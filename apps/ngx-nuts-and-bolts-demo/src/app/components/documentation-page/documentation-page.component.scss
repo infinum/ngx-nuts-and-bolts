@@ -1,0 +1,16 @@
+@import 'variables';
+
+:host {
+	display: block;
+
+	transition: padding 250ms ease-in-out;
+	padding: $padding-small;
+
+	&.is-mobile {
+		padding: $padding-large;
+	}
+
+	&.no-padding {
+		padding: 0;
+	}
+}
