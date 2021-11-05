@@ -5,6 +5,7 @@
 	"peerDependencies": {
 		"@angular/common": ">=12",
 		"@angular/core": ">=12",
+		"@angular/platform-browser": ">=12",
 		"rxjs": ">=6"
 	},
 	"dependencies": {
