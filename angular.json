@@ -1,6 +1,48 @@
 {
   "version": 1,
   "projects": {
+    "ngx-nuts-and-bolts": {
+      "projectType": "library",
+      "root": "libs/ngx-nuts-and-bolts",
+      "sourceRoot": "libs/ngx-nuts-and-bolts/src",
+      "prefix": "ngx-nuts-and-bolts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/ngx-nuts-and-bolts"],
+          "options": {
+            "project": "libs/ngx-nuts-and-bolts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ngx-nuts-and-bolts"],
+          "options": {
+            "jestConfig": "libs/ngx-nuts-and-bolts/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ngx-nuts-and-bolts/src/**/*.ts",
+              "libs/ngx-nuts-and-bolts/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "ngx-nuts-and-bolts-demo": {
       "projectType": "application",
       "root": "apps/ngx-nuts-and-bolts-demo",
