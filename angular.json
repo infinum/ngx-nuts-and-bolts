@@ -1,172 +1,164 @@
 {
-  "version": 1,
-  "projects": {
-    "ngx-nuts-and-bolts": {
-      "projectType": "library",
-      "root": "libs/ngx-nuts-and-bolts",
-      "sourceRoot": "libs/ngx-nuts-and-bolts/src",
-      "prefix": "ngx-nuts-and-bolts",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "outputs": ["dist/libs/ngx-nuts-and-bolts"],
-          "options": {
-            "project": "libs/ngx-nuts-and-bolts/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ngx-nuts-and-bolts"],
-          "options": {
-            "jestConfig": "libs/ngx-nuts-and-bolts/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/ngx-nuts-and-bolts/src/**/*.ts",
-              "libs/ngx-nuts-and-bolts/src/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
-    },
-    "ngx-nuts-and-bolts-demo": {
-      "projectType": "application",
-      "root": "apps/ngx-nuts-and-bolts-demo",
-      "sourceRoot": "apps/ngx-nuts-and-bolts-demo/src",
-      "prefix": "ngx-nuts-and-bolts",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/ngx-nuts-and-bolts-demo",
-            "index": "apps/ngx-nuts-and-bolts-demo/src/index.html",
-            "main": "apps/ngx-nuts-and-bolts-demo/src/main.ts",
-            "polyfills": "apps/ngx-nuts-and-bolts-demo/src/polyfills.ts",
-            "tsConfig": "apps/ngx-nuts-and-bolts-demo/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/ngx-nuts-and-bolts-demo/src/favicon.ico",
-              "apps/ngx-nuts-and-bolts-demo/src/assets"
-            ],
-            "styles": ["apps/ngx-nuts-and-bolts-demo/src/styles.scss"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "apps/ngx-nuts-and-bolts-demo/src/environments/environment.ts",
-                  "with": "apps/ngx-nuts-and-bolts-demo/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "ngx-nuts-and-bolts-demo:build:production"
-            },
-            "development": {
-              "browserTarget": "ngx-nuts-and-bolts-demo:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "ngx-nuts-and-bolts-demo:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/ngx-nuts-and-bolts-demo/src/**/*.ts",
-              "apps/ngx-nuts-and-bolts-demo/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/ngx-nuts-and-bolts-demo"],
-          "options": {
-            "jestConfig": "apps/ngx-nuts-and-bolts-demo/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "ngx-nuts-and-bolts-demo-e2e": {
-      "root": "apps/ngx-nuts-and-bolts-demo-e2e",
-      "sourceRoot": "apps/ngx-nuts-and-bolts-demo-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/ngx-nuts-and-bolts-demo-e2e/cypress.json",
-            "devServerTarget": "ngx-nuts-and-bolts-demo:serve:development",
-            "tsConfig": "apps/ngx-nuts-and-bolts-demo-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ngx-nuts-and-bolts-demo:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": [
-              "apps/ngx-nuts-and-bolts-demo-e2e/**/*.{js,ts}"
-            ]
-          }
-        }
-      },
-      "tags": [],
-      "implicitDependencies": ["ngx-nuts-and-bolts-demo"]
-    }
-  }
+	"version": 1,
+	"projects": {
+		"ngx-nuts-and-bolts": {
+			"projectType": "library",
+			"root": "libs/ngx-nuts-and-bolts",
+			"sourceRoot": "libs/ngx-nuts-and-bolts/src",
+			"prefix": "inf",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:package",
+					"outputs": ["dist/libs/ngx-nuts-and-bolts"],
+					"options": {
+						"project": "libs/ngx-nuts-and-bolts/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/ngx-nuts-and-bolts"],
+					"options": {
+						"jestConfig": "libs/ngx-nuts-and-bolts/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["libs/ngx-nuts-and-bolts/src/**/*.ts", "libs/ngx-nuts-and-bolts/src/**/*.html"]
+					}
+				}
+			},
+			"tags": []
+		},
+		"ngx-nuts-and-bolts-demo": {
+			"projectType": "application",
+			"root": "apps/ngx-nuts-and-bolts-demo",
+			"sourceRoot": "apps/ngx-nuts-and-bolts-demo/src",
+			"prefix": "inf",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/apps/ngx-nuts-and-bolts-demo",
+						"index": "apps/ngx-nuts-and-bolts-demo/src/index.html",
+						"main": "apps/ngx-nuts-and-bolts-demo/src/main.ts",
+						"polyfills": "apps/ngx-nuts-and-bolts-demo/src/polyfills.ts",
+						"tsConfig": "apps/ngx-nuts-and-bolts-demo/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": ["apps/ngx-nuts-and-bolts-demo/src/favicon.ico", "apps/ngx-nuts-and-bolts-demo/src/assets"],
+						"styles": ["apps/ngx-nuts-and-bolts-demo/src/styles.scss"],
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "apps/ngx-nuts-and-bolts-demo/src/environments/environment.ts",
+									"with": "apps/ngx-nuts-and-bolts-demo/src/environments/environment.prod.ts"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "ngx-nuts-and-bolts-demo:build:production"
+						},
+						"development": {
+							"browserTarget": "ngx-nuts-and-bolts-demo:build:development"
+						}
+					},
+					"defaultConfiguration": "development"
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "ngx-nuts-and-bolts-demo:build"
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": [
+							"apps/ngx-nuts-and-bolts-demo/src/**/*.ts",
+							"apps/ngx-nuts-and-bolts-demo/src/**/*.html"
+						]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/apps/ngx-nuts-and-bolts-demo"],
+					"options": {
+						"jestConfig": "apps/ngx-nuts-and-bolts-demo/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			},
+			"tags": []
+		},
+		"ngx-nuts-and-bolts-demo-e2e": {
+			"root": "apps/ngx-nuts-and-bolts-demo-e2e",
+			"sourceRoot": "apps/ngx-nuts-and-bolts-demo-e2e/src",
+			"projectType": "application",
+			"architect": {
+				"e2e": {
+					"builder": "@nrwl/cypress:cypress",
+					"options": {
+						"cypressConfig": "apps/ngx-nuts-and-bolts-demo-e2e/cypress.json",
+						"devServerTarget": "ngx-nuts-and-bolts-demo:serve:development",
+						"tsConfig": "apps/ngx-nuts-and-bolts-demo-e2e/tsconfig.json"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "ngx-nuts-and-bolts-demo:serve:production"
+						}
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["apps/ngx-nuts-and-bolts-demo-e2e/**/*.{js,ts}"]
+					}
+				}
+			},
+			"tags": [],
+			"implicitDependencies": ["ngx-nuts-and-bolts-demo"]
+		}
+	}
 }
