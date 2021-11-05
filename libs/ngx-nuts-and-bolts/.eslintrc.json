@@ -4,13 +4,22 @@
 	"overrides": [
 		{
 			"files": ["*.ts"],
-			"extends": ["plugin:@nrwl/nx/angular", "plugin:@angular-eslint/template/process-inline-templates"],
+			// We set parserOptions.project for the project to allow TypeScript to create the type-checker behind the scenes when we run linting
+			"parserOptions": {
+				"project": ["libs/ngx-nuts-and-bolts/tsconfig.*?.json"]
+			},
+			"plugins": ["rxjs"],
+			"extends": [
+				"plugin:rxjs/recommended",
+				"plugin:@nrwl/nx/angular",
+				"plugin:@angular-eslint/template/process-inline-templates"
+			],
 			"rules": {
 				"@angular-eslint/directive-selector": [
 					"error",
 					{
 						"type": "attribute",
-						"prefix": "ngxNutsAndBolts",
+						"prefix": "inf",
 						"style": "camelCase"
 					}
 				],
@@ -18,10 +27,18 @@
 					"error",
 					{
 						"type": "element",
-						"prefix": "ngx-nuts-and-bolts",
+						"prefix": "inf",
 						"style": "kebab-case"
 					}
-				]
+				],
+				"rxjs/no-async-subscribe": "error",
+				"rxjs/no-ignored-observable": "error",
+				"rxjs/no-ignored-subscription": "error",
+				"rxjs/no-nested-subscribe": "error",
+				"rxjs/no-unbound-methods": "error",
+				"rxjs/throw-error": "error",
+				"rxjs/finnish": "error",
+				"rxjs/no-exposed-subjects": "error"
 			}
 		},
 		{

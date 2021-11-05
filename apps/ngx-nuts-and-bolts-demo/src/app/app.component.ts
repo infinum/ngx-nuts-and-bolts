@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-	selector: 'ngx-nuts-and-bolts-root',
+	selector: 'inf-ngx-nuts-and-bolts-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })

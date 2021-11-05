@@ -1,1 +1,1 @@
-export * from './lib/ngx-nuts-and-bolts.module';
+export * from './lib/component-with-loading-state/component-with-loading-state';

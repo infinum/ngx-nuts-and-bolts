@@ -1,5 +1,7 @@
 {
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
 	"version": 1,
+	"defaultProject": "ngx-nuts-and-bolts",
 	"projects": {
 		"ngx-nuts-and-bolts": {
 			"projectType": "library",
