@@ -8,6 +8,7 @@
 		"start": "nx serve",
 		"build": "nx build",
 		"test": "nx test",
+		"precommit": "nx affected:lint --parallel --uncommitted",
 		"prepare": "husky install"
 	},
 	"private": true,
