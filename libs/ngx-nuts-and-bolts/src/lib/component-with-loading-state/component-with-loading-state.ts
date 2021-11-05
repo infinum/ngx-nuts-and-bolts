@@ -53,6 +53,7 @@ export abstract class ComponentWithLoadingState<TError = unknown> {
 
 	public onRetry(): void {
 		this.loadingTrigger$.next();
+		console.log('retrying');
 	}
 }
 
