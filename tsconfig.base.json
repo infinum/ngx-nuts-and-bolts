@@ -16,6 +16,7 @@
 		"baseUrl": ".",
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
+		"esModuleInterop": true,
 		"paths": {
 			"@infinumjs/ngx-nuts-and-bolts": ["libs/ngx-nuts-and-bolts/src/index.ts"]
 		}
