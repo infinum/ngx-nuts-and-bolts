@@ -1,25 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { attachUnsupportedMatchMediaMethods } from '../../../testing/media-matcher.testing';
 import { DocumentationPageComponent } from './documentation-page.component';
 
 describe('DocumentationPageComponent', () => {
-  let component: DocumentationPageComponent;
-  let fixture: ComponentFixture<DocumentationPageComponent>;
+	let component: DocumentationPageComponent;
+	let fixture: ComponentFixture<DocumentationPageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ DocumentationPageComponent ]
-    })
-    .compileComponents();
-  });
+	beforeAll(() => {
+		attachUnsupportedMatchMediaMethods();
+	});
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DocumentationPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [DocumentationPageComponent],
+		}).compileComponents();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(DocumentationPageComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
+
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

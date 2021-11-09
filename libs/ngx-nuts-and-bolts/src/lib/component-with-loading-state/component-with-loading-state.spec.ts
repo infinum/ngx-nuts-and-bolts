@@ -74,7 +74,7 @@ describe('ComponentWithLoadingState', () => {
 	}));
 
 	it('should show and log the error and hide the loader', fakeAsync(() => {
-		const consoleErrorSpy = jest.spyOn(console, 'error');
+		const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
 
 		expect(fixture.debugElement.query(By.css(loaderSelector))).toBeFalsy();
 		expect(fixture.debugElement.query(By.css(errorSelector))).toBeFalsy();

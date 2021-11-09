@@ -1,3 +1,7 @@
+require('jest-preset-angular/ngcc-jest-processor');
+
+const esModules = ['@angular/cdl'].join('|');
+
 module.exports = {
 	displayName: 'ngx-nuts-and-bolts-demo',
 	preset: '../../jest.preset.js',
@@ -12,6 +16,7 @@ module.exports = {
 	transform: {
 		'^.+\\.(ts|js|html)$': 'jest-preset-angular',
 	},
+	transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
 	snapshotSerializers: [
 		'jest-preset-angular/build/serializers/no-ng-attributes',
 		'jest-preset-angular/build/serializers/ng-snapshot',
