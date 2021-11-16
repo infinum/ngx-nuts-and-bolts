@@ -3,9 +3,9 @@
 	"version": "1.0.0-alpha.0",
 	"license": "MIT",
 	"peerDependencies": {
-		"@angular/common": ">=12",
-		"@angular/core": ">=12",
-		"@angular/platform-browser": ">=12",
+		"@angular/common": ">=10 <13",
+		"@angular/core": ">=10 <13",
+		"@angular/platform-browser": ">=10 <13",
 		"rxjs": ">=6"
 	},
 	"dependencies": {
