@@ -12,7 +12,7 @@ import { AppRoutePath } from './app-route-path.enum';
 	animations: [scaleAnimation(), fadeAnimation()],
 })
 export class AppComponent implements OnDestroy {
-	@ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
+	@ViewChild('sidenav', { static: true }) public sidenav!: MatSidenav;
 
 	public readonly mobileQuery: MediaQueryList;
 	public readonly isMobileInitially: boolean;
