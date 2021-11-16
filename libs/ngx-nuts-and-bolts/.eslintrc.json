@@ -8,11 +8,11 @@
 			"parserOptions": {
 				"project": ["libs/ngx-nuts-and-bolts/tsconfig.*?.json"]
 			},
-			"plugins": ["rxjs"],
 			"extends": [
 				"plugin:rxjs/recommended",
 				"plugin:@nrwl/nx/angular",
-				"plugin:@angular-eslint/template/process-inline-templates"
+				"plugin:@angular-eslint/template/process-inline-templates",
+				"@infinumjs/eslint-config-angular-ts"
 			],
 			"rules": {
 				"@angular-eslint/directive-selector": [
@@ -30,15 +30,7 @@
 						"prefix": "inf",
 						"style": "kebab-case"
 					}
-				],
-				"rxjs/no-async-subscribe": "error",
-				"rxjs/no-ignored-observable": "error",
-				"rxjs/no-ignored-subscription": "error",
-				"rxjs/no-nested-subscribe": "error",
-				"rxjs/no-unbound-methods": "error",
-				"rxjs/throw-error": "error",
-				"rxjs/finnish": "error",
-				"rxjs/no-exposed-subjects": "error"
+				]
 			}
 		},
 		{
