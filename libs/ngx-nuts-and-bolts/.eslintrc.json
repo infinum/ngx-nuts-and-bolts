@@ -4,9 +4,8 @@
 	"overrides": [
 		{
 			"files": ["*.ts"],
-			// We set parserOptions.project for the project to allow TypeScript to create the type-checker behind the scenes when we run linting
 			"parserOptions": {
-				"project": ["libs/ngx-nuts-and-bolts/tsconfig.*?.json"]
+				"project": ["libs/ngx-nuts-and-bolts/tsconfig.*?.json", "libs/ngx-nuts-and-bolts/.storybook/tsconfig.json"]
 			},
 			"extends": [
 				"plugin:rxjs/recommended",
@@ -29,6 +28,17 @@
 						"type": "element",
 						"prefix": "inf",
 						"style": "kebab-case"
+					}
+				],
+				"rxjs/finnish": [
+					"error",
+					{
+						"functions": false,
+						"methods": false,
+						"parameters": true,
+						"properties": true,
+						"strict": false,
+						"variables": true
 					}
 				]
 			}
