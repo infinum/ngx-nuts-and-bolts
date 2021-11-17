@@ -10,8 +10,8 @@ interface IMockData {
 
 @Component({
 	template: `
-		<button *ngIf="counter >= 2" (click)="onResetClick()">Reset</button>
-		<ng-container *ngIf="isPending">
+		<button *ngIf="!isPending && (error$ | async) === null" (click)="onResetClick()">Reset</button>
+		<ng-container *ngIf="isPending && (error$ | async) === null">
 			<button (click)="onResolveDataClick()">Resolve data</button>
 			<button (click)="onTriggerErrorClick()">Trigger error</button>
 		</ng-container>
@@ -32,8 +32,8 @@ interface IMockData {
 	`,
 })
 class ComponentWithLoadingStateHostComponent extends ComponentWithLoadingState {
-	public counter = 1;
 	public isPending = true;
+	private counter = 1;
 	private mockDataTrigger$ = new Subject<IMockData>();
 
 	public readonly mockData$ = this.loadingTrigger$.pipe(
