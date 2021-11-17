@@ -49,6 +49,26 @@ class MyComponent extends ComponentWithLoadingState {
 }
 ```
 
+Keep in mind that calling `super` without any parameters will cause the default values to be used, even if you provided values via DI. To keep using the values provided via DI, you can either omit the constructor and the super call or mirror the constructor parameters of the base class. Both of the following examples will use the values provided via DI (if they are provided):
+
+```ts
+class MyComponentA extends ComponentWithLoadingState {}
+```
+
+```ts
+class MyComponentB extends ComponentWithLoadingState {
+	constructor(
+		@Optional()
+		@Inject(COMPONENT_WITH_LOADING_STATE_CONFIG)
+		config?: IComponentWithLoadingStateConfig,
+
+		private readonly someService: SomeService
+	) {
+		super(config);
+	}
+}
+```
+
 ## 3. Usage
 
 There are two ways to implement handling the loading and error states:

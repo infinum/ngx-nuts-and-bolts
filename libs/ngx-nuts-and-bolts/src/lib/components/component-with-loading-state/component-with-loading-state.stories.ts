@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, finalize, first, switchMap } from 'rxjs/operators';
-import { ComponentWithLoadingState } from './component-with-loading-state';
+import { ComponentWithLoadingState, COMPONENT_WITH_LOADING_STATE_CONFIG } from './component-with-loading-state';
 
 interface IMockData {
 	foo: string;
@@ -53,10 +53,6 @@ class ComponentWithLoadingStateHostComponent extends ComponentWithLoadingState {
 		})
 	);
 
-	constructor() {
-		super();
-	}
-
 	private fetchMockData(): Observable<IMockData> {
 		return this.mockDataTrigger$.pipe(first());
 	}
@@ -90,6 +86,15 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [],
+			providers: [
+				{
+					provide: COMPONENT_WITH_LOADING_STATE_CONFIG,
+					useValue: {
+						enterDelay: 300,
+						leaveDelay: 100,
+					},
+				},
+			],
 		}),
 	],
 } as Meta<ComponentWithLoadingStateHostComponent>;

@@ -49,6 +49,7 @@ export abstract class ComponentWithLoadingState<TError = unknown> {
 			leaveDelay: DEFAULT_LOADER_LEAVE_DELAY,
 		}
 	) {
+		console.log(config);
 		const { _error$, _loading$ } = privateLoadingState<TError>();
 		const directLoading$ = _loading$.pipe(distinctUntilChanged());
 		const { error$, loading$, initialLoadDone$ } = publicLoadingState(
