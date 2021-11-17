@@ -38,6 +38,8 @@ export abstract class ComponentWithLoadingState<TError = unknown> {
 	protected readonly _loading$!: IPrivateLoadingState<TError>['_loading$'];
 	public readonly loading$!: IPublicLoadingState<TError>['loading$'];
 
+	public readonly directLoading$!: IPublicLoadingState<TError>['loading$'];
+
 	public readonly initialLoadDone$!: IPublicLoadingState<TError>['initialLoadDone$'];
 
 	constructor(
@@ -111,6 +113,7 @@ export function initializeLoadingState<T, TError>(
 	loaderLeaveDelay: number = DEFAULT_LOADER_LEAVE_DELAY
 ): void {
 	const { _error$, _loading$ } = privateLoadingState<TError>();
+	const directLoading$ = _loading$.pipe(distinctUntilChanged());
 	const { error$, loading$, initialLoadDone$ } = publicLoadingState(
 		{ _error$, _loading$ },
 		loaderEnterDelay,
@@ -123,5 +126,6 @@ export function initializeLoadingState<T, TError>(
 		error$,
 		loading$,
 		initialLoadDone$,
+		directLoading$,
 	});
 }

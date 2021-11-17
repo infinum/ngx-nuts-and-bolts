@@ -17,7 +17,7 @@ interface IMockData {
 		</ng-container>
 
 		<div *ngIf="mockData$ | async as mockData">
-			<ng-container *ngIf="(loading$ | async) === false && (error$ | async) === null">
+			<ng-container *ngIf="(directLoading$ | async) === false && (error$ | async) === null">
 				<pre>{{ mockData | json }}</pre>
 			</ng-container>
 		</div>
