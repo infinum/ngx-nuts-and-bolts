@@ -31,14 +31,15 @@ export abstract class ComponentWithLoadingState<TError = unknown> {
 	protected readonly loadingTrigger$ = new BehaviorSubject<void>(undefined);
 
 	// eslint-disable-next-line rxjs/no-exposed-subjects
-	protected readonly _error$!: IPrivateLoadingState<TError>['_error$'];
-	public readonly error$!: IPublicLoadingState<TError>['error$'];
+	protected readonly _error$: IPrivateLoadingState<TError>['_error$'];
+	public readonly error$: IPublicLoadingState<TError>['error$'];
 
 	// eslint-disable-next-line rxjs/no-exposed-subjects
-	protected readonly _loading$!: IPrivateLoadingState<TError>['_loading$'];
-	public readonly loading$!: IPublicLoadingState<TError>['loading$'];
+	protected readonly _loading$: IPrivateLoadingState<TError>['_loading$'];
+	public readonly loading$: IPublicLoadingState<TError>['loading$'];
 
-	public readonly initialLoadDone$!: IPublicLoadingState<TError>['initialLoadDone$'];
+	public readonly initialLoadDone$: IPublicLoadingState<TError>['initialLoadDone$'];
+	public readonly directLoading$: IPublicLoadingState<TError>['loading$'];
 
 	constructor(
 		@Optional()
@@ -48,7 +49,23 @@ export abstract class ComponentWithLoadingState<TError = unknown> {
 			leaveDelay: DEFAULT_LOADER_LEAVE_DELAY,
 		}
 	) {
-		initializeLoadingState<ComponentWithLoadingState<TError>, TError>(this, config.enterDelay, config.leaveDelay);
+		console.log(config);
+		const { _error$, _loading$ } = privateLoadingState<TError>();
+		const directLoading$ = _loading$.pipe(distinctUntilChanged());
+		const { error$, loading$, initialLoadDone$ } = publicLoadingState(
+			{ _error$, _loading$ },
+			config.enterDelay,
+			config.leaveDelay
+		);
+
+		this._error$ = _error$;
+		this.error$ = error$;
+
+		this._loading$ = _loading$;
+		this.loading$ = loading$;
+
+		this.initialLoadDone$ = initialLoadDone$;
+		this.directLoading$ = directLoading$;
 	}
 
 	public onRetry(): void {
@@ -103,25 +120,4 @@ export function publicLoadingState<TError = unknown>(
 		initialLoadDone$,
 		error$,
 	};
-}
-
-export function initializeLoadingState<T, TError>(
-	component: T,
-	loaderEnterDelay: number = DEFAULT_LOADER_ENTER_DELAY,
-	loaderLeaveDelay: number = DEFAULT_LOADER_LEAVE_DELAY
-): void {
-	const { _error$, _loading$ } = privateLoadingState<TError>();
-	const { error$, loading$, initialLoadDone$ } = publicLoadingState(
-		{ _error$, _loading$ },
-		loaderEnterDelay,
-		loaderLeaveDelay
-	);
-
-	Object.assign(component, {
-		_error$,
-		_loading$,
-		error$,
-		loading$,
-		initialLoadDone$,
-	});
 }
