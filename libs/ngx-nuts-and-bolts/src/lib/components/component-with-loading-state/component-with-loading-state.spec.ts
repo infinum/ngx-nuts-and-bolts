@@ -18,10 +18,6 @@ class ComponentWithLoadingStateHostComponent extends ComponentWithLoadingState {
 	public setError(error: unknown): void {
 		this._error$.next(error);
 	}
-
-	constructor() {
-		super();
-	}
 }
 
 describe('ComponentWithLoadingState', () => {
@@ -73,12 +69,9 @@ describe('ComponentWithLoadingState', () => {
 		expect(fixture.debugElement.query(By.css(errorSelector))).toBeFalsy();
 	}));
 
-	it('should show and log the error and hide the loader', fakeAsync(() => {
-		const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
-
+	it('should emit the error and hide the loader', fakeAsync(() => {
 		expect(fixture.debugElement.query(By.css(loaderSelector))).toBeFalsy();
 		expect(fixture.debugElement.query(By.css(errorSelector))).toBeFalsy();
-		expect(console.error).toHaveBeenCalledTimes(0);
 
 		component.setLoading(true);
 		component.setError('epic fail');
@@ -88,6 +81,5 @@ describe('ComponentWithLoadingState', () => {
 
 		expect(fixture.debugElement.query(By.css(loaderSelector))).toBeFalsy();
 		expect(fixture.debugElement.query(By.css(errorSelector))).toBeTruthy();
-		expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
 	}));
 });

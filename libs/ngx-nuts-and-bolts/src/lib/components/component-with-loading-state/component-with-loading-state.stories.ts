@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, Story } from '@storybook/angular';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, finalize, first, switchMap } from 'rxjs/operators';
-import { ComponentWithLoadingState, COMPONENT_WITH_LOADING_STATE_CONFIG } from './component-with-loading-state';
+import { ComponentWithLoadingState } from './component-with-loading-state';
 
 interface IMockData {
 	foo: string;
@@ -83,20 +83,6 @@ class ComponentWithLoadingStateHostComponent extends ComponentWithLoadingState {
 export default {
 	title: 'ComponentWithLoadingState',
 	component: ComponentWithLoadingStateHostComponent,
-	decorators: [
-		moduleMetadata({
-			imports: [],
-			providers: [
-				{
-					provide: COMPONENT_WITH_LOADING_STATE_CONFIG,
-					useValue: {
-						enterDelay: 300,
-						leaveDelay: 100,
-					},
-				},
-			],
-		}),
-	],
 } as Meta<ComponentWithLoadingStateHostComponent>;
 
 const Template: Story<ComponentWithLoadingStateHostComponent> = (args: ComponentWithLoadingStateHostComponent) => ({
@@ -104,5 +90,5 @@ const Template: Story<ComponentWithLoadingStateHostComponent> = (args: Component
 	props: args,
 });
 
-export const Primary = Template.bind({});
-Primary.args = {};
+export const Default = Template.bind({});
+Default.args = {};

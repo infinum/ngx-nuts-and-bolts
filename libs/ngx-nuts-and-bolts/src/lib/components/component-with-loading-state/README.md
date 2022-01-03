@@ -10,7 +10,7 @@ This class should really be called `Component with loading and error states` (CW
 
 Different enter and leave delay times allow for showing and hiding the loader only if the loading takes at least a certain amount of time. This provides a better UX where the user will not see a loading state if the loading takes very short time, preventing quick flashes. If for whatever reason you need access to the loading observable without any debounce delays, you can use `directLoading$`.
 
-When loading begins, any previous error is cleared, avoiding the need to handle clearing errors on retry manually. Similarly, when an error is set, the loading state is cleared.
+When loading begins, any previous error is cleared, avoiding the need to handle clearing errors on retry manually. Similarly, when an error is set, the loading state is cleared. Please note that these side-effects will trigger only if you subscribe to both the error and the loading observables.
 
 Accompanying loading and error observables is an observable for checking if the initial loading is done. This can be useful to show a different loading state on the initial load.
 
@@ -18,7 +18,7 @@ It usually makes sense to allow the user to retry on error. For this purpose, `C
 
 ## 2. Configuration
 
-By default, loader enter delay is set to 250ms and loader leave delay is set to 0ms. You can change these values globally for all components that extend `ComponentWithLoadingState` or on a case-by-case basis. If there is no globally defined provider nor an explicit value set for a particular component, that component will use the default delays.
+By default, loader enter delay is set to 250ms and loader leave delay is set to 0ms. You can change these values globally for all components that extend `ComponentWithLoadingState` or on a case-by-case basis. If there is no globally defined provider nor a component-level provider for some specific component, the component will use the default delays.
 
 ### 2.1. Setting delays globally
 
@@ -34,39 +34,23 @@ Provide the desired values in a provider in your `AppModule`:
 }
 ```
 
-### 2.2. Setting delays for a particular case
+### 2.2. Setting delays for a particular component
 
-Pass the desired values via the constructor (this will override any values set in the global provider):
+Pass the desired values via component-specific provider (this will override any values set in the global provider):
 
 ```ts
-class MyComponent extends ComponentWithLoadingState {
-	constructor() {
-		super({
+@Component({
+	...
+	providers: [{
+		provide: COMPONENT_WITH_LOADING_STATE_CONFIG,
+		useValue: {
 			enterDelay: 300,
 			leaveDelay: 100,
-		});
-	}
-}
-```
-
-Keep in mind that calling `super` without any parameters will cause the default values to be used, even if you provided some non-default values via DI. To keep using the values provided via DI, you can either omit the constructor and the super call or mirror the constructor parameters of the base class. Both of the following examples will use the values provided via DI (if they are provided):
-
-```ts
-class MyComponentA extends ComponentWithLoadingState {}
-```
-
-```ts
-class MyComponentB extends ComponentWithLoadingState {
-	constructor(
-		@Optional()
-		@Inject(COMPONENT_WITH_LOADING_STATE_CONFIG)
-		config?: IComponentWithLoadingStateConfig,
-
-		private readonly someService: SomeService
-	) {
-		super(config);
-	}
-}
+		}
+	}],
+	...
+})
+class MyComponent extends ComponentWithLoadingState {}
 ```
 
 ## 3. Usage
@@ -186,4 +170,4 @@ class MyComponent {
 }
 ```
 
-You continue to use the two sets of \_error$, error$, \_loading$ and loading$ just as you would when working with one set by extending `ComponentWithLoadingState`. It is probably clear why you would not want to do this and stick with using only one set of states. Do this only if necessary
+You continue to use the two sets of \_error$, error$, \_loading$ and loading$ just as you would when working with one set when extending `ComponentWithLoadingState`. It is probably clear why you would not want to do this and stick with using only one set of states. Do this only if necessary

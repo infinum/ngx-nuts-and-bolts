@@ -1,4 +1,4 @@
-import { Directive, Inject, InjectionToken, Optional } from '@angular/core';
+import { Directive, InjectFlags, InjectionToken, Injector } from '@angular/core';
 import { BehaviorSubject, Observable, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, tap } from 'rxjs/operators';
 
@@ -41,15 +41,16 @@ export abstract class ComponentWithLoadingState<TError = unknown> {
 	public readonly initialLoadDone$: IPublicLoadingState<TError>['initialLoadDone$'];
 	public readonly directLoading$: IPublicLoadingState<TError>['loading$'];
 
-	constructor(
-		@Optional()
-		@Inject(COMPONENT_WITH_LOADING_STATE_CONFIG)
-		config: IComponentWithLoadingStateConfig = {
-			enterDelay: DEFAULT_LOADER_ENTER_DELAY,
-			leaveDelay: DEFAULT_LOADER_LEAVE_DELAY,
-		}
-	) {
-		console.log(config);
+	constructor(private readonly injector: Injector) {
+		const config = this.injector.get(
+			COMPONENT_WITH_LOADING_STATE_CONFIG,
+			{
+				enterDelay: DEFAULT_LOADER_ENTER_DELAY,
+				leaveDelay: DEFAULT_LOADER_LEAVE_DELAY,
+			},
+			InjectFlags.Optional
+		);
+
 		const { _error$, _loading$ } = privateLoadingState<TError>();
 		const directLoading$ = _loading$.pipe(distinctUntilChanged());
 		const { error$, loading$, initialLoadDone$ } = publicLoadingState(
@@ -108,7 +109,6 @@ export function publicLoadingState<TError = unknown>(
 		distinctUntilChanged(),
 		tap((e) => {
 			if (e) {
-				console.error(e);
 				_loading$.next(false);
 				initialLoadDone$.next(false);
 			}
