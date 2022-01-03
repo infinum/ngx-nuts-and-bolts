@@ -2,6 +2,10 @@
 	"name": "@infinumjs/ngx-nuts-and-bolts",
 	"version": "1.0.0",
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/infinum/ngx-nuts-and-bolts.git"
+	},
 	"peerDependencies": {
 		"@angular/common": ">=10 <13",
 		"@angular/core": ">=10 <13",
