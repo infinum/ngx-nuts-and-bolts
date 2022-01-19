@@ -5,13 +5,13 @@ import { debounce, distinctUntilChanged, tap } from 'rxjs/operators';
 const DEFAULT_LOADER_ENTER_DELAY = 250;
 const DEFAULT_LOADER_LEAVE_DELAY = 0;
 
-export interface IComponentWithLoadingStateConfig {
+export interface ILoadingStateConfig {
 	enterDelay?: number;
 	leaveDelay?: number;
 }
 
-export const COMPONENT_WITH_LOADING_STATE_CONFIG = new InjectionToken<IComponentWithLoadingStateConfig>(
-	'COMPONENT_WITH_LOADING_STATE_CONFIG'
+export const LOADING_STATE_CONFIG = new InjectionToken<ILoadingStateConfig>(
+	'LOADING_STATE_CONFIG'
 );
 
 export interface IPrivateLoadingState<TError> {
@@ -26,7 +26,7 @@ export interface IPublicLoadingState<TError> {
 }
 
 @Directive()
-export abstract class ComponentWithLoadingState<TError = unknown> {
+export abstract class LoadingState<TError = unknown> {
 	// eslint-disable-next-line rxjs/no-exposed-subjects
 	protected readonly loadingTrigger$ = new BehaviorSubject<void>(undefined);
 
@@ -43,7 +43,7 @@ export abstract class ComponentWithLoadingState<TError = unknown> {
 
 	constructor(private readonly injector: Injector) {
 		const config = this.injector.get(
-			COMPONENT_WITH_LOADING_STATE_CONFIG,
+			LOADING_STATE_CONFIG,
 			{
 				enterDelay: DEFAULT_LOADER_ENTER_DELAY,
 				leaveDelay: DEFAULT_LOADER_LEAVE_DELAY,

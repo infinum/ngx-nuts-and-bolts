@@ -10,7 +10,7 @@ npm install @infinumjs/ngx-nuts-and-bolts
 
 ## Available nuts and bolts
 
-- [ComponentWithLoadingState](./libs/ngx-nuts-and-bolts/src/lib/components/component-with-loading-state/README.md)
+- [LoadingState](./libs/ngx-nuts-and-bolts/src/lib/directives/loading-state/README.md)
 
 # License
 
