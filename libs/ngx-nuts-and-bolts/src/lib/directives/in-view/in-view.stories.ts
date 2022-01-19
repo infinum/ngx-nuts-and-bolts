@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { moduleMetadata, Story } from '@storybook/angular';
 import { InViewModule } from './in-view.module';
+import mdx from './in-view.mdx';
 
 @Component({
 	template: `
@@ -54,6 +55,11 @@ class InViewStoryComponent {
 export default {
 	title: 'InView',
 	component: InViewStoryComponent,
+	parameters: {
+		docs: {
+			page: mdx,
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			declarations: [InViewStoryComponent],
