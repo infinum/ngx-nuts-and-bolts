@@ -4,7 +4,7 @@ Often times, one may be interested to know whether or not piece of DOM is visibl
 
 ## 1. Features
 
-`infInView` directive allows you to determine if a piece of DOM is fully visible on user`s screen.
+`infInView` directive allows you to determine if a piece of DOM is fully visible on user's screen.
 
 ## 2. Usage
 
