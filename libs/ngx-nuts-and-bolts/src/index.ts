@@ -12,3 +12,4 @@ export * from './lib/helpers/table-state/table-state.helper';
 
 // Directives
 export * from './lib/directives/in-view/in-view.module';
+export * from './lib/directives/in-view/in-view.testing.module';
