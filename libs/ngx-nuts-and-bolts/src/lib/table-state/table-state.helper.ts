@@ -3,15 +3,6 @@ import { Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
 export type Sort = 'asc' | 'desc' | '';
-
-export interface ITableState {
-	pageIndex: number;
-	pageSize: number;
-	totalItems: number;
-	active: string;
-	sort: Sort;
-}
-
 export interface IPageInfo {
 	pageIndex: number;
 	pageSize: number;
