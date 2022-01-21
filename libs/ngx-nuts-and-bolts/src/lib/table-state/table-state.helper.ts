@@ -1,12 +1,14 @@
 import { ActivatedRoute, Router } from '@angular/router';
+import { isEqual } from 'lodash';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
 export type Sort = 'asc' | 'desc' | '';
+
 export interface IPageInfo {
 	pageIndex: number;
 	pageSize: number;
-	totalItems?: number;
+	length?: number;
 }
 
 export interface ISortInfo {
@@ -50,12 +52,14 @@ export function createSortingObservable(route: ActivatedRoute): Observable<ISort
 				sortingKey,
 				sortDirection,
 			};
-		}) // TODO: Check if last emitted and current object are equal.
+		}),
+		distinctUntilChanged(isEqual)
 	);
 }
 
 export function createCustomFiltersObservable<TFilterValue extends Record<string, unknown> | null = null>(
-	route: ActivatedRoute
+	route: ActivatedRoute,
+	router: Router
 ): Observable<TFilterValue | null> {
 	return route.queryParamMap.pipe(
 		map((queryParamMap) => {
@@ -70,21 +74,17 @@ export function createCustomFiltersObservable<TFilterValue extends Record<string
 			}
 
 			if (filters && isFilterEmpty(filters)) {
-				// clearFilters(); // Should find a way how to pass router reference to this or use different approach for cleaning filters.
+				clearFilters(router);
 				return null;
 			}
 
 			return filters;
-		})
-		// distinctUntilChanged(isEqual) // Also how to check for equality
+		}),
+		distinctUntilChanged(isEqual)
 	);
 }
 
 function isFilterEmpty<TFilterValue extends Record<string, unknown> | null = null>(filterValue: TFilterValue): boolean {
-	// Default implementation for empty filter check that is sufficient for most cases.
-	// If there are some specific tables that need a stricter/different empty check,
-	// those components can override this method as necessary.
-
 	if (!filterValue) {
 		return true;
 	}
@@ -149,14 +149,5 @@ export function clearFilters(router: Router): void {
 		queryParams: {
 			[TableQueryParam.CUSTOM_FILTERS]: null,
 		},
-	});
-}
-
-export function setTableState(router: Router): void {
-	console.log('router', router);
-	router.navigate([], {
-		replaceUrl: true,
-		queryParamsHandling: 'merge',
-		queryParams: {},
 	});
 }
