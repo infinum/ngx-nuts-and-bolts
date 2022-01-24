@@ -24,11 +24,26 @@ export enum TableQueryParam {
 	CUSTOM_FILTERS = 'filters',
 }
 
-export function createPaginationObservable(route: ActivatedRoute): Observable<IPageInfo> {
+/**
+ *
+ * Creates observable that emits when page information in route changes.
+ * @param {ActivatedRoute} route - Activated route instance used in component.
+ * @param {IPageInfo} [fallbackPaginationInfo] - Fallback values for pagination info.
+ */
+export function createPaginationObservable(
+	route: ActivatedRoute,
+	fallBackPaginationInfo: IPageInfo = { pageIndex: 0, pageSize: 10 }
+): Observable<IPageInfo> {
 	return route.queryParamMap.pipe(
 		map((paramMap) => {
-			const pageIndex = parseInt(paramMap.get(TableQueryParam.PAGE_INDEX) ?? '0', 10);
-			const pageSize = parseInt(paramMap.get(TableQueryParam.PAGE_SIZE) ?? '10', 10);
+			const pageIndex = parseInt(
+				paramMap.get(TableQueryParam.PAGE_INDEX) ?? fallBackPaginationInfo.pageIndex.toString(),
+				10
+			);
+			const pageSize = parseInt(
+				paramMap.get(TableQueryParam.PAGE_SIZE) ?? fallBackPaginationInfo.pageSize.toString(),
+				10
+			);
 
 			return {
 				pageIndex,
@@ -42,6 +57,11 @@ export function createPaginationObservable(route: ActivatedRoute): Observable<IP
 	);
 }
 
+/**
+ *
+ * Creates observable that emits when sorting information in route changes.
+ * @param {ActivatedRoute} route - Activated route instance used in component.
+ */
 export function createSortingObservable(route: ActivatedRoute): Observable<ISortInfo> {
 	return route.queryParamMap.pipe(
 		map((paramMap) => {
@@ -57,6 +77,12 @@ export function createSortingObservable(route: ActivatedRoute): Observable<ISort
 	);
 }
 
+/**
+ *
+ * Creates observable that emits when filtering information in route changes.
+ * @param {ActivatedRoute} route - Activated route instance used in component.
+ * @param {Router} router - Router instance used in component.
+ */
 export function createCustomFiltersObservable<TFilterValue extends Record<string, unknown> | null = null>(
 	route: ActivatedRoute,
 	router: Router
@@ -84,6 +110,69 @@ export function createCustomFiltersObservable<TFilterValue extends Record<string
 	);
 }
 
+/**
+ *
+ * Creates query params with passed information about pagination.
+ * @param {Router} router - Router instance used in component.
+ * @param {IPageInfo} pageInfo - Object containing information about page size and page index
+ */
+export function onPageChangeHelper(router: Router, pageInfo: IPageInfo): void {
+	router.navigate([], {
+		replaceUrl: true,
+		queryParamsHandling: 'merge',
+		queryParams: {
+			[TableQueryParam.PAGE_INDEX]: pageInfo.pageIndex || null,
+			[TableQueryParam.PAGE_SIZE]: pageInfo.pageSize,
+		},
+	});
+}
+
+/**
+ *
+ * Creates query params with passed information about sorting.
+ * @param {Router} router - Router instance used in component.
+ * @param {ISortInfo} sortInfo - Object containing information about sorting key and direction
+ */
+export function onSortChangeHelper(router: Router, sort: ISortInfo): void {
+	const sortDirection = sort.sortDirection || null;
+	const sortKey = sortDirection ? sort.sortingKey : null;
+	router.navigate([], {
+		replaceUrl: true,
+		queryParamsHandling: 'merge',
+		queryParams: {
+			[TableQueryParam.SORT_KEY]: sortKey,
+			[TableQueryParam.SORT_DIRECTION]: sortDirection,
+		},
+	});
+}
+
+/**
+ *
+ * Creates query params and encodes them based on passed filter value.
+ * @param {Router} router - Router instance used in component.
+ * @param {TFilterValue} filterValue - Object containing properties used for filtering
+ */
+export function onFiltersChangeHelper<TFilterValue extends Record<string, unknown> | null = null>(
+	router: Router,
+	customFilters: TFilterValue
+): void {
+	let filters = null;
+	try {
+		filters = customFilters ? btoa(JSON.stringify(customFilters)) : null;
+	} catch (e) {
+		console.error(e);
+	}
+
+	router.navigate([], {
+		replaceUrl: true,
+		queryParamsHandling: 'merge',
+		queryParams: {
+			[TableQueryParam.CUSTOM_FILTERS]: filters,
+			[TableQueryParam.PAGE_INDEX]: null,
+		},
+	});
+}
+
 function isFilterEmpty<TFilterValue extends Record<string, unknown> | null = null>(filterValue: TFilterValue): boolean {
 	if (!filterValue) {
 		return true;
@@ -104,45 +193,7 @@ function isFilterEmpty<TFilterValue extends Record<string, unknown> | null = nul
 	return !filterHasSomeValue;
 }
 
-export function onPageChangeHelper(router: Router, pageInfo: IPageInfo): void {
-	router.navigate([], {
-		replaceUrl: true,
-		queryParamsHandling: 'merge',
-		queryParams: {
-			[TableQueryParam.PAGE_INDEX]: pageInfo.pageIndex || null,
-			[TableQueryParam.PAGE_SIZE]: pageInfo.pageSize,
-		},
-	});
-}
-
-export function onSortChangeHelper(router: Router, sort: ISortInfo): void {
-	const sortDirection = sort.sortDirection || null;
-	const sortKey = sortDirection ? sort.sortingKey : null;
-	router.navigate([], {
-		replaceUrl: true,
-		queryParamsHandling: 'merge',
-		queryParams: {
-			[TableQueryParam.SORT_KEY]: sortKey,
-			[TableQueryParam.SORT_DIRECTION]: sortDirection,
-		},
-	});
-}
-
-export function onFiltersChange<TFilterValue extends Record<string, unknown> | null = null>(
-	router: Router,
-	customFilters: TFilterValue
-): void {
-	router.navigate([], {
-		replaceUrl: true,
-		queryParamsHandling: 'merge',
-		queryParams: {
-			[TableQueryParam.CUSTOM_FILTERS]: customFilters ? btoa(JSON.stringify(customFilters)) : null,
-			[TableQueryParam.PAGE_INDEX]: null, // go to first page on filters change
-		},
-	});
-}
-
-export function clearFilters(router: Router): void {
+function clearFilters(router: Router): void {
 	router.navigate([], {
 		replaceUrl: true,
 		queryParamsHandling: 'merge',
