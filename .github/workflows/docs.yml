@@ -2,7 +2,9 @@ name: Docs
 
 on:
   push:
-    branches: [master]
+    branches:
+      - main
+      - 'issue-14-improve-documentation'
 
 jobs:
   docs:
