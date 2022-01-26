@@ -8,13 +8,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
 	title: 'ngx-nuts-and-bolts',
 	tagline: 'Collection of reusable components and helpers',
-	url: 'https://github.com/infinum/',
+	url: 'https://infinum.github.io/ngx-nuts-and-bolts/',
 	baseUrl: '/ngx-nuts-and-bolts/',
 	onBrokenLinks: 'throw',
 	onBrokenMarkdownLinks: 'warn',
 	favicon: 'img/favicon.ico',
-	organizationName: 'Infinum', // Usually your GitHub org/user name.
+	organizationName: 'infinum', // Usually your GitHub org/user name.
 	projectName: 'ngx-nuts-and-bolts', // Usually your repo name.
+	deploymentBranch: 'gh-pages',
+	trailingSlash: 'false',
 	presets: [
 		[
 			'classic',
