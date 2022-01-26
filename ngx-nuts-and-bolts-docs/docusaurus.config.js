@@ -7,15 +7,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
 	title: 'ngx-nuts-and-bolts',
-	tagline: 'Jumpstart your development with production tested components and helpers',
-	url: 'https://github.com/infinum/ngx-nuts-and-bolts',
+	tagline: 'Collection of reusable components and helpers',
+	url: 'https://github.com/infinum/',
 	baseUrl: '/ngx-nuts-and-bolts/',
 	onBrokenLinks: 'throw',
 	onBrokenMarkdownLinks: 'warn',
 	favicon: 'img/favicon.ico',
 	organizationName: 'Infinum', // Usually your GitHub org/user name.
 	projectName: 'ngx-nuts-and-bolts', // Usually your repo name.
-
 	presets: [
 		[
 			'classic',
