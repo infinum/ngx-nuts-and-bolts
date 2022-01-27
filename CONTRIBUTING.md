@@ -20,7 +20,7 @@ A minimal reproduction allows us to quickly confirm a bug (or point out a coding
 
 ## Missing a feature?
 
-You can request adding new feature to the library by starting new discussion in the discussions tab, where you can outline the problem your requested feature would solve. Ideally you would already have solution in mind which you can also describe in the discussion. After discussing the new feature if team members agree that it will be useful and reusable the issue will be created based on which solution can be implemented and new pull request created.
+You can request adding a new feature to the library by starting a new discussion in the discussions tab, where you can outline the problem your requested feature would solve. Ideally, you would already have a solution in mind which you can describe in the discussion. Based on the discussion of the new feature and if team members agree that it will be useful and reusable, a new issue will be created. Development will start and, finally, a new pull request will be created.
 
 ## Coding rules
 
