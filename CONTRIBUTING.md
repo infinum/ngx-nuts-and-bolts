@@ -24,12 +24,12 @@ You can request adding new feature to the library by starting new discussion in 
 
 ## Coding rules
 
-To ensure consistency throughout the source code, keep these rules in mind as you are working:
+To ensure consistency throughout the source code, keep these rules in mind as you are working on implementation of a new feature or a bugfix:
 
 All features or bug fixes must be tested by one or more specs (unit-tests).
 
-All features must be documented by adding new `.md` file in appropriate folder inside of the `ngx-nuts-and-bolts-docs` project.
+All features must be documented by adding a new `.md` file in an appropriate folder inside of the `ngx-nuts-and-bolts-docs` project.
 
-All features that interact directly with or affect the UI should also have accompanying `.storiest.ts` file.
+All features that interact directly with or affect the UI should also have an accompanying `.storiest.ts` file.
 
 [github]: https://github.com/infinum/ngx-nuts-and-bolts
