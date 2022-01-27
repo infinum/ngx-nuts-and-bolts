@@ -26,10 +26,20 @@ You can request adding a new feature to the library by starting a new discussion
 
 To ensure consistency throughout the source code, keep these rules in mind as you are working on implementation of a new feature or a bugfix:
 
-All features or bug fixes must be tested by one or more specs (unit-tests).
+- All features or bug fixes must be tested by one or more specs (unit-tests).
 
-All features must be documented by adding a new `.md` file in an appropriate folder inside of the `ngx-nuts-and-bolts-docs` project.
+- All features must be documented by adding a new `.md` file in an appropriate folder inside of the `ngx-nuts-and-bolts-docs` project.
 
-All features that interact directly with or affect the UI should also have an accompanying `.storiest.ts` file.
+- All features that interact directly with or affect the UI should also have an accompanying `.stories.ts` file.
+
+### Writing documentation
+
+After you've added a new feature into the library, steps to add corresponding documentation are as follows:
+
+1. Add related `README.md` file inside of the `docs` folder in the `ngx-nuts-and-bolts-docs` project.
+2. Edit `sidebar.js` file and add a new object which will be used in building sidebar navigation.
+
+After your pull request is merged, documentation will be built via github action and after successfull build available at [github-pages][github-pages]
 
 [github]: https://github.com/infinum/ngx-nuts-and-bolts
+[github-pages]: https://infinum.github.io/ngx-nuts-and-bolts/
