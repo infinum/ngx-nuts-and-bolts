@@ -1,6 +1,6 @@
 # Async data helper
 
-If and when returning mocked data from testing service user should avoid using something like:
+If and when returning mocked data from the testing service, users should avoid doing something like this:
 
 ```ts
 public getData(data: TData): Observable<TData>{
