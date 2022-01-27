@@ -1,6 +1,13 @@
 # ExtractPublic
 
-Use <span class="x x-first x-last">`</span>ExtractPublic<span class="x x-first x-last">`</span> custom type when you want to extract public members of class. It could prove most useful when creating test doubles for your services or components[^1].
+Use `ExtractPublic` custom type when you want to extract public members of class. It could prove most useful when creating test doubles for your services or components[^1].
+You might be wondering why you couldn't simply do
+
+```ts
+class UserTestingService implements UserService
+```
+
+Good question! Perhaps unexpectedly, that would require you to implement private and protected members of UserService as well as public members. You can find a more detailed explanation [here](https://github.com/Microsoft/TypeScript/issues/18499).
 
 ## 1. Usage
 
