@@ -1,3 +1,8 @@
+---
+id: extract-public
+title: Extract public
+---
+
 # ExtractPublic
 
 Use `ExtractPublic` custom type when you want to extract public members of class. It could prove most useful when creating test doubles for your services or components[^1].
