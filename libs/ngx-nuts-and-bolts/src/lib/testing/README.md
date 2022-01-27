@@ -1,6 +1,6 @@
 # ExtractPublic
 
-Use ExtractPublic custom type when you want to extract public members of class. It could prove most useful when creating test doubles for your services or components[^1].
+Use <span class="x x-first x-last">`</span>ExtractPublic<span class="x x-first x-last">`</span> custom type when you want to extract public members of class. It could prove most useful when creating test doubles for your services or components[^1].
 
 ## 1. Usage
 
