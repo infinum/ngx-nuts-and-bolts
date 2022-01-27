@@ -14,7 +14,8 @@ This specific implementation of helper uses `observeOn` operator which applies `
 
 ## 1. Usage
 
-In service test double just call `asyncData` function with the mocked data you want to return asynchronously.
+When returning the mock data in test doubles, simply wrap the data using `asyncData` function and the data will be returned asynchronously.
+``
 
 ```ts
 public getTestingData(data: TData): Observable<TData>{
