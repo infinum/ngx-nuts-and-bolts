@@ -1,6 +1,6 @@
 # Table state helpers
 
-Being able to take out the pagination, sorting and filtering information from the memory of the application alleviates some of the problems (link sharing, refreshing pages) which are present when saving that data in-memory. For that purpose this library exposes functions which cover common use cases regarding table state manipulation.
+Being able to take out the pagination, sorting and filtering information from the memory of the application alleviates some of the problems (link sharing, refreshing pages) which are present when saving that data in-memory. For this purpose, this library exposes functions which cover common use cases regarding table state manipulation.
 
 ## 1. Features
 
@@ -9,12 +9,18 @@ Being able to take out the pagination, sorting and filtering information from th
 
 ## 2. Usage
 
-Helper functions can be used individually or as example below shows with other helper functions and a little bit of RxJS magic which then reacts and re-fethces data based on changes in any one of the passed observables.
+Helper functions can be used individually or, as the example below shows, with other helper functions and a little bit of RxJS magic which reacts and re-fethces data based on changes in any one of the passed observables.
 
 ```ts
 
+import {isEqual} from 'loadsh';
+
 interface ITemplateData{
 	data: Data;
+	tableState: ITableState;
+}
+
+interface ITableState{
 	pagination: IPageInfo;
 	sort: ISortInfo;
 	filters: TFilterValue;
@@ -31,21 +37,24 @@ export class MyComponent extends LoadingStateComponent {
 
 	private createTemplateDataObservable(): Observable<ITemplateData> {
 		const pagination$ = createPaginationObservable();
-		const sort$ = createSortingObservable();
+		const sort$ = createSortObservable();
 		const filters$ = createFilteringObservable();
 
-		return combineLatest([pagination$, sort$, filters$, this.loadingTrigger$]).pipe(
+		const tableSate$ = combineLatest([pagination$, sort$, filters$]).pipe(
+			debounceTime(500), // optional, might depend on the use case whether you want this or not
+			distinctUntilChanged(isEqual) // recommended to prevent multiple emits for same navigation events
+		);
+
+		return combineLatest([tableState$, this.loadingTrigger$]).pipe(
 			tap(() => {
 				this._loading$.next(true);
-			})
-			switchMap(([pagination, sort, filters]) => {
-				return this.dataService.fetchPaginatedSortedFilteredData(pagination, sort, filter).pipe(
+			}),
+			switchMap(([tableState]) => {
+				return this.dataService.fetchPaginatedSortedFilteredData(tableState).pipe(
 					map((data) => {
 						return {
 							data,
-							pagination,
-							sort,
-							filters
+							tableState
 						}
 					})
 				);
@@ -59,7 +68,7 @@ export class MyComponent extends LoadingStateComponent {
 }
 ```
 
-Setting of the query parameters is even simpler as shown in code snippets below. With little mapping, interfaces for pagination and sorting should be usable with most of the 3rd party out-of-the-box data table events. While `onFiltersChange()` function accepts generic object as filter value.
+Setting of the query parameters is even simpler as shown in code snippets below. With little mapping, interfaces for pagination and sorting should be usable with most of the 3rd party out-of-the-box data table events. While `changeFilters()` function accepts generic object as filter value.
 
 ```ts
 ...
@@ -69,7 +78,7 @@ public onPageChange(event: PageEvent): void{
 		pageSize: event.pageSize
 	}
 
-	onPageChangeHelper(this.router, pageInfo)
+	changePage(this.router, pageInfo)
 }
 ```
 
@@ -78,16 +87,16 @@ public onPageChange(event: PageEvent): void{
 public onSortChange(event: SortEvent): void{
 	const sortInfo: ISortInfo{
 		sortDirection: event.direction,
-		sortingKey: event.key
+		sortKey: event.key
 	}
 
-	onSortChangeHelper(this.router, sortInfo)
+	changeSort(this.router, sortInfo)
 }
 ```
 
 ```ts
 ...
 public onFiltersChange(event: FilterEvent): void{
-	onFiltersChangeHelper(this.router, event)
+	changeFilters(this.router, event)
 }
 ```

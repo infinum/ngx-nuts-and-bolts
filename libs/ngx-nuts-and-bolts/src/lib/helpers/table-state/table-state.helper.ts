@@ -1,7 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { isEqual } from 'lodash';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export type Sort = 'asc' | 'desc' | '';
 
@@ -12,7 +11,7 @@ export interface IPageInfo {
 }
 
 export interface ISortInfo {
-	sortingKey: string;
+	sortKey: string;
 	sortDirection: Sort;
 }
 
@@ -49,31 +48,26 @@ export function createPaginationObservable(
 				pageIndex,
 				pageSize,
 			};
-		}),
-		distinctUntilChanged(
-			(pageEvent1, pageEvent2) =>
-				pageEvent1.pageIndex === pageEvent2.pageIndex && pageEvent1.pageSize === pageEvent2.pageSize
-		)
+		})
 	);
 }
 
 /**
  *
- * Creates observable that emits when sorting information in route changes.
+ * Creates observable that emits when sort information in route changes.
  * @param {ActivatedRoute} route - Activated route instance used in component.
  */
-export function createSortingObservable(route: ActivatedRoute): Observable<ISortInfo> {
+export function createSortObservable(route: ActivatedRoute): Observable<ISortInfo> {
 	return route.queryParamMap.pipe(
 		map((paramMap) => {
-			const sortingKey = paramMap.get(TableQueryParam.SORT_KEY) ?? '';
+			const sortKey = paramMap.get(TableQueryParam.SORT_KEY) ?? '';
 			const sortDirection = (paramMap.get(TableQueryParam.SORT_DIRECTION) ?? '') as Sort;
 
 			return {
-				sortingKey,
+				sortKey,
 				sortDirection,
 			};
-		}),
-		distinctUntilChanged(isEqual)
+		})
 	);
 }
 
@@ -105,8 +99,7 @@ export function createCustomFiltersObservable<TFilterValue extends Record<string
 			}
 
 			return filters;
-		}),
-		distinctUntilChanged(isEqual)
+		})
 	);
 }
 
@@ -116,8 +109,8 @@ export function createCustomFiltersObservable<TFilterValue extends Record<string
  * @param {Router} router - Router instance used in component.
  * @param {IPageInfo} pageInfo - Object containing information about page size and page index
  */
-export function onPageChangeHelper(router: Router, pageInfo: IPageInfo): void {
-	router.navigate([], {
+export function changePage(router: Router, pageInfo: IPageInfo): Promise<boolean> {
+	return router.navigate([], {
 		replaceUrl: true,
 		queryParamsHandling: 'merge',
 		queryParams: {
@@ -129,14 +122,15 @@ export function onPageChangeHelper(router: Router, pageInfo: IPageInfo): void {
 
 /**
  *
- * Creates query params with passed information about sorting.
+ * Creates query params with passed information about sort.
  * @param {Router} router - Router instance used in component.
- * @param {ISortInfo} sortInfo - Object containing information about sorting key and direction
+ * @param {ISortInfo} sortInfo - Object containing information about sort key and direction
  */
-export function onSortChangeHelper(router: Router, sort: ISortInfo): void {
+export function changeSort(router: Router, sort: ISortInfo): Promise<boolean> {
 	const sortDirection = sort.sortDirection || null;
-	const sortKey = sortDirection ? sort.sortingKey : null;
-	router.navigate([], {
+	const sortKey = sortDirection ? sort.sortKey : null;
+
+	return router.navigate([], {
 		replaceUrl: true,
 		queryParamsHandling: 'merge',
 		queryParams: {
@@ -152,10 +146,10 @@ export function onSortChangeHelper(router: Router, sort: ISortInfo): void {
  * @param {Router} router - Router instance used in component.
  * @param {TFilterValue} filterValue - Object containing properties used for filtering
  */
-export function onFiltersChangeHelper<TFilterValue extends Record<string, unknown> | null = null>(
+export function changeFilters<TFilterValue extends Record<string, unknown> | null = null>(
 	router: Router,
 	customFilters: TFilterValue
-): void {
+): Promise<boolean> {
 	let filters = null;
 	try {
 		filters = customFilters ? btoa(JSON.stringify(customFilters)) : null;
@@ -163,7 +157,7 @@ export function onFiltersChangeHelper<TFilterValue extends Record<string, unknow
 		console.error(e);
 	}
 
-	router.navigate([], {
+	return router.navigate([], {
 		replaceUrl: true,
 		queryParamsHandling: 'merge',
 		queryParams: {
@@ -183,7 +177,7 @@ function isFilterEmpty<TFilterValue extends Record<string, unknown> | null = nul
 			return Boolean(value);
 		} else if (typeof value === 'number') {
 			return value || value === 0;
-		} else if (value instanceof Array) {
+		} else if (Array.isArray(value)) {
 			return value.length;
 		}
 
