@@ -31,6 +31,11 @@ const sidebars = {
 			label: 'Utilities',
 			items: ['utilities/testing/extract-public'],
 		},
+		{
+			type: 'category',
+			label: 'Helpers',
+			items: ['table-state/table-state'],
+		},
 	],
 
 	// But you can create a sidebar manually
