@@ -22,4 +22,4 @@ export class UserTestingService implements ExtractPublic<UserService>{
 }
 ```
 
-[^1]: Using this custom type with components could result in redundant code in test doubles since e.g. component could contain public methods used in templates which might be unnecessary in the testing double. asd
+[^1]: Using this custom type with components could result in redundant code in test doubles since e.g. component could contain public methods used in templates which might be unnecessary in the testing double.
