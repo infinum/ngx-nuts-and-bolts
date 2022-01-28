@@ -1,3 +1,9 @@
+---
+id: table-state
+title: Table state helpers
+sidebar_label: Table state helpers
+---
+
 # Table state helpers
 
 Being able to take out the pagination, sorting and filtering information from the memory of the application alleviates some of the problems (link sharing, refreshing pages) which are present when saving that data in-memory. For this purpose, this library exposes functions which cover common use cases regarding table state manipulation.

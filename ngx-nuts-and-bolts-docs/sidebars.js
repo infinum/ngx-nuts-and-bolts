@@ -26,6 +26,10 @@ const sidebars = {
 			label: 'Components',
 			items: ['loading-state/component-with-loading-state'],
 		},
+		{
+			type: 'doc',
+			id: 'table-state/table-state',
+		},
 	],
 
 	// But you can create a sidebar manually
