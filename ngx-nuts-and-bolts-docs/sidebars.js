@@ -31,6 +31,10 @@ const sidebars = {
 			label: 'Animations',
 			items: ['animations/animations'],
 		},
+		{
+			type: 'doc',
+			id: 'table-state/table-state',
+		},
 	],
 
 	// But you can create a sidebar manually
