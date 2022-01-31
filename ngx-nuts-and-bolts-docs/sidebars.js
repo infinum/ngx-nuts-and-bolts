@@ -27,8 +27,14 @@ const sidebars = {
 			items: ['loading-state/component-with-loading-state'],
 		},
 		{
-			type: 'doc',
-			id: 'table-state/table-state',
+			type: 'category',
+			label: 'Utilities',
+			items: ['utilities/testing/extract-public'],
+		},
+		{
+			type: 'category',
+			label: 'Helpers',
+			items: ['table-state/table-state'],
 		},
 	],
 
