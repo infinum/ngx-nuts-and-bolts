@@ -1,18 +1,16 @@
 ---
-id: component-with-loading-state
-title: Component with loading state
-sidebar_label: Component with loading state
+id: loading-state
+title: LoadingState directive
+sidebar_label: LoadingState directive
 ---
 
-# Component with loading state
+# LoadingState directive
 
 Or how I learned to start worrying and handle the error states.
 
-This class should really be called `Component with loading and error states` (CWLARS for short), but it was just too much.
-
 ## 1. Features
 
-`ComponentWithLoadingState` class allows you to extend your application components with loading and error states.
+`LoadingState` class allows you to extend whatever lives within DI provider with loading and error states.
 
 Different enter and leave delay times allow for showing and hiding the loader only if the loading takes at least a certain amount of time. This provides a better UX where the user will not see a loading state if the loading takes very short time, preventing quick flashes. If for whatever reason you need access to the loading observable without any debounce delays, you can use `directLoading$`.
 
@@ -20,11 +18,11 @@ When loading begins, any previous error is cleared, avoiding the need to handle 
 
 Accompanying loading and error observables is an observable for checking if the initial loading is done. This can be useful to show a different loading state on the initial load.
 
-It usually makes sense to allow the user to retry on error. For this purpose, `ComponentWithLoadingState` exposes `loadingTrigger$` observable that is used to "kick-start" the RxJS pipeline and `onRetry` handler that triggers `loadingTrigger$`.
+It usually makes sense to allow the user to retry on error. For this purpose, `LoadingState` exposes `loadingTrigger$` observable that is used to "kick-start" the RxJS pipeline and `onRetry` handler that triggers `loadingTrigger$`.
 
 ## 2. Configuration
 
-By default, loader enter delay is set to 250ms and loader leave delay is set to 0ms. You can change these values globally for all components that extend `ComponentWithLoadingState` or on a case-by-case basis. If there is no globally defined provider nor a component-level provider for some specific component, the component will use the default delays.
+By default, loader enter delay is set to 250ms and loader leave delay is set to 0ms. You can change these values globally for all components that extend `LoadingState` or on a case-by-case basis. If there is no globally defined provider nor a component-level provider for some specific component, the component will use the default delays.
 
 ### 2.1. Setting delays globally
 
@@ -40,7 +38,7 @@ Provide the desired values in a provider in your `AppModule`:
 }
 ```
 
-### 2.2. Setting delays for a particular component
+### 2.2. Setting delays for a particular component (or a subtreesubtree)
 
 Pass the desired values via component-specific provider (this will override any values set in the global provider):
 
@@ -56,19 +54,19 @@ Pass the desired values via component-specific provider (this will override any 
 	}],
 	...
 })
-class MyComponent extends ComponentWithLoadingState {}
+class MyComponent extends LoadingState {}
 ```
 
 ## 3. Usage
 
 There are two ways to implement handling the loading and error states:
 
-1. Extend `ComponentWithLoadingState` base class and use `_loading$` and `_error$` observables to emit values and `loading$` and `error$` observables to react to state changes
+1. Extend `LoadingState` base class and use `_loading$` and `_error$` observables to emit values and `loading$` and `error$` observables to react to state changes
    - this requires the least amount of boilerplate and works for components that have only one set of loading and error states
 2. Use `privateLoadingState` and `publicLoadingState` functions to manually create observables
    - this requires a bit more work, but it allows you to have multiple sets of loading and error states within the same component
 
-### 3.1. Extending `ComponentWithLoadingState`
+### 3.1. Extending `LoadingState`
 
 ```html
 <ng-container *ngIf="templateData$ | async as templateData">...</ng-container>
@@ -84,7 +82,7 @@ There are two ways to implement handling the loading and error states:
 
 interface ITemplateData { ... }
 
-class MyComponent extends ComponentWithLoadingState {
+class MyComponent extends LoadingState {
 	public readonly templateData$ = this.createTemplateDataObservable();
 
 	private createTemplateDataObservable(): Observable<ITemplateData> {
@@ -142,7 +140,7 @@ private createTemplateDataObservable(): Observable<ITemplateData> {
 
 Ideally, the component should only be handling one loading/error state for one data source observable. If the component is handling multiple independent data source observables, it is probably best to consider splitting up the component into multiple components.
 
-If you really do need to handle multiple data source observables from the same component, you will not be able to extend `ComponentWithLoadingState` because it can only handle one source observable. In such cases, use `publicLoadingState` and `privateLoadingState` to create multiple sets of loading state observables. Here is a quick example:
+If you really do need to handle multiple data source observables from the same component, you will not be able to extend `LoadingState` because it can only handle one source observable. In such cases, use `publicLoadingState` and `privateLoadingState` to create multiple sets of loading state observables. Here is a quick example:
 
 ```ts
 class MyComponent {
@@ -176,4 +174,4 @@ class MyComponent {
 }
 ```
 
-You continue to use the two sets of \_error$, error$, \_loading$ and loading$ just as you would when working with one set when extending `ComponentWithLoadingState`. It is probably clear why you would not want to do this and stick with using only one set of states. Do this only if necessary
+You continue to use the two sets of \_error$, error$, \_loading$ and loading$ just as you would when working with one set when extending `LoadingState`. It is probably clear why you would not want to do this and stick with using only one set of states. Do this only if necessary.

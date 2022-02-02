@@ -23,10 +23,9 @@ const sidebars = {
 		},
 		{
 			type: 'category',
-			label: 'Components',
-			items: ['loading-state/component-with-loading-state'],
+			label: 'Directives',
+			items: ['directives/loading-state'],
 		},
-
 		{
 			type: 'category',
 			label: 'Animations',
