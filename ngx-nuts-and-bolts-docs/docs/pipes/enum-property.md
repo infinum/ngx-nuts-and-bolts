@@ -1,10 +1,10 @@
 ---
 id: enum-property
-title: Enum property pipe
-sidebar_label: Enum property pipe
+title: EnumProperty pipe
+sidebar_label: EnumProperty pipe
 ---
 
-# Enum property pipe
+# EnumProperty pipe
 
 Common practice of working with enums often runs into a need to define separate metadata for each value of a given enum type. See [Infinum Handbook - Enumerations](https://infinum.com/handbook/frontend/angular/angular-guidelines-and-best-practices/file-and-module-organization-and-naming#enumerations)
 
