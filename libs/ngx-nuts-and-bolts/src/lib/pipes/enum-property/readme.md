@@ -4,11 +4,9 @@ Common practice of working with enums often runs into a need to define separate 
 
 ## 1. Features
 
-`enumProperty` pipe gives you an easy way to access given enum's value metadata in template.
+`enumProperty` pipe gives you an easy way to access given enum's value metadata in the template.
 
 ## 2. Usage
-
-Asssuming that you keep your enum definitions somewhat similar to what is defined in handbook like so:
 
 ```ts
 export enum Directions {
@@ -52,7 +50,7 @@ export class ExampleComponent {
 }
 ```
 
-By convention `enumProperty` looks for `translationKey` on the metadata object (in this example `directionsData`), but takes an argument allowing you to look for different key.
+By default `enumProperty` looks for `translationKey` on the metadata object (in this example `directionsData`), but takes an argument allowing you to look for different key.
 
 ```ts
 @Component({
