@@ -1,10 +1,10 @@
 # inView directive
 
-Often times, one may be interested to know whether or not piece of DOM is visible on user's screen. There is [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) just for that purpose and this directive is very simple option-less wrapper around it.
+Often times, one may be interested to know whether or not piece a of DOM is visible on the user's screen. We utilize [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) just for that purpose and this directive is a very simple option-less wrapper around it.
 
 ## 1. Features
 
-`infInView` directive allows you to determine if a piece of DOM is fully visible on user's screen.
+`infInView` directive allows you to determine if a piece of DOM is visible on user's screen.
 
 ## 2. Usage
 
@@ -13,7 +13,7 @@ Simply add `infInView` directive to whatever DOM node you care about. You can th
 ```ts
 @Component({
 	selector: 'app-example',
-	template: `<div infInView (inView)="inView$.next($event)>{{ inView$ | async }}</div>`,
+	template: `<div (infInView)="inView$.next($event)>{{ inView$ | async }}</div>`,
 })
 class ExampleComponent {
 	public inView$ = new Subject<boolean>();

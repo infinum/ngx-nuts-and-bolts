@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, ElementRef, EventEmitter, OnDestroy, Output }
 
 @Directive({ selector: '[infInView]', exportAs: 'infInView' })
 export class InViewDirective implements AfterViewInit, OnDestroy {
-	@Output()
+	@Output('infInView')
 	public inView: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public isInView: boolean | undefined = undefined;
