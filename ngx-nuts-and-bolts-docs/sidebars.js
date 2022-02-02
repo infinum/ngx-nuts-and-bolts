@@ -26,7 +26,11 @@ const sidebars = {
 			label: 'Components',
 			items: ['loading-state/component-with-loading-state'],
 		},
-
+		{
+			type: 'category',
+			label: 'Directives',
+			items: ['directives/in-view'],
+		},
 		{
 			type: 'category',
 			label: 'Animations',
