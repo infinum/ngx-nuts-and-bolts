@@ -1,4 +1,5 @@
-export * from './lib/components/component-with-loading-state/component-with-loading-state';
+// Directives
+export * from './lib/directives/loading-state/loading-state';
 
 // Animations
 export * from './lib/animations/fade.animation';
