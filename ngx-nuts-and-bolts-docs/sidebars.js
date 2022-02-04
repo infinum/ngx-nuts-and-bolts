@@ -23,11 +23,6 @@ const sidebars = {
 		},
 		{
 			type: 'category',
-			label: 'Components',
-			items: ['loading-state/component-with-loading-state'],
-		},
-		{
-			type: 'category',
 			label: 'Directives',
 			items: ['directives/in-view'],
 		},
@@ -38,12 +33,17 @@ const sidebars = {
 		},
 		{
 			type: 'category',
-			label: 'Utilities',
-			items: ['utilities/testing/extract-public'],
+			label: 'Pipes',
+			items: ['pipes/enum-property'],
 		},
 		{
-			type: 'doc',
-			id: 'table-state/table-state',
+			type: 'category',
+			label: 'Utilities',
+			items: [
+				'utilities/testing/extract-public',
+				'utilities/loading-state/loading-state',
+				'utilities/table-state/table-state',
+			],
 		},
 	],
 

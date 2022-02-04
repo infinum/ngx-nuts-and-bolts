@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ComponentWithLoadingState } from './component-with-loading-state';
+import { LoadingState } from './loading-state';
 
 @Component({
 	selector: 'inf-component-with-loading-state-host',
@@ -10,7 +10,7 @@ import { ComponentWithLoadingState } from './component-with-loading-state';
 		<div *ngIf="error$ | async as error" class="error">{{ error }}</div>
 	`,
 })
-class ComponentWithLoadingStateHostComponent extends ComponentWithLoadingState {
+class LoadingStateHostComponent extends LoadingState {
 	public setLoading(loading: boolean): void {
 		this._loading$.next(loading);
 	}
@@ -20,20 +20,20 @@ class ComponentWithLoadingStateHostComponent extends ComponentWithLoadingState {
 	}
 }
 
-describe('ComponentWithLoadingState', () => {
-	let fixture: ComponentFixture<ComponentWithLoadingStateHostComponent>;
-	let component: ComponentWithLoadingStateHostComponent;
+describe('LoadingState', () => {
+	let fixture: ComponentFixture<LoadingStateHostComponent>;
+	let component: LoadingStateHostComponent;
 	const loaderSelector = '.loader';
 	const errorSelector = '.error';
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [ComponentWithLoadingStateHostComponent],
+			declarations: [LoadingStateHostComponent],
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(ComponentWithLoadingStateHostComponent);
+		fixture = TestBed.createComponent(LoadingStateHostComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

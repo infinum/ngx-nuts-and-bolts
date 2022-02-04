@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Meta, Story } from '@storybook/angular';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, finalize, first, switchMap } from 'rxjs/operators';
-import { ComponentWithLoadingState } from './component-with-loading-state';
+import { LoadingState } from './loading-state';
 
 interface IMockData {
 	foo: string;
@@ -31,7 +31,7 @@ interface IMockData {
 		</div>
 	`,
 })
-class ComponentWithLoadingStateHostComponent extends ComponentWithLoadingState {
+class LoadingStateHostComponent extends LoadingState {
 	public isPending = true;
 	private counter = 1;
 	private mockDataTrigger$ = new Subject<IMockData>();
@@ -81,12 +81,12 @@ class ComponentWithLoadingStateHostComponent extends ComponentWithLoadingState {
 }
 
 export default {
-	title: 'ComponentWithLoadingState',
-	component: ComponentWithLoadingStateHostComponent,
-} as Meta<ComponentWithLoadingStateHostComponent>;
+	title: 'LoadingState',
+	component: LoadingStateHostComponent,
+} as Meta<LoadingStateHostComponent>;
 
-const Template: Story<ComponentWithLoadingStateHostComponent> = (args: ComponentWithLoadingStateHostComponent) => ({
-	component: ComponentWithLoadingStateHostComponent,
+const Template: Story<LoadingStateHostComponent> = (args: LoadingStateHostComponent) => ({
+	component: LoadingStateHostComponent,
 	props: args,
 });
 

@@ -4,8 +4,6 @@ title: InView directive
 sidebar_label: InView directive
 ---
 
-# InView directive
-
 Often times, one may be interested to know whether or not piece a of DOM is visible on the user's screen. We utilize [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) just for that purpose and this directive is a very simple option-less wrapper around it.
 
 ## 1. Features
