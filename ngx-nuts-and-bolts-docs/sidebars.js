@@ -26,11 +26,15 @@ const sidebars = {
 			label: 'Components',
 			items: ['loading-state/component-with-loading-state'],
 		},
-
 		{
 			type: 'category',
 			label: 'Animations',
 			items: ['animations/animations'],
+		},
+		{
+			type: 'category',
+			label: 'Pipes',
+			items: ['pipes/enum-property']
 		},
 		{
 			type: 'category',
