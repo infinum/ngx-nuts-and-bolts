@@ -10,11 +10,11 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
-**Is this an regression?**
+**Is this a regression?**
 [ ] - Yes
 [ ] - No
 
-**Please provide error or exception you've encountered**
+**Please provide the error or the exception you've encountered**
 
 **Expected behaviour**
 A clear and concise description of what you expected to happen.
