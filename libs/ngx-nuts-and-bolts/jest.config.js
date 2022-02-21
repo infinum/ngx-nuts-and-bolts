@@ -17,14 +17,22 @@ module.exports = {
 		'jest-preset-angular/build/serializers/ng-snapshot',
 		'jest-preset-angular/build/serializers/html-comment',
 	],
-	coverageReporters: ['text'],
-
+	coverageReporters: ['text', 'lcov', 'html'],
+	collectCoverage: true,
+	collectCoverageFrom: ['./src/lib/**'],
+	// prettier-ignore
+	coveragePathIgnorePatterns: [
+		'stories.ts',
+		'module.ts',
+		'\.testing.*ts', // eslint-disable-line no-useless-escape
+		'animation.ts'
+	],
 	coverageThreshold: {
 		global: {
-			branches: 75,
-			functions: 80,
-			lines: 80,
-			statements: 95,
+			branches: 25,
+			functions: 40,
+			lines: 45,
+			statements: 50,
 		},
 	},
 };
