@@ -1,10 +1,8 @@
 ---
 id: loading-state
-title: LoadingState directive
-sidebar_label: LoadingState directive
+title: Loading state
+sidebar_label: Loading state
 ---
-
-# LoadingState directive
 
 Or how I learned to start worrying and handle the error states.
 
@@ -30,7 +28,7 @@ Provide the desired values in a provider in your `AppModule`:
 
 ```ts
 {
-	provide: COMPONENT_WITH_LOADING_STATE_CONFIG,
+	provide: LOADING_STATE_CONFIG,
 	useValue: {
 		enterDelay: 300,
 		leaveDelay: 100,
@@ -38,7 +36,7 @@ Provide the desired values in a provider in your `AppModule`:
 }
 ```
 
-### 2.2. Setting delays for a particular component (or a subtreesubtree)
+### 2.2. Setting delays for a particular component (or a subtree)
 
 Pass the desired values via component-specific provider (this will override any values set in the global provider):
 
@@ -46,7 +44,7 @@ Pass the desired values via component-specific provider (this will override any 
 @Component({
 	...
 	providers: [{
-		provide: COMPONENT_WITH_LOADING_STATE_CONFIG,
+		provide: LOADING_STATE_CONFIG,
 		useValue: {
 			enterDelay: 300,
 			leaveDelay: 100,

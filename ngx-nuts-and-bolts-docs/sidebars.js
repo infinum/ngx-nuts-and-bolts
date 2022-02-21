@@ -24,7 +24,7 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Directives',
-			items: ['directives/loading-state'],
+			items: ['directives/in-view'],
 		},
 		{
 			type: 'category',
@@ -34,16 +34,16 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Pipes',
-			items: ['pipes/enum-property']
+			items: ['pipes/enum-property'],
 		},
 		{
 			type: 'category',
 			label: 'Utilities',
-			items: ['utilities/testing/extract-public'],
-		},
-		{
-			type: 'doc',
-			id: 'table-state/table-state',
+			items: [
+				'utilities/testing/extract-public',
+				'utilities/loading-state/loading-state',
+				'utilities/table-state/table-state',
+			],
 		},
 	],
 
