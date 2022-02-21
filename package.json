@@ -11,7 +11,7 @@
 		"postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
 		"start": "nx run ngx-nuts-and-bolts:storybook",
 		"build": "nx build ngx-nuts-and-bolts && npm run copy-files",
-		"copy-files": "cp ./LICENSE ./dist/libs/ngx-nuts-and-bolts/LICENSE && cp ./README.md ./dist/libs/ngx-nut-and-bolts/README.md",
+		"copy-files": "cp ./LICENSE ./dist/libs/ngx-nuts-and-bolts/LICENSE && cp ./README.md ./dist/libs/ngx-nuts-and-bolts/README.md",
 		"test": "nx run-many --target=test --all --parallel",
 		"test:watch": "nx run-many --target=test --all --parallel --watch",
 		"precommit": "concurrently \"npm run precommit:tsc\" \"npm run precommit:lint\"",
