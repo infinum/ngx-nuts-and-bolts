@@ -13,7 +13,7 @@
 		"build": "nx build ngx-nuts-and-bolts && npm run copy-license",
 		"copy-license": "cp ./LICENSE ./dist/libs/ngx-nuts-and-bolts",
 		"test": "nx run-many --target=test --all --parallel --code-coverage",
-		"test:watch": "nx run-many --target=test --all --parallel --code-coverate --watch",
+		"test:watch": "nx run-many --target=test --all --parallel --code-coverage --watch",
 		"precommit": "concurrently \"npm run precommit:tsc\" \"npm run precommit:lint\"",
 		"precommit:tsc": "concurrently \"npm run tsc:lib\" \"npm run tsc:spec\"",
 		"precommit:lint": "nx affected:lint --parallel --uncommitted",

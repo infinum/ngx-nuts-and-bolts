@@ -23,8 +23,8 @@ const sidebars = {
 		},
 		{
 			type: 'category',
-			label: 'Components',
-			items: ['loading-state/component-with-loading-state'],
+			label: 'Directives',
+			items: ['directives/in-view'],
 		},
 		{
 			type: 'category',
@@ -33,18 +33,18 @@ const sidebars = {
 		},
 		{
 			type: 'category',
-			label: 'Utilities',
-			items: [
-				{
-					type: 'category',
-					label: 'Testing',
-					items: ['utilities/testing/extract-public', 'utilities/testing/async-data'],
-				},
-			],
+			label: 'Testing',
+			items: ['testing/extract-public', 'testing/async-data'],
 		},
 		{
-			type: 'doc',
-			id: 'table-state/table-state',
+			type: 'category',
+			label: 'Pipes',
+			items: ['pipes/enum-property'],
+		},
+		{
+			type: 'category',
+			label: 'Utilities',
+			items: ['utilities/loading-state', 'utilities/table-state'],
 		},
 	],
 

@@ -1,4 +1,8 @@
-# Async data helper
+---
+id: async-data
+title: Async data
+sidebar_label: Async data
+---
 
 If and when returning mocked data from the testing service, users should avoid doing something like this:
 
