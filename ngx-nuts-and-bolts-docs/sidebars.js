@@ -33,17 +33,18 @@ const sidebars = {
 		},
 		{
 			type: 'category',
+			label: 'Testing',
+			items: ['testing/extract-public', 'testing/async-data'],
+		},
+		{
+			type: 'category',
 			label: 'Pipes',
 			items: ['pipes/enum-property'],
 		},
 		{
 			type: 'category',
 			label: 'Utilities',
-			items: [
-				'utilities/testing/extract-public',
-				'utilities/loading-state/loading-state',
-				'utilities/table-state/table-state',
-			],
+			items: ['utilities/loading-state', 'utilities/table-state'],
 		},
 	],
 
