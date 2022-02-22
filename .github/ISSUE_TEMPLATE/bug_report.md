@@ -11,8 +11,8 @@ assignees: ''
 A clear and concise description of what the bug is.
 
 **Is this a regression?**
-[ ] - Yes
-[ ] - No
+- [ ] Yes
+- [ ] No
 
 **Please provide the error or the exception you've encountered**
 
