@@ -1,6 +1,9 @@
 # ngx-nuts-and-bolts
 
-A collection of commonly used pieces of code that we use everyday at Infinum.
+[![CI](https://github.com/infinum/ngx-nuts-and-bolts/actions/workflows/ci.yml/badge.svg)](https://github.com/infinum/ngx-nuts-and-bolts/actions/workflows/ci.yml)
+[![Build and Deploy documentation](https://github.com/infinum/ngx-nuts-and-bolts/actions/workflows/docs.yml/badge.svg)](https://github.com/infinum/ngx-nuts-and-bolts/actions/workflows/docs.yml)
+
+A collection of commonly used pieces of Angular-related code that we use everyday at Infinum.
 
 ## Installation
 
@@ -8,9 +11,15 @@ A collection of commonly used pieces of code that we use everyday at Infinum.
 npm install @infinumjs/ngx-nuts-and-bolts
 ```
 
-## Available nuts and bolts
+## Available _nuts and bolts_
 
-- [ComponentWithLoadingState](./libs/ngx-nuts-and-bolts/src/lib/components/component-with-loading-state/README.md)
+For a list of all available _nuts and bolts_ and guidance on how to use them, please check out the [documentation pages](https://infinum.github.io/ngx-nuts-and-bolts/docs).
+
+You can also look at some examples in Storybook.
+
+## Contributing
+
+Please check the [CONTRIBUTING.md](./CONTRIBUTING.md) document.
 
 # License
 

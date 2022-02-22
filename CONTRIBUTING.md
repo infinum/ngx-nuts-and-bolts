@@ -5,8 +5,7 @@ In the following chapters is the short workflow of how you can contribute to thi
 
 ## <a name="issue"></a> Found a Bug?
 
-If you find a bug in the source code or the functionality itself, you can help us by [submitting an issue](#submit-issue) to our [GitHub Repository][github].
-After which you can, you can [submit a Pull Request](#submit-pr) with a fix if you feel like contributing.
+If you find a bug in the source code or the functionality itself, you can help us by [submitting an issue][github-issues] to our [GitHub Repository][github]. If you already have a solution in mind, you can [submit a Pull Request][github-pulls] with a fix if you feel like contributing.
 
 ### <a name="submit-issue"></a> Submitting an Issue
 
@@ -36,10 +35,12 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 After you've added a new feature into the library, steps to add corresponding documentation are as follows:
 
-1. Add related `README.md` file inside of the `docs` folder in the `ngx-nuts-and-bolts-docs` project.
-2. Edit `sidebar.js` file and add a new object which will be used in building sidebar navigation.
+1. Add related `<feature-name>.md` file inside of the `docs` folder in the `ngx-nuts-and-bolts-docs` project.
+2. Edit `sidebar.js` file by adding a new object which will be used in building sidebar navigation.
 
-After your pull request is merged, documentation will be built via github action and after successfull build available at [github-pages][github-pages]
+After your pull request is merged, documentation will be built via a GitHub action and will be available at [github-pages][github-pages] after a successful build.
 
 [github]: https://github.com/infinum/ngx-nuts-and-bolts
+[github-issues]: https://github.com/infinum/ngx-nuts-and-bolts/issues
+[github-pulls]: https://github.com/infinum/ngx-nuts-and-bolts/pulls
 [github-pages]: https://infinum.github.io/ngx-nuts-and-bolts/
