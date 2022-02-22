@@ -18,9 +18,11 @@
 		"helpers"
 	],
 	"peerDependencies": {
+		"@angular/animations": ">=10",
 		"@angular/common": ">=10",
 		"@angular/core": ">=10",
 		"@angular/platform-browser": ">=10",
+		"@angular/router": ">=10",
 		"rxjs": ">=6"
 	},
 	"dependencies": {
