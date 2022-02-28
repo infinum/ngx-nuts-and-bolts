@@ -6,9 +6,6 @@ export * from './lib/animations/height.animation';
 export * from './lib/testing/extract-public/extract-public.type';
 export * from './lib/testing/async-data/async-data.helper';
 
-// Table state helpers
-export * from './lib/utilities/table-state/table-state';
-
 // Directives
 export * from './lib/directives/in-view/in-view.module';
 export * from './lib/directives/in-view/in-view.directive';
@@ -17,6 +14,7 @@ export * from './lib/directives/in-view/in-view.testing.directive';
 
 // Utilities
 export * from './lib/utilities/loading-state/loading-state';
+export * from './lib/utilities/table-state/table-state';
 
 // Pipes
 export * from './lib/pipes/enum-property/enum-property.module';
