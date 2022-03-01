@@ -24,7 +24,7 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Directives',
-			items: ['directives/in-view'],
+			items: ['directives/in-view', 'directives/observe-resize'],
 		},
 		{
 			type: 'category',
