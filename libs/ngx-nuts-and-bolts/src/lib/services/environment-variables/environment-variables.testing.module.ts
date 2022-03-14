@@ -5,7 +5,7 @@ import { EnvironmentVariablesService } from './environment-variables.service';
 
 @NgModule()
 export class EnvironmentVariablesTestingModule {
-	public static withEnvironment<TVariable extends string>(
+	public static withMockEnvironment<TVariable extends string>(
 		variables: EnvironmentVariablesRecord<TVariable>
 	): ModuleWithProviders<EnvironmentVariablesTestingModule> {
 		return {
