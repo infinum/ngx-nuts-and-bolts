@@ -13,4 +13,4 @@ npm install @infinumjs/ngx-nuts-and-bolts
 ```
 
 After the library is installed you can simply import what you need.
-You can browse through the documentation to see the examples of usage of implemented nuts-and-bolts.
+You can browse through the documentation to see which nuts-and-bolts are available and how to use them.
