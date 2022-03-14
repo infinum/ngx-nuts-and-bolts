@@ -16,6 +16,6 @@ describe('environment variable value pipe', () => {
 	});
 
 	it('should get environment variable value', () => {
-		expect(pipe.transform(EnvironmentVariable.FOO)).toBe('I am foo (testing)');
+		expect(pipe.transform(EnvironmentVariable.FOO)).toBe('I am Foo (testing)');
 	});
 });

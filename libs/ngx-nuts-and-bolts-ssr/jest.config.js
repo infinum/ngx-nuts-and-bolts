@@ -1,5 +1,5 @@
 module.exports = {
-	displayName: 'ngx-nuts-and-bolts',
+	displayName: 'ngx-nuts-and-bolts-ssr',
 	preset: '../../jest.preset.js',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	globals: {
@@ -8,7 +8,7 @@ module.exports = {
 			stringifyContentPathRegex: '\\.(html|svg)$',
 		},
 	},
-	coverageDirectory: '../../coverage/libs/ngx-nuts-and-bolts',
+	coverageDirectory: '../../coverage/libs/ngx-nuts-and-bolts-ssr',
 	transform: {
 		'^.+\\.(ts|js|html)$': 'jest-preset-angular',
 	},

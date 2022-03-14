@@ -1,9 +1,8 @@
 import { isPlatformServer } from '@angular/common';
 import { ModuleWithProviders, NgModule, PLATFORM_ID, Provider } from '@angular/core';
-import { PROCESS } from '../../../../injection-tokens/injection-tokens';
-import { ENVIRONMENT_VARIABLES_LOADER } from '../../environment-variables-loader.interface';
+import { ENVIRONMENT_VARIABLES_LOADER } from '@infinumjs/ngx-nuts-and-bolts';
 import { EnvironmentVariablesSSRLoader } from './environment-variables-ssr-loader';
-import { ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG } from './environment-variables-ssr-loader-utils';
+import { ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG, PROCESS } from './environment-variables-ssr-loader-utils';
 
 export interface IEnvironmentVariablesSSRLoaderModuleConfig<TVariable extends string> {
 	provideProcess?: boolean;

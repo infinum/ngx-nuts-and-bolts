@@ -12,9 +12,6 @@ export * from './lib/directives/in-view/in-view.directive';
 export * from './lib/directives/in-view/in-view.testing.module';
 export * from './lib/directives/in-view/in-view.testing.directive';
 
-// Injection tokens
-export * from './lib/injection-tokens/injection-tokens';
-
 // Utilities
 export * from './lib/utilities/loading-state/loading-state';
 export * from './lib/utilities/table-state/table-state';

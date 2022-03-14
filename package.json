@@ -11,6 +11,7 @@
 		"postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
 		"start": "nx run ngx-nuts-and-bolts:storybook",
 		"start:environment-variables-ssr-example": "NGX_NUTS_AND_BOLTS_EXAMPLE_FOO='I am Foo' NGX_NUTS_AND_BOLTS_EXAMPLE_BAR='I am Bar' nx run environment-variables-ssr-example:serve-ssr",
+		"start:environment-variables-fetch-example": "nx run environment-variables-fetch-example:serve",
 		"build": "nx build ngx-nuts-and-bolts && npm run copy-files",
 		"build:package": "npm run build && cd dist/libs/ngx-nuts-and-bolts && npm pack",
 		"copy-files": "cp ./LICENSE ./dist/libs/ngx-nuts-and-bolts/LICENSE && cp ./README.md ./dist/libs/ngx-nuts-and-bolts/README.md",

@@ -1,14 +1,13 @@
 import { isPlatformServer } from '@angular/common';
 import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
 import { TransferState } from '@angular/platform-browser';
+import { EnvironmentVariablesRecord, IEnvironmentVariablesLoader } from '@infinumjs/ngx-nuts-and-bolts';
 import { Observable } from 'rxjs';
-import { PROCESS } from '../../../../injection-tokens/injection-tokens';
-import { IEnvironmentVariablesLoader } from '../../environment-variables-loader.interface';
-import { EnvironmentVariablesRecord } from '../../environment-variables-record.type';
 import {
 	environmentVariablesStateKey,
 	ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG,
 	IEnvironmentVariablesSSRLoaderConfig,
+	PROCESS,
 } from './environment-variables-ssr-loader-utils';
 
 @Injectable()

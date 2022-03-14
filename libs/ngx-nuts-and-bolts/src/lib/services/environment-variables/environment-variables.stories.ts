@@ -44,8 +44,8 @@ export default {
 					provide: ENVIRONMENT_VARIABLES_LOADER,
 					useValue: {
 						load: () => ({
-							[EnvironmentVariable.FOO]: 'I am foo',
-							[EnvironmentVariable.BAR]: 'I am bar',
+							[EnvironmentVariable.FOO]: 'I am Foo',
+							[EnvironmentVariable.BAR]: 'I am Bar',
 						}),
 					},
 				},

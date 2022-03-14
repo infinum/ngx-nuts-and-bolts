@@ -18,7 +18,8 @@
 		"noUnusedParameters": true,
 		"esModuleInterop": true,
 		"paths": {
-			"@infinumjs/ngx-nuts-and-bolts": ["libs/ngx-nuts-and-bolts/src/index.ts"]
+			"@infinumjs/ngx-nuts-and-bolts": ["libs/ngx-nuts-and-bolts/src/index.ts"],
+			"@infinumjs/ngx-nuts-and-bolts-ssr": ["libs/ngx-nuts-and-bolts-ssr/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
