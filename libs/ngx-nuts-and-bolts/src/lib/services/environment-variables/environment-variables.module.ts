@@ -5,15 +5,6 @@ import { EnvironmentVariablesService } from './environment-variables.service';
 
 @NgModule()
 export class EnvironmentVariablesModule {
-	private static initialized = false;
-	constructor() {
-		if (EnvironmentVariablesModule.initialized) {
-			throw new Error('EnvironmentVariablesModule can be initialized only once, using forRoot()');
-		}
-
-		EnvironmentVariablesModule.initialized = true;
-	}
-
 	public static forRoot(): ModuleWithProviders<EnvironmentVariablesModule> {
 		return {
 			ngModule: EnvironmentVariablesModule,

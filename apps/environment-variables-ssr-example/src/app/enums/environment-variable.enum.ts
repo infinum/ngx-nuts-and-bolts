@@ -1,4 +1,4 @@
 export enum EnvironmentVariable {
-	FOO = 'EXAMPLE_FOO',
-	BAR = 'EXAMPLE_BAR',
+	FOO = 'NGX_NUTS_AND_BOLTS_EXAMPLE_FOO',
+	BAR = 'NGX_NUTS_AND_BOLTS_EXAMPLE_BAR',
 }

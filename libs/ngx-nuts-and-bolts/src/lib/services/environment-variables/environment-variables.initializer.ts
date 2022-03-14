@@ -7,9 +7,7 @@ export function environmentVariablesInitializer<TVariable extends string>(
 	environmentVariablesService: EnvironmentVariablesService<TVariable>,
 	loader: IEnvironmentVariablesLoader<TVariable>
 ): () => Observable<unknown> | Promise<unknown> | void {
-	console.log('1');
 	return () => {
-		console.log('2');
 		const loadResult = loader.load(); // eslint-disable-line rxjs/finnish
 
 		if (loadResult instanceof Observable) {

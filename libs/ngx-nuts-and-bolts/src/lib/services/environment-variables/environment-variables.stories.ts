@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { ENVIRONMENT_VARIABLES_LOADER } from './environment-variables-loader.interface';
@@ -25,17 +25,11 @@ enum EnvironmentVariable {
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class EnvironmentVariablesHostComponent implements OnDestroy {
+class EnvironmentVariablesHostComponent {
 	public readonly variables = Object.entries(EnvironmentVariable);
 	public selectedVariable = EnvironmentVariable.FOO;
 
 	constructor(public readonly env: EnvironmentVariablesService<EnvironmentVariable>) {}
-
-	public ngOnDestroy(): void {
-		// You don't need to do this in your app, it's needed only for Stroybook because
-		// in Storybook the the module will be initialized multiple times using .forRoot()
-		EnvironmentVariablesModule['initialized'] = false;
-	}
 }
 
 export default {

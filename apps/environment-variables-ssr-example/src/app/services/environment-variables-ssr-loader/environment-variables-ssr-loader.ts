@@ -1,17 +1,19 @@
 import { isPlatformServer } from '@angular/common';
-import { Inject, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { EnvironmentVariablesRecord, IEnvironmentVariablesLoader } from '@infinumjs/ngx-nuts-and-bolts';
 import { Observable } from 'rxjs';
+import { PROCESS } from '../../../injection-tokens';
 import { EnvironmentVariable } from '../../enums/environment-variable.enum';
 
 const envStateKey = makeStateKey<EnvironmentVariablesRecord<EnvironmentVariable>>('environmentVariables');
 
+@Injectable()
 export class EnvironmentVariablesSSRLoader implements IEnvironmentVariablesLoader<EnvironmentVariable> {
 	constructor(
 		@Inject(PLATFORM_ID) private readonly platformId: string,
 		private readonly transferState: TransferState,
-		private readonly process?: NodeJS.Process
+		@Optional() @Inject(PROCESS) private readonly process?: NodeJS.Process
 	) {}
 
 	public load():
