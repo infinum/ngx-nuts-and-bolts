@@ -1,34 +1,25 @@
-import { isPlatformServer } from '@angular/common';
-import { NgModule, PLATFORM_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { EnvironmentVariablesModule, ENVIRONMENT_VARIABLES_LOADER } from '@infinumjs/ngx-nuts-and-bolts';
-import { PROCESS } from '../injection-tokens';
+import { EnvironmentVariablesModule, EnvironmentVariablesSSRLoaderModule } from '@infinumjs/ngx-nuts-and-bolts';
 import { AppComponent } from './app.component';
-import { EnvironmentVariablesSSRLoader } from './services/environment-variables-ssr-loader/environment-variables-ssr-loader';
+import { EnvironmentVariable } from './enums/environment-variable.enum';
+import { EnvironmentVariableValueModule } from './pipes/environment-variable-value/environment-variable-value.module';
 
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
 		BrowserModule.withServerTransition({ appId: 'serverApp' }),
-		BrowserTransferStateModule,
-		EnvironmentVariablesModule.forRoot(),
-	],
-	providers: [
-		{
-			provide: PROCESS,
-			useFactory: (platformId: string) => {
-				if (isPlatformServer(platformId)) {
-					return process;
-				}
 
-				return undefined;
-			},
-			deps: [PLATFORM_ID],
-		},
-		{
-			provide: ENVIRONMENT_VARIABLES_LOADER,
-			useClass: EnvironmentVariablesSSRLoader,
-		},
+		BrowserTransferStateModule,
+
+		EnvironmentVariablesModule.forRoot(),
+		EnvironmentVariablesSSRLoaderModule.forRoot({
+			variablesToLoad: Object.values(EnvironmentVariable),
+		}),
+
+		FormsModule,
+		EnvironmentVariableValueModule,
 	],
 	bootstrap: [AppComponent],
 })

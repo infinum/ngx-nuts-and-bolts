@@ -1,1 +1,9 @@
-<pre>{{ variables | json }}</pre>
+<label>
+	Select environment variable:
+
+	<select [(ngModel)]="selectedVariable">
+		<option *ngFor="let variable of variables" [value]="variable[1]">{{ variable[0] }} ({{ variable[1] }})</option>
+	</select>
+</label>
+
+<p>Value: {{ selectedVariable | environmentVariableValue }}</p>
