@@ -8,7 +8,7 @@ module.exports = {
 	// prettier-ignore
 	coveragePathIgnorePatterns: [
 		'stories.ts',
-		'module.ts',
+		// 'module.ts',
 		'\.testing.*ts', // eslint-disable-line no-useless-escape
 		'animation.ts'
 	],

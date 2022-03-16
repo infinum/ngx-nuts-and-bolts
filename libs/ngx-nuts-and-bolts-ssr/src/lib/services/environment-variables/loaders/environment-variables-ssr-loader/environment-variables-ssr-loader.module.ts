@@ -6,18 +6,24 @@ import { ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG, PROCESS } from './environment-
 
 export interface IEnvironmentVariablesSSRLoaderModuleConfig<TVariable extends string> {
 	provideProcess?: boolean;
-	variablesToLoad?: Array<TVariable>;
+	variablesToLoad: Array<TVariable>;
 }
 
 @NgModule()
 export class EnvironmentVariablesSSRLoaderModule {
 	public static forRoot<TVariable extends string>(
-		config?: IEnvironmentVariablesSSRLoaderModuleConfig<TVariable>
+		config: IEnvironmentVariablesSSRLoaderModuleConfig<TVariable>
 	): ModuleWithProviders<EnvironmentVariablesSSRLoaderModule> {
 		const providers: Array<Provider> = [
 			{
 				provide: ENVIRONMENT_VARIABLES_LOADER,
 				useClass: EnvironmentVariablesSSRLoader,
+			},
+			{
+				provide: ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG,
+				useValue: {
+					variablesToLoad: config.variablesToLoad,
+				},
 			},
 		];
 
@@ -33,15 +39,6 @@ export class EnvironmentVariablesSSRLoaderModule {
 					return undefined;
 				},
 				deps: [PLATFORM_ID],
-			});
-		}
-
-		if (config?.variablesToLoad) {
-			providers.push({
-				provide: ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG,
-				useValue: {
-					variablesToLoad: config.variablesToLoad,
-				},
 			});
 		}
 

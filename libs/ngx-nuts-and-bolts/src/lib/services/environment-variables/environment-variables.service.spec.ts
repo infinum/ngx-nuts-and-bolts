@@ -10,7 +10,9 @@ describe('EnvironmentVariablesService', () => {
 	let service: EnvironmentVariablesService<EnvironmentVariable>;
 
 	beforeEach(() => {
-		TestBed.configureTestingModule({});
+		TestBed.configureTestingModule({
+			providers: [EnvironmentVariablesService],
+		});
 		service = TestBed.inject(EnvironmentVariablesService);
 	});
 

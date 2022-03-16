@@ -2,7 +2,6 @@ import { isPlatformServer } from '@angular/common';
 import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
 import { TransferState } from '@angular/platform-browser';
 import { EnvironmentVariablesRecord, IEnvironmentVariablesLoader } from '@infinumjs/ngx-nuts-and-bolts';
-import { Observable } from 'rxjs';
 import {
 	environmentVariablesStateKey,
 	ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG,
@@ -20,7 +19,7 @@ export class EnvironmentVariablesSSRLoader<TVariable extends string> implements 
 		@Optional() @Inject(PROCESS) private readonly process?: NodeJS.Process
 	) {}
 
-	public load(): EnvironmentVariablesRecord<TVariable> | Observable<EnvironmentVariablesRecord<TVariable>> {
+	public load(): EnvironmentVariablesRecord<TVariable> {
 		if (isPlatformServer(this.platformId)) {
 			if (!this.process) {
 				throw new Error('Process is not defined, please provide it under the PROCESS injection token');
