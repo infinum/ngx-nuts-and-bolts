@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { ENVIRONMENT_VARIABLES_LOADER } from './environment-variables-loader.interface';
 import { environmentVariablesInitializer } from './environment-variables.initializer';

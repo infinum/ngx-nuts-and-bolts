@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 export { ENVIRONMENT_VARIABLES_LOADER, IEnvironmentVariablesLoader } from './environment-variables-loader.interface';
 export { EnvironmentVariablesRecord } from './environment-variables-record.type';
 export { EnvironmentVariablesModule } from './environment-variables.module';

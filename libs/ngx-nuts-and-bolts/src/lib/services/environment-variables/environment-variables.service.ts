@@ -11,7 +11,7 @@ export class EnvironmentVariablesService<TVariable extends string> {
 
 	public get(variableName: TVariable): string | undefined {
 		if (!this.variables) {
-			console.warn(new Error('Environment variables are not initialized.'));
+			throw new Error('Environment variables are not initialized.');
 		}
 
 		return this.variables?.[variableName];

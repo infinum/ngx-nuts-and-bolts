@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { NgModule } from '@angular/core';
 import { EnvironmentVariableValuePipe } from './environment-variable-value.pipe';
 
