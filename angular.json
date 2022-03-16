@@ -2,6 +2,32 @@
 	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
 	"version": 1,
 	"projects": {
+		"environment-variables-example-app-base": {
+			"projectType": "library",
+			"root": "libs/environment-variables-example-app-base",
+			"sourceRoot": "libs/environment-variables-example-app-base/src",
+			"prefix": "ngx-nuts-and-bolts",
+			"architect": {
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/environment-variables-example-app-base"],
+					"options": {
+						"jestConfig": "libs/environment-variables-example-app-base/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": [
+							"libs/environment-variables-example-app-base/src/**/*.ts",
+							"libs/environment-variables-example-app-base/src/**/*.html"
+						]
+					}
+				}
+			},
+			"tags": []
+		},
 		"environment-variables-fetch-example": {
 			"projectType": "application",
 			"root": "apps/environment-variables-fetch-example",

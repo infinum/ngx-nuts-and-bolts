@@ -19,7 +19,10 @@
 		"esModuleInterop": true,
 		"paths": {
 			"@infinumjs/ngx-nuts-and-bolts": ["libs/ngx-nuts-and-bolts/src/index.ts"],
-			"@infinumjs/ngx-nuts-and-bolts-ssr": ["libs/ngx-nuts-and-bolts-ssr/src/index.ts"]
+			"@infinumjs/ngx-nuts-and-bolts-ssr": ["libs/ngx-nuts-and-bolts-ssr/src/index.ts"],
+			"@ngx-nuts-and-bolts/environment-variables-example-app-base": [
+				"libs/environment-variables-example-app-base/src/index.ts"
+			]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

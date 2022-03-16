@@ -2,8 +2,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvironmentVariablesRecord, IEnvironmentVariablesLoader } from '@infinumjs/ngx-nuts-and-bolts';
+import { EnvironmentVariable } from '@ngx-nuts-and-bolts/environment-variables-example-app-base';
 import { Observable } from 'rxjs';
-import { EnvironmentVariable } from '../../../../environment-variables-ssr-example/src/app/enums/environment-variable.enum';
 
 @Injectable()
 export class EnvironmentVariablesFetchLoader implements IEnvironmentVariablesLoader<EnvironmentVariable> {
