@@ -179,9 +179,9 @@ export class AppModule {}
 
 Please check out the source code repository for two example applications.
 
-`apps/environment-variables-fetch-example` demonstrates an example that uses `EnvironmentVariablesStaticLoader`. In `main.ts` (before the application is loaded), `./assets/env.json` is fetched using `fetch` and stored into `env` property on `window`. Once the application is started, the loader reads from `window.env`. You can start this example with `npm run start:environment-variables-fetch-example`.
+[`apps/environment-variables-fetch-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-fetch-example) demonstrates an example that uses `EnvironmentVariablesStaticLoader`. In `main.ts` (before the application is loaded), `./assets/env.json` is fetched using `fetch` and stored into `env` property on `window`. Once the application is started, the loader reads from `window.env`. You can start this example with `npm run start:environment-variables-fetch-example`.
 
-`apps/environment-variables-ssr-example` uses `EnvironmentVariablesSSRLoader`. The application has to be started with environment variables exposed to the node process that is running the SSR app. You can start this example with `npm run start:environment-variables-ssr-example`
+[`apps/environment-variables-ssr-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-ssr-example) uses `EnvironmentVariablesSSRLoader`. The application has to be started with environment variables exposed to the node process that is running the SSR app. You can start this example with `npm run start:environment-variables-ssr-example`
 
 ## 3. Opinion piece - what about Angular's `environment` files?
 
