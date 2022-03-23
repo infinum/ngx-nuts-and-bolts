@@ -36,9 +36,9 @@ Any custom loaders you might need to implement are injectable classes that imple
 
 ### 1.3. Race conditions during application initialization
 
-Because all the `APP_INITIALIZERS` start being resolved at the same time, there is no guarantee in which order they will be resolved. This can cause issues if you have an asynchronous environment variables loader and you need to use `EnvironmentVariablesService` within some other `APP_INITIALIZERS` - it could happen that `EnvironmentVariablesService` is not initialized in time.
+Because all the `APP_INITIALIZER`s start being resolved at the same time, there is no guarantee in which order they will be resolved. This can cause issues if you have an asynchronous environment variables loader and you need to use `EnvironmentVariablesService` within some other `APP_INITIALIZER`s - it could happen that `EnvironmentVariablesService` is not initialized in time.
 
-As a workaround for such cases, other initializers can await for `EnvironmentVariablesService`'s `initialized$` observable to emit `true`.
+As a workaround for such cases, other initializers can await for `EnvironmentVariablesService`'s `initDone$` observable to emit `true`.
 
 `EnvironmentVariablesSSRLoader` and `EnvironmentVariablesStaticLoader` loaders that are provided with the library are not affected by this issue, but some custom loaders that are written for specific application needs might be.
 
