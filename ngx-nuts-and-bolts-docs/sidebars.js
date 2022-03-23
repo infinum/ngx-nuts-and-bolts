@@ -28,23 +28,28 @@ const sidebars = {
 		},
 		{
 			type: 'category',
-			label: 'Animations',
-			items: ['animations/animations'],
-		},
-		{
-			type: 'category',
-			label: 'Testing',
-			items: ['testing/extract-public', 'testing/async-data'],
-		},
-		{
-			type: 'category',
 			label: 'Pipes',
 			items: ['pipes/enum-property'],
 		},
 		{
 			type: 'category',
+			label: 'Services',
+			items: ['services/environment-variables'],
+		},
+		{
+			type: 'category',
+			label: 'Animations',
+			items: ['animations/animations'],
+		},
+		{
+			type: 'category',
 			label: 'Utilities',
 			items: ['utilities/loading-state', 'utilities/table-state'],
+		},
+		{
+			type: 'category',
+			label: 'Testing',
+			items: ['testing/extract-public', 'testing/async-data'],
 		},
 	],
 
