@@ -14,6 +14,6 @@ export class EnvironmentVariablesService<TVariable extends string> {
 			throw new Error('Environment variables are not initialized.');
 		}
 
-		return this.variables?.[variableName];
+		return this.variables[variableName];
 	}
 }

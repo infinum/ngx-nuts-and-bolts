@@ -17,7 +17,7 @@ describe('EnvironmentVariablesModule + initializer', () => {
 	describe('with synchronous loader', () => {
 		beforeEach(() => {
 			TestBed.configureTestingModule({
-				imports: [EnvironmentVariablesModule.forRoot()],
+				imports: [EnvironmentVariablesModule],
 				providers: [
 					{
 						provide: ENVIRONMENT_VARIABLES_LOADER,
@@ -44,7 +44,7 @@ describe('EnvironmentVariablesModule + initializer', () => {
 	describe('with asynchronous loader', () => {
 		beforeEach(async () => {
 			TestBed.configureTestingModule({
-				imports: [EnvironmentVariablesModule.forRoot()],
+				imports: [EnvironmentVariablesModule],
 				providers: [
 					{
 						provide: ENVIRONMENT_VARIABLES_LOADER,

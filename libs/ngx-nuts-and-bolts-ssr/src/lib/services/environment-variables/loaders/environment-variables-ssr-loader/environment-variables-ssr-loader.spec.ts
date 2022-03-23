@@ -1,46 +1,21 @@
 import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { StateKey, TransferState } from '@angular/platform-browser';
-import { EnvironmentVariablesRecord, ExtractPublic } from '@infinumjs/ngx-nuts-and-bolts';
+import { TransferState } from '@angular/platform-browser';
+import { EnvironmentVariablesRecord } from '@infinumjs/ngx-nuts-and-bolts';
 import { EnvironmentVariablesSSRLoader } from './environment-variables-ssr-loader';
 import {
 	ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG,
 	IEnvironmentVariablesSSRLoaderConfig,
 	PROCESS,
 } from './environment-variables-ssr-loader-utils';
+import { TransferStateTestingService } from './transfer-state.testing.service';
 
 enum EnvironmentVariable {
 	FOO = 'foo',
 	BAR = 'bar',
 }
 
-class TransferStateTestingService implements ExtractPublic<TransferState> {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	get<T>(_key: StateKey<T>, _defaultValue: T): T {
-		throw new Error('Method not implemented.');
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	set<T>(_key: StateKey<T>, _value: T): void {
-		throw new Error('Method not implemented.');
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	remove<T>(_key: StateKey<T>): void {
-		throw new Error('Method not implemented.');
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	hasKey<T>(_key: StateKey<T>): boolean {
-		throw new Error('Method not implemented.');
-	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	onSerialize<T>(_key: StateKey<T>, _callback: () => T): void {
-		throw new Error('Method not implemented.');
-	}
-	toJson(): string {
-		throw new Error('Method not implemented.');
-	}
-}
-
-describe('Environment variables SSR loader service', () => {
+describe('Environment variables SSR loader', () => {
 	let service: EnvironmentVariablesSSRLoader<EnvironmentVariable>;
 	let config: IEnvironmentVariablesSSRLoaderConfig<EnvironmentVariable>;
 	let transferState: TransferState;

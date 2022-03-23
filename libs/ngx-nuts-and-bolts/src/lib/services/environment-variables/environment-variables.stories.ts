@@ -38,7 +38,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [EnvironmentVariablesHostComponent],
-			imports: [FormsModule, EnvironmentVariablesModule.forRoot()],
+			imports: [FormsModule, EnvironmentVariablesModule],
 			providers: [
 				{
 					provide: ENVIRONMENT_VARIABLES_LOADER,

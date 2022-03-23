@@ -1,12 +1,16 @@
 import { FactoryProvider, ModuleWithProviders, ValueProvider } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { TransferState } from '@angular/platform-browser';
+import { ENVIRONMENT_VARIABLES_LOADER } from '@infinumjs/ngx-nuts-and-bolts';
 import { ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG, PROCESS } from './environment-variables-ssr-loader-utils';
 import { EnvironmentVariablesSSRLoaderModule } from './environment-variables-ssr-loader.module';
+import { TransferStateTestingService } from './transfer-state.testing.service';
 
 describe('Environment variables SSR laoder module', () => {
 	let resolvedModule: ModuleWithProviders<EnvironmentVariablesSSRLoaderModule>;
 
 	it('should add process provider to the providers array by default', () => {
-		resolvedModule = EnvironmentVariablesSSRLoaderModule.forRoot({
+		resolvedModule = EnvironmentVariablesSSRLoaderModule.withConfig({
 			variablesToLoad: [],
 		});
 
@@ -18,7 +22,7 @@ describe('Environment variables SSR laoder module', () => {
 	});
 
 	it('should add process provider to the providers array if the option is set to true', () => {
-		resolvedModule = EnvironmentVariablesSSRLoaderModule.forRoot({
+		resolvedModule = EnvironmentVariablesSSRLoaderModule.withConfig({
 			provideProcess: true,
 			variablesToLoad: [],
 		});
@@ -31,7 +35,7 @@ describe('Environment variables SSR laoder module', () => {
 	});
 
 	it('should not add process provider to the providers array if the option is set to false', () => {
-		resolvedModule = EnvironmentVariablesSSRLoaderModule.forRoot({
+		resolvedModule = EnvironmentVariablesSSRLoaderModule.withConfig({
 			provideProcess: false,
 			variablesToLoad: [],
 		});
@@ -44,7 +48,7 @@ describe('Environment variables SSR laoder module', () => {
 	});
 
 	it('should set the provider for the list of variables to be loaded', () => {
-		resolvedModule = EnvironmentVariablesSSRLoaderModule.forRoot({
+		resolvedModule = EnvironmentVariablesSSRLoaderModule.withConfig({
 			variablesToLoad: ['foo', 'bar'],
 		});
 
@@ -53,5 +57,26 @@ describe('Environment variables SSR laoder module', () => {
 		) as ValueProvider;
 
 		expect(configProvider.useValue.variablesToLoad).toEqual(['foo', 'bar']);
+	});
+
+	it('should provide EnvironmentVariablesSSRLoader', () => {
+		TestBed.configureTestingModule({
+			imports: [EnvironmentVariablesSSRLoaderModule],
+			providers: [
+				{
+					provide: ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG,
+					useValue: {
+						variablesToLoad: ['foo', 'bar'],
+					},
+				},
+				{
+					provide: TransferState,
+					useClass: TransferStateTestingService,
+				},
+			],
+		});
+
+		const loader = TestBed.inject(ENVIRONMENT_VARIABLES_LOADER);
+		expect(loader).toBeTruthy();
 	});
 });

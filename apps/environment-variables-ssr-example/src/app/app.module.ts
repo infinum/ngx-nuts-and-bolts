@@ -16,8 +16,8 @@ import {
 
 		BrowserTransferStateModule,
 
-		EnvironmentVariablesModule.forRoot(),
-		EnvironmentVariablesSSRLoaderModule.forRoot({
+		EnvironmentVariablesModule,
+		EnvironmentVariablesSSRLoaderModule.withConfig({
 			variablesToLoad: Object.values(EnvironmentVariable),
 		}),
 

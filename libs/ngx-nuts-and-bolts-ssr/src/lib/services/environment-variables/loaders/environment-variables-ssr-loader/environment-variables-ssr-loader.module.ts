@@ -9,21 +9,22 @@ export interface IEnvironmentVariablesSSRLoaderModuleConfig<TVariable extends st
 	variablesToLoad: Array<TVariable>;
 }
 
-@NgModule()
+@NgModule({
+	providers: [
+		{
+			provide: ENVIRONMENT_VARIABLES_LOADER,
+			useClass: EnvironmentVariablesSSRLoader,
+		},
+	],
+})
 export class EnvironmentVariablesSSRLoaderModule {
-	public static forRoot<TVariable extends string>(
+	public static withConfig<TVariable extends string>(
 		config: IEnvironmentVariablesSSRLoaderModuleConfig<TVariable>
 	): ModuleWithProviders<EnvironmentVariablesSSRLoaderModule> {
 		const providers: Array<Provider> = [
 			{
-				provide: ENVIRONMENT_VARIABLES_LOADER,
-				useClass: EnvironmentVariablesSSRLoader,
-			},
-			{
 				provide: ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG,
-				useValue: {
-					variablesToLoad: config.variablesToLoad,
-				},
+				useValue: config,
 			},
 		];
 
