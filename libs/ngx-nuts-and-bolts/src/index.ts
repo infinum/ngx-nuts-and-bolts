@@ -5,6 +5,7 @@ export * from './lib/animations/height.animation';
 // Testing utilities
 export * from './lib/testing/extract-public/extract-public.type';
 export * from './lib/testing/async-data/async-data.helper';
+export * from './lib/testing/async-error/async-error.helper';
 
 // Directives
 export * from './lib/directives/in-view/in-view.module';
