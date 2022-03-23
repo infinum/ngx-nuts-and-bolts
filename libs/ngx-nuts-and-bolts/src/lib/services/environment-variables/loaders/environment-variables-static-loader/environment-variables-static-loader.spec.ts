@@ -17,9 +17,11 @@ enum EnvironmentVariable {
 const WINDOW = new InjectionToken<Window>('window');
 
 // Extend window with env property
-// eslint-disable-next-line @typescript-eslint/naming-convention
-interface Window {
-	env: EnvironmentVariablesRecord<EnvironmentVariable>;
+declare global {
+	// eslint-disable-next-line @typescript-eslint/naming-convention
+	interface Window {
+		env: EnvironmentVariablesRecord<EnvironmentVariable>;
+	}
 }
 
 fdescribe('Environment variables static loader', () => {

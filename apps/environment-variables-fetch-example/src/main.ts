@@ -8,6 +8,12 @@ if (environment.production) {
 	enableProdMode();
 }
 
-platformBrowserDynamic()
-	.bootstrapModule(AppModule)
-	.catch((err) => console.error(err));
+fetch('./assets/env.json')
+	.then((response) => response.json())
+	.then((env) => {
+		window.env = env;
+
+		platformBrowserDynamic()
+			.bootstrapModule(AppModule)
+			.catch((err) => console.error(err));
+	});
