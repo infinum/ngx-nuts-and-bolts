@@ -11,6 +11,10 @@ export * from './lib/directives/in-view/in-view.module';
 export * from './lib/directives/in-view/in-view.directive';
 export * from './lib/directives/in-view/in-view.testing.module';
 export * from './lib/directives/in-view/in-view.testing.directive';
+export * from './lib/directives/observe-resize/observe-resize.module';
+export * from './lib/directives/observe-resize/observe-resize.directive';
+export * from './lib/directives/observe-resize/observe-resize.testing.module';
+export * from './lib/directives/observe-resize/observe-resize.testing.directive';
 
 // Utilities
 export * from './lib/utilities/loading-state/loading-state';
