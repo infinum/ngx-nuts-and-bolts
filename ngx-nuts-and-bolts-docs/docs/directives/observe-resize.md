@@ -85,9 +85,9 @@ describe('AppComponent', () => {
 });
 ```
 
-Unfortunately above won't as well as when we run the tests, we will see it complaining that expected `heightOutputDebugEl` innerText doesn't match `newHeight`. Why is that?
+Unfortunately above won't work well, as when we run the tests, we will see it is complaining that expected `heightOutputDebugEl` innerText doesn't match `newHeight`. Why is that?
 
-Clearly the browser doesn't fire ResizeObserver notifications the instant one of the elements gets resized or to make it clearer, it doesn't trigger the moment anything which could cause a resize happens. Instead, it runs as described in [spec](https://www.w3.org/TR/resize-observer/#html-event-loop), TL;DR after layout gets updated, but before repaint. Closest the end of that would be using `requestAnimationFrame` with `setTimeout`, where `requestAnimationFrame` runs its callback just before the repaint happens, we can defer it to next macrotask with `setTimeout` (which is bound to happen after repaint). We could use artificial delay as well, but that wouldn't guarantee the execution after the next repaint.
+Clearly the browser doesn't fire ResizeObserver notifications the instant one of the elements gets resized or to make it clearer, it doesn't trigger the moment anything which could cause a resize happens. Instead, it runs as described in [spec](https://www.w3.org/TR/resize-observer/#html-event-loop), in other words: after layout gets updated, but before repaint. Closest to that would be using `requestAnimationFrame` with `setTimeout`, where `requestAnimationFrame` runs its callback just before the repaint happens, which in turn we can defer to next macrotask with `setTimeout`. We could use artificial delay as well, but that wouldn't guarantee the execution after the next repaint.
 
 ## Test solution
 

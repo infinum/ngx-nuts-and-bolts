@@ -8,8 +8,8 @@ import { ObserveResizeModule } from './observe-resize.module';
 	template: `
 		<h2>Content rect:</h2>
 		<pre>{{ measurements$ | async | json }}</pre>
-		<button (click)="appendText()">Append text</button>
-		<button (click)="toggleContent()">Toggle content</button>
+		<button (click)="onAppendTextClick()">Append text</button>
+		<button (click)="onToggleContentClick()">Toggle content</button>
 		<div *ngIf="renderContent$ | async" (infObserveResize)="onResize($event)" class="content">
 			{{ content$ | async }}
 		</div>
@@ -31,7 +31,7 @@ class ObserveResizeStoryComponent {
 	private readonly _content$ = new Subject<string>();
 	public readonly content$ = this.createContent(this._content$);
 
-	public appendText(): void {
+	public onAppendTextClick(): void {
 		this._content$.next('Lorem ipsum dolor sit amet. ');
 	}
 
@@ -39,7 +39,7 @@ class ObserveResizeStoryComponent {
 		this._measurements$.next(entries);
 	}
 
-	public toggleContent(): void {
+	public onToggleContentClick(): void {
 		this._renderContent$.next(!this._renderContent$.value);
 	}
 
