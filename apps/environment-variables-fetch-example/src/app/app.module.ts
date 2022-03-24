@@ -6,12 +6,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import {
 	EnvironmentVariablesModule,
 	EnvironmentVariablesStaticLoaderModule,
+	ENVIRONMENT_VARIABLES_LOADER,
 	ENVIRONMENT_VARIABLES_STATIC_LOADER_CONFIG,
 } from '@infinumjs/ngx-nuts-and-bolts';
 import {
 	AppComponent,
+	EnvironmentVariable,
 	EnvironmentVariableValueModule,
 } from '@ngx-nuts-and-bolts/environment-variables-example-app-base';
+import { environment } from '../environments/environment';
 import { WINDOW } from './injection-tokens';
 
 @NgModule({
@@ -38,6 +41,22 @@ import { WINDOW } from './injection-tokens';
 			provide: WINDOW,
 			useValue: window,
 		},
+		// Development mode variables
+		...(environment.production
+			? []
+			: [
+					{
+						provide: ENVIRONMENT_VARIABLES_LOADER,
+						useValue: {
+							load: () => {
+								return {
+									[EnvironmentVariable.FOO]: 'I am foo (dev)',
+									[EnvironmentVariable.BAR]: 'I am bar (dev)',
+								};
+							},
+						},
+					},
+			  ]),
 	],
 	bootstrap: [AppComponent],
 })

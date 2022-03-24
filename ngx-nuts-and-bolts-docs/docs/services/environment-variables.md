@@ -175,7 +175,44 @@ Provide your custom loader:
 export class AppModule {}
 ```
 
-### 2.4. Example applications
+### 2.4. Setting values for development only
+
+During development, you might want to set environment variables so that, for example, `API_URL` points to a localhost proxy. At the same time, don't want these development URLs to be part of the final application bundle. There are multiple ways to achieve this. One possible solution is to provide a custom loader only in development mode, like so:
+
+```ts
+@NgModule({
+	imports: [
+		EnvironmentVariablesModule,
+		EnvironmentVariablesSSRLoaderModule.withConfig({
+			variablesToLoad: Object.values(EnvironmentVariable),
+		}),
+	],
+	providers: [
+		// Development mode variables
+		...(environment.production
+			? []
+			: [
+					{
+						provide: ENVIRONMENT_VARIABLES_LOADER,
+						useValue: {
+							load: () => {
+								return {
+									[EnvironmentVariable.API_URL]: 'http://localhost:4200/api',
+								};
+							},
+						},
+					},
+			  ]),
+	],
+})
+export class AppModule {}
+```
+
+Because we use `environment.production`, custom loader will be tree-shaken at build-time and will not be present in the production application bundle - it will only be used during development. This keeps the production bundle clear of any development-related environment variables values. You can also consider adding an additional boolean to your environment files, e.g. `useDevelopmentEnvironmentVariablesValues`. The value of this property will most probably be in-sync with `production` property value but it does not have to be, especially if you have more than two environment files.
+
+There is an opinion piece later on in this documentation page describing what we should or should not use environment files for. This is a good example of a use case where we can use environment files.
+
+### 2.5. Example applications
 
 Please check out the source code repository for two example applications.
 
