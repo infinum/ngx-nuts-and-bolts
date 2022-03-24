@@ -313,6 +313,7 @@
 				"storybook": {
 					"builder": "@nrwl/storybook:storybook",
 					"options": {
+						"projectBuildConfig": "ngx-nuts-and-bolts:build-storybook",
 						"uiFramework": "@storybook/angular",
 						"port": 4400,
 						"config": {

@@ -66,7 +66,7 @@
 		"@nrwl/nx-cloud": "^13.1.6",
 		"@nrwl/storybook": "^13.9.4",
 		"@nrwl/tao": "^13.9.4",
-		"@nrwl/workspace": "^13.9.4",
+		"@nrwl/workspace": "13.9.4",
 		"@storybook/addon-essentials": "~6.4.19",
 		"@storybook/angular": "~6.4.19",
 		"@storybook/builder-webpack5": "~6.4.19",
