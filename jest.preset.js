@@ -2,6 +2,7 @@ const nxPreset = require('@nrwl/jest/preset');
 
 module.exports = {
 	...nxPreset,
+	transformIgnorePatterns: [`node_modules/(?!@angular|@ngneat/spectator|array-move|lodash-es)`],
 	coverageReporters: ['text', 'lcov', 'html'],
 	collectCoverage: true,
 	collectCoverageFrom: ['./src/lib/**'],
