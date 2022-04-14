@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InViewDirective } from './in-view.directive';
@@ -7,4 +9,4 @@ import { InViewDirective } from './in-view.directive';
 	imports: [CommonModule],
 	exports: [InViewDirective],
 })
-export class InViewModule { }
+export class InViewModule {}

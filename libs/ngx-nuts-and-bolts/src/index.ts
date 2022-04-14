@@ -17,6 +17,9 @@ export * from './lib/directives/in-view/in-view.testing.directive';
 export * from './lib/utilities/loading-state/loading-state';
 export * from './lib/utilities/table-state/table-state';
 
+// Services
+export * from './lib/services/environment-variables';
+
 // Pipes
 export * from './lib/pipes/enum-property/enum-property.module';
 export * from './lib/pipes/enum-property/enum-property.pipe';
