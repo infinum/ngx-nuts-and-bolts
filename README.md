@@ -30,5 +30,11 @@ The [MIT License](./LICENSE)
 ngx-nuts-and-bolts is maintained and sponsored by
 [Infinum](https://www.infinum.com).
 
-![logo](https://assets.infinum.com/brand/logo/static/default.svg#gh-light-mode-only)
-![dark mode logo](https://assets.infinum.com/brand/logo/static/white.svg#gh-dark-mode-only)
+<p align="center">
+  <a href='https://infinum.com'>
+    <picture>
+        <source srcset="https://assets.infinum.com/brand/logo/static/white.svg" media="(prefers-color-scheme: dark)">
+        <img src="https://assets.infinum.com/brand/logo/static/default.svg">
+    </picture>
+  </a>
+</p>
