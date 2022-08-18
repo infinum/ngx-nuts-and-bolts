@@ -220,7 +220,43 @@ Please check out the source code repository for two example applications.
 
 [`apps/environment-variables-ssr-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-ssr-example) uses `EnvironmentVariablesSSRLoader`. The application has to be started with environment variables exposed to the node process that is running the SSR app. You can start this example with `npm run start:environment-variables-ssr-example`
 
-## 3. Opinion piece - what about Angular's `environment` files?
+## 3. Unit testing
+
+For unit testing, you can use `EnvironmentVariablesTestingModule`, which is inspired by Transloco's [`TranslocoTestingModule`](https://ngneat.github.io/transloco/docs/unit-testing/).
+
+By using `EnvironmentVariablesTestingModule`'s `withMockEnvironment` method, you can create a testing module with mock values for environment variables:
+
+```ts title="/src/testing/environment-variables-testing-module.ts"
+import { EnvironmentVariablesTestingModule } from '@infinumjs/ngx-nuts-and-bolts';
+import { EnvironmentVariable } from 'src/app/enums/environment-variable.enum';
+
+export const MyAppEnvironmentVariablesTestingModule = EnvironmentVariablesTestingModule.withMockEnvironment({
+	[EnvironmentVariable.FOO]: 'I am Foo (testing)',
+	[EnvironmentVariable.BAR]: 'I am Bar (testing)',
+});
+```
+
+Then, you can importing this module in the `TestBed` for a specific component/service/whatever:
+
+```ts title="/src/app/components/foo/foo.component.spec.ts"
+import { TestBed } from '@angular/core/testing';
+import { EnvironmentVariable } from 'src/app/enums/environment-variable.enum';
+import { MyAppEnvironmentVariablesTestingModule } from 'src/testing/my-app-environment-variables.testing.module';
+
+describe('foo component', () => {
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [MyAppEnvironmentVariablesTestingModule],
+		});
+	});
+});
+```
+
+If you want to test how your application handles specific environment variable values other than the default ones from `MyAppEnvironmentVariablesTestingModule`, you can create a new, more specific, testing module for that test suite and/or you can spy on `EnvironmentVariablesService`'s `get` method and return the desired value that is relevant for that specific test.
+
+_Note:_ Apply better naming than `MyApp` for `MyAppEnvironmentVariablesTestingModule`.
+
+## 4. Opinion piece - what about Angular's `environment` files?
 
 While Angular provides environment files out-of-the-box (one for development and one for production), but they are not the best solution to this problem for multiple reasons:
 
