@@ -1,6 +1,4 @@
 {
-	"packages": [
-		"libs/*"
-	],
-	"version": "1.2.0"
+	"packages": ["libs/*"],
+	"version": "1.2.2"
 }
