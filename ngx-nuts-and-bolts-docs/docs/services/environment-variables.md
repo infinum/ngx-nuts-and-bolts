@@ -236,7 +236,9 @@ export const MyAppEnvironmentVariablesTestingModule = EnvironmentVariablesTestin
 });
 ```
 
-Then, you can importing this module in the `TestBed` for a specific component/service/whatever:
+This module will provide `EnvironmentVariablesService` and set up a simple loader that uses the values you pass to `withMockEnvironment` method.
+
+Then, you can import this module in the `TestBed` for a specific component/service/whatever:
 
 ```ts title="/src/app/components/foo/foo.component.spec.ts"
 import { TestBed } from '@angular/core/testing';
