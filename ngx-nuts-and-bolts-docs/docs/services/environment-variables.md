@@ -254,6 +254,8 @@ describe('foo component', () => {
 
 If you want to test how your application handles specific environment variable values other than the default ones from `MyAppEnvironmentVariablesTestingModule`, you can create a new, more specific, testing module for that test suite and/or you can spy on `EnvironmentVariablesService`'s `get` method and return the desired value that is relevant for that specific test.
 
+You can see some examples in the repository [here](https://github.com/infinum/ngx-nuts-and-bolts/blob/7e2c0d6bcf33dfc3a9a5e7fb5bd9f3849960e4fc/libs/environment-variables-example-app-base/src/lib/pipes/environment-variable-value/environment-variable-value.pipe.spec.ts) and [here](https://github.com/infinum/ngx-nuts-and-bolts/blob/7e2c0d6bcf33dfc3a9a5e7fb5bd9f3849960e4fc/libs/environment-variables-example-app-base/src/lib/testing/my-app-environment-variables.testing.module.ts).
+
 _Note:_ Apply better naming than `MyApp` for `MyAppEnvironmentVariablesTestingModule`.
 
 ## 4. Opinion piece - what about Angular's `environment` files?
