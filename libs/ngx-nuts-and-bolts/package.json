@@ -1,6 +1,6 @@
 {
 	"name": "@infinumjs/ngx-nuts-and-bolts",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "Reusable components and helpers for angular projects",
 	"license": "MIT",
 	"repository": {
@@ -21,6 +21,7 @@
 		"@angular/animations": ">=10",
 		"@angular/common": ">=10",
 		"@angular/core": ">=10",
+		"@angular/forms": ">=10",
 		"@angular/platform-browser": ">=10",
 		"@angular/router": ">=10",
 		"rxjs": ">=6"
