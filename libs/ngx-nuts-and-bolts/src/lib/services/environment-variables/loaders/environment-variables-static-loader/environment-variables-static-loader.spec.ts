@@ -24,7 +24,7 @@ declare global {
 	}
 }
 
-fdescribe('Environment variables static loader', () => {
+describe('Environment variables static loader', () => {
 	let loader: EnvironmentVariablesStaticLoader<EnvironmentVariable>;
 
 	describe('with config set via withConfig', () => {
