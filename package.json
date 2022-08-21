@@ -10,7 +10,7 @@
 		"ng": "nx",
 		"postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
 		"start": "nx run ngx-nuts-and-bolts:storybook",
-		"start:environment-variables-ssr-example": "NGX_NUTS_AND_BOLTS_EXAMPLE_FOO='I am Foo' NGX_NUTS_AND_BOLTS_EXAMPLE_BAR='I am Bar' nx run environment-variables-ssr-example:serve-ssr",
+		"start:environment-variables-ssr-example": "NGX_NUTS_AND_BOLTS_EXAMPLE_FOO='I am Foo' NGX_NUTS_AND_BOLTS_EXAMPLE_BAR='I am Bar' NGX_NUTS_AND_BOLTS_EXAMPLE_API_URL='http://localhost:4200/assets' nx run environment-variables-ssr-example:serve-ssr",
 		"start:environment-variables-fetch-example": "nx run environment-variables-fetch-example:serve",
 		"build": "concurrently \"npm run build:core\" \"npm run build:ssr\"",
 		"build:core": "nx build ngx-nuts-and-bolts --skip-nx-cache && npm run copy-files:core",

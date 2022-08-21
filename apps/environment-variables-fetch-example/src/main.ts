@@ -1,6 +1,9 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { ENVIRONMENT_VARIABLES_STATIC_LOADER_CONFIG } from '@infinumjs/ngx-nuts-and-bolts';
+import {
+	ENVIRONMENT_VARIABLES_STATIC_LOADER_CONFIG,
+	IEnvironmentVariablesStaticLoaderConfig,
+} from '@infinumjs/ngx-nuts-and-bolts';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
@@ -17,7 +20,7 @@ fetch('./assets/env.json')
 				useFactory: () => {
 					return {
 						environmentVariablesRecord: env,
-					};
+					} as IEnvironmentVariablesStaticLoaderConfig<string>;
 				},
 			},
 		])
