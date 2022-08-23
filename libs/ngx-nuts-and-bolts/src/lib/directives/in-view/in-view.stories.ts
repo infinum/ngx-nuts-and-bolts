@@ -35,7 +35,7 @@ import { InViewModule } from './in-view.module';
 			.block {
 				display: grid;
 				place-items: center;
-				color: #fff;
+				color: #eee;
 				width: 100%;
 				height: clamp(200px, 25vh, 400px);
 				background: black;
