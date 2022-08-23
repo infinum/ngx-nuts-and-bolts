@@ -1,5 +1,6 @@
-module.exports = {
-	displayName: 'environment-variables-example-app-base',
+/* eslint-disable */
+export default {
+	displayName: 'ngx-nuts-and-bolts',
 	preset: '../../jest.preset.js',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	globals: {
@@ -8,7 +9,7 @@ module.exports = {
 			stringifyContentPathRegex: '\\.(html|svg)$',
 		},
 	},
-	coverageDirectory: '../../coverage/libs/environment-variables-example-app-base',
+	coverageDirectory: '../../coverage/libs/ngx-nuts-and-bolts',
 	transform: {
 		'^.+\\.(ts|js|html)$': 'jest-preset-angular',
 	},

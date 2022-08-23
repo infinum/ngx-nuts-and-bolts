@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
 	displayName: 'environment-variables-fetch-example',
 	preset: '../../jest.preset.js',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],

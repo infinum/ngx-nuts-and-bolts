@@ -1,5 +1,6 @@
-module.exports = {
-	displayName: 'environment-variables-ssr-example',
+/* eslint-disable */
+export default {
+	displayName: 'environment-variables-example-app-base',
 	preset: '../../jest.preset.js',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	globals: {
@@ -8,7 +9,7 @@ module.exports = {
 			stringifyContentPathRegex: '\\.(html|svg)$',
 		},
 	},
-	coverageDirectory: '../../coverage/apps/environment-variables-ssr-example',
+	coverageDirectory: '../../coverage/libs/environment-variables-example-app-base',
 	transform: {
 		'^.+\\.(ts|js|html)$': 'jest-preset-angular',
 	},

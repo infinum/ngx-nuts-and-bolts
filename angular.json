@@ -12,7 +12,7 @@
 					"builder": "@nrwl/jest:jest",
 					"outputs": ["coverage/libs/environment-variables-example-app-base"],
 					"options": {
-						"jestConfig": "libs/environment-variables-example-app-base/jest.config.js",
+						"jestConfig": "libs/environment-variables-example-app-base/jest.config.ts",
 						"passWithNoTests": true
 					}
 				},
@@ -115,7 +115,7 @@
 					"builder": "@nrwl/jest:jest",
 					"outputs": ["coverage/apps/environment-variables-fetch-example"],
 					"options": {
-						"jestConfig": "apps/environment-variables-fetch-example/jest.config.js",
+						"jestConfig": "apps/environment-variables-fetch-example/jest.config.ts",
 						"passWithNoTests": true
 					}
 				}
@@ -209,7 +209,7 @@
 					"builder": "@nrwl/jest:jest",
 					"outputs": ["coverage/apps/environment-variables-ssr-example"],
 					"options": {
-						"jestConfig": "apps/environment-variables-ssr-example/jest.config.js",
+						"jestConfig": "apps/environment-variables-ssr-example/jest.config.ts",
 						"passWithNoTests": true
 					}
 				},
@@ -300,7 +300,7 @@
 					"builder": "@nrwl/jest:jest",
 					"outputs": ["coverage/libs/ngx-nuts-and-bolts"],
 					"options": {
-						"jestConfig": "libs/ngx-nuts-and-bolts/jest.config.js",
+						"jestConfig": "libs/ngx-nuts-and-bolts/jest.config.ts",
 						"passWithNoTests": true
 					}
 				},
@@ -311,14 +311,12 @@
 					}
 				},
 				"storybook": {
-					"builder": "@nrwl/storybook:storybook",
+					"builder": "@storybook/angular:start-storybook",
 					"options": {
-						"projectBuildConfig": "ngx-nuts-and-bolts:build-storybook",
-						"uiFramework": "@storybook/angular",
 						"port": 4400,
-						"config": {
-							"configFolder": "libs/ngx-nuts-and-bolts/.storybook"
-						}
+						"configDir": "libs/ngx-nuts-and-bolts/.storybook",
+						"browserTarget": "ngx-nuts-and-bolts:build-storybook",
+						"compodoc": false
 					},
 					"configurations": {
 						"ci": {
@@ -327,14 +325,13 @@
 					}
 				},
 				"build-storybook": {
-					"builder": "@nrwl/storybook:build",
+					"builder": "@storybook/angular:build-storybook",
 					"outputs": ["{options.outputPath}"],
 					"options": {
-						"uiFramework": "@storybook/angular",
-						"outputPath": "dist/storybook/ngx-nuts-and-bolts",
-						"config": {
-							"configFolder": "libs/ngx-nuts-and-bolts/.storybook"
-						}
+						"outputDir": "dist/storybook/ngx-nuts-and-bolts",
+						"configDir": "libs/ngx-nuts-and-bolts/.storybook",
+						"browserTarget": "ngx-nuts-and-bolts:build-storybook",
+						"compodoc": false
 					},
 					"configurations": {
 						"ci": {
@@ -371,7 +368,7 @@
 					"builder": "@nrwl/jest:jest",
 					"outputs": ["coverage/libs/ngx-nuts-and-bolts-ssr"],
 					"options": {
-						"jestConfig": "libs/ngx-nuts-and-bolts-ssr/jest.config.js",
+						"jestConfig": "libs/ngx-nuts-and-bolts-ssr/jest.config.ts",
 						"passWithNoTests": true
 					}
 				},
