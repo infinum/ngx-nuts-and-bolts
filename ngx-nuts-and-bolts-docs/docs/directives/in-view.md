@@ -46,3 +46,5 @@ Additionally, you can also export the directive instance in a template directly.
 })
 class ExampleComponent {}
 ```
+
+<iframe src="https://630c9e10af89ab7ec4984c86-cnamutrprw.chromatic.com/?path=/story/inview--default" width="100%" height="600px"></iframe>
