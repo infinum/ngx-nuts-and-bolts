@@ -35,6 +35,11 @@ const config = {
 	themeConfig:
 		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
 		({
+      algolia: {
+        appId: 'K4XBJI8YCN',
+        apiKey: '9c80fcb5c3bf1eba3b438a2c35956bfd',
+        indexName: 'ngx-nuts-and-bolts'
+      },
 			navbar: {
 				title: 'ngx-nuts-and-bolts',
 				logo: {
