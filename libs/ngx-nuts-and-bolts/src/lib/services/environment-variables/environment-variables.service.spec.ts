@@ -21,11 +21,6 @@ describe('EnvironmentVariablesService', () => {
 	});
 
 	it('should initialize and get the variables', () => {
-		service.init({
-			[EnvironmentVariable.FOO]: 'foo',
-			[EnvironmentVariable.BAR]: 'bar',
-		});
-
 		expect(service.get(EnvironmentVariable.FOO)).toBe('foo');
 	});
 

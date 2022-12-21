@@ -1,7 +1,7 @@
 import { isPlatformServer } from '@angular/common';
 import { Inject, Injectable, Optional, PLATFORM_ID } from '@angular/core';
 import { TransferState } from '@angular/platform-browser';
-import { EnvironmentVariablesRecord, IEnvironmentVariablesLoader } from '@infinumjs/ngx-nuts-and-bolts';
+import { EnvironmentVariablesRecord } from '@infinumjs/ngx-nuts-and-bolts';
 import {
 	environmentVariablesStateKey,
 	ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG,
@@ -10,7 +10,7 @@ import {
 } from './environment-variables-ssr-loader-utils';
 
 @Injectable()
-export class EnvironmentVariablesSSRLoader<TVariable extends string> implements IEnvironmentVariablesLoader<TVariable> {
+export class EnvironmentVariablesSSRLoader<TVariable extends string> {
 	constructor(
 		@Inject(PLATFORM_ID) private readonly platformId: string,
 		@Inject(ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG)

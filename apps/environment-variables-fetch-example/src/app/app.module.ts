@@ -1,12 +1,12 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {
 	EnvironmentVariablesModule,
-	EnvironmentVariablesStaticLoaderModule,
-	ENVIRONMENT_VARIABLES_LOADER,
+	EnvironmentVariablesService,
+	ENVIRONMENT_VARIABLES_RECORD,
 } from '@infinumjs/ngx-nuts-and-bolts';
 import {
 	AppComponent,
@@ -17,28 +17,25 @@ import { environment } from '../environments/environment';
 
 @NgModule({
 	declarations: [AppComponent],
-	imports: [
-		BrowserModule,
-		FormsModule,
-		HttpClientModule,
-		EnvironmentVariableValueModule,
-		EnvironmentVariablesModule,
-		EnvironmentVariablesStaticLoaderModule,
-	],
+	imports: [BrowserModule, FormsModule, HttpClientModule, EnvironmentVariableValueModule, EnvironmentVariablesModule],
 	providers: [
+		{
+			provide: APP_INITIALIZER,
+			multi: true,
+			useFactory: (env: EnvironmentVariablesService<EnvironmentVariable>) => {
+				return () => console.log(env.get(EnvironmentVariable.FOO));
+			},
+			deps: [EnvironmentVariablesService],
+		},
 		// Development mode variables
 		...(environment.production
 			? []
 			: [
 					{
-						provide: ENVIRONMENT_VARIABLES_LOADER,
+						provide: ENVIRONMENT_VARIABLES_RECORD,
 						useValue: {
-							load: () => {
-								return {
-									[EnvironmentVariable.FOO]: 'I am foo (dev)',
-									[EnvironmentVariable.BAR]: 'I am bar (dev)',
-								};
-							},
+							[EnvironmentVariable.FOO]: 'I am foo (dev)',
+							[EnvironmentVariable.BAR]: 'I am bar (dev)',
 						},
 					},
 			  ]),

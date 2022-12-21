@@ -1,6 +1,5 @@
 import { isPlatformServer } from '@angular/common';
 import { ModuleWithProviders, NgModule, PLATFORM_ID, Provider } from '@angular/core';
-import { ENVIRONMENT_VARIABLES_LOADER } from '@infinumjs/ngx-nuts-and-bolts';
 import { EnvironmentVariablesSSRLoader } from './environment-variables-ssr-loader';
 import { ENVIRONMENT_VARIABLES_SSR_LOADER_CONFIG, PROCESS } from './environment-variables-ssr-loader-utils';
 

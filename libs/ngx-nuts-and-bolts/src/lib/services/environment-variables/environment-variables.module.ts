@@ -1,19 +1,9 @@
 /* istanbul ignore file */
 
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { ENVIRONMENT_VARIABLES_LOADER } from './environment-variables-loader.interface';
-import { environmentVariablesInitializer } from './environment-variables.initializer';
+import { NgModule } from '@angular/core';
 import { EnvironmentVariablesService } from './environment-variables.service';
 
 @NgModule({
-	providers: [
-		EnvironmentVariablesService,
-		{
-			provide: APP_INITIALIZER,
-			multi: true,
-			useFactory: environmentVariablesInitializer,
-			deps: [EnvironmentVariablesService, ENVIRONMENT_VARIABLES_LOADER],
-		},
-	],
+	providers: [EnvironmentVariablesService],
 })
 export class EnvironmentVariablesModule {}
