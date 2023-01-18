@@ -14,6 +14,7 @@ import {
 	createSortObservable,
 	IPageInfo,
 	ISortInfo,
+	TableQueryParam,
 } from './table-state';
 
 describe('Table sate', () => {
@@ -219,6 +220,29 @@ describe('Table sate', () => {
 
 		await changeFilters(router, filters);
 		expect(callbacks.next.mock.calls[callbacks.next.mock.calls.length - 1][0]).not.toBe(null);
+	});
+
+	it('should use scoped query params for filters', async () => {
+		const scopedFilters = 'scoped-filters';
+		let filtersValue = await createCustomFiltersObservable(route, router, scopedFilters).pipe(take(1)).toPromise();
+		expect(navigationSpy).toHaveBeenCalledTimes(0);
+		const filter = {
+			arrayQuery: ['foo', 'bar'],
+			textQuery: 'baz',
+			numberQuery: 42,
+			objectQuery: { xyz: 'ijk' },
+		};
+
+		expect(filtersValue).toBe(null);
+
+		await changeFilters(router, filter, scopedFilters);
+		filtersValue = await createCustomFiltersObservable(route, router, scopedFilters).pipe(take(1)).toPromise();
+
+		expect(route.snapshot.queryParamMap.get(scopedFilters)).toBeTruthy();
+		expect(route.snapshot.queryParamMap.get(TableQueryParam.CUSTOM_FILTERS)).toBeFalsy();
+		expect(filtersValue).not.toBe(null);
+
+		expect(navigationSpy).toHaveBeenCalledTimes(1);
 	});
 });
 

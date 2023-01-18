@@ -76,18 +76,20 @@ export function createSortObservable(route: ActivatedRoute): Observable<ISortInf
  * Creates observable that emits when filtering information in route changes.
  * @param {ActivatedRoute} route - Activated route instance used in component.
  * @param {Router} router - Router instance used in component.
+ * @param {string} queryParamsScope - String value representing your scoped queryParam
  */
 export function createCustomFiltersObservable<TFilterValue extends Record<string, unknown> | null = null>(
 	route: ActivatedRoute,
-	router: Router
+	router: Router,
+	queryParamsScope?: string
 ): Observable<TFilterValue | null> {
 	return route.queryParamMap.pipe(
 		map((queryParamMap) => {
 			let filters = null;
 
 			try {
-				if (queryParamMap.has(TableQueryParam.CUSTOM_FILTERS)) {
-					filters = JSON.parse(atob(queryParamMap.get(TableQueryParam.CUSTOM_FILTERS) || ''));
+				if (queryParamMap.has(queryParamsScope || TableQueryParam.CUSTOM_FILTERS)) {
+					filters = JSON.parse(atob(queryParamMap.get(queryParamsScope || TableQueryParam.CUSTOM_FILTERS) || ''));
 				}
 			} catch (e) {
 				console.error(e);
@@ -148,7 +150,8 @@ export function changeSort(router: Router, sort: ISortInfo): Promise<boolean> {
  */
 export function changeFilters<TFilterValue extends Record<string, unknown> | null = null>(
 	router: Router,
-	customFilters: TFilterValue
+	customFilters: TFilterValue,
+	queryParamsScope?: string
 ): Promise<boolean> {
 	let filters = null;
 	try {
@@ -161,7 +164,7 @@ export function changeFilters<TFilterValue extends Record<string, unknown> | nul
 		replaceUrl: true,
 		queryParamsHandling: 'merge',
 		queryParams: {
-			[TableQueryParam.CUSTOM_FILTERS]: filters,
+			[queryParamsScope || TableQueryParam.CUSTOM_FILTERS]: filters,
 			[TableQueryParam.PAGE_INDEX]: null,
 		},
 	});
