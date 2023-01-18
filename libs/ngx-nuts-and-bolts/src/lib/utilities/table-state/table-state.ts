@@ -96,7 +96,7 @@ export function createCustomFiltersObservable<TFilterValue extends Record<string
 			}
 
 			if (filters && isFilterEmpty(filters)) {
-				clearFilters(router);
+				clearFilters(router, queryParamsScope);
 				return null;
 			}
 
@@ -147,6 +147,7 @@ export function changeSort(router: Router, sort: ISortInfo): Promise<boolean> {
  * Creates query params and encodes them based on passed filter value.
  * @param {Router} router - Router instance used in component.
  * @param {TFilterValue} filterValue - Object containing properties used for filtering
+ * @param {string} queryParamsScope - String value representing your scoped queryParam
  */
 export function changeFilters<TFilterValue extends Record<string, unknown> | null = null>(
 	router: Router,
@@ -190,12 +191,19 @@ function isFilterEmpty<TFilterValue extends Record<string, unknown> | null = nul
 	return !filterHasSomeValue;
 }
 
-function clearFilters(router: Router): void {
+/**
+ *
+ * Creates query params and encodes them based on passed filter value.
+ * @param {Router} router - Router instance used in component.
+ * @param {string} queryParamsScope - String value representing your scoped queryParam
+ */
+
+function clearFilters(router: Router, queryParamsScope?: string): void {
 	router.navigate([], {
 		replaceUrl: true,
 		queryParamsHandling: 'merge',
 		queryParams: {
-			[TableQueryParam.CUSTOM_FILTERS]: null,
+			[queryParamsScope || TableQueryParam.CUSTOM_FILTERS]: null,
 		},
 	});
 }

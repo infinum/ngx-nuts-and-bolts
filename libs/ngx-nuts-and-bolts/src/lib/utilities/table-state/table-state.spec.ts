@@ -205,10 +205,10 @@ describe('Table sate', () => {
 		};
 
 		await changeFilters(router, filters);
-		expect(callbacks.next.mock.calls[callbacks.next.mock.calls.length - 1][0]).not.toBe(null);
+		expect(callbacks.next.mock.calls[callbacks.next.mock.calls.length - 1][0]).toBe(null);
 	});
 
-	fit('should not set custom filter observable value to null if object filter is truthy', async () => {
+	it('should not set custom filter observable value to null if object filter is truthy', async () => {
 		const callbacks = mockSubscribeCallbacks();
 
 		createCustomFiltersObservable(route, router).subscribe(callbacks);
@@ -243,6 +243,19 @@ describe('Table sate', () => {
 		expect(filtersValue).not.toBe(null);
 
 		expect(navigationSpy).toHaveBeenCalledTimes(1);
+	});
+
+	it('should set scoped custom filter observable value to null if filter is empty', async () => {
+		const scopedFilters = 'scoped-filters';
+		const callbacks = mockSubscribeCallbacks();
+
+		createCustomFiltersObservable(route, router, scopedFilters).subscribe(callbacks);
+		expect(callbacks.next).toHaveBeenLastCalledWith(null);
+
+		const filters = {};
+
+		await changeFilters(router, filters, scopedFilters);
+		expect(callbacks.next).toHaveBeenLastCalledWith(null);
 	});
 });
 
