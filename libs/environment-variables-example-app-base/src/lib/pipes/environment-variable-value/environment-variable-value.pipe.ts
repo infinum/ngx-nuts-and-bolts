@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { EnvironmentVariablesService } from '@infinumjs/ngx-nuts-and-bolts';
 import { EnvironmentVariable } from '../../enums/environment-variable.enum';
 
@@ -6,7 +6,7 @@ import { EnvironmentVariable } from '../../enums/environment-variable.enum';
 	name: 'environmentVariableValue',
 })
 export class EnvironmentVariableValuePipe implements PipeTransform {
-	constructor(private readonly env: EnvironmentVariablesService<EnvironmentVariable>) {}
+	private readonly env = inject<EnvironmentVariablesService<EnvironmentVariable>>(EnvironmentVariablesService);
 
 	public transform(variable: EnvironmentVariable): string | undefined {
 		return this.env.get(variable);
