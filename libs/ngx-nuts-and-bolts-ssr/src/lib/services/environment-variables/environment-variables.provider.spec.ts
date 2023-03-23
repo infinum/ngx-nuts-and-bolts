@@ -132,28 +132,28 @@ describe('provideUniversalEnvironmentVariables', () => {
 				);
 			});
 		});
-	});
 
-	describe('on browser', () => {
-		it('should not throw an error if no process is provided', () => {
-			TestBed.configureTestingModule({
-				providers: [
-					provideUniversalEnvironmentVariables({
-						publicVariables: [EnvironmentVariable.Foo, EnvironmentVariable.Bar],
-						privateVariables: [EnvironmentVariable.Baz],
-					}),
-					{
-						provide: PLATFORM_ID,
-						useValue: 'browser',
-					},
-					{
-						provide: TransferState,
-						useClass: TransferStateMock,
-					},
-				],
+		describe('on browser', () => {
+			it('should not throw an error if no process is provided', () => {
+				TestBed.configureTestingModule({
+					providers: [
+						provideUniversalEnvironmentVariables({
+							publicVariables: [EnvironmentVariable.Foo, EnvironmentVariable.Bar],
+							privateVariables: [EnvironmentVariable.Baz],
+						}),
+						{
+							provide: PLATFORM_ID,
+							useValue: 'browser',
+						},
+						{
+							provide: TransferState,
+							useClass: TransferStateMock,
+						},
+					],
+				});
+
+				expect(() => TestBed.inject(EnvironmentVariablesService)).not.toThrowError();
 			});
-
-			expect(() => TestBed.inject(EnvironmentVariablesService)).not.toThrowError();
 		});
 	});
 });
