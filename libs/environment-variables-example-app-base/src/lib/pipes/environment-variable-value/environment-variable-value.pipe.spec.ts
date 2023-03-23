@@ -11,8 +11,8 @@ describe('environment variable value pipe', () => {
 			providers: [
 				EnvironmentVariableValuePipe,
 				provideEnvironmentVariables({
-					[EnvironmentVariable.FOO]: 'I am Foo (testing)',
-					[EnvironmentVariable.BAR]: 'I am Bar (testing)',
+					[EnvironmentVariable.Foo]: 'I am Foo (testing)',
+					[EnvironmentVariable.Bar]: 'I am Bar (testing)',
 				}),
 			],
 		});
@@ -21,6 +21,6 @@ describe('environment variable value pipe', () => {
 	});
 
 	it('should get environment variable value', () => {
-		expect(pipe.transform(EnvironmentVariable.FOO)).toBe('I am Foo (testing)');
+		expect(pipe.transform(EnvironmentVariable.Foo)).toBe('I am Foo (testing)');
 	});
 });

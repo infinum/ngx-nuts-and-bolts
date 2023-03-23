@@ -3,8 +3,8 @@ import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { EnumPropertyModule } from './enum-property.module';
 
 enum TestingEnum {
-	FOO = 'foo',
-	BAR = 'bar',
+	Foo = 'foo',
+	Bar = 'bar',
 }
 
 interface ITestingEnumData {
@@ -13,11 +13,11 @@ interface ITestingEnumData {
 }
 
 const testingEnumData: Record<TestingEnum, ITestingEnumData> = {
-	[TestingEnum.FOO]: {
+	[TestingEnum.Foo]: {
 		theAnswer: 42,
 		translationKey: 'testingEnum.foo',
 	},
-	[TestingEnum.BAR]: {
+	[TestingEnum.Bar]: {
 		theAnswer: 69,
 		translationKey: 'testingEnum.bar',
 	},
@@ -27,7 +27,7 @@ const testingEnumData: Record<TestingEnum, ITestingEnumData> = {
 	template: ` {{ enumPropertyValue | enumProperty: testingEnumData:'translationKey' }} `,
 })
 class EnumPropertyPipeHostComponent {
-	public enumPropertyValue = TestingEnum.BAR;
+	public enumPropertyValue = TestingEnum.Bar;
 	public testingEnumData = testingEnumData;
 }
 

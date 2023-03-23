@@ -4,261 +4,152 @@ title: Environment variables
 sidebar_label: Environment variables
 ---
 
-Most applications that are deployed to multiple environments have a need for environment variables that can have different values, depending on which environment the app is running in. `EnvironmentVariablesService` and the corresponding modules from `ngx-nuts-and-bolts` allow for handling of environment variables in a way that does not require application to be re-built nor to be re-deployed (only restarted in the case of SSR). This allows the same build to be deployed to multiple environments, increasing reliability and providing confidence that the codebase that was tested in pre-production environment is identical to what gets deployed to production. Additionally, this approach works well with Docker - the same Docker image containing the build can be run with different environment values for different environments.
+Most applications that are deployed to multiple environments have a need for environment variables that can have different values, depending on which environment the app is running in.
+
+`EnvironmentVariablesService` and the corresponding providers from `ngx-nuts-and-bolts` allow for handling of environment variables in a way that does not require application to be re-built nor to be re-deployed (only restarted in the case of SSR). This allows the same build to be deployed to multiple environments, increasing reliability and providing confidence that the codebase that was tested in pre-production environment is identical to what gets deployed to production. Additionally, this approach works well with Docker - the same Docker image containing the build can be run with different environment values for different environments.
 
 ## 1. Features
 
-Environment variables feature set consists of two main parts - `EnvironmentVariablesService` and a loader. `EnvironmentVariablesService` service is what is used in the application when you need to read some specific environment variable value. A loader is what initializes the `EnvironmentVariablesService` with actual values. Depending on project architecture, you might use one of two loaders that are provided with the library. If you seek something more specific, you can implement a custom loader.
+Environment variables feature set consists of two main parts - `EnvironmentVariablesService` and providers. `EnvironmentVariablesService` service is what is used in the application when you need to read some specific environment variable value. A provider is what initializes the `EnvironmentVariablesService` with actual values. Depending on project architecture, you might use the provider that is available in the library, or you might create your own provider that suits your specific needs.
 
-### 1.1. Main service and module
+## 1.1. Available variables enum
 
-`EnvironmentVariablesService` is provided by `EnvironmentVariablesModule`. This module also provides an `APP_INITIALIZER` that uses the loader of you choice to initialize the service during application initialization.
+Before starting anything, it is recommended that you define a string enum that will be used for defining all the available environment variables that can be set and read.
 
-`init` method is intentionally available publicly and can be called multiple times in order not to restrict the users in whatever use cases they might have. If you use a loader, you probably will not have to call it from your application code (not even once), but it is available if you have the need for it.
-
-### 1.2. Loaders
-
-The two available loaders are `EnvironmentVariablesSSRLoader` and `EnvironmentVariablesStaticLoader`.
-
-#### SSR loader
-
-As the name suggests, `EnvironmentVariablesSSRLoader` is to be used with Angular Universal (Server-Side Rendering) applications. It reads from `process.env` on server-side and transfers the values to the client browser using the `TransferState` service.
-
-This is the recommended loader if you use SSR, although you can still use any other loader if there is a specific need.
-
-Please note that this loader is part of a separate NPM package (`@infinumjs/ngx-nuts-and-bolts-ssr`) because of `node` dependency. This keeps the main NPM package (`@infinumjs/ngx-nuts-and-bolts`) free of any node dependencies.
-
-#### Static loader
-
-The main use case for `EnvironmentVariablesStaticLoader` is for statically built applications that do not use SSR.
-
-Any custom loaders you might need to implement are injectable classes that implement `IEnvironmentVariablesLoader`. Please check out the source code of the two available loaders for some examples.
-
-### 1.3. Race conditions during application initialization
-
-Because all the `APP_INITIALIZER`s start being resolved at the same time, there is no guarantee in which order they will be resolved. This can cause issues if you have an asynchronous environment variables loader and you need to use `EnvironmentVariablesService` within some other `APP_INITIALIZER`s - it could happen that `EnvironmentVariablesService` is not initialized in time.
-
-As a workaround for such cases, other initializers can await for `EnvironmentVariablesService`'s `initDone$` observable to emit `true`.
-
-`EnvironmentVariablesSSRLoader` and `EnvironmentVariablesStaticLoader` loaders that are provided with the library are not affected by this issue, but some custom loaders that are written for specific application needs might be.
-
-## 2. Usage and example applications
-
-Please follow these steps to set up the environment variables service and loaders:
-
-1. Define a string enum that defines all the needed environment variables
-
-   Example enum:
-
-   ```ts
-   export enum EnvironmentVariable {
-   	FOO = 'NGX_NUTS_AND_BOLTS_EXAMPLE_FOO',
-   	BAR = 'NGX_NUTS_AND_BOLTS_EXAMPLE_BAR',
-   }
-   ```
-
-2. Import `EnvironmentVariablesModule` into your `AppModule`
-3. Import an existing loader module or provide a custom loader (also in `AppModule`)
-4. Inject `EnvironmentVariablesService` and call `get` method wherever you need some environment variable value
-
-### 2.1. Configuring static loader
-
-Import `EnvironmentVariablesStaticLoaderModule` with or without config.
-
-#### With config
-
-This option will use fully static values that are defined when the module is imported. This can be useful for setting environment variables in development of if you are reading them from `window.env` or similar.
-
-Some examples:
+Example:
 
 ```ts
-@NgModule({
-	imports: [
-		EnvironmentVariablesModule,
-		EnvironmentVariablesStaticLoaderModule.withConfig({
-			environmentVariablesRecord: {
-				[EnvironmentVariable.FOO]: 'I am Foo',
-				[EnvironmentVariable.BAR]: 'I am Bar',
-			},
-		}),
-	],
-})
-export class AppModule {}
-```
-
-```ts
-@NgModule({
-	imports: [
-		EnvironmentVariablesModule,
-		EnvironmentVariablesStaticLoaderModule.withConfig({
-			environmentVariablesRecord: window.env,
-		}),
-	],
-})
-export class AppModule {}
-```
-
-#### Without config
-
-If the module is imported without calling `withConfig`, you need to provide the config manually. An example:
-
-```ts
-@NgModule({
-	imports: [EnvironmentVariablesModule, EnvironmentVariablesStaticLoaderModule],
-	providers: [
-		{
-			provide: ENVIRONMENT_VARIABLES_STATIC_LOADER_CONFIG,
-			useFactory: (window: Window) => {
-				return {
-					environmentVariablesRecord: window.env,
-				};
-			},
-			deps: [WINDOW],
-		},
-		{
-			provide: WINDOW,
-			useValue: window,
-		},
-	],
-})
-export class AppModule {}
-```
-
-This example is functionally the same as `EnvironmentVariablesStaticLoaderModule.withConfig` example where window.env was used directly (without injection token). Generally, it is a good practice to hide globals behind injection tokens and your app might already have an injection token for `Window` because you are using something else from `Window` as well. The example above shows how to use that injection token when configuring `EnvironmentVariablesStaticLoader`.
-
-### 2.2. Configuring SSR loader
-
-Before using `EnvironmentVariablesSSRLoader`, make sure that `BrowserTransferStateModule` is imported, because `EnvironmentVariablesSSRLoader` depends on `TransferState`.
-
-There can be many different environment variables present on the server where your Angular Universal application is running. `EnvironmentVariablesSSRLoader` has to be configured with information about which variables should be read from `process.env`. Be careful not to expose any secrets to the browser (e.g. various tokens/keys that are present in `process.env`). This can be done as shown in this example:
-
-```ts
-@NgModule({
-	imports: [
-		BrowserModule.withServerTransition({ appId: 'serverApp' }),
-		BrowserTransferStateModule,
-
-		EnvironmentVariablesModule,
-		EnvironmentVariablesSSRLoaderModule.withConfig({
-			variablesToLoad: [EnvironmentVariable.FOO, EnvironmentVariable.BAR],
-		}),
-	],
-})
-export class AppModule {}
-```
-
-### 2.3. Implementing and providing a custom loader
-
-Implement an injectable class that implements `IEnvironmentVariablesLoader`:
-
-```ts
-@Injectable()
-export class MyEnvironmentVariablesLoader<TVariable extends string> implements IEnvironmentVariablesLoader<TVariable> {
-	public load(): EnvironmentVariablesRecord<TVariable> | Observable<EnvironmentVariablesRecord<TVariable>> {
-		...
-	}
+export enum EnvironmentVariable {
+	Foo = 'NGX_NUTS_AND_BOLTS_EXAMPLE_FOO',
+	Bar = 'NGX_NUTS_AND_BOLTS_EXAMPLE_BAR',
 }
 ```
 
-Provide your custom loader:
+This enum will be used in place of some generic values for things like `EnvironmentVariablesService`, `ENVIRONMENT_VARIABLES_RECORD` and `EnvironmentVariablesRecord`
+
+## 1.2. `EnvironmentVariablesService`
+
+### 1.2.1. Methods
+
+`EnvironmentVariablesService` exposes methods like `get`, `getAsNumber` and `getAsBoolean` that allow you to read environment variable values directly, or try to convert them to a number or a boolean before returning the value. Please read JSDoc comments for more information about each of the methods.
+
+### 1.2.2. Configuration
+
+`EnvironmentVariablesService` can be configured by setting a value under `ENVIRONMENT_VARIABLES_CONFIG` DI token to an object that satisfies `IEnvironmentVariablesConfig` inteface. The configuration object has the following properties:
+
+- `truthyBooleanStrings` - An array of strings that will, when reading environment variable via `getAsBoolean`, be consider `true`. Before comparison, the actual value is converted to lowercase. The default value is `['true', '1']`.
+
+This configuration is applied no matter how the environment variables values are provided.
+
+## 1.3 Providers
+
+`EnvironmentVariablesService` depends on variables and their values to be provided via `DI`. There are two providers that are available in the library that should cover most use cases, and a way to create your own provider.
+
+### 1.3.1. For SPA Apps - `provideEnvironmentVariables`
+
+`provideEnvironmentVariables` is a simple function that receives an object and returns a provider. The passed object must have all the environment variables that are used in the application.
+
+Intended use case for this is to fetch environment variables from a file that is bundled with the application. This is the most common use case for SPA apps and is the one that is used in the example application.
+
+```ts title="apps/environment-variables-fetch-example/src/main.ts"
+fetch('./assets/env.json')
+	.then((response) => response.json())
+	.then((env) => {
+		platformBrowserDynamic([provideEnvironmentVariables(env)])
+			.bootstrapModule(AppModule)
+			.catch((err) => console.error(err));
+	});
+```
+
+In `env.json`, you would have something like this:
+
+```json title="apps/environment-variables-fetch-example/src/assets/env.json"
+{
+	"API_URL": "https://api.example.com"
+}
+```
+
+`env.json` file should be committed and the committed values in the file should be the values you use during development.
+
+When you deploy the app to some environment, you build the application artifacts only once and the DevOps team should implement value replacements of properties in `dist/assets/env.json` file. This replacement must happen after the build, but before the application is deployed (basically copied to production server as static files). This way, user's browser will fetch `env.json` when the app starts and use the values that are set in the file. Values can, of course, be set per-environment (that is the whole point of this feature).
+
+### 1.3.2. For SSR / Angular Universal Apps - `provideUniversalEnvironmentVariables`
+
+The setup for Angular Universal is similar, but there is no env.json file that is fetched. This files was necessary for SPA apps because there is no application runtime, only statically built and served files. However, with SSR, there is a runtime and we can access `process.env` to read values from system-level environment variables.
+
+To use `provideUniversalEnvironmentVariables`, update your `AppModule` (not `AppServerModule`!) like so:
 
 ```ts
 @NgModule({
-	imports: [EnvironmentVariablesModule],
+	declarations: [AppComponent],
+	imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }), BrowserTransferStateModule],
 	providers: [
 		{
-			provide: ENVIRONMENT_VARIABLES_LOADER,
-			useClass: MyEnvironmentVariablesLoader,
+			provide: PROCESS,
+			useValue: process,
 		},
-	],
-})
-export class AppModule {}
-```
-
-### 2.4. Setting values for development only
-
-During development, you might want to set environment variables so that, for example, `API_URL` points to a localhost proxy. At the same time, don't want these development URLs to be part of the final application bundle. There are multiple ways to achieve this. One possible solution is to provide a custom loader only in development mode, like so:
-
-```ts
-@NgModule({
-	imports: [
-		EnvironmentVariablesModule,
-		EnvironmentVariablesSSRLoaderModule.withConfig({
-			variablesToLoad: Object.values(EnvironmentVariable),
+		provideUniversalEnvironmentVariables({
+			publicVariables: [EnvironmentVariable.Foo],
+			privateVariables: [EnvironmentVariable.Bar],
 		}),
 	],
-	providers: [
-		// Development mode variables
-		...(environment.production
-			? []
-			: [
-					{
-						provide: ENVIRONMENT_VARIABLES_LOADER,
-						useValue: {
-							load: () => {
-								return {
-									[EnvironmentVariable.API_URL]: 'http://localhost:4200/api',
-								};
-							},
-						},
-					},
-			  ]),
-	],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}
 ```
 
-Because we use `environment.production`, custom loader will be tree-shaken at build-time and will not be present in the production application bundle - it will only be used during development. This keeps the production bundle clear of any development-related environment variables values. You can also consider adding an additional boolean to your environment files, e.g. `useDevelopmentEnvironmentVariablesValues`. The value of this property will most probably be in-sync with `production` property value but it does not have to be, especially if you have more than two environment files.
+`provideUniversalEnvironmentVariables` provider accepts a configuration object that has `publicVariables` and `privateVariables` properties (both are arrays of strings). Use these two arrays to define which variables and their values should be readable only on server (e.g. captcha verification key) and which should be readable both on server and client/browser (e.g. API URL).
 
-There is an opinion piece later on in this documentation page describing what we should or should not use environment files for. This is a good example of a use case where we can use environment files.
+_Implementation detail_ - [`TransferState`](https://angular.io/api/platform-browser/TransferState) is used to transfer public variables from Node to browser, while private ones are kept only on server and are not transferred to the client.
 
-### 2.5. Example applications
+Because the node part of the app will read values from `process.env`, you must provide the global `process` object under `PROCESS` DI token. This is done so that `process.env` is not hard-coded in `provideUniversalEnvironmentVariables` provider, making unit testing easier.
+
+When running the app on production server, simply set environment variables in one of the standard ways:
+
+1. API_URL=https://api.example.com node server.js
+2. export API_URL=https://api.example.com && node server.js
+3. save API_URL=https://api.example.com in .env file and source it in server.ts (e.g. using [`dotenv`](https://www.npmjs.com/package/dotenv) NPM package for Node.js)
+
+For development, you can easily define values for variables in a local .env file and source it however you like (e.g. using [`dotenv` ohmyzsh plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv) or rely on [`dotenv`](https://www.npmjs.com/package/dotenv) implementation in server.ts);
+
+### 1.3.3. `ENVIRONMENT_VARIABLES_RECORD` (for custom setup)
+
+This method gives you flexibility to implement a custom way of initializing environment variables record. You can provide the record containing values for environment variables yourself, by manually setting value for `ENVIRONMENT_VARIABLES_RECORD` DI token. This is what both `provideEnvironmentVariables` and `provideUniversalEnvironmentVariables` do internally.
+
+The of the object that you provide under `ENVIRONMENT_VARIABLES_RECORD` has to satisfy `EnvironmentVariablesRecord` generic type. This type receives a generic that is the enum of your available variables.
+
+If you do this, do not use `provideEnvironmentVariables` nor `provideUniversalEnvironmentVariables` providers.
+
+## 2. Example applications
 
 Please check out the source code repository for two example applications.
 
-[`apps/environment-variables-fetch-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-fetch-example) demonstrates an example that uses `EnvironmentVariablesStaticLoader`. In `main.ts` (before the application is loaded), `./assets/env.json` is fetched using `fetch` and the application is bootstrapped with the loader provided in `main.ts` instead of `app.module.ts` (as you would do usually). You can start this example with `npm run start:environment-variables-fetch-example`.
+### 2.1 Single-page App with fetching
 
-[`apps/environment-variables-ssr-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-ssr-example) uses `EnvironmentVariablesSSRLoader`. The application has to be started with environment variables exposed to the node process that is running the SSR app. You can start this example with `npm run start:environment-variables-ssr-example`
+[`apps/environment-variables-fetch-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-fetch-example) demonstrates an example that uses `provideEnvironmentVariables` provider. In `main.ts` (before the application is loaded), `./assets/env.json` is fetched using `fetch` and the application is bootstrapped with the `provideEnvironmentVariables` provider set in in `main.ts` instead of `app.module.ts` (as you would do usually). You can start this example with `npm run start:environment-variables-fetch-example`.
+
+### 2.2 Angular Universal App with SSR
+
+[`apps/environment-variables-ssr-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-ssr-example) uses `provideUniversalEnvironmentVariables` provider. The application has to be started with environment variables exposed to the node process that is running the SSR app. You can start this example with `npm run start:environment-variables-ssr-example`.
+
+For this example, `Foo` variable is set as public, and `Bar` is set as private. That is why you don't see value for `Bar` in browser, but you will see it in console of the node process.
 
 ## 3. Unit testing
 
-For unit testing, you can use `EnvironmentVariablesTestingModule`, which is inspired by Transloco's [`TranslocoTestingModule`](https://ngneat.github.io/transloco/docs/unit-testing/).
+For unit testing, simply call `provideEnvironmentVariables` with desired values for that specific test suite and `EnvironmentVariablesService` will use those values. You do not have to provide `EnvironmentVariablesService` explicitly, as it has `providedIn: 'root'`. `TestBed` configuration example:
 
-By using `EnvironmentVariablesTestingModule`'s `withMockEnvironment` method, you can create a testing module with mock values for environment variables:
-
-```ts title="/src/testing/environment-variables-testing-module.ts"
-import { EnvironmentVariablesTestingModule } from '@infinumjs/ngx-nuts-and-bolts';
-import { EnvironmentVariable } from 'src/app/enums/environment-variable.enum';
-
-export const MyAppEnvironmentVariablesTestingModule = EnvironmentVariablesTestingModule.withMockEnvironment({
-	[EnvironmentVariable.FOO]: 'I am Foo (testing)',
-	[EnvironmentVariable.BAR]: 'I am Bar (testing)',
+```ts
+TestBed.configureTestingModule({
+	providers: [
+		provideEnvironmentVariables({
+			[EnvironmentVariable.Foo]: 'I am Foo (testing)',
+			[EnvironmentVariable.Bar]: 'I am Bar (testing)',
+		}),
+	],
 });
+
+envService = TestBed.inject(EnvironmentVariablesService);
 ```
-
-This module will provide `EnvironmentVariablesService` and set up a simple loader that uses the values you pass to `withMockEnvironment` method.
-
-Then, you can import this module in the `TestBed` for a specific component/service/whatever:
-
-```ts title="/src/app/components/foo/foo.component.spec.ts"
-import { TestBed } from '@angular/core/testing';
-import { EnvironmentVariable } from 'src/app/enums/environment-variable.enum';
-import { MyAppEnvironmentVariablesTestingModule } from 'src/testing/my-app-environment-variables.testing.module';
-
-describe('foo component', () => {
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			imports: [MyAppEnvironmentVariablesTestingModule],
-		});
-	});
-});
-```
-
-If you want to test how your application handles specific environment variable values other than the default ones from `MyAppEnvironmentVariablesTestingModule`, you can create a new, more specific, testing module for that test suite and/or you can spy on `EnvironmentVariablesService`'s `get` method and return the desired value that is relevant for that specific test.
-
-You can see some examples in the repository [here](https://github.com/infinum/ngx-nuts-and-bolts/blob/7e2c0d6bcf33dfc3a9a5e7fb5bd9f3849960e4fc/libs/environment-variables-example-app-base/src/lib/pipes/environment-variable-value/environment-variable-value.pipe.spec.ts) and [here](https://github.com/infinum/ngx-nuts-and-bolts/blob/7e2c0d6bcf33dfc3a9a5e7fb5bd9f3849960e4fc/libs/environment-variables-example-app-base/src/lib/testing/my-app-environment-variables.testing.module.ts).
-
-_Note:_ Apply better naming than `MyApp` for `MyAppEnvironmentVariablesTestingModule`.
 
 ## 4. Opinion piece - what about Angular's `environment` files?
 
@@ -280,3 +171,5 @@ Although these out-of-the-box files are named `environment.ts` and `environment.
 Even though one of the configurations is called `production` and the other `development`, these are usually the only two configurations you actually need. In environments where it is important to provide a optimized build to the end-user, use `production` configuration. In environments where it is important that you can easily debug the deployed code, use `development` configuration. Even if you have many different environments, you are probably still ok with using one of these two configurations in each of the environments (e.g. `production` configuration for production and pre-production environments and `development` for development environments). You might want to add one additional middle-ground configuration that has all the optimizations enabled, but also includes sourcemaps that can be used to help with debugging. Basically `production` configuration + sourcemaps on top.
 
 We can only hope that one day Angular CLI completely drops `environment` from naming and starts calling these files `configuration` files (e.g. `configuration.dev.ts`, `configuration.prod.ts`). This would better convey use cases where these files are a good fit. Environment variables should be kept out of these files in most applications. If you think these files will work for your use case, feel free to use them. However, we believe that they are not a good fit for anything other than some really small-scale and/or demo projects.
+
+As a final nail in the coffin for developers defaulting to using `environment` files for things like API_URL, [Angular CLI removed generation of these files for new projects in version 15](https://github.com/angular/angular-cli/commit/283b564d1de985f0af8c2fcb6192801a90baacda). You can still enable them after the project is generated, but it is no longer there by default and the usage of these files is discouraged for anything other than defining differences in build configurations (e.g. build with MSW handlers or without).

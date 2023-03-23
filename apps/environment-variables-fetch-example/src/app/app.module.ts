@@ -18,7 +18,7 @@ import {
 			provide: APP_INITIALIZER,
 			multi: true,
 			useFactory: (env: EnvironmentVariablesService<EnvironmentVariable>) => {
-				return () => console.log(env.get(EnvironmentVariable.FOO));
+				return () => console.log(env.get(EnvironmentVariable.Foo));
 			},
 			deps: [EnvironmentVariablesService],
 		},

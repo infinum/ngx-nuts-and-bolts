@@ -11,7 +11,7 @@ import { EnvironmentVariable } from './enums/environment-variable.enum';
 })
 export class AppComponent {
 	public readonly variables = Object.entries(EnvironmentVariable);
-	public selectedVariable = EnvironmentVariable.FOO;
+	public selectedVariable = EnvironmentVariable.Foo;
 
 	constructor(private readonly env: EnvironmentVariablesService<EnvironmentVariable>) {
 		for (const variableName of Object.values(EnvironmentVariable)) {

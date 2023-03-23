@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { provideUniversalEnvironmentVariables } from '@infinumjs/ngx-nuts-and-bolts-ssr';
+import { PROCESS, provideUniversalEnvironmentVariables } from '@infinumjs/ngx-nuts-and-bolts-ssr';
 import {
 	AppComponent,
 	EnvironmentVariable,
@@ -19,9 +19,13 @@ import {
 		EnvironmentVariableValueModule,
 	],
 	providers: [
+		{
+			provide: PROCESS,
+			useValue: process,
+		},
 		provideUniversalEnvironmentVariables({
-			publicVariables: [EnvironmentVariable.FOO],
-			privateVariables: [EnvironmentVariable.BAR],
+			publicVariables: [EnvironmentVariable.Foo],
+			privateVariables: [EnvironmentVariable.Bar],
 		}),
 	],
 	bootstrap: [AppComponent],
