@@ -9,7 +9,7 @@ This NPM library contains reusable components and helpers to ease and speed up d
 ## 1. Installation and setup
 
 ```ts
-npm install @infinumjs/ngx-nuts-and-bolts
+npm install @infinum/ngx-nuts-and-bolts
 ```
 
 After the library is installed you can simply import what you need.

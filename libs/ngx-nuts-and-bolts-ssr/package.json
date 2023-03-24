@@ -1,5 +1,5 @@
 {
-	"name": "@infinumjs/ngx-nuts-and-bolts-ssr",
+	"name": "@infinum/ngx-nuts-and-bolts-ssr",
 	"version": "2.0.0",
 	"description": "Reusable components and helpers for angular projects",
 	"license": "MIT",
@@ -20,7 +20,7 @@
 		"universal"
 	],
 	"peerDependencies": {
-		"@infinumjs/ngx-nuts-and-bolts": ">=2.0.0",
+		"@infinum/ngx-nuts-and-bolts": ">=2.0.0",
 		"@angular/animations": ">=10",
 		"@angular/common": ">=10",
 		"@angular/core": ">=10",

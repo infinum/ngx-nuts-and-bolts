@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { InjectionToken, Optional, PLATFORM_ID, StaticProvider } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
-import { EnvironmentVariablesRecord, ENVIRONMENT_VARIABLES_RECORD } from '@infinumjs/ngx-nuts-and-bolts';
+import { EnvironmentVariablesRecord, ENVIRONMENT_VARIABLES_RECORD } from '@infinum/ngx-nuts-and-bolts';
 
 export interface IUniversalEnvironmentVariablesProviderConfig<TVariable extends string> {
 	/**

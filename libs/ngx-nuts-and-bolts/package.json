@@ -1,5 +1,5 @@
 {
-	"name": "@infinumjs/ngx-nuts-and-bolts",
+	"name": "@infinum/ngx-nuts-and-bolts",
 	"version": "2.0.0",
 	"description": "Reusable components and helpers for angular projects",
 	"license": "MIT",

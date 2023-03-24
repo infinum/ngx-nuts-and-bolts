@@ -8,7 +8,7 @@ A collection of commonly used pieces of Angular-related code that we use everyda
 ## Installation
 
 ```bash
-npm install @infinumjs/ngx-nuts-and-bolts
+npm install @infinum/ngx-nuts-and-bolts
 ```
 
 ## Available _nuts and bolts_

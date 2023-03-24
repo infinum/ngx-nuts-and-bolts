@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { EnvironmentVariablesService } from '@infinumjs/ngx-nuts-and-bolts';
+import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts';
 import {
 	AppComponent,
 	EnvironmentVariable,

@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { EnvironmentVariablesService } from '@infinumjs/ngx-nuts-and-bolts';
+import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts';
 import { EnvironmentVariable } from './enums/environment-variable.enum';
 
 @Component({

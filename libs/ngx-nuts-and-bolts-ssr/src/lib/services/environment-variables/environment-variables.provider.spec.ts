@@ -1,7 +1,7 @@
 import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { StateKey, TransferState } from '@angular/platform-browser';
-import { EnvironmentVariablesService } from '@infinumjs/ngx-nuts-and-bolts';
+import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts';
 import { PROCESS, provideUniversalEnvironmentVariables } from './environment-variables.provider';
 
 enum EnvironmentVariable {

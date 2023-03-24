@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { PROCESS, provideUniversalEnvironmentVariables } from '@infinumjs/ngx-nuts-and-bolts-ssr';
+import { PROCESS, provideUniversalEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts-ssr';
 import {
 	AppComponent,
 	EnvironmentVariable,
