@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
+import { provideEnvironmentVariables } from '@infinumjs/ngx-nuts-and-bolts';
 import { EnvironmentVariable } from '../../enums/environment-variable.enum';
-import { MyAppEnvironmentVariablesTestingModule } from '../../testing/my-app-environment-variables.testing.module';
 import { EnvironmentVariableValuePipe } from './environment-variable-value.pipe';
 
 describe('environment variable value pipe', () => {
@@ -8,14 +8,19 @@ describe('environment variable value pipe', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [MyAppEnvironmentVariablesTestingModule],
-			providers: [EnvironmentVariableValuePipe],
+			providers: [
+				EnvironmentVariableValuePipe,
+				provideEnvironmentVariables({
+					[EnvironmentVariable.Foo]: 'I am Foo (testing)',
+					[EnvironmentVariable.Bar]: 'I am Bar (testing)',
+				}),
+			],
 		});
 
 		pipe = TestBed.inject(EnvironmentVariableValuePipe);
 	});
 
 	it('should get environment variable value', () => {
-		expect(pipe.transform(EnvironmentVariable.FOO)).toBe('I am Foo (testing)');
+		expect(pipe.transform(EnvironmentVariable.Foo)).toBe('I am Foo (testing)');
 	});
 });

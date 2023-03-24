@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
-import { ENVIRONMENT_VARIABLES_LOADER } from './environment-variables-loader.interface';
-import { EnvironmentVariablesModule } from './environment-variables.module';
+import { provideEnvironmentVariables } from './environment-variables.provider';
 import { EnvironmentVariablesService } from './environment-variables.service';
 
 enum EnvironmentVariable {
-	FOO = 'MY_APP_FOO',
-	BAR = 'MY_APP_BAR',
+	Foo = 'MY_APP_FOO',
+	Bar = 'MY_APP_BAR',
 }
 
 @Component({
@@ -27,7 +26,7 @@ enum EnvironmentVariable {
 })
 class EnvironmentVariablesHostComponent {
 	public readonly variables = Object.entries(EnvironmentVariable);
-	public selectedVariable = EnvironmentVariable.FOO;
+	public selectedVariable = EnvironmentVariable.Foo;
 
 	constructor(public readonly env: EnvironmentVariablesService<EnvironmentVariable>) {}
 }
@@ -38,17 +37,12 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [EnvironmentVariablesHostComponent],
-			imports: [FormsModule, EnvironmentVariablesModule],
+			imports: [FormsModule],
 			providers: [
-				{
-					provide: ENVIRONMENT_VARIABLES_LOADER,
-					useValue: {
-						load: () => ({
-							[EnvironmentVariable.FOO]: 'I am Foo',
-							[EnvironmentVariable.BAR]: 'I am Bar',
-						}),
-					},
-				},
+				provideEnvironmentVariables({
+					[EnvironmentVariable.Foo]: 'I am Foo',
+					[EnvironmentVariable.Bar]: 'I am Bar',
+				}),
 			],
 		}),
 	],

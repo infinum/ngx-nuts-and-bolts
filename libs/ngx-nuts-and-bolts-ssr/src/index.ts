@@ -1,1 +1,5 @@
-export * from './lib/services/environment-variables/loaders/environment-variables-ssr-loader/environment-variables-ssr-loader.module';
+export {
+	provideUniversalEnvironmentVariables,
+	IUniversalEnvironmentVariablesProviderConfig,
+	PROCESS,
+} from './lib/services/environment-variables/environment-variables.provider';

@@ -1,8 +1,8 @@
 import { EnumPropertyPipe } from './enum-property.pipe';
 
 enum TestingEnum {
-	FOO = 'foo',
-	BAR = 'bar',
+	Foo = 'foo',
+	Bar = 'bar',
 }
 
 interface ITestingEnumData {
@@ -11,11 +11,11 @@ interface ITestingEnumData {
 }
 
 const testingEnumData: Record<TestingEnum, ITestingEnumData> = {
-	[TestingEnum.FOO]: {
+	[TestingEnum.Foo]: {
 		theAnswer: 42,
 		translationKey: 'testingEnum.foo',
 	},
-	[TestingEnum.BAR]: {
+	[TestingEnum.Bar]: {
 		theAnswer: 69,
 		translationKey: 'testingEnum.bar',
 	},
@@ -40,12 +40,12 @@ describe('EnumPropertyPipe', () => {
 	});
 
 	it('should return the enum translation key property by default', () => {
-		const result = pipe.transform(TestingEnum.FOO, testingEnumData);
+		const result = pipe.transform(TestingEnum.Foo, testingEnumData);
 		expect(result).toBe('testingEnum.foo');
 	});
 
 	it('should return the answer a specific property', () => {
-		const result = pipe.transform(TestingEnum.FOO, testingEnumData, 'theAnswer');
+		const result = pipe.transform(TestingEnum.Foo, testingEnumData, 'theAnswer');
 		expect(result).toBe(42);
 	});
 
