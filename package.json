@@ -88,7 +88,6 @@
 		"jest": "27.5.1",
 		"jest-fail-on-console": "^2.3.0",
 		"jest-preset-angular": "11.1.1",
-		"lerna": "^4.0.0",
 		"ng-packagr": "^13.3.0",
 		"postcss": "^8.4.12",
 		"postcss-import": "^14.1.0",
