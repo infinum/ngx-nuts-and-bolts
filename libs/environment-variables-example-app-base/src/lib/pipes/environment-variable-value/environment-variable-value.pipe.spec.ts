@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideEnvironmentVariables } from '@infinumjs/ngx-nuts-and-bolts';
+import { provideEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts';
 import { EnvironmentVariable } from '../../enums/environment-variable.enum';
 import { EnvironmentVariableValuePipe } from './environment-variable-value.pipe';
 
