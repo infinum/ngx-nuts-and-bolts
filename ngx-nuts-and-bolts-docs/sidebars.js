@@ -49,7 +49,7 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Testing',
-			items: ['testing/extract-public', 'testing/async-data', 'testing/async-error'],
+			items: ['testing/extract-public', 'testing/async-data', 'testing/async-error', 'testing/provide-testing-service'],
 		},
 	],
 
