@@ -15,6 +15,7 @@ export * from './lib/directives/in-view/in-view.testing.directive';
 
 // Utilities
 export * from './lib/utilities/loading-state/loading-state';
+export * from './lib/utilities/route-config-loading/route-config-loading';
 export * from './lib/utilities/table-state/table-state';
 
 // Services

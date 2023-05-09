@@ -44,7 +44,7 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Utilities',
-			items: ['utilities/loading-state', 'utilities/table-state'],
+			items: ['utilities/loading-state', 'utilities/route-config-loading', 'utilities/table-state'],
 		},
 		{
 			type: 'category',

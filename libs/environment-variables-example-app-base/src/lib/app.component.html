@@ -7,3 +7,22 @@
 </label>
 
 <p>Value: {{ selectedVariable | environmentVariableValue }}</p>
+
+<hr />
+
+<p>For testing global loader during chunk loading (<em>throttle network to see it</em>):</p>
+
+<nav>
+	<ul>
+		<li>
+			<a routerLink="foo">Foo page</a>
+		</li>
+		<li>
+			<a routerLink="bar">Bar page</a>
+		</li>
+	</ul>
+</nav>
+
+<p>Is route loading: {{ isRouteConfigLoading$ | async }}</p>
+
+<router-outlet></router-outlet>
