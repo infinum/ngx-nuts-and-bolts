@@ -1,5 +1,6 @@
 import {
 	NavigationEnd,
+	NavigationError,
 	NavigationStart,
 	RouteConfigLoadEnd,
 	RouteConfigLoadStart,
@@ -39,6 +40,29 @@ describe('createRouteConfigLoadingObservable', () => {
 		expect(callbacks.complete).toHaveBeenCalledTimes(0);
 
 		router.events.next(new RouteConfigLoadEnd({}) as unknown as RouterEvent);
+
+		expect(callbacks.next).toHaveBeenCalledTimes(2);
+		expect(callbacks.next).toHaveBeenNthCalledWith(2, false);
+		expect(callbacks.error).toHaveBeenCalledTimes(0);
+		expect(callbacks.complete).toHaveBeenCalledTimes(0);
+	});
+
+	it('should emit false on NavigationError', () => {
+		const callbacks = mockSubscribeCallbacks();
+		isRouteConfigLoading$.subscribe(callbacks);
+
+		expect(callbacks.next).toHaveBeenCalledTimes(0);
+		expect(callbacks.error).toHaveBeenCalledTimes(0);
+		expect(callbacks.complete).toHaveBeenCalledTimes(0);
+
+		router.events.next(new RouteConfigLoadStart({}) as unknown as RouterEvent);
+
+		expect(callbacks.next).toHaveBeenCalledTimes(1);
+		expect(callbacks.next).toHaveBeenNthCalledWith(1, true);
+		expect(callbacks.error).toHaveBeenCalledTimes(0);
+		expect(callbacks.complete).toHaveBeenCalledTimes(0);
+
+		router.events.next(new NavigationError(0, 'error', {}));
 
 		expect(callbacks.next).toHaveBeenCalledTimes(2);
 		expect(callbacks.next).toHaveBeenNthCalledWith(2, false);
