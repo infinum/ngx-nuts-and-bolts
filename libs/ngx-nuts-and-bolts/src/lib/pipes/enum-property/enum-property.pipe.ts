@@ -14,7 +14,7 @@ export class EnumPropertyPipe<TEnum extends string, TEnumDataObject extends Reco
 	): TReturnValue | TEnum | null {
 		if (enumData[value]?.[key] === undefined) {
 			if (showWarning) {
-				console.warn(`No property for key "${key}" for enum value "${value}" `, enumData);
+				console.warn(`No property for key "${String(key)}" for enum value "${value}" `, enumData);
 			}
 			return null;
 		}
