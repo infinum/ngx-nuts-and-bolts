@@ -73,7 +73,7 @@ class LoadingStateHostComponent extends LoadingState {
 		this.loadingTrigger$.next();
 	}
 
-	public onRetry(): void {
+	public override onRetry(): void {
 		this.isPending = true;
 		this.mockDataTrigger$ = new Subject();
 		super.onRetry();

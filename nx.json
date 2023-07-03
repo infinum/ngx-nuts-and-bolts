@@ -4,7 +4,7 @@
 		"default": {
 			"runner": "nx-cloud",
 			"options": {
-				"cacheableOperations": ["build", "lint", "test", "e2e", "server"],
+				"cacheableOperations": ["build", "lint", "test", "e2e", "server", "build-storybook"],
 				"accessToken": "NWY3ZDE5MTMtM2I1MS00M2IwLTk1ZmMtMjllM2IyMjE2ZWQzfHJlYWQ="
 			}
 		}
@@ -22,6 +22,9 @@
 		},
 		"lint": {
 			"inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"]
+		},
+		"build-storybook": {
+			"inputs": ["default", "^production", "!{projectRoot}/.storybook/**/*"]
 		}
 	},
 	"namedInputs": {
@@ -31,7 +34,9 @@
 			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
 			"!{projectRoot}/tsconfig.spec.json",
 			"!{projectRoot}/jest.config.[jt]s",
-			"!{projectRoot}/.eslintrc.json"
+			"!{projectRoot}/.eslintrc.json",
+			"!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+			"!{projectRoot}/.storybook/**/*"
 		],
 		"sharedGlobals": []
 	},
