@@ -22,9 +22,9 @@
 	"sideEffects": false,
 	"peerDependencies": {
 		"@infinum/ngx-nuts-and-bolts": ">=3.0.0",
-		"@angular/common": ">=14",
-		"@angular/core": ">=14",
-		"@angular/platform-browser": ">=14"
+		"@angular/common": ">=16",
+		"@angular/core": ">=16",
+		"@angular/platform-browser": ">=16"
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"

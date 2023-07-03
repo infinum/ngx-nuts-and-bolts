@@ -19,12 +19,12 @@
 	],
 	"sideEffects": false,
 	"peerDependencies": {
-		"@angular/animations": ">=14",
-		"@angular/common": ">=14",
-		"@angular/core": ">=14",
-		"@angular/forms": ">=14",
-		"@angular/platform-browser": ">=14",
-		"@angular/router": ">=14",
+		"@angular/animations": ">=16",
+		"@angular/common": ">=16",
+		"@angular/core": ">=16",
+		"@angular/forms": ">=16",
+		"@angular/platform-browser": ">=16",
+		"@angular/router": ">=16",
 		"rxjs": ">=7"
 	},
 	"dependencies": {
