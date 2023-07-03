@@ -4,6 +4,9 @@
 	"overrides": [
 		{
 			"files": ["*.ts"],
+			"parserOptions": {
+				"project": ["libs/ngx-nuts-and-bolts/tsconfig.*?.json", "libs/ngx-nuts-and-bolts/.storybook/tsconfig.json"]
+			},
 			"rules": {
 				"@angular-eslint/directive-selector": [
 					"error",

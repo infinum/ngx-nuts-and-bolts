@@ -2,7 +2,7 @@
 	"name": "ngx-nuts-and-bolts",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "libs/ngx-nuts-and-bolts/src",
-	"prefix": "ngx-nuts-and-bolts",
+	"prefix": "inf",
 	"tags": [],
 	"projectType": "library",
 	"targets": {

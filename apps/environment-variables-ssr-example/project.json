@@ -2,7 +2,7 @@
 	"name": "environment-variables-ssr-example",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"projectType": "application",
-	"prefix": "ngx",
+	"prefix": "inf",
 	"sourceRoot": "apps/environment-variables-ssr-example/src",
 	"tags": [],
 	"targets": {

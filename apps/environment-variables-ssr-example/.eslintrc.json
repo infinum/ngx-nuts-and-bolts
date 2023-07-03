@@ -4,12 +4,15 @@
 	"overrides": [
 		{
 			"files": ["*.ts"],
+			"parserOptions": {
+				"project": ["apps/environment-variables-ssr-example/tsconfig.*?.json"]
+			},
 			"rules": {
 				"@angular-eslint/directive-selector": [
 					"error",
 					{
 						"type": "attribute",
-						"prefix": "ngx",
+						"prefix": "inf",
 						"style": "camelCase"
 					}
 				],
@@ -17,7 +20,7 @@
 					"error",
 					{
 						"type": "element",
-						"prefix": "ngx",
+						"prefix": "inf",
 						"style": "kebab-case"
 					}
 				]

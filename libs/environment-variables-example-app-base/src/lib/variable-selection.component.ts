@@ -7,7 +7,7 @@ import { EnvironmentVariable } from './enums/environment-variable.enum';
 import { EnvironmentVariableValuePipe } from './pipes/environment-variable-value/environment-variable-value.pipe';
 
 @Component({
-	selector: 'ngx-variable-selection',
+	selector: 'inf-variable-selection',
 	templateUrl: './variable-selection.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,

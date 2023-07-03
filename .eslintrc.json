@@ -23,12 +23,12 @@
 		},
 		{
 			"files": ["*.ts", "*.tsx"],
-			"extends": ["plugin:@nx/typescript"],
+			"extends": ["plugin:@nx/typescript", "plugin:@infinum/typescript", "plugin:@infinum/angular"],
 			"rules": {}
 		},
 		{
 			"files": ["*.js", "*.jsx"],
-			"extends": ["plugin:@nx/javascript"],
+			"extends": ["plugin:@nx/javascript", "plugin:@infinum/core"],
 			"rules": {}
 		},
 		{

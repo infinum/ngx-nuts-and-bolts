@@ -15,5 +15,5 @@
 		"**/*.stories.ts",
 		"**/*.stories.js"
 	],
-	"include": ["src/**/*.ts"]
+	"include": ["src/**/*.ts", "src/lib/services/environment-variables/environment-variables.stories.ts"]
 }
