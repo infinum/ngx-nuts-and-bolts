@@ -10,9 +10,7 @@ export interface ILoadingStateConfig {
 	leaveDelay?: number;
 }
 
-export const LOADING_STATE_CONFIG = new InjectionToken<ILoadingStateConfig>(
-	'LOADING_STATE_CONFIG'
-);
+export const LOADING_STATE_CONFIG = new InjectionToken<ILoadingStateConfig>('LOADING_STATE_CONFIG');
 
 export interface IPrivateLoadingState<TError> {
 	_loading$: BehaviorSubject<boolean>;
@@ -27,14 +25,11 @@ export interface IPublicLoadingState<TError> {
 
 @Directive()
 export abstract class LoadingState<TError = unknown> {
-	// eslint-disable-next-line rxjs/no-exposed-subjects
 	protected readonly loadingTrigger$ = new BehaviorSubject<void>(undefined);
 
-	// eslint-disable-next-line rxjs/no-exposed-subjects
 	protected readonly _error$: IPrivateLoadingState<TError>['_error$'];
 	public readonly error$: IPublicLoadingState<TError>['error$'];
 
-	// eslint-disable-next-line rxjs/no-exposed-subjects
 	protected readonly _loading$: IPrivateLoadingState<TError>['_loading$'];
 	public readonly loading$: IPublicLoadingState<TError>['loading$'];
 

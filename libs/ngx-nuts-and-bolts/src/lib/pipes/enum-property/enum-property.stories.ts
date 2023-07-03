@@ -24,7 +24,7 @@ const testingEnumData: Record<TestingEnum, ITestingEnumData> = {
 };
 
 @Component({
-	template: ` {{ enumPropertyValue | enumProperty: testingEnumData:'translationKey' }} `,
+	template: ` {{ enumPropertyValue | enumProperty : testingEnumData : 'translationKey' }} `,
 })
 class EnumPropertyPipeHostComponent {
 	public enumPropertyValue = TestingEnum.Bar;

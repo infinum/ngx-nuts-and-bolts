@@ -45,7 +45,7 @@ You can bring both of these into a component and use them together as such:
 ```ts
 @Component({
 	selector: 'app-example',
-	template: ` {{ enumValue | enumProperty: directionsData }} `,
+	template: ` {{ enumValue | enumProperty : directionsData }} `,
 })
 export class ExampleComponent {
 	public enumValue = Directions.NORTH;
@@ -59,7 +59,7 @@ By default `enumProperty` looks for `translationKey` on the metadata object (in 
 ```ts
 @Component({
 	selector: 'app-example',
-	template: ` {{ enumValue | enumProperty: directionsData:'differentKey' }} `,
+	template: ` {{ enumValue | enumProperty : directionsData : 'differentKey' }} `,
 })
 export class ExampleComponent {
 	public enumValue = Directions.NORTH;

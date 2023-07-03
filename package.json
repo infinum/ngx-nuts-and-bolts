@@ -26,7 +26,8 @@
 		"dev:ssr-example": "ng run environment-variables-ssr-example:serve-ssr",
 		"serve:ssr-example": "node dist/environment-variables-ssr-example/server/main.js",
 		"build:ssr-example": "ng build && ng run environment-variables-ssr-example:server",
-		"prerender": "ng run environment-variables-ssr-example:prerender"
+		"prerender": "ng run environment-variables-ssr-example:prerender",
+		"prepare": "husky install"
 	},
 	"private": false,
 	"dependencies": {
@@ -74,10 +75,12 @@
 		"@types/node": "16.11.7",
 		"@typescript-eslint/eslint-plugin": "^5.58.0",
 		"@typescript-eslint/parser": "^5.58.0",
+		"concurrently": "^8.2.0",
 		"cypress": "^12.11.0",
 		"eslint": "~8.15.0",
 		"eslint-config-prettier": "8.1.0",
 		"eslint-plugin-cypress": "^2.10.3",
+		"husky": "^8.0.3",
 		"jest": "^29.4.1",
 		"jest-environment-jsdom": "^29.4.1",
 		"jest-fail-on-console": "^3.1.1",
