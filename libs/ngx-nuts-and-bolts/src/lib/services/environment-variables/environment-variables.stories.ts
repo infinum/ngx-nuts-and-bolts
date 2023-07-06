@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, applicationConfig } from '@storybook/angular';
 import { provideEnvironmentVariables } from './environment-variables.provider';
 import { EnvironmentVariablesService } from './environment-variables.service';
 
@@ -11,6 +12,8 @@ enum EnvironmentVariable {
 
 @Component({
 	selector: 'inf-environment-variables-host-component',
+	standalone: true,
+	imports: [CommonModule, FormsModule],
 	template: `
 		<label>
 			Select environment variable:
@@ -32,12 +35,10 @@ class EnvironmentVariablesHostComponent {
 }
 
 export default {
-	title: 'EnvironmentVariables',
+	title: 'Environment Variables',
 	component: EnvironmentVariablesHostComponent,
 	decorators: [
-		moduleMetadata({
-			declarations: [EnvironmentVariablesHostComponent],
-			imports: [FormsModule],
+		applicationConfig({
 			providers: [
 				provideEnvironmentVariables({
 					[EnvironmentVariable.Foo]: 'I am Foo',
@@ -48,10 +49,8 @@ export default {
 	],
 } as Meta<EnvironmentVariablesHostComponent>;
 
-const Template: Story<EnvironmentVariablesHostComponent> = (args: EnvironmentVariablesHostComponent) => ({
-	component: EnvironmentVariablesHostComponent,
-	props: args,
-});
-
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = {
+	render: (args: EnvironmentVariablesHostComponent) => ({
+		props: args,
+	}),
+};

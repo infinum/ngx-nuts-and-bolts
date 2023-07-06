@@ -2,13 +2,18 @@
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"outDir": "../../dist/out-tsc",
-		"target": "es2015",
 		"declaration": true,
 		"declarationMap": true,
 		"inlineSources": true,
-		"types": [],
-		"lib": ["dom", "es2018"]
+		"types": []
 	},
-	"exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.stories.ts", "**/*.stories.js"],
-	"include": ["**/*.ts"]
+	"exclude": [
+		"src/**/*.spec.ts",
+		"src/test-setup.ts",
+		"jest.config.ts",
+		"src/**/*.test.ts",
+		"**/*.stories.ts",
+		"**/*.stories.js"
+	],
+	"include": ["src/**/*.ts", "src/lib/services/environment-variables/environment-variables.stories.ts"]
 }

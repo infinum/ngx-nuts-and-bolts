@@ -10,9 +10,7 @@ export interface ILoadingStateConfig {
 	leaveDelay?: number;
 }
 
-export const LOADING_STATE_CONFIG = new InjectionToken<ILoadingStateConfig>(
-	'LOADING_STATE_CONFIG'
-);
+export const LOADING_STATE_CONFIG = new InjectionToken<ILoadingStateConfig>('LOADING_STATE_CONFIG');
 
 export interface IPrivateLoadingState<TError> {
 	_loading$: BehaviorSubject<boolean>;

@@ -35,15 +35,15 @@ This enum will be used in place of some generic values for things like `Environm
 
 ### 1.2.2. Configuration
 
-`EnvironmentVariablesService` can be configured by setting a value under `ENVIRONMENT_VARIABLES_CONFIG` DI token to an object that satisfies `IEnvironmentVariablesConfig` inteface. The configuration object has the following properties:
+`EnvironmentVariablesService` can be configured by setting a value under `ENVIRONMENT_VARIABLES_CONFIG` DI token to an object that satisfies `IEnvironmentVariablesConfig` interface. You can use `provideEnvironmentVariablesServiceConfig` functional provider. The configuration object has the following properties:
 
 - `truthyBooleanStrings` - An array of strings that will, when reading environment variable via `getAsBoolean`, be consider `true`. Before comparison, the actual value is converted to lowercase. The default value is `['true', '1']`.
 
-This configuration is applied no matter how the environment variables values are provided.
+This configuration is applied no matter how the environment variables values are provided (SPA or SSR).
 
 ## 1.3 Providers
 
-`EnvironmentVariablesService` depends on variables and their values to be provided via `DI`. There are two providers that are available in the library that should cover most use cases, and a way to create your own provider.
+`EnvironmentVariablesService` depends on variables and their values to be provided via `DI`. There are two providers that are available in the library (one for SPA and one for SSR) that should cover most use cases, and a way to create your own provider.
 
 ### 1.3.1. For SPA Apps - `provideEnvironmentVariables`
 
@@ -77,32 +77,93 @@ When you deploy the app to some environment, you build the application artifacts
 
 The setup for Angular Universal is similar, but there is no env.json file that is fetched. This files was necessary for SPA apps because there is no application runtime, only statically built and served files. However, with SSR, there is a runtime and we can access `process.env` to read values from system-level environment variables.
 
-To use `provideUniversalEnvironmentVariables`, update your `AppModule` (not `AppServerModule`!) like so:
+#### Providers and their configuration
+
+There are two providers that enable use of environment variables on both the server and the client:
+
+1. `provideUniversalEnvironmentVariables` - ensures that variables can be read on both server and the client
+   - a configuration object allows you to specify which variables are public and which are private. Public variables will be transferred from server to client, while private ones will be kept only on the server
+2. `provideProcess` - provides the global `process` object for use on the server
+
+#### Module configuration
+
+Add `provideUniversalEnvironmentVariables` to the `AppModule` (not `AppServerModule`!):
 
 ```ts
+import { provideUniversalEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts-ssr';
+// ...
+
 @NgModule({
-	declarations: [AppComponent],
-	imports: [BrowserModule.withServerTransition({ appId: 'serverApp' }), BrowserTransferStateModule],
+	// ...
 	providers: [
-		{
-			provide: PROCESS,
-			useValue: process,
-		},
+		// ...
 		provideUniversalEnvironmentVariables({
 			publicVariables: [EnvironmentVariable.Foo],
 			privateVariables: [EnvironmentVariable.Bar],
 		}),
 	],
-	bootstrap: [AppComponent],
 })
 export class AppModule {}
 ```
 
-`provideUniversalEnvironmentVariables` provider accepts a configuration object that has `publicVariables` and `privateVariables` properties (both are arrays of strings). Use these two arrays to define which variables and their values should be readable only on server (e.g. captcha verification key) and which should be readable both on server and client/browser (e.g. API URL).
+Update `AppServerModule` by adding `provideProcess` provider:
+
+```ts
+import { provideProcess } from '@infinum/ngx-nuts-and-bolts-ssr';
+// ...
+
+@NgModule({
+	// ...
+	providers: [
+		// ...
+		provideProcess(),
+	],
+})
+export class AppServerModule {}
+```
+
+#### Standalone-components configuration
+
+If you do not use modules and use a standalone component for bootstrapping the app, you must update your application config like so:
+
+```ts
+import { ApplicationConfig } from '@angular/core';
+import { provideUniversalEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts-ssr';
+// ...
+
+export const appConfig: ApplicationConfig = {
+	providers: [
+		// ...
+		provideUniversalEnvironmentVariables({
+			publicVariables: [EnvironmentVariable.Foo],
+			privateVariables: [EnvironmentVariable.Bar], // Value for `Bar` will be `undefined` in the browser, but preset on the server.
+		}),
+	],
+};
+```
+
+Next, update server application config:
+
+```ts
+import { ApplicationConfig, mergeApplicationConfig } from '@angular/core';
+import { provideServerRendering } from '@angular/platform-server';
+import { provideProcess } from '@infinum/ngx-nuts-and-bolts-ssr';
+import { appConfig } from './app.config';
+
+const serverConfig: ApplicationConfig = {
+	providers: [provideServerRendering(), provideProcess()],
+};
+
+export const config = mergeApplicationConfig(appConfig, serverConfig);
+```
+
+Please notice that the config used for bootstrapping the application on the server merges the base config with browser-specific config. To draw a comparison with the module-based approach, base config is basically what was in `AppModule` and server config is what was in `AppServerModule`.
+
+#### Implementation details
 
 _Implementation detail_ - [`TransferState`](https://angular.io/api/platform-browser/TransferState) is used to transfer public variables from Node to browser, while private ones are kept only on server and are not transferred to the client.
 
-Because the node part of the app will read values from `process.env`, you must provide the global `process` object under `PROCESS` DI token. This is done so that `process.env` is not hard-coded in `provideUniversalEnvironmentVariables` provider, making unit testing easier.
+Because the node part of the app will read values from `process.env`, you must provide the global `process` object under `PROCESS` DI token. You can do so by using `provideProcess` functional provider. This is done so that `process.env` is not hard-coded in `provideUniversalEnvironmentVariables` provider, making unit testing easier.
 
 When running the app on production server, simply set environment variables in one of the standard ways:
 
@@ -110,9 +171,9 @@ When running the app on production server, simply set environment variables in o
 2. export API_URL=https://api.example.com && node server.js
 3. save API_URL=https://api.example.com in .env file and source it in server.ts (e.g. using [`dotenv`](https://www.npmjs.com/package/dotenv) NPM package for Node.js)
 
-For development, you can easily define values for variables in a local .env file and source it however you like (e.g. using [`dotenv` ohmyzsh plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv) or rely on [`dotenv`](https://www.npmjs.com/package/dotenv) implementation in server.ts);
+For development, you can easily define values for variables in a local .env file and source it however you like (e.g. using [`dotenv` ohmyzsh plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv) or rely on [`dotenv`](https://www.npmjs.com/package/dotenv) implementation in `server.ts`);
 
-### 1.3.3. `ENVIRONMENT_VARIABLES_RECORD` (for custom setup)
+### 1.3.3. Custom setup using `ENVIRONMENT_VARIABLES_RECORD`
 
 This method gives you flexibility to implement a custom way of initializing environment variables record. You can provide the record containing values for environment variables yourself, by manually setting value for `ENVIRONMENT_VARIABLES_RECORD` DI token. This is what both `provideEnvironmentVariables` and `provideUniversalEnvironmentVariables` do internally.
 
@@ -122,17 +183,17 @@ If you do this, do not use `provideEnvironmentVariables` nor `provideUniversalEn
 
 ## 2. Example applications
 
-Please check out the source code repository for two example applications.
+Please check out the source code repository for two example applications. Example applications use standalone components for bootstrapping the app, but the same principles apply to module-based apps.
 
 ### 2.1 Single-page App with fetching
 
-[`apps/environment-variables-fetch-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-fetch-example) demonstrates an example that uses `provideEnvironmentVariables` provider. In `main.ts` (before the application is loaded), `./assets/env.json` is fetched using `fetch` and the application is bootstrapped with the `provideEnvironmentVariables` provider set in in `main.ts` instead of `app.module.ts` (as you would do usually). You can start this example with `npm run start:environment-variables-fetch-example`.
+[`apps/environment-variables-fetch-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-fetch-example) demonstrates an example that uses `provideEnvironmentVariables` provider. In `main.ts` (before the application is loaded), `./assets/env.json` is fetched using `fetch` and the application is bootstrapped with the `provideEnvironmentVariables` provider. You can start this example with `npm run start:environment-variables-fetch-example`.
 
 ### 2.2 Angular Universal App with SSR
 
 [`apps/environment-variables-ssr-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-ssr-example) uses `provideUniversalEnvironmentVariables` provider. The application has to be started with environment variables exposed to the node process that is running the SSR app. You can start this example with `npm run start:environment-variables-ssr-example`.
 
-For this example, `Foo` variable is set as public, and `Bar` is set as private. That is why you don't see value for `Bar` in browser, but you will see it in console of the node process.
+For this example, `Foo` variable is set as public, and `Bar` is set as private. That is why you don't see value for `Bar` in the browser, but you will see it in the console of the node process.
 
 ## 3. Unit testing
 

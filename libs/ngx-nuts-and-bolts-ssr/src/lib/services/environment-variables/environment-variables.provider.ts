@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
-import { InjectionToken, Optional, PLATFORM_ID, StaticProvider } from '@angular/core';
-import { makeStateKey, TransferState } from '@angular/platform-browser';
-import { EnvironmentVariablesRecord, ENVIRONMENT_VARIABLES_RECORD } from '@infinum/ngx-nuts-and-bolts';
+import { Optional, PLATFORM_ID, StaticProvider, TransferState, makeStateKey } from '@angular/core';
+import { ENVIRONMENT_VARIABLES_RECORD, EnvironmentVariablesRecord } from '@infinum/ngx-nuts-and-bolts';
+import { PROCESS } from '../../di-tokens';
 
 export interface IUniversalEnvironmentVariablesProviderConfig<TVariable extends string> {
 	/**
@@ -14,8 +14,6 @@ export interface IUniversalEnvironmentVariablesProviderConfig<TVariable extends 
 	 */
 	publicVariables?: Array<TVariable>;
 }
-
-export const PROCESS = new InjectionToken<NodeJS.Process>('PROCESS');
 
 export function provideUniversalEnvironmentVariables<TVariable extends string>(
 	config: IUniversalEnvironmentVariablesProviderConfig<TVariable>
