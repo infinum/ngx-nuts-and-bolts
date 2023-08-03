@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 export type Sort = 'asc' | 'desc' | '';
 
@@ -84,23 +84,24 @@ export function createCustomFiltersObservable<TFilterValue extends Record<string
 	queryParamsScope?: string
 ): Observable<TFilterValue | null> {
 	return route.queryParamMap.pipe(
-		map((queryParamMap) => {
-			let filters = null;
+		switchMap((queryParamMap) => {
+			let filters: TFilterValue | null = null;
 
 			try {
 				if (queryParamMap.has(queryParamsScope || TableQueryParam.CUSTOM_FILTERS)) {
-					filters = JSON.parse(atob(queryParamMap.get(queryParamsScope || TableQueryParam.CUSTOM_FILTERS) || ''));
+					filters = JSON.parse(
+						atob(queryParamMap.get(queryParamsScope || TableQueryParam.CUSTOM_FILTERS) || '')
+					) as TFilterValue;
 				}
 			} catch (e) {
 				console.error(e);
 			}
 
 			if (filters && isFilterEmpty(filters)) {
-				clearFilters(router, queryParamsScope);
-				return null;
+				return of(clearFilters(router, queryParamsScope)).pipe(map(() => null));
 			}
 
-			return filters;
+			return of(filters);
 		})
 	);
 }
@@ -198,8 +199,8 @@ function isFilterEmpty<TFilterValue extends Record<string, unknown> | null = nul
  * @param {string} queryParamsScope - String value representing your scoped queryParam
  */
 
-function clearFilters(router: Router, queryParamsScope?: string): void {
-	router.navigate([], {
+async function clearFilters(router: Router, queryParamsScope?: string) {
+	return router.navigate([], {
 		replaceUrl: true,
 		queryParamsHandling: 'merge',
 		queryParams: {

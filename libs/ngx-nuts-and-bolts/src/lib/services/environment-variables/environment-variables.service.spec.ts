@@ -40,7 +40,8 @@ describe('EnvironmentVariablesService', () => {
 				},
 			],
 		});
-		service = TestBed.inject(EnvironmentVariablesService);
+
+		service = TestBed.inject<EnvironmentVariablesService<EnvironmentVariable>>(EnvironmentVariablesService);
 	});
 
 	it('should be created', () => {

@@ -105,7 +105,7 @@ describe('provideUniversalEnvironmentVariables', () => {
 			],
 		});
 
-		envService = TestBed.inject(EnvironmentVariablesService);
+		envService = TestBed.inject<EnvironmentVariablesService<EnvironmentVariable>>(EnvironmentVariablesService);
 	}
 
 	describe('when no PROCESS is provided', () => {
