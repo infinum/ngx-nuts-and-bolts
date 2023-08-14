@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
-import { EnumPropertyModule } from './enum-property.module';
+import { EnumPropertyPipe } from './enum-property.pipe';
 
 enum TestingEnum {
 	Foo = 'foo',
@@ -24,17 +24,32 @@ const testingEnumData: Record<TestingEnum, ITestingEnumData> = {
 };
 
 @Component({
-	template: ` {{ enumPropertyValue | enumProperty : testingEnumData : 'translationKey' }} `,
+	template: `
+		<div *ngFor="let enumEntry of enumEntries">
+			<code>translationKey</code> for enum
+
+			<!-- RIP prettier. TODO: figure out how to make sure that prettier formats this nicely -->
+			<ng-container>
+				[key: <code>{{ enumEntry[0] }}</code
+				>]
+			</ng-container>
+
+			<ng-container>
+				[value: <code>{{ enumEntry[1] }}</code> </ng-container
+			>]:
+			<code>{{ enumEntry[1] | enumProperty : testingEnumData : 'translationKey' }}</code>
+		</div>
+	`,
 })
 class EnumPropertyPipeHostComponent {
-	public enumPropertyValue = TestingEnum.Bar;
+	public enumEntries = Object.entries(TestingEnum);
 	public testingEnumData = testingEnumData;
 }
 
 export default {
 	title: 'EnumPropertyPipe',
 	component: EnumPropertyPipeHostComponent,
-	decorators: [moduleMetadata({ declarations: [EnumPropertyPipeHostComponent], imports: [EnumPropertyModule] })],
+	decorators: [moduleMetadata({ declarations: [EnumPropertyPipeHostComponent], imports: [EnumPropertyPipe] })],
 } as Meta<EnumPropertyPipeHostComponent>;
 
 const Template: Story<EnumPropertyPipeHostComponent> = (args: EnumPropertyPipeHostComponent) => ({
