@@ -4,13 +4,15 @@ title: InView directive
 sidebar_label: InView directive
 ---
 
+## 1. Introduction
+
 Often times, one may be interested to know whether or not piece a of DOM is visible on the user's screen. We utilize [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) just for that purpose and this directive is a very simple option-less wrapper around it.
 
-## 1. Features
+## 2. Features
 
 `infInView` directive allows you to determine if a piece of DOM is visible on user's screen.
 
-## 2. Usage
+## 3. Usage
 
 Simply add `infInView` directive to whatever DOM node you care about. You can then handle notifications from `(inView)` EventEmitter.
 

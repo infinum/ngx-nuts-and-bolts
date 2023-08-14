@@ -4,14 +4,16 @@ title: Table state helpers
 sidebar_label: Table state helpers
 ---
 
+## 1. Introduction
+
 Being able to take out the pagination, sorting and filtering information from the memory of the application alleviates some of the problems (link sharing, refreshing pages) which are present when saving that data in-memory. For this purpose, this library exposes functions which cover common use cases regarding table state manipulation.
 
-## 1. Features
+## 2. Features
 
-- Creation of pagination/sorting/filtering observables which enable consumers to react to pagination/sorting/filtering query paramater change events.
+- Creation of pagination/sorting/filtering observables which enable consumers to react to pagination/sorting/filtering query parameter change events.
 - Saving table state information (pagination/sorting/filtering) into the query parameters.
 
-## 2. Usage
+## 3. Usage
 
 Helper functions can be used individually or, as the example below shows, with other helper functions and a little bit of RxJS magic which reacts and re-fethces data based on changes in any one of the passed observables.
 

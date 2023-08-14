@@ -4,9 +4,9 @@ title: EnumProperty pipe
 sidebar_label: EnumProperty pipe
 ---
 
-Common practice of working with enums often runs into a need to define separate metadata for each value of a given enum type. See [Infinum Handbook - Enumerations](https://infinum.com/handbook/frontend/angular/angular-guidelines-and-best-practices/file-and-module-organization-and-naming#enumerations)
-
 ## 1. Features
+
+Common practice of working with enums often runs into a need to define separate metadata for each value of a given enum type. See [Infinum Handbook - Enumerations](https://infinum.com/handbook/frontend/angular/angular-guidelines-and-best-practices/file-and-module-organization-and-naming#enumerations)
 
 `enumProperty` pipe gives you an easy way to access given enum's value metadata in the template.
 

@@ -1,6 +1,8 @@
-# @infinum/ngx-nuts-and-bolts/animations
-
-Secondary entry point of `@infinum/ngx-nuts-and-bolts`. It can be used by importing from `@infinum/ngx-nuts-and-bolts/animations`.
+---
+id: animations
+title: Fade and height animations
+sidebar_label: Fade and height animations
+---
 
 ## 1. Features
 

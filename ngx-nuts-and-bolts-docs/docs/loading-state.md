@@ -1,10 +1,10 @@
 ---
 id: loading-state
-title: Loading state
-sidebar_label: Loading state
+title: Loading state helpers
+sidebar_label: Loading state helpers
 ---
 
-Or how I learned to start worrying and handle the error states.
+...or how I learned to start worrying and handle the error states.
 
 ## 1. Features
 

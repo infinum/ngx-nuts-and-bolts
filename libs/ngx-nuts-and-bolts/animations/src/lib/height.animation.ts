@@ -9,7 +9,6 @@ const hiddenStyle = style({
 	'padding-bottom': 0,
 	'margin-top': 0,
 	'margin-bottom': 0,
-	display: 'none',
 });
 
 const visibleStyle = style({
@@ -19,8 +18,6 @@ const visibleStyle = style({
 	'margin-top': '*',
 	'margin-bottom': '*',
 });
-
-const displayAuto = style({ display: '*' });
 
 interface IFadeHeightAnimationOptions {
 	duration: number;
@@ -36,9 +33,8 @@ export function heightAnimation(
 	return trigger(options.triggerName, [
 		state('true', visibleStyle),
 		state('false', hiddenStyle),
-		transition('false => true', [displayAuto, animate(`${options.duration}ms ease-in-out`)]),
 		transition('true => false', [animate(`${options.duration}ms ease-in-out`)]),
-		transition(':enter', [hiddenStyle, displayAuto, animate(`${options.duration}ms ease-in-out`), visibleStyle]),
+		transition(':enter', [hiddenStyle, animate(`${options.duration}ms ease-in-out`), visibleStyle]),
 		transition(':leave', [visibleStyle, animate(`${options.duration}ms ease-in-out`, hiddenStyle)]),
 	]);
 }
