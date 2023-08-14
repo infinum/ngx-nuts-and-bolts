@@ -7,7 +7,7 @@ type ExtractPublic<T extends object> = {
 	[K in keyof T]: T[K];
 };
 
-@Directive({ selector: '[infInView]' })
+@Directive({ selector: '[infInView]', standalone: true, exportAs: 'infInView' })
 export class InViewTestingDirective implements ExtractPublic<InViewDirective>, AfterViewInit, OnDestroy {
 	@Output('infInView')
 	public inView: EventEmitter<boolean> = new EventEmitter<boolean>();

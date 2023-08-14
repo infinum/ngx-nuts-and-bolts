@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { moduleMetadata, Story } from '@storybook/angular';
-import { InViewModule } from './in-view.module';
+import { InViewDirective } from './in-view.directive';
 
 @Component({
 	template: `
@@ -57,7 +57,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [InViewStoryComponent],
-			imports: [InViewModule],
+			imports: [InViewDirective],
 		}),
 	],
 };

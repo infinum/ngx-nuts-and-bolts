@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
 	name: 'enumProperty',
+	standalone: true,
 })
 export class EnumPropertyPipe<TEnum extends string, TEnumDataObject extends Record<string, TReturnValue>, TReturnValue>
 	implements PipeTransform

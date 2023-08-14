@@ -1,5 +1,5 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
-import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts';
+import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts/env';
 import { EnvironmentVariable } from '../../enums/environment-variable.enum';
 
 @Pipe({

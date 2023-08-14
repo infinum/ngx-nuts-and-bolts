@@ -1,6 +1,6 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, OnDestroy, Output } from '@angular/core';
 
-@Directive({ selector: '[infInView]', exportAs: 'infInView' })
+@Directive({ selector: '[infInView]', standalone: true, exportAs: 'infInView' })
 export class InViewDirective implements AfterViewInit, OnDestroy {
 	@Output('infInView')
 	public inView: EventEmitter<boolean> = new EventEmitter<boolean>();

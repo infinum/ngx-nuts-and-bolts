@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
-import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts';
 import { provideUniversalEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts-ssr';
+import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts/env';
 import { EnvironmentVariable } from '@ngx-nuts-and-bolts/environment-variables-example-app-base';
 
 export const appConfig: ApplicationConfig = {
