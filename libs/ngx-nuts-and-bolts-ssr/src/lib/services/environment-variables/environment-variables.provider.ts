@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Optional, PLATFORM_ID, StaticProvider, TransferState, makeStateKey } from '@angular/core';
-import { ENVIRONMENT_VARIABLES_RECORD, EnvironmentVariablesRecord } from '@infinum/ngx-nuts-and-bolts';
+import { ENVIRONMENT_VARIABLES_RECORD, EnvironmentVariablesRecord } from '@infinum/ngx-nuts-and-bolts/env';
 import { PROCESS } from '../../di-tokens';
 
 export interface IUniversalEnvironmentVariablesProviderConfig<TVariable extends string> {

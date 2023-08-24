@@ -1,6 +1,6 @@
 {
 	"name": "@infinum/ngx-nuts-and-bolts-ssr",
-	"version": "3.0.0",
+	"version": "4.0.0",
 	"description": "Reusable components and helpers for angular projects",
 	"license": "MIT",
 	"repository": {
@@ -21,7 +21,7 @@
 	],
 	"sideEffects": false,
 	"peerDependencies": {
-		"@infinum/ngx-nuts-and-bolts": ">=3.0.0",
+		"@infinum/ngx-nuts-and-bolts": ">=4.0.0",
 		"@angular/common": ">=16",
 		"@angular/core": ">=16",
 		"@angular/platform-browser": ">=16"

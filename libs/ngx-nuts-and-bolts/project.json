@@ -40,7 +40,24 @@
 			"executor": "@nx/linter:eslint",
 			"outputs": ["{options.outputFile}"],
 			"options": {
-				"lintFilePatterns": ["libs/ngx-nuts-and-bolts/**/*.ts", "libs/ngx-nuts-and-bolts/**/*.html"]
+				"lintFilePatterns": [
+					"libs/ngx-nuts-and-bolts/**/*.ts",
+					"libs/ngx-nuts-and-bolts/**/*.html",
+					"libs/ngx-nuts-and-bolts/animations/**/*.ts",
+					"libs/ngx-nuts-and-bolts/animations/**/*.html",
+					"libs/ngx-nuts-and-bolts/testing-utils/**/*.ts",
+					"libs/ngx-nuts-and-bolts/testing-utils/**/*.html",
+					"libs/ngx-nuts-and-bolts/in-view/**/*.ts",
+					"libs/ngx-nuts-and-bolts/in-view/**/*.html",
+					"libs/ngx-nuts-and-bolts/enum-property/**/*.ts",
+					"libs/ngx-nuts-and-bolts/enum-property/**/*.html",
+					"libs/ngx-nuts-and-bolts/env/**/*.ts",
+					"libs/ngx-nuts-and-bolts/env/**/*.html",
+					"libs/ngx-nuts-and-bolts/loading-state/**/*.ts",
+					"libs/ngx-nuts-and-bolts/loading-state/**/*.html",
+					"libs/ngx-nuts-and-bolts/table-state/**/*.ts",
+					"libs/ngx-nuts-and-bolts/table-state/**/*.html"
+				]
 			}
 		},
 		"storybook": {
