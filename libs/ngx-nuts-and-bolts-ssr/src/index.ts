@@ -1,1 +1,2 @@
-export * from './lib/services/environment-variables/loaders/environment-variables-ssr-loader/environment-variables-ssr-loader.module';
+export * from './lib/di-tokens';
+export * from './lib/services';

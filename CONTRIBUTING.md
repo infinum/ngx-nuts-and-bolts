@@ -37,6 +37,7 @@ After you've added a new feature into the library, steps to add corresponding do
 
 1. Add related `<feature-name>.md` file inside of the `docs` folder in the `ngx-nuts-and-bolts-docs` project.
 2. Edit `sidebar.js` file by adding a new object which will be used in building sidebar navigation.
+3. Keep each secondary entry point's README.md in-sync with Docusaurus' `<feature-name>.md` file.
 
 After your pull request is merged, documentation will be built via a GitHub action and will be available at [github-pages][github-pages] after a successful build.
 

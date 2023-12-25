@@ -1,6 +1,6 @@
 {
-	"name": "@infinumjs/ngx-nuts-and-bolts-ssr",
-	"version": "1.2.2",
+	"name": "@infinum/ngx-nuts-and-bolts-ssr",
+	"version": "4.0.1",
 	"description": "Reusable components and helpers for angular projects",
 	"license": "MIT",
 	"repository": {
@@ -19,15 +19,12 @@
 		"ssr",
 		"universal"
 	],
+	"sideEffects": false,
 	"peerDependencies": {
-		"@infinumjs/ngx-nuts-and-bolts": ">=1.2.2",
-		"@angular/animations": ">=10",
-		"@angular/common": ">=10",
-		"@angular/core": ">=10",
-		"@angular/forms": ">=10",
-		"@angular/platform-browser": ">=10",
-		"@angular/router": ">=10",
-		"rxjs": ">=6"
+		"@infinum/ngx-nuts-and-bolts": ">=4.0.0",
+		"@angular/common": ">=16",
+		"@angular/core": ">=16",
+		"@angular/platform-browser": ">=16"
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"
