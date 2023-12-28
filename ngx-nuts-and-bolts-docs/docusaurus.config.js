@@ -12,7 +12,7 @@ const config = {
 	baseUrl: '/ngx-nuts-and-bolts/',
 	onBrokenLinks: 'throw',
 	onBrokenMarkdownLinks: 'warn',
-	favicon: 'img/favicon.ico',
+	favicon: 'img/favicon.png',
 	organizationName: 'infinum', // Usually your GitHub org/user name.
 	projectName: 'ngx-nuts-and-bolts', // Usually your repo name.
 	deploymentBranch: 'gh-pages',
@@ -26,7 +26,10 @@ const config = {
 					sidebarPath: require.resolve('./sidebars.js'),
 				},
 				theme: {
-					customCss: require.resolve('./src/css/custom.css'),
+					customCss: [
+						require.resolve('./src/theme/styles.css'),
+						require.resolve('@infinum/docusaurus-theme/dist/style.css'),
+					],
 				},
 			}),
 		],
@@ -35,11 +38,16 @@ const config = {
 	themeConfig:
 		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
 		({
-      algolia: {
-        appId: 'K4XBJI8YCN',
-        apiKey: '9c80fcb5c3bf1eba3b438a2c35956bfd',
-        indexName: 'ngx-nuts-and-bolts'
-      },
+			algolia: {
+				appId: 'K4XBJI8YCN',
+				apiKey: '9c80fcb5c3bf1eba3b438a2c35956bfd',
+				indexName: 'ngx-nuts-and-bolts',
+			},
+			colorMode: {
+				defaultMode: 'light',
+				disableSwitch: true,
+				respectPrefersColorScheme: false,
+			},
 			navbar: {
 				title: 'ngx-nuts-and-bolts',
 				logo: {
@@ -61,8 +69,49 @@ const config = {
 				],
 			},
 			footer: {
-				style: 'dark',
-				copyright: `Copyright © ${new Date().getFullYear()} Infinum`,
+				links: [
+					{
+						title: 'Community',
+						items: [
+							{
+								label: 'Facebook',
+								href: 'https://facebook.com/infinumcom',
+								icon: 'facebook',
+								target: '_blank',
+							},
+							{
+								label: 'Instagram',
+								href: 'https://instagram.com/infinumcom/',
+								icon: 'instagram',
+								target: '_blank',
+							},
+							{
+								label: 'Twitter',
+								href: 'https://twitter.com/infinum',
+								icon: 'twitter',
+								target: '_blank',
+							},
+							{
+								label: 'Clutch',
+								href: 'https://clutch.co/profile/infinum',
+								icon: 'clutch',
+								target: '_blank',
+							},
+							{
+								label: 'Dribbble',
+								href: 'https://dribbble.com/infinum',
+								icon: 'dribbble',
+								target: '_blank',
+							},
+							{
+								label: 'LinkedIn',
+								href: 'https://linkedin.com/company/infinum/',
+								icon: 'linkedin',
+							},
+						],
+					},
+				],
+				copyright: 'Made with ❤️ by Infinum team.',
 			},
 			prism: {
 				theme: lightCodeTheme,

@@ -4,6 +4,7 @@ import Layout from '@theme/Layout';
 import clsx from 'clsx';
 import React from 'react';
 import styles from './index.module.css';
+import { EsOsFreebies } from '../theme/sections/os-freebies';
 
 function HomepageHeader() {
 	const { siteConfig } = useDocusaurusContext();
@@ -28,6 +29,8 @@ export default function Home() {
 		<Layout title={`Hello from ${siteConfig.title}`} description="Description will go into a meta tag in <head />">
 			<HomepageHeader />
 			<main></main>
+
+			<EsOsFreebies />
 		</Layout>
 	);
 }
