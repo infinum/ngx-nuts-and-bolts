@@ -1,18 +1,17 @@
 import { Route } from '@angular/router';
-import { breadcrumbRoute } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
+import { breadcrumbRoute, breadcrumbLiteralResolver } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
 import { customerDetailsBreadcrumbResolver } from './breadcrumb-resolvers/customer-details.breadcrumb-resolver';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { CUSTOMERS_ROUTE_PATH, CUSTOMER_ID_ROUTE_PARAM } from './route-param';
 
 export const appRoutes: Array<Route> = [
-	breadcrumbRoute({
+	{
 		path: '',
-		breadcrumbResolver: () => 'Home',
 		component: HomepageComponent,
-	}),
+	},
 	breadcrumbRoute({
 		path: CUSTOMERS_ROUTE_PATH,
-		breadcrumbResolver: () => 'Customers',
+		breadcrumbResolver: breadcrumbLiteralResolver({ label: 'Customers' }),
 		children: [
 			{
 				path: '',

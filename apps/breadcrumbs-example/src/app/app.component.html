@@ -1,20 +1,9 @@
-<header>
-	<nav>
-		<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Homepage</a>
-		<a [routerLink]="['/', CUSTOMERS_ROUTE_PATH]" routerLinkActive="active">Customers</a>
-
-		<!-- Special links for testing -->
-		<a [routerLink]="['/', CUSTOMERS_ROUTE_PATH, 'walmart']" routerLinkActive="active">Deep link to Walmart!</a>
-	</nav>
-</header>
-
-<hr />
-
-<pre>{{ bc$ | async | json }}</pre>
-<!-- <inf-breadcrumbs></inf-breadcrumbs> -->
-
-<hr />
-
 <main>
+	<app-breadcrumbs></app-breadcrumbs>
+
 	<router-outlet></router-outlet>
 </main>
+
+<aside>
+	<pre>{{ breadcrumbsForCodeSnippet$ | async | json }}</pre>
+</aside>

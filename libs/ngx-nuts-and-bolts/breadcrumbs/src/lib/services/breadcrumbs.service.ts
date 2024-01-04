@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Breadcrumb } from '../types';
 
 @Injectable({ providedIn: 'root' })
 export class BreadcrumbsService<T> {
-	private readonly _breadcrumbs$ = new BehaviorSubject<Array<T>>([]);
+	private readonly _breadcrumbs$ = new BehaviorSubject<Array<Breadcrumb<T>>>([]);
 	public readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
 
 	public get breadcrumbs() {
@@ -12,11 +13,12 @@ export class BreadcrumbsService<T> {
 
 	public pop() {
 		const breadcrumbs = this._breadcrumbs$.getValue();
-		const poppedValue = breadcrumbs.pop();
-		return poppedValue;
+		const popped = breadcrumbs.pop();
+		this._breadcrumbs$.next(breadcrumbs);
+		return popped;
 	}
 
-	public push(value: T) {
+	public push(value: Breadcrumb<T>) {
 		const breadcrumbs = this._breadcrumbs$.getValue();
 		breadcrumbs.push(value);
 		this._breadcrumbs$.next(breadcrumbs);

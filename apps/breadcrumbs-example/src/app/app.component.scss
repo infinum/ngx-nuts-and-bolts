@@ -1,8 +1,13 @@
-.active {
-	font-weight: bold;
+:host {
+	display: flex;
+	gap: 32px;
+	justify-content: space-between;
 }
 
-nav {
-	display: flex;
-	gap: 8px;
+pre {
+	background-color: #eee;
+	padding: 16px;
+	border-radius: 16px;
+	max-width: 400px;
+	white-space: pre-wrap;
 }

@@ -1,3 +1,5 @@
 import { Customer } from './customer';
 
-export type BreadcrumbData = string | Customer;
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+export type BreadcrumbData = { label: string };
+export type BreadcrumbRouteData = string | Customer;

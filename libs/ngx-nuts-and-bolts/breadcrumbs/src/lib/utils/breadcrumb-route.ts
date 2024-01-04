@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { CanDeactivateFn, ResolveFn, Route } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { ActivatedRouteSnapshot, CanDeactivateFn, Route, RouterStateSnapshot } from '@angular/router';
+import { Observable, map, tap } from 'rxjs';
 import { BREADCRUMBS_CONFIG } from '../providers';
 import { BreadcrumbsService } from '../services';
-import { TitleConfiguration } from '../types';
+import { BreadcrumbResolver, TitleConfiguration } from '../types';
 
 export const BREADCRUMBS_RESOLVE_KEY = 'breadcrumbs';
 
@@ -20,14 +20,18 @@ function updateTitle<T>(
 	title.setTitle(titleConfiguration.formatter(breadcrumbsService.breadcrumbs));
 }
 
-export function breadcrumbRoute<TBreadcrumbData>(
-	route: Route & { breadcrumbResolver: ResolveFn<TBreadcrumbData> }
+export type BreadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData> = Route & {
+	breadcrumbResolver: BreadcrumbResolver<TRouteData, TBreadcrumbData>;
+};
+
+export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
+	routeConfig: BreadcrumbRoute<TBreadcrumbData, TRouteData>
 ): Route {
-	const resolve = route.resolve || {};
-	const canDeactivate = (route.canDeactivate || []) as Array<CanDeactivateFn<unknown>>;
+	const resolve = routeConfig.resolve || {};
+	const canDeactivate = (routeConfig.canDeactivate || []) as Array<CanDeactivateFn<unknown>>;
 
 	canDeactivate.push(() => {
-		const breadcrumbsService = inject(BreadcrumbsService);
+		const breadcrumbsService: BreadcrumbsService<TBreadcrumbData> = inject(BreadcrumbsService);
 		const title = inject(Title);
 		const breadcrumbsConfig = inject(BREADCRUMBS_CONFIG);
 
@@ -36,36 +40,53 @@ export function breadcrumbRoute<TBreadcrumbData>(
 		return true;
 	});
 
-	resolve[BREADCRUMBS_RESOLVE_KEY] = (...args: Parameters<ResolveFn<TBreadcrumbData>>) => {
-		const breadcrumbsService = inject(BreadcrumbsService);
+	resolve[BREADCRUMBS_RESOLVE_KEY] = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+		const breadcrumbsService: BreadcrumbsService<TBreadcrumbData> = inject(BreadcrumbsService);
 		const title = inject(Title);
 		const breadcrumbsConfig = inject(BREADCRUMBS_CONFIG);
+		const url = route.pathFromRoot.map((r) => r.url.map((s) => s.toString()).join('/')).join('/');
 
 		// eslint-disable-next-line rxjs/finnish
-		const resolver = route.breadcrumbResolver(...args);
+		const resolver = routeConfig.breadcrumbResolver(route, state);
 
 		if (resolver instanceof Observable) {
 			return resolver.pipe(
 				tap((result) => {
-					breadcrumbsService.push(result);
+					breadcrumbsService.push({
+						url,
+						route,
+						state,
+						extra: result.breadcrumbData,
+					});
 					updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
-				})
+				}),
+				map(({ routeData }) => routeData)
 			);
 		} else if (resolver instanceof Promise) {
 			return resolver.then((result) => {
-				breadcrumbsService.push(result);
+				breadcrumbsService.push({
+					url,
+					route,
+					state,
+					extra: result.breadcrumbData,
+				});
 				updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
-				return result;
+				return result.routeData;
 			});
+		} else {
+			breadcrumbsService.push({
+				url,
+				route,
+				state,
+				extra: resolver.breadcrumbData,
+			});
+			updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
+			return resolver.routeData;
 		}
-
-		breadcrumbsService.push(resolver);
-		updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
-		return resolver;
 	};
 
 	return {
-		...route,
+		...routeConfig,
 		resolve,
 		canDeactivate,
 	};

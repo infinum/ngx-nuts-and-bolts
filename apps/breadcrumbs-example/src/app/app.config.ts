@@ -13,13 +13,7 @@ export const appConfig: ApplicationConfig = {
 					return [
 						'Breadcrumbs example app',
 						...breadcrumbs.map((breadcrumb) => {
-							if (typeof breadcrumb === 'string') {
-								return breadcrumb;
-							} else if (breadcrumb['name']) {
-								return breadcrumb['name'];
-							}
-
-							return breadcrumb.toString();
+							return breadcrumb.extra.label;
 						}),
 					]
 						.reverse()

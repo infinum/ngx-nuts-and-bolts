@@ -1,0 +1,13 @@
+<div class="breadcrumbs" *ngIf="breadcrumbs$ | async as breadcrumbs">
+	<div class="breadcrumb">
+		<a routerLink="/">Breadcrumbs example app</a>
+		<span *ngIf="breadcrumbs.length" class="separator">></span>
+	</div>
+
+	<div class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs; let last = last">
+		<a [routerLink]="breadcrumb.url">
+			{{ breadcrumb.extra.label }}
+		</a>
+		<span *ngIf="!last" class="separator">></span>
+	</div>
+</div>
