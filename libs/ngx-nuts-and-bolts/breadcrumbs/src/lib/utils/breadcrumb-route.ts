@@ -1,47 +1,45 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, CanDeactivateFn, Route } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
-import { BreadcrumbsService } from '../services/breadcrumbs.service';
 import { Title } from '@angular/platform-browser';
+import { CanDeactivateFn, ResolveFn, Route } from '@angular/router';
+import { Observable, map, tap } from 'rxjs';
+import { BREADCRUMBS_CONFIG } from '../providers';
+import { BreadcrumbsService } from '../services';
+import { TitleConfiguration } from '../types';
 
-export type BreadcrumbResolver<T> = (...args: Parameters<CanActivateFn>) => T | Observable<T> | Promise<T>;
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-type TitleConfiguration<T> = {
-	updateTitle: true;
-	formatter: (breadcrumbs: Array<T>) => string;
-};
+export const BREADCRUMBS_RESOLVE_KEY = 'breadcrumbs';
 
 function updateTitle<T>(
 	titleConfiguration: TitleConfiguration<T>,
 	breadcrumbsService: BreadcrumbsService<T>,
 	title: Title
 ) {
+	if (!titleConfiguration.formatter) {
+		return;
+	}
+
 	title.setTitle(titleConfiguration.formatter(breadcrumbsService.breadcrumbs));
 }
 
 export function breadcrumbRoute<TBreadcrumbData>(
-	route: Route & { breadcrumbResolver: BreadcrumbResolver<TBreadcrumbData> },
-	titleConfiguration: TitleConfiguration<TBreadcrumbData> = {
-		updateTitle: true,
-		formatter: (breadcrumbs) => breadcrumbs.join(' | '),
-	}
+	route: Route & { breadcrumbResolver: ResolveFn<TBreadcrumbData> }
 ): Route {
-	const data = route.data || {};
-	const canActivate = (route.canActivate || []) as Array<CanActivateFn>;
+	const resolve = route.resolve || {};
 	const canDeactivate = (route.canDeactivate || []) as Array<CanDeactivateFn<unknown>>;
 
 	canDeactivate.push(() => {
 		const breadcrumbsService = inject(BreadcrumbsService);
 		const title = inject(Title);
+		const breadcrumbsConfig = inject(BREADCRUMBS_CONFIG);
 
 		breadcrumbsService.pop();
-		updateTitle(titleConfiguration, breadcrumbsService, title);
+		updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
 		return true;
 	});
 
-	canActivate.push((...args) => {
+	resolve[BREADCRUMBS_RESOLVE_KEY] = (...args: Parameters<ResolveFn<TBreadcrumbData>>) => {
 		const breadcrumbsService = inject(BreadcrumbsService);
 		const title = inject(Title);
+		const breadcrumbsConfig = inject(BREADCRUMBS_CONFIG);
 
 		// eslint-disable-next-line rxjs/finnish
 		const resolver = route.breadcrumbResolver(...args);
@@ -50,27 +48,26 @@ export function breadcrumbRoute<TBreadcrumbData>(
 			return resolver.pipe(
 				tap((result) => {
 					breadcrumbsService.push(result);
-					updateTitle(titleConfiguration, breadcrumbsService, title);
+					updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
 				}),
 				map(() => true)
 			);
 		} else if (resolver instanceof Promise) {
 			return resolver.then((result) => {
 				breadcrumbsService.push(result);
-				updateTitle(titleConfiguration, breadcrumbsService, title);
+				updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
 				return true;
 			});
 		}
 
 		breadcrumbsService.push(resolver);
-		updateTitle(titleConfiguration, breadcrumbsService, title);
+		updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
 		return true;
-	});
+	};
 
 	return {
 		...route,
-		data,
-		canActivate,
+		resolve,
 		canDeactivate,
 	};
 }
