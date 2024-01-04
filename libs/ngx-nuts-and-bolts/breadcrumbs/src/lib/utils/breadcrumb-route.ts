@@ -4,7 +4,7 @@ import { Observable, map, tap } from 'rxjs';
 import { BreadcrumbsService } from '../services/breadcrumbs.service';
 import { Title } from '@angular/platform-browser';
 
-type BreadcrumbResolver<T> = (...args: Parameters<CanActivateFn>) => T | Observable<T> | Promise<T>;
+export type BreadcrumbResolver<T> = (...args: Parameters<CanActivateFn>) => T | Observable<T> | Promise<T>;
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 type TitleConfiguration<T> = {
 	updateTitle: true;
