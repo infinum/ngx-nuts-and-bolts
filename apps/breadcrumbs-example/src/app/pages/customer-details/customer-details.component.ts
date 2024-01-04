@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
-import { CUSTOMER_ID_ROUTE_PARAM } from '../../route-param';
-import { EMPTY, Observable } from 'rxjs';
-import { ICustomer } from '../../types/customer';
-import { CustomersService } from '../../services/customers.service';
+import { Component, Input } from '@angular/core';
+import { BREADCRUMBS_RESOLVE_KEY } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
+import { Customer } from '../../types/customer';
 
 @Component({
 	selector: 'app-customer-details',
@@ -12,15 +10,6 @@ import { CustomersService } from '../../services/customers.service';
 	templateUrl: './customer-details.component.html',
 	styleUrls: ['./customer-details.component.scss'],
 })
-export class CustomerDetailsComponent implements OnChanges {
-	@Input(CUSTOMER_ID_ROUTE_PARAM) public customerId!: string;
-
-	private readonly customersService = inject(CustomersService);
-	protected customer$: Observable<ICustomer> = EMPTY;
-
-	public ngOnChanges(changes: SimpleChanges): void {
-		if (changes['customerId']) {
-			this.customer$ = this.customersService.getCustomerById(this.customerId);
-		}
-	}
+export class CustomerDetailsComponent {
+	@Input(BREADCRUMBS_RESOLVE_KEY) public customer!: Customer;
 }

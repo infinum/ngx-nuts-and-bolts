@@ -1,3 +1,3 @@
-import { ICustomer } from './customer';
+import { Customer } from './customer';
 
-export type BreadcrumbData = string | ICustomer;
+export type BreadcrumbData = string | Customer;

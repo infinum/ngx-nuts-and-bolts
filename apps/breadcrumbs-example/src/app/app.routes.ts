@@ -14,11 +14,10 @@ export const appRoutes: Array<Route> = [
 		path: CUSTOMERS_ROUTE_PATH,
 		breadcrumbResolver: () => 'Customers',
 		children: [
-			breadcrumbRoute({
+			{
 				path: '',
-				breadcrumbResolver: () => 'Index',
 				loadComponent: () => import('./pages/customers/customers.component').then((m) => m.CustomersComponent),
-			}),
+			},
 			breadcrumbRoute({
 				path: `:${CUSTOMER_ID_ROUTE_PARAM}`,
 				breadcrumbResolver: customerDetailsBreadcrumbResolver,

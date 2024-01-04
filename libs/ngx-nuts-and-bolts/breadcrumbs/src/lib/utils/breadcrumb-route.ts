@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { CanDeactivateFn, ResolveFn, Route } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { BREADCRUMBS_CONFIG } from '../providers';
 import { BreadcrumbsService } from '../services';
 import { TitleConfiguration } from '../types';
@@ -49,20 +49,19 @@ export function breadcrumbRoute<TBreadcrumbData>(
 				tap((result) => {
 					breadcrumbsService.push(result);
 					updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
-				}),
-				map(() => true)
+				})
 			);
 		} else if (resolver instanceof Promise) {
 			return resolver.then((result) => {
 				breadcrumbsService.push(result);
 				updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
-				return true;
+				return result;
 			});
 		}
 
 		breadcrumbsService.push(resolver);
 		updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
-		return true;
+		return resolver;
 	};
 
 	return {

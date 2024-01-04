@@ -1,13 +1,13 @@
-import { ICustomer } from '../../app/types/customer';
+import { Customer } from '../../app/types/customer';
 
-const _customers: Array<ICustomer> = [];
+const _customers: Array<Customer> = [];
 
-export function getMockCustomers(): Array<ICustomer> {
+export function getMockCustomers(): Array<Customer> {
 	return _customers;
 }
 
 export function initMockCustomers(
-	customers: Array<ICustomer> = [
+	customers: Array<Customer> = [
 		{
 			id: 'walmart',
 			name: 'Walmart',
