@@ -1,2 +1,2 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export function noop() {}
+export * from './lib/services/breadcrumbs.service';
+export * from './lib/utils/breadcrumb-route';
