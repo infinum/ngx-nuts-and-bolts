@@ -21,7 +21,7 @@ function updateTitle<T>(
 }
 
 export type BreadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData> = Route & {
-	breadcrumbResolver: BreadcrumbResolver<TRouteData, TBreadcrumbData>;
+	breadcrumbResolver: BreadcrumbResolver<TBreadcrumbData, TRouteData>;
 };
 
 export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(

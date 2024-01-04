@@ -6,7 +6,7 @@ import { CUSTOMER_ID_ROUTE_PARAM } from '../route-param';
 import { CustomersService } from '../services/customers.service';
 import { BreadcrumbData, BreadcrumbRouteData } from '../types/breadcrumb-data';
 
-export const customerDetailsBreadcrumbResolver: BreadcrumbResolver<BreadcrumbRouteData, BreadcrumbData> = (
+export const customerDetailsBreadcrumbResolver: BreadcrumbResolver<BreadcrumbData, BreadcrumbRouteData> = (
 	route: ActivatedRouteSnapshot
 ) => {
 	const customersService = inject(CustomersService);

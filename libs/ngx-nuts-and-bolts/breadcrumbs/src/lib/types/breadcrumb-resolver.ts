@@ -11,6 +11,6 @@ export type BreadcrumbResolver<TBreadcrumbData, TRouteData = TBreadcrumbData> = 
 	route: ActivatedRouteSnapshot,
 	state: RouterStateSnapshot
 ) =>
-	| BreadcrumbDataEnvelope<TRouteData, TBreadcrumbData>
-	| Observable<BreadcrumbDataEnvelope<TRouteData, TBreadcrumbData>>
-	| Promise<BreadcrumbDataEnvelope<TRouteData, TBreadcrumbData>>;
+	| BreadcrumbDataEnvelope<TBreadcrumbData, TRouteData>
+	| Observable<BreadcrumbDataEnvelope<TBreadcrumbData, TRouteData>>
+	| Promise<BreadcrumbDataEnvelope<TBreadcrumbData, TRouteData>>;
