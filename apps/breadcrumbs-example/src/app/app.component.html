@@ -1,0 +1,16 @@
+<header>
+	<nav>
+		<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Homepage</a>
+		<a [routerLink]="['/', CUSTOMERS_ROUTE_PATH]" routerLinkActive="active">Customers</a>
+	</nav>
+</header>
+
+<hr />
+
+<!-- <inf-breadcrumbs></inf-breadcrumbs> -->
+
+<hr />
+
+<main>
+	<router-outlet></router-outlet>
+</main>

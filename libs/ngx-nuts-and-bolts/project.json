@@ -56,7 +56,9 @@
 					"libs/ngx-nuts-and-bolts/loading-state/**/*.ts",
 					"libs/ngx-nuts-and-bolts/loading-state/**/*.html",
 					"libs/ngx-nuts-and-bolts/table-state/**/*.ts",
-					"libs/ngx-nuts-and-bolts/table-state/**/*.html"
+					"libs/ngx-nuts-and-bolts/table-state/**/*.html",
+					"libs/ngx-nuts-and-bolts/breadcrumbs/**/*.ts",
+					"libs/ngx-nuts-and-bolts/breadcrumbs/**/*.html"
 				]
 			}
 		},

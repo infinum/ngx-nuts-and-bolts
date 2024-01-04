@@ -18,6 +18,7 @@
 		"paths": {
 			"@infinum/ngx-nuts-and-bolts-ssr": ["libs/ngx-nuts-and-bolts-ssr/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/animations": ["libs/ngx-nuts-and-bolts/animations/src/index.ts"],
+			"@infinum/ngx-nuts-and-bolts/breadcrumbs": ["libs/ngx-nuts-and-bolts/breadcrumbs/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/enum-property": ["libs/ngx-nuts-and-bolts/enum-property/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/env": ["libs/ngx-nuts-and-bolts/env/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/in-view": ["libs/ngx-nuts-and-bolts/in-view/src/index.ts"],

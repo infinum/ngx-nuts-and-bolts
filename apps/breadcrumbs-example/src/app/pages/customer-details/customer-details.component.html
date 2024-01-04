@@ -1,0 +1,7 @@
+<ng-container *ngIf="customer$ | async as customer; else loading">
+	<h2>{{ customer.name }}</h2>
+</ng-container>
+
+<ng-template #loading>
+	<p>Loading...</p>
+</ng-template>

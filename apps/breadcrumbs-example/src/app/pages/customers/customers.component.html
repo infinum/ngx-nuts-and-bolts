@@ -1,0 +1,20 @@
+<h2>Customers</h2>
+
+<table *ngIf="customers$ | async as customers; else loading">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let customer of customers">
+			<td>{{ customer.name }}</td>
+			<td><a [routerLink]="customer.id">View details</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<ng-template #loading>
+	<p>Loading...</p>
+</ng-template>
