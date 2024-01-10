@@ -29,5 +29,16 @@
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"
+	},
+	"schematics": "./schematics/collection.json",
+	"ng-add": {
+		"save": "dependencies"
+	},
+	"devDependencies": {
+		"typescript": "file:../../node_modules/typescript"
+	},
+	"scripts": {
+		"build": "tsc -p tsconfig.schematics.json",
+		"postbuild": "cp schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/libs/ngx-nuts-and-bolts/schematics/"
 	}
 }
