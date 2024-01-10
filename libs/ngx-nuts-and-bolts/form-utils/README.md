@@ -4,7 +4,7 @@ Secondary entry point of `@infinum/ngx-nuts-and-bolts`. It can be used by import
 
 ## 1. Features
 
-Currently, the types for a form value or raw form value are not publicly exposed. The helper types `FormValue` and `RawFormValue` enable you to retrieve a value or a raw value typings from an Angular form.
+Currently, the types for a form value or raw form value [are not publicly exposed from Angular](https://github.com/angular/angular/blob/c4de4e1f894001d8f80b70297c5e576f2d11ec6f/packages/forms/src/model/abstract_model.ts#L227). The helper types `FormValue` and `RawFormValue` enable you to retrieve a value or a raw value typings from an Angular form.
 
 ## 2. Usage
 
