@@ -1,6 +1,6 @@
 {
 	"name": "@infinum/ngx-nuts-and-bolts",
-	"version": "4.1.0-alpha.4",
+	"version": "4.0.1",
 	"description": "Reusable components and helpers for angular projects",
 	"license": "MIT",
 	"repository": {

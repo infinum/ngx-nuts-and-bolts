@@ -1,5 +1,5 @@
 {
-	"name": "schematics",
+	"name": "@ngx-nuts-and-bolts/schematics",
 	"version": "0.0.1",
 	"type": "commonjs"
 }

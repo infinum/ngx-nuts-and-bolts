@@ -3,6 +3,5 @@
 	"dest": "../../dist/libs/ngx-nuts-and-bolts",
 	"lib": {
 		"entryFile": "src/index.ts"
-	},
-	"assets": ["./src/schematics/**/*.*"]
+	}
 }
