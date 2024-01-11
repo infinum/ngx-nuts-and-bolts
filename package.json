@@ -14,7 +14,7 @@
 		"build": "concurrently \"npm run build:core\" \"npm run build:ssr\"",
 		"build:core": "nx build ngx-nuts-and-bolts --skip-nx-cache && npm run copy-files:core && npm run build:schematics",
 		"build:ssr": "nx build ngx-nuts-and-bolts-ssr --skip-nx-cache && npm run copy-files:ssr",
-		"build:schematics": "cd ./libs/ngx-nuts-and-bolts && npm run build",
+		"build:schematics": "nx build schematics --skip-nx-cache",
 		"copy-files:core": "cp ./LICENSE ./dist/libs/ngx-nuts-and-bolts/LICENSE && cp ./README.md ./dist/libs/ngx-nuts-and-bolts/README.md",
 		"copy-files:ssr": "cp ./LICENSE ./dist/libs/ngx-nuts-and-bolts-ssr/LICENSE && cp ./README.md ./dist/libs/ngx-nuts-and-bolts-ssr/README.md",
 		"test": "nx run-many --target=test --all --parallel --skip-nx-cache",

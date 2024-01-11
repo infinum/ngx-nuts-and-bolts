@@ -1,6 +1,6 @@
 {
 	"name": "@infinum/ngx-nuts-and-bolts",
-	"version": "4.0.1",
+	"version": "4.1.0-alpha.4",
 	"description": "Reusable components and helpers for angular projects",
 	"license": "MIT",
 	"repository": {
@@ -30,15 +30,11 @@
 	"dependencies": {
 		"tslib": "^2.3.0"
 	},
-	"schematics": "./schematics/collection.json",
+	"schematics": "./schematics/src/collection.json",
 	"ng-add": {
 		"save": "dependencies"
 	},
 	"devDependencies": {
 		"typescript": "file:../../node_modules/typescript"
-	},
-	"scripts": {
-		"build": "tsc -p tsconfig.schematics.json",
-		"postbuild": "cp schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/libs/ngx-nuts-and-bolts/schematics/"
 	}
 }
