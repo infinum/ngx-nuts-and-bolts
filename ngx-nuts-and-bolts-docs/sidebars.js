@@ -45,6 +45,10 @@ const sidebars = {
 			id: 'animations',
 		},
 		{
+			type: 'doc',
+			id: 'form-utils',
+		},
+		{
 			type: 'category',
 			label: 'Testing utilities',
 			items: ['testing-utils/extract-public', 'testing-utils/async-data', 'testing-utils/async-error'],
