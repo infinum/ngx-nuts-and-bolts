@@ -8,6 +8,10 @@ A collection of commonly used pieces of Angular-related code that we use everyda
 ## Installation
 
 ```bash
+ng add @infinum/ngx-nuts-and-bolts
+```
+
+```bash
 npm install @infinum/ngx-nuts-and-bolts
 ```
 
