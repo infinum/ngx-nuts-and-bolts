@@ -32,4 +32,9 @@ export const appRoutes: Array<Route> = [
 			}),
 		],
 	}),
+	breadcrumbRoute({
+		path: 'faq',
+		breadcrumbResolver: breadcrumbLiteralResolver({ label: 'FAQ' }),
+		loadComponent: () => import('./pages/faq/faq.component').then((m) => m.FaqComponent),
+	}),
 ];

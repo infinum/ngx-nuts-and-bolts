@@ -1,6 +1,15 @@
 <main>
 	<pre>URL: {{ url$ | async }}</pre>
 
+	<nav>
+		<p>Top-level navigation links:</p>
+		<ul>
+			<li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Homepage</a></li>
+			<li><a routerLink="/customers" routerLinkActive="active">Customers</a></li>
+			<li><a routerLink="/faq" routerLinkActive="active">FAQ</a></li>
+		</ul>
+	</nav>
+
 	<p>Top-level breadcrumbs:</p>
 	<app-breadcrumbs></app-breadcrumbs>
 
