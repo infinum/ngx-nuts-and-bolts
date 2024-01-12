@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanDeactivateFn } from '@angular/router';
-import { WINDOW } from '../global-tokens';
+import { WINDOW } from '@infinum/ngx-nuts-and-bolts';
 
 export const confirmLeaveGuard: CanDeactivateFn<unknown> = (_, currentRoute) => {
 	const window = inject(WINDOW);

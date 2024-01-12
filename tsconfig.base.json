@@ -16,6 +16,7 @@
 		"baseUrl": ".",
 		"esModuleInterop": true,
 		"paths": {
+			"@infinum/ngx-nuts-and-bolts": ["libs/ngx-nuts-and-bolts/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts-ssr": ["libs/ngx-nuts-and-bolts-ssr/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/animations": ["libs/ngx-nuts-and-bolts/animations/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/breadcrumbs": ["libs/ngx-nuts-and-bolts/breadcrumbs/src/index.ts"],

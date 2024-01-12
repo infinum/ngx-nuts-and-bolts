@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { BreadcrumbsService } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
-import { Subscription, map } from 'rxjs';
+import { map } from 'rxjs';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { BreadcrumbData } from './types/breadcrumb-data';
 
@@ -13,7 +13,7 @@ import { BreadcrumbData } from './types/breadcrumb-data';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent {
 	private readonly router = inject(Router);
 	public readonly url$ = this.router.events.pipe(map(() => this.router.url));
 	private readonly breadcrumbsService: BreadcrumbsService<BreadcrumbData> = inject(BreadcrumbsService);
@@ -29,18 +29,4 @@ export class AppComponent implements OnDestroy {
 			});
 		})
 	);
-
-	private readonly subscriptions = new Subscription();
-
-	constructor() {
-		this.subscriptions.add(
-			this.breadcrumbsService.operationsQueue$.subscribe((operations) => {
-				console.log('Operations queue', operations);
-			})
-		);
-	}
-
-	public ngOnDestroy(): void {
-		this.subscriptions.unsubscribe();
-	}
 }

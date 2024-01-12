@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { WINDOW } from '../global-tokens';
+import { WINDOW } from '@infinum/ngx-nuts-and-bolts';
 
 export const confirmEntryGuard: CanActivateFn = (route) => {
 	const router = inject(Router);

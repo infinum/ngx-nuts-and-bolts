@@ -9,11 +9,11 @@ import { BreadcrumbResolver, TitleConfiguration } from '../types';
 export const BREADCRUMBS_RESOLVE_KEY = 'breadcrumbs';
 
 function updateTitle<T>(
-	titleConfiguration: TitleConfiguration<T>,
+	titleConfiguration: TitleConfiguration<T> | null,
 	breadcrumbsService: BreadcrumbsService<T>,
 	title: Title
 ) {
-	if (!titleConfiguration.formatter) {
+	if (!titleConfiguration) {
 		return;
 	}
 

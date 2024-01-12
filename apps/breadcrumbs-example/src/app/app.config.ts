@@ -1,18 +1,17 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withEnabledBlockingInitialNavigation } from '@angular/router';
+import { provideConsole, provideWindow } from '@infinum/ngx-nuts-and-bolts';
 import { provideBreadcrumbsConfig } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
 import { appRoutes } from './app.routes';
-import { WINDOW } from './global-tokens';
 import { BreadcrumbData } from './types/breadcrumb-data';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
-		{
-			provide: WINDOW,
-			useValue: window,
-		},
+		provideWindow(window),
+		provideConsole(console),
 		provideBreadcrumbsConfig<BreadcrumbData>({
+			logLevel: 'debug',
 			titleConfiguration: {
 				formatter: (breadcrumbs) => {
 					return [
