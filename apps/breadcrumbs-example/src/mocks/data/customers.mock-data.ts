@@ -15,10 +15,12 @@ export function initMockCustomers(
 				{
 					id: 'walmart-sacramento',
 					name: 'Sacramento Supercenter',
+					address: '3661 Truxel Rd, Sacramento, CA 95834',
 				},
 				{
 					id: 'walmart-elk',
 					name: 'Elk Grove Store',
+					address: '8465 Elk Grove Blvd, Elk Grove, CA 95758',
 				},
 			],
 		},
@@ -29,10 +31,12 @@ export function initMockCustomers(
 				{
 					id: 'amazon-hq',
 					name: 'Headquarters',
+					address: '410 Terry Ave. North, Seattle, WA 98109',
 				},
 				{
 					id: 'amazon-lux',
 					name: 'Luxembourg',
+					address: '38 Avenue John F. Kennedy, Luxembourg City, Luxembourg',
 				},
 			],
 		},
@@ -43,10 +47,12 @@ export function initMockCustomers(
 				{
 					id: 'target-cr-south',
 					name: 'Cedar Rapids South',
+					address: '3400 Edgewood Rd SW, Cedar Rapids, IA 52404',
 				},
 				{
 					id: 'target-cr-north',
 					name: 'Cedar Rapids North',
+					address: '1030 Blairs Ferry Rd NE, Cedar Rapids, IA 52402',
 				},
 			],
 		},
