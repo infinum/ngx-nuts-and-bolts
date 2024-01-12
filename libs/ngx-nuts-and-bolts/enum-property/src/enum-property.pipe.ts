@@ -13,12 +13,26 @@ export class EnumPropertyPipe<TEnum extends string, TEnumDataObject extends Reco
 		key: keyof TEnumDataObject = 'translationKey',
 		showWarning = true
 	): TReturnValue | TEnum | null {
-		if (enumData[value]?.[key] === undefined) {
-			if (showWarning) {
-				console.warn(`No property for key "${String(key)}" for enum value "${value}" `, enumData);
-			}
-			return null;
-		}
-		return enumData[value][key];
+		return getTranslationKey(value, enumData, key, showWarning);
 	}
+}
+
+export function getTranslationKey<
+	TEnum extends string,
+	TEnumDataObject extends Record<string, TReturnValue>,
+	TReturnValue
+>(
+	value: TEnum,
+	enumData: Record<TEnum, TEnumDataObject>,
+	key: keyof TEnumDataObject = 'translationKey',
+	showWarning = true
+): TReturnValue | TEnum | null {
+	if (enumData[value]?.[key] === undefined) {
+		if (showWarning) {
+			console.warn(`No property for key "${String(key)}" for enum value "${value}" `, enumData);
+		}
+		return null;
+	}
+
+	return enumData[value][key];
 }

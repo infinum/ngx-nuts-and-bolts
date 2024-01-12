@@ -67,3 +67,25 @@ export class ExampleComponent {
 ```
 
 Here, since `directionsData` doesn't have `differentKey` property for any of the enum values, `undefined` would be returned.
+
+If the need for fetching translation keys in the .ts files arises `getTranslationKey()` function is at your disposal, result of which you can pass into transloco service to get the actual translated value for passed in translation key. With this approach we are avoiding need for instantiating `EnumPropertyPipe` class and accessing the `transform` method.
+
+```ts
+import { getTranslationKey } from '@infinum/ngx-nuts-and-bolts';
+
+@Component({
+	selector: 'app-example',
+	template: ``,
+})
+export class ExampleComponent {
+	public enumValue = Directions.NORTH;
+	public directionsData = directionsData;
+
+	private readonly transloco = inject(TranslocoService);
+
+	private translationDemoMethod(): void {
+		const translationKey = getTranslationKey(Directions.NORTH, directionsData);
+		const translation = this.transloco.translate(translationKey as string);
+	}
+}
+```
