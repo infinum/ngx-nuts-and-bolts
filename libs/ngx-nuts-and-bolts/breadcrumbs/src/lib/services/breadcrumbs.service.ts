@@ -5,6 +5,7 @@ import { Breadcrumb } from '../types';
 import { BREADCRUMBS_CONFIG } from '../providers';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { CONSOLE } from '@infinum/ngx-nuts-and-bolts';
+import { Title } from '@angular/platform-browser';
 
 type BreadcrumbOperation<T> =
 	| {
@@ -19,6 +20,7 @@ type BreadcrumbOperation<T> =
 export class BreadcrumbsService<T> implements OnDestroy {
 	private static instanceCounter = 0;
 	private readonly instanceId: number;
+	private readonly title = inject(Title);
 	private readonly config = inject(BREADCRUMBS_CONFIG);
 	private readonly console = inject(CONSOLE);
 	private readonly subscriptions = new Subscription();
@@ -112,6 +114,7 @@ export class BreadcrumbsService<T> implements OnDestroy {
 			}
 		});
 		this._breadcrumbs$.next(breadcrumbs);
+		this.updateTitle(breadcrumbs);
 
 		this.resetQueue();
 	}
@@ -121,6 +124,21 @@ export class BreadcrumbsService<T> implements OnDestroy {
 
 		if (this.config.logLevel === 'debug') {
 			this.console.log(`[Breadcrumbs][${this.instanceId}] Operations queue reset`);
+		}
+	}
+
+	private updateTitle(breadcrumbs: Array<Breadcrumb<T>>) {
+		const titleConfiguration = this.config.titleConfiguration;
+		if (!titleConfiguration) {
+			return;
+		}
+
+		const newTitle = titleConfiguration.formatter(breadcrumbs);
+
+		this.title.setTitle(newTitle);
+
+		if (this.config.logLevel === 'debug') {
+			this.console.log(`[Breadcrumbs][${this.instanceId}] Page title set to "${newTitle}"`);
 		}
 	}
 }
