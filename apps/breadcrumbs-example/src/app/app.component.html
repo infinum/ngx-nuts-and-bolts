@@ -1,9 +1,16 @@
 <main>
+	<pre>URL: {{ url$ | async }}</pre>
+
+	<p>Top-level breadcrumbs:</p>
 	<app-breadcrumbs></app-breadcrumbs>
 
 	<router-outlet></router-outlet>
 </main>
 
 <aside>
-	<pre>{{ breadcrumbsForCodeSnippet$ | async | json }}</pre>
+	<pre>
+Top-level breadcrumbs:
+{{ breadcrumbsForCodeSnippet$ | async | json }}
+	</pre
+	>
 </aside>

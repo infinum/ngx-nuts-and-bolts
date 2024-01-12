@@ -25,8 +25,10 @@ export type BreadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData> = Rou
 };
 
 export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
-	originalRouteConfig: BreadcrumbRoute<TBreadcrumbData, TRouteData>
+	routeConfig: BreadcrumbRoute<TBreadcrumbData, TRouteData>
 ): Route {
+	const { breadcrumbResolver, ...originalRouteConfig } = routeConfig;
+
 	const breadcrumbRouteDeactivationGuard: CanDeactivateFn<unknown> = () => {
 		const breadcrumbsService: BreadcrumbsService<TBreadcrumbData> = inject(BreadcrumbsService);
 		const title = inject(Title);
@@ -36,6 +38,8 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 		updateTitle(breadcrumbsConfig.titleConfiguration, breadcrumbsService, title);
 		return true;
 	};
+	const canDeactivate = originalRouteConfig.canDeactivate || [];
+	canDeactivate.push(breadcrumbRouteDeactivationGuard);
 
 	const breadcrumbRouteResolver: ResolveFn<TRouteData | undefined> = (
 		route: ActivatedRouteSnapshot,
@@ -47,7 +51,7 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 		const url = route.pathFromRoot.map((r) => r.url.map((s) => s.toString()).join('/')).join('/');
 
 		// eslint-disable-next-line rxjs/finnish
-		const resolver = originalRouteConfig.breadcrumbResolver(route, state);
+		const resolver = breadcrumbResolver(route, state);
 
 		if (resolver instanceof Observable) {
 			return resolver.pipe(
@@ -84,18 +88,12 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 			return resolver.routeData;
 		}
 	};
+	const resolve = originalRouteConfig.resolve || {};
+	resolve[BREADCRUMBS_RESOLVE_KEY] = breadcrumbRouteResolver;
 
 	return {
-		path: '',
-		canDeactivate: [breadcrumbRouteDeactivationGuard],
-		children: [
-			{
-				...originalRouteConfig,
-				resolve: {
-					...originalRouteConfig.resolve,
-					[BREADCRUMBS_RESOLVE_KEY]: breadcrumbRouteResolver,
-				},
-			},
-		],
+		...originalRouteConfig,
+		resolve,
+		canDeactivate,
 	};
 }

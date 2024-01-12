@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
-import { breadcrumbRoute, breadcrumbLiteralResolver } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
+import { breadcrumbLiteralResolver, breadcrumbRoute } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
 import { customerDetailsBreadcrumbResolver } from './breadcrumb-resolvers/customer-details.breadcrumb-resolver';
-import { HomepageComponent } from './pages/homepage/homepage.component';
-import { CUSTOMERS_ROUTE_PATH, CUSTOMER_ID_ROUTE_PARAM } from './route-param';
 import { confirmEntryGuard } from './guards/confirm-entry.guard';
 import { confirmLeaveGuard } from './guards/confirm-leave.guard';
+import { HomepageComponent } from './pages/homepage/homepage.component';
+import { CUSTOMERS_ROUTE_PATH, CUSTOMER_ID_ROUTE_PARAM } from './route-param';
 
 export const appRoutes: Array<Route> = [
 	{
@@ -14,6 +14,8 @@ export const appRoutes: Array<Route> = [
 	breadcrumbRoute({
 		path: CUSTOMERS_ROUTE_PATH,
 		breadcrumbResolver: breadcrumbLiteralResolver({ label: 'Customers' }),
+		canActivate: [confirmEntryGuard],
+		canDeactivate: [confirmLeaveGuard],
 		children: [
 			{
 				path: '',
