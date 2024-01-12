@@ -1,3 +1,12 @@
 <h2>{{ customer.name }}</h2>
 
-<pre>{{ customer | json }}</pre>
+<nav>
+	<span>Locations:</span>
+	<ul>
+		<li *ngFor="let location of customer.locations">
+			<a [routerLink]="location.id" routerLinkActive="active">{{ location.name }}</a>
+		</li>
+	</ul>
+</nav>
+
+<router-outlet></router-outlet>

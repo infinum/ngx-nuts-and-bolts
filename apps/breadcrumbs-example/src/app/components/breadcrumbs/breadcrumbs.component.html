@@ -1,6 +1,6 @@
 <div class="breadcrumbs" *ngIf="breadcrumbs$ | async as breadcrumbs">
-	<div *ngIf="includeTopLevelLink" class="breadcrumb">
-		<a routerLink="/">My logistics company™</a>
+	<div *ngIf="topLevelLink" class="breadcrumb">
+		<a [routerLink]="topLevelLink.url">{{ topLevelLink.label }}</a>
 		<span *ngIf="breadcrumbs.length" class="separator">></span>
 	</div>
 

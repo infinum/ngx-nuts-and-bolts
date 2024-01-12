@@ -12,7 +12,7 @@ import { BreadcrumbData } from '../../types/breadcrumb-data';
 	styleUrls: ['./breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent {
-	@Input() public includeTopLevelLink = true;
+	@Input() public topLevelLink?: { label: string; url: string };
 
 	private readonly breadcrumbsService: BreadcrumbsService<BreadcrumbData> = inject(BreadcrumbsService);
 

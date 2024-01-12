@@ -4,13 +4,17 @@ import { customerDetailsBreadcrumbResolver } from './breadcrumb-resolvers/custom
 import { confirmEntryGuard } from './guards/confirm-entry.guard';
 import { confirmLeaveGuard } from './guards/confirm-leave.guard';
 import { HomepageComponent } from './pages/homepage/homepage.component';
-import { CUSTOMERS_ROUTE_PATH, CUSTOMER_ID_ROUTE_PARAM } from './route-param';
+import { CUSTOMERS_ROUTE_PATH, CUSTOMER_ID_ROUTE_PARAM, LOCATION_ID_ROUTE_PARAM } from './route-param';
+import { locationDetailsBreadcrumbResolver } from './breadcrumb-resolvers/location-details.breadcrumb-resolver';
 
 export const appRoutes: Array<Route> = [
+	// Homepage
 	{
 		path: '',
 		component: HomepageComponent,
 	},
+
+	// Customers
 	breadcrumbRoute({
 		path: CUSTOMERS_ROUTE_PATH,
 		breadcrumbResolver: breadcrumbLiteralResolver({ label: 'Customers' }),
@@ -29,9 +33,22 @@ export const appRoutes: Array<Route> = [
 				canDeactivate: [confirmLeaveGuard],
 				loadComponent: () =>
 					import('./pages/customer-details/customer-details.component').then((m) => m.CustomerDetailsComponent),
+				children: [
+					breadcrumbRoute({
+						path: `:${LOCATION_ID_ROUTE_PARAM}`,
+						breadcrumbResolver: locationDetailsBreadcrumbResolver,
+						canActivate: [confirmEntryGuard],
+						canDeactivate: [confirmLeaveGuard],
+						breadcrumbResolverKey: 'location',
+						loadComponent: () =>
+							import('./pages/location-details/location-details.component').then((m) => m.LocationDetailsComponent),
+					}),
+				],
 			}),
 		],
 	}),
+
+	// FAQ
 	breadcrumbRoute({
 		path: 'faq',
 		breadcrumbResolver: breadcrumbLiteralResolver({ label: 'FAQ' }),
