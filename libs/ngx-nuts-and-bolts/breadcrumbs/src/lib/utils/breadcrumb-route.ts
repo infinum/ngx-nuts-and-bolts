@@ -6,7 +6,7 @@ import { BREADCRUMBS_CONFIG } from '../providers';
 import { BreadcrumbsService } from '../services';
 import { BreadcrumbResolver, TitleConfiguration } from '../types';
 
-export const BREADCRUMBS_RESOLVE_KEY = 'breadcrumbs';
+export const BREADCRUMBS_DEFAULT_RESOLVE_KEY = 'breadcrumbs';
 
 function updateTitle<T>(
 	titleConfiguration: TitleConfiguration<T> | null,
@@ -22,12 +22,17 @@ function updateTitle<T>(
 
 export type BreadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData> = Route & {
 	breadcrumbResolver: BreadcrumbResolver<TBreadcrumbData, TRouteData>;
+	breadcrumbResolverKey?: string;
 };
 
 export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 	routeConfig: BreadcrumbRoute<TBreadcrumbData, TRouteData>
 ): Route {
-	const { breadcrumbResolver, ...originalRouteConfig } = routeConfig;
+	const {
+		breadcrumbResolver,
+		breadcrumbResolverKey = BREADCRUMBS_DEFAULT_RESOLVE_KEY,
+		...originalRouteConfig
+	} = routeConfig;
 
 	const breadcrumbRouteDeactivationGuard: CanDeactivateFn<unknown> = () => {
 		const breadcrumbsService: BreadcrumbsService<TBreadcrumbData> = inject(BreadcrumbsService);
@@ -89,7 +94,7 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 		}
 	};
 	const resolve = originalRouteConfig.resolve || {};
-	resolve[BREADCRUMBS_RESOLVE_KEY] = breadcrumbRouteResolver;
+	resolve[breadcrumbResolverKey] = breadcrumbRouteResolver;
 
 	return {
 		...originalRouteConfig,

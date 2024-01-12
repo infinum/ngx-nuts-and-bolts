@@ -24,6 +24,7 @@ export const appRoutes: Array<Route> = [
 			breadcrumbRoute({
 				path: `:${CUSTOMER_ID_ROUTE_PARAM}`,
 				breadcrumbResolver: customerDetailsBreadcrumbResolver,
+				breadcrumbResolverKey: 'customer',
 				canActivate: [confirmEntryGuard],
 				canDeactivate: [confirmLeaveGuard],
 				loadComponent: () =>
