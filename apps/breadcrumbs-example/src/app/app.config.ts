@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
 			titleConfiguration: {
 				formatter: (breadcrumbs) => {
 					return [
-						'Breadcrumbs example app',
+						'My logistics company™',
 						...breadcrumbs.map((breadcrumb) => {
 							return breadcrumb.extra.label;
 						}),
