@@ -4,34 +4,36 @@ import { Pipe, PipeTransform } from '@angular/core';
 	name: 'enumProperty',
 	standalone: true,
 })
-export class EnumPropertyPipe<TEnum extends string, TEnumDataObject extends Record<string, TReturnValue>, TReturnValue>
-	implements PipeTransform
+export class EnumPropertyPipe<
+	TEnum extends string,
+	TEnumDataObject extends Record<string, unknown>,
+	TKey extends keyof TEnumDataObject
+> implements PipeTransform
 {
 	public transform(
 		value: TEnum,
 		enumData: Record<TEnum, TEnumDataObject>,
-		key: keyof TEnumDataObject = 'translationKey',
+		key: TKey = 'translationKey' as TKey,
 		showWarning = true
-	): TReturnValue | TEnum | null {
-		return getTranslationKey(value, enumData, key, showWarning);
+	) {
+		try {
+			return getEnumPropertyValue(value, enumData, key);
+		} catch (e) {
+			if (showWarning) {
+				console.warn(e);
+			}
+			return null;
+		}
 	}
 }
 
-export function getTranslationKey<
+export function getEnumPropertyValue<
 	TEnum extends string,
-	TEnumDataObject extends Record<string, TReturnValue>,
-	TReturnValue
->(
-	value: TEnum,
-	enumData: Record<TEnum, TEnumDataObject>,
-	key: keyof TEnumDataObject = 'translationKey',
-	showWarning = true
-): TReturnValue | TEnum | null {
+	TEnumDataObject extends Record<string, unknown>,
+	TKey extends keyof TEnumDataObject
+>(value: TEnum, enumData: Record<TEnum, TEnumDataObject>, key: TKey = 'translationKey' as TKey) {
 	if (enumData[value]?.[key] === undefined) {
-		if (showWarning) {
-			console.warn(`No property for key "${String(key)}" for enum value "${value}" `, enumData);
-		}
-		return null;
+		throw new Error(`No property for key "${String(key)}" for enum value "${value}" `);
 	}
 
 	return enumData[value][key];
