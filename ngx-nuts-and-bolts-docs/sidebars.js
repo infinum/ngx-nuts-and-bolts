@@ -51,7 +51,12 @@ const sidebars = {
 		{
 			type: 'category',
 			label: 'Testing utilities',
-			items: ['testing-utils/extract-public', 'testing-utils/async-data', 'testing-utils/async-error'],
+			items: [
+				'testing-utils/extract-public',
+				'testing-utils/async-data',
+				'testing-utils/async-error',
+				'testing-utils/mock-storage',
+			],
 		},
 	],
 
