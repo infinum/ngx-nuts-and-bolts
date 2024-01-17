@@ -20,6 +20,6 @@ const someProvider: Provider = {
 		//                          |
 		// will resolve to SomeType, so you do not have to c/p it and it will be less prone to errors if type of value provided under SOME_TOKEN changes
 	},
+	deps: [SOME_TOKEN];
 };
-deps: [SOME_TOKEN];
 ```
