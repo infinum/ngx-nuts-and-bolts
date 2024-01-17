@@ -82,8 +82,11 @@ export class ExampleComponent {
 	public enumValue = Directions.NORTH;
 	public directionsData = directionsData;
 
-	private demoMethod(): void {
-		const enumPropertyValue = getEnumPropertyValue(Directions.NORTH, directionsData);
+	private readonly transloco = inject(TranslocoService);
+
+	private translationDemoMethod(): void {
+		const translationKey = getEnumPropertyValue(Directions.NORTH, directionsData);
+		const translation = this.transloco.translate(translationKey);
 	}
 }
 ```
