@@ -1,6 +1,6 @@
 import { MockStorage } from './mock-storage';
 
-fdescribe('MockStorage', () => {
+describe('MockStorage', () => {
 	let mockStorage: MockStorage;
 
 	beforeEach(() => {
