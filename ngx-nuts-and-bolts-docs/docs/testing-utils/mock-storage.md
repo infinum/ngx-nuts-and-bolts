@@ -15,7 +15,11 @@ beforeEach(async () => {
 	await TestBed.configureTestingModule({
 		providers: [
 			{
-				provide: Storage,
+				provide: LOCAL_STORAGE,
+				useClass: MockStorage,
+			},
+			{
+				provide: SESSION_STORAGE,
 				useClass: MockStorage,
 			},
 		],
