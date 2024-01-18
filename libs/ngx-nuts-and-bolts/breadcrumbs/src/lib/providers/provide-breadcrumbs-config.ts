@@ -8,7 +8,7 @@ export const DEFAULT_BREADCRUMBS_CONFIG: BreadcrumbsConfig<unknown> = {
 	logLevel: 'silent',
 };
 
-export function provideBreadcrumbsConfig<T>(config: Partial<BreadcrumbsConfig<T>>): Provider {
+export function provideBreadcrumbsConfig<T>(config?: Partial<BreadcrumbsConfig<T>>): Provider {
 	const finalConfig = {
 		...DEFAULT_BREADCRUMBS_CONFIG,
 		...config,

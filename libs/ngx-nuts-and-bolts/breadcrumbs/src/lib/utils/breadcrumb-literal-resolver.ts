@@ -7,6 +7,3 @@ export const breadcrumbLiteralResolver: <T>(value: T) => BreadcrumbResolver<T> =
 		};
 	};
 };
-
-export const breadcrumbStringResolver: (value: string) => BreadcrumbResolver<string> =
-	breadcrumbLiteralResolver<string>;

@@ -5,23 +5,20 @@
 	</div>
 
 	<div class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs; let last = last">
-		<a [routerLink]="breadcrumb.url">
-			<ng-container *ngIf="isString(breadcrumb.data)">
-				{{ breadcrumb.data }}
-			</ng-container>
+		<a *ngIf="isString(breadcrumb.data)" [routerLink]="breadcrumb.url">{{ breadcrumb.data }}</a>
 
-			<ng-container *ngIf="isCustomerLocationWithCustomerData(breadcrumb.data)">
-				<select (change)="onLocationChange($event, breadcrumb.data.customer.id)">
-					<option
-						*ngFor="let location of breadcrumb.data.customer.locations"
-						[attr.value]="location.id"
-						[attr.selected]="location.id === breadcrumb.data.location.id || null"
-					>
-						{{ location.name }}
-					</option>
-				</select>
-			</ng-container>
-		</a>
+		<ng-container *ngIf="isCustomerLocationWithCustomerData(breadcrumb.data)">
+			<select (change)="onLocationChange($event, breadcrumb.data.customer.id)">
+				<option
+					*ngFor="let location of breadcrumb.data.customer.locations"
+					[attr.value]="location.id"
+					[attr.selected]="location.id === breadcrumb.data.location.id || null"
+				>
+					{{ location.name }}
+				</option>
+			</select>
+		</ng-container>
+
 		<span *ngIf="!last" class="separator">></span>
 	</div>
 </div>

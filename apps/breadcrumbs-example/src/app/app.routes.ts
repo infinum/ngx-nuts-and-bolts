@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { breadcrumbRoute, breadcrumbStringResolver } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
+import { breadcrumbRoute, breadcrumbLiteralResolver } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
 import { customerDetailsBreadcrumbResolver } from './breadcrumb-resolvers/customer-details.breadcrumb-resolver';
 import { locationDetailsBreadcrumbResolver } from './breadcrumb-resolvers/location-details.breadcrumb-resolver';
 import { confirmEntryGuard } from './guards/confirm-entry.guard';
@@ -17,7 +17,7 @@ export const appRoutes: Array<Route> = [
 	// Customers
 	breadcrumbRoute({
 		path: CUSTOMERS_ROUTE_PATH,
-		breadcrumbResolver: breadcrumbStringResolver('Customers'),
+		breadcrumbResolver: breadcrumbLiteralResolver('Customers'),
 		canActivate: [confirmEntryGuard],
 		canDeactivate: [confirmLeaveGuard],
 		children: [
@@ -52,7 +52,7 @@ export const appRoutes: Array<Route> = [
 	// FAQ
 	breadcrumbRoute({
 		path: 'faq',
-		breadcrumbResolver: breadcrumbStringResolver('FAQ'),
+		breadcrumbResolver: breadcrumbLiteralResolver('FAQ'),
 		loadComponent: () => import('./pages/faq/faq.component').then((m) => m.FaqComponent),
 	}),
 ];

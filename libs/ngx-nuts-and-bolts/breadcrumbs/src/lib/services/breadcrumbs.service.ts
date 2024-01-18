@@ -22,7 +22,7 @@ export class BreadcrumbsService<T> implements OnDestroy {
 	private readonly instanceId: number;
 	private readonly title = inject(Title);
 	private readonly config = inject(BREADCRUMBS_CONFIG);
-	private readonly console = inject(CONSOLE);
+	private readonly console = inject(CONSOLE, { optional: true }) || console;
 	private readonly subscriptions = new Subscription();
 	public readonly parentInstance = inject(BreadcrumbsService, { skipSelf: true, optional: true });
 
@@ -35,7 +35,6 @@ export class BreadcrumbsService<T> implements OnDestroy {
 	}
 
 	constructor() {
-		this.console.log(this.parentInstance);
 		this.instanceId = BreadcrumbsService.instanceCounter;
 		BreadcrumbsService.instanceCounter++;
 
