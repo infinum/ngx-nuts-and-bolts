@@ -9,6 +9,7 @@ export const BREADCRUMBS_DEFAULT_RESOLVE_KEY = 'breadcrumbs';
 export type BreadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData> = Route & {
 	breadcrumbResolver: BreadcrumbResolver<TBreadcrumbData, TRouteData>;
 	breadcrumbResolverKey?: string;
+	breadcrumbBoundary?: boolean;
 };
 
 export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
@@ -17,8 +18,14 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 	const {
 		breadcrumbResolver,
 		breadcrumbResolverKey = BREADCRUMBS_DEFAULT_RESOLVE_KEY,
+		breadcrumbBoundary = false,
+		providers = [],
 		...originalRouteConfig
 	} = routeConfig;
+
+	if (breadcrumbBoundary) {
+		providers.push(BreadcrumbsService);
+	}
 
 	const breadcrumbRouteDeactivationGuard: CanDeactivateFn<unknown> = () => {
 		const breadcrumbsService: BreadcrumbsService<TBreadcrumbData> = inject(BreadcrumbsService);
@@ -46,7 +53,7 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 						url,
 						route,
 						state,
-						extra: result.breadcrumbData,
+						data: result.breadcrumbData,
 					});
 				}),
 				map(({ routeData }) => routeData)
@@ -57,7 +64,7 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 					url,
 					route,
 					state,
-					extra: result.breadcrumbData,
+					data: result.breadcrumbData,
 				});
 				return result.routeData;
 			});
@@ -66,7 +73,7 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 				url,
 				route,
 				state,
-				extra: resolver.breadcrumbData,
+				data: resolver.breadcrumbData,
 			});
 			return resolver.routeData;
 		}
@@ -76,6 +83,7 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 
 	return {
 		...originalRouteConfig,
+		providers,
 		resolve,
 		canDeactivate,
 	};

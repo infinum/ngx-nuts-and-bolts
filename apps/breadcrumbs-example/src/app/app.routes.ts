@@ -1,11 +1,11 @@
 import { Route } from '@angular/router';
-import { breadcrumbLiteralResolver, breadcrumbRoute } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
+import { breadcrumbRoute, breadcrumbStringResolver } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
 import { customerDetailsBreadcrumbResolver } from './breadcrumb-resolvers/customer-details.breadcrumb-resolver';
+import { locationDetailsBreadcrumbResolver } from './breadcrumb-resolvers/location-details.breadcrumb-resolver';
 import { confirmEntryGuard } from './guards/confirm-entry.guard';
 import { confirmLeaveGuard } from './guards/confirm-leave.guard';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { CUSTOMERS_ROUTE_PATH, CUSTOMER_ID_ROUTE_PARAM, LOCATION_ID_ROUTE_PARAM } from './route-param';
-import { locationDetailsBreadcrumbResolver } from './breadcrumb-resolvers/location-details.breadcrumb-resolver';
 
 export const appRoutes: Array<Route> = [
 	// Homepage
@@ -17,7 +17,7 @@ export const appRoutes: Array<Route> = [
 	// Customers
 	breadcrumbRoute({
 		path: CUSTOMERS_ROUTE_PATH,
-		breadcrumbResolver: breadcrumbLiteralResolver({ label: 'Customers' }),
+		breadcrumbResolver: breadcrumbStringResolver('Customers'),
 		canActivate: [confirmEntryGuard],
 		canDeactivate: [confirmLeaveGuard],
 		children: [
@@ -29,6 +29,7 @@ export const appRoutes: Array<Route> = [
 				path: `:${CUSTOMER_ID_ROUTE_PARAM}`,
 				breadcrumbResolver: customerDetailsBreadcrumbResolver,
 				breadcrumbResolverKey: 'customer',
+				breadcrumbBoundary: true,
 				canActivate: [confirmEntryGuard],
 				canDeactivate: [confirmLeaveGuard],
 				loadComponent: () =>
@@ -51,7 +52,7 @@ export const appRoutes: Array<Route> = [
 	// FAQ
 	breadcrumbRoute({
 		path: 'faq',
-		breadcrumbResolver: breadcrumbLiteralResolver({ label: 'FAQ' }),
+		breadcrumbResolver: breadcrumbStringResolver('FAQ'),
 		loadComponent: () => import('./pages/faq/faq.component').then((m) => m.FaqComponent),
 	}),
 ];

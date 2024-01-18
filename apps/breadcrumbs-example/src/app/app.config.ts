@@ -17,7 +17,11 @@ export const appConfig: ApplicationConfig = {
 					return [
 						'My logistics company™',
 						...breadcrumbs.map((breadcrumb) => {
-							return breadcrumb.extra.label;
+							if (typeof breadcrumb.data === 'string') {
+								return breadcrumb.data;
+							}
+
+							return breadcrumb.data.location.name;
 						}),
 					]
 						.reverse()

@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Customer } from '../../types/customer';
 import { RouterModule } from '@angular/router';
+import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.component';
+import { Customer } from '../../types/customer';
 
 @Component({
 	selector: 'app-customer-details',
 	standalone: true,
-	imports: [CommonModule, RouterModule],
+	imports: [CommonModule, RouterModule, BreadcrumbsComponent],
 	templateUrl: './customer-details.component.html',
 	styleUrls: ['./customer-details.component.scss'],
 })

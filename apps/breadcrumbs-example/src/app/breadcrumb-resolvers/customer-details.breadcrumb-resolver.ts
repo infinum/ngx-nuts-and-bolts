@@ -22,7 +22,7 @@ export const customerDetailsBreadcrumbResolver: BreadcrumbResolver<BreadcrumbDat
 	return customersService.getCustomerById(customerId).pipe(
 		map((customer) => {
 			return {
-				breadcrumbData: { label: customer.name },
+				breadcrumbData: customer.name,
 				routeData: customer,
 			};
 		})

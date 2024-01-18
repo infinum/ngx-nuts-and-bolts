@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { Breadcrumb } from '../types';
 import { BREADCRUMBS_CONFIG } from '../providers';
+import { Breadcrumb } from '../types';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { CONSOLE } from '@infinum/ngx-nuts-and-bolts';
-import { Title } from '@angular/platform-browser';
 
 type BreadcrumbOperation<T> =
 	| {
@@ -24,6 +24,7 @@ export class BreadcrumbsService<T> implements OnDestroy {
 	private readonly config = inject(BREADCRUMBS_CONFIG);
 	private readonly console = inject(CONSOLE);
 	private readonly subscriptions = new Subscription();
+	public readonly parentInstance = inject(BreadcrumbsService, { skipSelf: true, optional: true });
 
 	private readonly router = inject(Router);
 	private readonly _breadcrumbs$ = new BehaviorSubject<Array<Breadcrumb<T>>>([]);
@@ -34,6 +35,7 @@ export class BreadcrumbsService<T> implements OnDestroy {
 	}
 
 	constructor() {
+		this.console.log(this.parentInstance);
 		this.instanceId = BreadcrumbsService.instanceCounter;
 		BreadcrumbsService.instanceCounter++;
 
@@ -67,6 +69,8 @@ export class BreadcrumbsService<T> implements OnDestroy {
 	public readonly operationsQueue$ = this._operationsQueue$.asObservable();
 
 	public push(value: Breadcrumb<T>) {
+		this.parentInstance?.push(value);
+
 		const operation: BreadcrumbOperation<T> = { operation: 'push', value };
 
 		const queue = this._operationsQueue$.getValue();
@@ -80,6 +84,8 @@ export class BreadcrumbsService<T> implements OnDestroy {
 	}
 
 	public pop() {
+		this.parentInstance?.pop();
+
 		const operation: BreadcrumbOperation<T> = { operation: 'pop' };
 
 		const queue = this._operationsQueue$.getValue();

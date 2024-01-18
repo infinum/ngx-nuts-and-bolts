@@ -9,5 +9,5 @@ export type Breadcrumb<T> = {
 	 * Use `url` property instead, as that will resolve deep links correctly on non-sequential navigation and on initial page load.
 	 */
 	state: RouterStateSnapshot;
-	extra: T;
+	data: T;
 };

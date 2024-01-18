@@ -20,11 +20,10 @@ export class AppComponent {
 
 	protected readonly breadcrumbsForCodeSnippet$ = this.breadcrumbsService.breadcrumbs$.pipe(
 		map((breadcrumbs) => {
-			return breadcrumbs.map(({ extra, url, state }) => {
+			return breadcrumbs.map(({ data, url }) => {
 				return {
 					url,
-					urlFromState: state.url, // This is here just to demonstrate that it does not work correctly for deep links on initial page load
-					extra,
+					data,
 				};
 			});
 		})

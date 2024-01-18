@@ -1,5 +1,5 @@
 import { BreadcrumbResolver } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
-import { BreadcrumbData, BreadcrumbRouteData } from '../types/breadcrumb-data';
+import { BreadcrumbData, BreadcrumbRouteData, CustomerLocationWithCustomerData } from '../types/breadcrumb-data';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Customer } from '../types/customer';
 import { LOCATION_ID_ROUTE_PARAM } from '../route-param';
@@ -21,7 +21,7 @@ export const locationDetailsBreadcrumbResolver: BreadcrumbResolver<BreadcrumbDat
 	}
 
 	return {
-		breadcrumbData: { label: location.name },
+		breadcrumbData: new CustomerLocationWithCustomerData(location, customer),
 		routeData: location,
 	};
 };

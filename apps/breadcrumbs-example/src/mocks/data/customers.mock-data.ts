@@ -33,11 +33,6 @@ export function initMockCustomers(
 					name: 'Headquarters',
 					address: '410 Terry Ave. North, Seattle, WA 98109',
 				},
-				{
-					id: 'amazon-lux',
-					name: 'Luxembourg',
-					address: '38 Avenue John F. Kennedy, Luxembourg City, Luxembourg',
-				},
 			],
 		},
 		{
