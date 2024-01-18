@@ -50,7 +50,7 @@ export class BreadcrumbsService<T> implements OnDestroy {
 		);
 
 		if (this.config.logLevel === 'debug') {
-			this.console.log(`[Breadcrumbs][${this.instanceId}] Service initialized:`, this);
+			// this.console.log(`[Breadcrumbs][${this.instanceId}] Service initialized:`, this);
 
 			this.subscriptions.add(
 				this._breadcrumbs$.subscribe((breadcrumbs) => {
@@ -61,6 +61,10 @@ export class BreadcrumbsService<T> implements OnDestroy {
 	}
 
 	public ngOnDestroy(): void {
+		if (this.config.logLevel === 'debug') {
+			this.console.log(`[Breadcrumbs][${this.instanceId}] Service destroyed`);
+		}
+
 		this.subscriptions.unsubscribe();
 	}
 

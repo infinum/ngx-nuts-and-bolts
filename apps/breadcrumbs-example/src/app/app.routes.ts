@@ -21,10 +21,12 @@ export const appRoutes: Array<Route> = [
 		canActivate: [confirmEntryGuard],
 		canDeactivate: [confirmLeaveGuard],
 		children: [
+			// All customers
 			{
 				path: '',
 				loadComponent: () => import('./pages/customers/customers.component').then((m) => m.CustomersComponent),
 			},
+			// Customer details
 			breadcrumbRoute({
 				path: `:${CUSTOMER_ID_ROUTE_PARAM}`,
 				breadcrumbResolver: customerDetailsBreadcrumbResolver,
@@ -35,6 +37,7 @@ export const appRoutes: Array<Route> = [
 				loadComponent: () =>
 					import('./pages/customer-details/customer-details.component').then((m) => m.CustomerDetailsComponent),
 				children: [
+					// Customer location
 					breadcrumbRoute({
 						path: `:${LOCATION_ID_ROUTE_PARAM}`,
 						breadcrumbResolver: locationDetailsBreadcrumbResolver,

@@ -1,4 +1,11 @@
 <main>
+	<label class="prompt-checkbox">
+		<input type="checkbox" [(ngModel)]="navigationPromptService.promptDuringNavigation" /> Prompt during navigation (for
+		edge case testing)
+	</label>
+
+	<br />
+
 	<pre class="current-url">URL: {{ url$ | async }}</pre>
 
 	<nav>
@@ -20,6 +27,6 @@
 	<pre>
 Top-level breadcrumbs:
 {{ breadcrumbsForCodeSnippet$ | async | json }}
-	</pre
+</pre
 	>
 </aside>

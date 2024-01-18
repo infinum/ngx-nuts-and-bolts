@@ -19,3 +19,8 @@ pre {
 .current-url {
 	display: inline-block;
 }
+
+.prompt-checkbox {
+	user-select: none;
+	cursor: pointer;
+}
