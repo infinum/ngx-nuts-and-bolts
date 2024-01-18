@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { BREADCRUMBS_CONFIG } from '../providers';
 import { Breadcrumb } from '../types';
@@ -44,7 +44,7 @@ export class BreadcrumbsService<T> implements OnDestroy {
 				if (event instanceof NavigationEnd) {
 					this.processQueue();
 				}
-				if (event instanceof NavigationCancel) {
+				if (event instanceof NavigationCancel || event instanceof NavigationError) {
 					this.resetQueue();
 				}
 			})
