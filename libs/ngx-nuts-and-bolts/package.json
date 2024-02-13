@@ -33,8 +33,5 @@
 	"schematics": "./schematics/src/collection.json",
 	"ng-add": {
 		"save": "dependencies"
-	},
-	"devDependencies": {
-		"typescript": "file:../../node_modules/typescript"
 	}
 }
