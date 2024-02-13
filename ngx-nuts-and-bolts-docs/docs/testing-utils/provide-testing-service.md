@@ -41,7 +41,7 @@ it('should react to user changes', async () => {
 
 If you are interested in more details and reasoning, read on.
 
-## 1. The problem we are trying to solve
+## 2. The problem we are trying to solve
 
 Let's take a look at an example where we have `AuthService` that exposes `user$` observable. `AuthTestingService` must implement the public interface of `AuthService` (we will utilize [`ExtractPublic`](./extract-public.md) for that). It can be useful if `AuthTestingService` exposes `setUser` method that can be used for easier state setup in unit tests.
 
@@ -150,7 +150,7 @@ it('should react to user changes', async () => {
 
 This is better, but we have to do the tedious `as unknown as AuthTestingService` cast.
 
-## 2. The solution
+## 3. The solution
 
 To avoid any manual type casting, we can use `provideTestingService` helper method.
 
