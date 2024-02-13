@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts/env';
 import { createRouteConfigLoadingObservable } from '@infinum/ngx-nuts-and-bolts/routing-utils';
 import { EnvironmentVariable } from './enums/environment-variable.enum';
@@ -13,7 +13,7 @@ import { EnvironmentVariableValuePipe } from './pipes/environment-variable-value
 	templateUrl: './variable-selection.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, EnvironmentVariableValuePipe, FormsModule, RouterOutlet],
+	imports: [CommonModule, EnvironmentVariableValuePipe, FormsModule, RouterModule],
 })
 export class VariableSelectionComponent {
 	public readonly variables = Object.entries(EnvironmentVariable);

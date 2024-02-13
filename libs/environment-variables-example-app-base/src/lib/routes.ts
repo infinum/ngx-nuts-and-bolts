@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-export const routes: Array<Route> = [
+export const envExampleAppRoutes: Array<Route> = [
 	{
 		path: 'foo',
 		loadChildren: () => import('./pages/foo.page').then((m) => m.FooPageModule),
