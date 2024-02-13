@@ -37,6 +37,7 @@ After you've added a new feature into the library, steps to add corresponding do
 
 1. Add related `<feature-name>.md` file inside of the `docs` folder in the `ngx-nuts-and-bolts-docs` project.
 2. Edit `sidebar.js` file by adding a new object which will be used in building sidebar navigation.
+3. Keep each secondary entry point's README.md in-sync with Docusaurus' `<feature-name>.md` file.
 
 After your pull request is merged, documentation will be built via a GitHub action and will be available at [github-pages][github-pages] after a successful build.
 
@@ -44,3 +45,7 @@ After your pull request is merged, documentation will be built via a GitHub acti
 [github-issues]: https://github.com/infinum/ngx-nuts-and-bolts/issues
 [github-pulls]: https://github.com/infinum/ngx-nuts-and-bolts/pulls
 [github-pages]: https://infinum.github.io/ngx-nuts-and-bolts/
+
+## Publishing
+
+To publish new `ngx-nuts-and-bolts` package to the npm registry after CI process completes you need to checkout main branch on your machine locally, set appropriate versions according to the changes you did and semantic versioning and build the library (`either ngx-nuts-and-bolts or ngx-nuts-and-bolts-ssr`) manually. After that step is complete you need to navigate to the `dist` folder of the respective application you've built and run `npm publish` command. If you'll need to publish alpha or beta versions you need to use `--tag` flag for the npm publish command because versions in the package.json files will be disregarded.

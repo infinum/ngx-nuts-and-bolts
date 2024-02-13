@@ -1,4 +1,14 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run precommit
+# Check typescript errors
+npm run tscheck
+
+# Check linting errors
+npx nx affected:lint --uncommitted
+
+# Check that the build passes
+npx nx affected:build --uncommitted
+
+# Run prettier via lint-staged
+npx lint-staged
