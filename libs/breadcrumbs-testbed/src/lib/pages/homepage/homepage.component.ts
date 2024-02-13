@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CUSTOMERS_ROUTE_PATH } from '../../route-param';
 
 @Component({
-	selector: 'app-homepage',
+	selector: 'bea-homepage',
 	standalone: true,
 	imports: [CommonModule, RouterModule],
 	templateUrl: './homepage.component.html',

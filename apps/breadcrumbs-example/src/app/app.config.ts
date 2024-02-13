@@ -3,14 +3,14 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withEnabledBlockingInitialNavigation } from '@angular/router';
 import { provideConsole, provideWindow } from '@infinum/ngx-nuts-and-bolts';
 import { provideBreadcrumbsConfig } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
+import { BreadcrumbTestBedData } from 'breadcrumbs-testbed';
 import { appRoutes } from './app.routes';
-import { BreadcrumbData } from './types/breadcrumb-data';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
 		provideWindow(window),
 		provideConsole(console),
-		provideBreadcrumbsConfig<BreadcrumbData>({
+		provideBreadcrumbsConfig<BreadcrumbTestBedData>({
 			logLevel: 'debug',
 			titleConfiguration: {
 				formatter: (breadcrumbs) => {

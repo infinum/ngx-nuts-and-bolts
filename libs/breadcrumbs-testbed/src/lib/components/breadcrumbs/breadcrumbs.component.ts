@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { BreadcrumbsService } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
-import { BreadcrumbData, CustomerLocationWithCustomerData } from '../../types/breadcrumb-data';
+import { BreadcrumbTestBedData, CustomerLocationWithCustomerData } from '../../types/breadcrumb-data';
 
 @Component({
-	selector: 'app-breadcrumbs',
+	selector: 'bea-breadcrumbs',
 	standalone: true,
 	imports: [CommonModule, RouterModule],
 	templateUrl: './breadcrumbs.component.html',
@@ -15,15 +15,17 @@ export class BreadcrumbsComponent {
 	@Input() public topLevelLink?: { label: string; url: string };
 
 	private readonly router = inject(Router);
-	private readonly breadcrumbsService: BreadcrumbsService<BreadcrumbData> = inject(BreadcrumbsService);
+	private readonly breadcrumbsService: BreadcrumbsService<BreadcrumbTestBedData> = inject(BreadcrumbsService);
 
 	protected readonly breadcrumbs$ = this.breadcrumbsService.breadcrumbs$;
 
-	protected isString(value: BreadcrumbData): value is string {
+	protected isString(value: BreadcrumbTestBedData): value is string {
 		return typeof value === 'string';
 	}
 
-	protected isCustomerLocationWithCustomerData(value: BreadcrumbData): value is CustomerLocationWithCustomerData {
+	protected isCustomerLocationWithCustomerData(
+		value: BreadcrumbTestBedData
+	): value is CustomerLocationWithCustomerData {
 		return value instanceof CustomerLocationWithCustomerData;
 	}
 

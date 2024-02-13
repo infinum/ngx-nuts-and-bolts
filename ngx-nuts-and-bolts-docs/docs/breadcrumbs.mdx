@@ -19,7 +19,9 @@ import ReactPlayer from 'react-player';
 
 <ReactPlayer playing controls url={DemoAppVideoUrl} />
 
-Please check out `apps/breadcrumbs-example`. You can run the app with `npm run start:breadcrumbs-example`.
+You can run the app with `npm run start:breadcrumbs-example`.
+
+Please check out `apps/breadcrumbs-example` and `libs/breadcrumbs-testbed`. `breadcrumbs-testbed` lib includes most of the application code that is a good reference for how you should implement breadcrumbs in your app as well. It was separated out in a non-publishable and non-buildable lib just to re-use code for both the example app and unit tests.
 
 To showcase various edge cases where navigation might be cancelled because of app-specific route activation/matching and deactivation guards, there are some prompts that happen during navigation that you can play with to see how the app behaves in various cases. This is to simulate real-world examples where you might have guards that prevent navigation if the user is not logged in or that prevent leaving a page with a dirty form.
 
@@ -27,9 +29,9 @@ Some files that might be of particular interest:
 
 - How the service is configured in `apps/breadcrumbs-example/src/app/app.config.ts`.
   - Including the formatter for title updates.
-- The way routes are defined in `apps/breadcrumbs-example/src/app/app.routes.ts`.
-- Different resolvers for breadcrumb data in `apps/breadcrumbs-example/src/app/breadcrumb-resolvers`.
-- Example of how to render breadcrumb in `apps/breadcrumbs-example/src/app/components/breadcrumbs`.
+- The way routes are defined in `libs/breadcrumbs-testbed/src/lib/routes.ts`.
+- Different resolvers for breadcrumb data in `libs/breadcrumbs-testbed/src/lib/breadcrumb-resolvers`.
+- Example of how to render breadcrumb in `libs/breadcrumbs-testbed/src/lib/components/breadcrumbs`.
   - Including conditional rendering based on type of breadcrumb data object. This allows to render not just simple links, but also things like a dropdown selection that triggers navigation.
 
 ## 3. Usage
@@ -150,7 +152,7 @@ This is all that is mandatory. See following section for more details on additio
 
 Breadcrumb resolvers can set data on the route. There is a default key under which the breadcrumb data is resolved - `BREADCRUMBS_DEFAULT_RESOLVE_KEY` (`breadcrumbs`). Changing this can be useful if you want to read this data from the mounted component.
 
-You can see an example of this in demo app's customer details component (`apps/breadcrumbs-example/src/app/pages/customer-details/customer-details.component.ts`) and route definition where `breadcrumbResolverKey` is set to `location` - matching the input name of the component so that resolved data can be read easily.
+You can see an example of this in demo app's customer details component (`libs/breadcrumbs-testbed/src/lib/pages/customer-details/customer-details.component.ts`) and route definition where `breadcrumbResolverKey` is set to `location` - matching the input name of the component so that resolved data can be read easily.
 
 #### Boundaries
 
@@ -180,7 +182,7 @@ There is a built-in resolver that allow you to resolve breadcrumbs with static d
 
 #### Writing a custom resolver
 
-Please take a look at `apps/breadcrumbs-example/src/app/breadcrumb-resolvers/customer-details.breadcrumb-resolver.ts` for an example of a resolver. It reads customer ID from route parameter, fetches data about that customer, sets customer name as breadcrumb data and passes down the whole customer object as route data.
+Please take a look at `libs/breadcrumbs-testbed/src/lib/breadcrumb-resolvers/customer-details.breadcrumb-resolver.ts` for an example of a resolver. It reads customer ID from route parameter, fetches data about that customer, sets customer name as breadcrumb data and passes down the whole customer object as route data.
 
 ## 4. Debugging
 

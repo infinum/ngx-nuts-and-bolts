@@ -5,7 +5,7 @@ import { BreadcrumbsComponent } from '../../components/breadcrumbs/breadcrumbs.c
 import { Customer } from '../../types/customer';
 
 @Component({
-	selector: 'app-customer-details',
+	selector: 'bea-customer-details',
 	standalone: true,
 	imports: [CommonModule, RouterModule, BreadcrumbsComponent],
 	templateUrl: './customer-details.component.html',

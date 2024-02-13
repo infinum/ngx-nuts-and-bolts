@@ -6,5 +6,5 @@ export class CustomerLocationWithCustomerData {
 }
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-export type BreadcrumbData = string | CustomerLocationWithCustomerData;
-export type BreadcrumbRouteData = string | Customer | CustomerLocation;
+export type BreadcrumbTestBedData = string | CustomerLocationWithCustomerData;
+export type BreadcrumbTestBedRouteData = string | Customer | CustomerLocation;

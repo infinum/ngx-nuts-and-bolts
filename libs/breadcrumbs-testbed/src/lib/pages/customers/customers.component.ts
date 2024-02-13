@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CustomersService } from '../../services/customers.service';
 
 @Component({
-	selector: 'app-customers',
+	selector: 'bea-customers',
 	standalone: true,
 	imports: [CommonModule, RouterModule],
 	templateUrl: './customers.component.html',

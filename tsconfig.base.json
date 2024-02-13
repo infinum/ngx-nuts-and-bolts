@@ -29,7 +29,8 @@
 			"@infinum/ngx-nuts-and-bolts/testing-utils": ["libs/ngx-nuts-and-bolts/testing-utils/src/index.ts"],
 			"@ngx-nuts-and-bolts/environment-variables-example-app-base": [
 				"libs/environment-variables-example-app-base/src/index.ts"
-			]
+			],
+			"breadcrumbs-testbed": ["libs/breadcrumbs-testbed/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

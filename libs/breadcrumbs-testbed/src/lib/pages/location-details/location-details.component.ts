@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { CustomerLocation } from '../../types/customer-location';
 
 @Component({
-	selector: 'app-location-details',
+	selector: 'bea-location-details',
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './location-details.component.html',

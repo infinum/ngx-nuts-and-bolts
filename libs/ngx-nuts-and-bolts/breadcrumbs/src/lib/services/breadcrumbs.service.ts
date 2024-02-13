@@ -2,7 +2,7 @@ import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationCancel, NavigationEnd, NavigationError, Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { BREADCRUMBS_CONFIG } from '../providers';
+import { BREADCRUMBS_CONFIG, DEFAULT_BREADCRUMBS_CONFIG } from '../providers';
 import { Breadcrumb } from '../types';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { CONSOLE } from '@infinum/ngx-nuts-and-bolts';
@@ -21,7 +21,7 @@ export class BreadcrumbsService<T> implements OnDestroy {
 	private static instanceCounter = 0;
 	private readonly instanceId: number;
 	private readonly title = inject(Title);
-	private readonly config = inject(BREADCRUMBS_CONFIG);
+	private readonly config = inject(BREADCRUMBS_CONFIG, { optional: true }) || DEFAULT_BREADCRUMBS_CONFIG;
 	private readonly console = inject(CONSOLE, { optional: true }) || console;
 	private readonly subscriptions = new Subscription();
 	public readonly parentInstance = inject(BreadcrumbsService, { skipSelf: true, optional: true });
