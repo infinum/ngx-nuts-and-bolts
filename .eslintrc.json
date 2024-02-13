@@ -1,7 +1,7 @@
 {
 	"root": true,
 	"ignorePatterns": ["**/*"],
-	"plugins": ["@nx"],
+	"plugins": ["@nx", "@typescript-eslint"],
 	"overrides": [
 		{
 			"files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -23,8 +23,12 @@
 		},
 		{
 			"files": ["*.ts", "*.tsx"],
-			"extends": ["plugin:@nx/typescript", "plugin:@infinum/typescript", "plugin:@infinum/angular"],
-			"rules": {}
+			"extends": [
+				"plugin:@nx/typescript",
+				"plugin:@typescript-eslint/recommended-requiring-type-checking",
+				"plugin:@infinum/typescript",
+				"plugin:@infinum/angular"
+			]
 		},
 		{
 			"files": ["*.js", "*.jsx"],
