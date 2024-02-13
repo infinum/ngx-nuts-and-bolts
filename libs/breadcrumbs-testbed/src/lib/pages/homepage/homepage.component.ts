@@ -8,7 +8,6 @@ import { CUSTOMERS_ROUTE_PATH } from '../../route-param';
 	standalone: true,
 	imports: [CommonModule, RouterModule],
 	templateUrl: './homepage.component.html',
-	styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent {
 	protected readonly CUSTOMERS_ROUTE_PATH = CUSTOMERS_ROUTE_PATH;

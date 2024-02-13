@@ -50,8 +50,6 @@ export class BreadcrumbsService<T> implements OnDestroy {
 		);
 
 		if (this.config.logLevel === 'debug') {
-			// this.console.log(`[Breadcrumbs][${this.instanceId}] Service initialized:`, this);
-
 			this.subscriptions.add(
 				this._breadcrumbs$.subscribe((breadcrumbs) => {
 					this.console.log(`[Breadcrumbs][${this.instanceId}] State updated:`, breadcrumbs);

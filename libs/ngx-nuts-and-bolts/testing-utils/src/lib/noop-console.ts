@@ -6,12 +6,21 @@ import { Provider } from '@angular/core';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { CONSOLE } from '@infinum/ngx-nuts-and-bolts';
 import { ExtractPublic } from './extract-public.type';
+import { noop } from 'rxjs';
 
 export class NoopConsole implements Partial<ExtractPublic<Console>> {
-	public error(...data: Array<any>): void {}
-	public info(...data: Array<any>): void {}
-	public log(...data: Array<any>): void {}
-	public warn(...data: Array<any>): void {}
+	public error(...data: Array<any>): void {
+		noop();
+	}
+	public info(...data: Array<any>): void {
+		noop();
+	}
+	public log(...data: Array<any>): void {
+		noop();
+	}
+	public warn(...data: Array<any>): void {
+		noop();
+	}
 }
 
 export function provideNoopConsole(): Provider {

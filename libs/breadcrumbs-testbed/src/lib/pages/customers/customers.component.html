@@ -1,6 +1,6 @@
 <h1>Customers</h1>
 
-<table *ngIf="customers$ | async as customers; else loading">
+<table *ngIf="customers$ | async as customers; else loading" aria-label="Table of customers">
 	<thead>
 		<tr>
 			<th>Name</th>
