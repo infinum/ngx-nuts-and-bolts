@@ -1,14 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Check typescript errors
-npm run tscheck
-
-# Check linting errors
-npx nx affected:lint --uncommitted
-
-# Check that the build passes
-npx nx affected:build --uncommitted
-
 # Run prettier via lint-staged
 npx lint-staged
+
+# Check linters, builds and tests
+npx nx affected -t lint build test

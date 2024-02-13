@@ -9,7 +9,10 @@ import { provideNoopConsole, provideTestingTitleService } from '@infinum/ngx-nut
 import { breadcrumbsTestBedRoutes } from '../routes';
 import { BreadcrumbTestBedData } from '../types/breadcrumb-data';
 
-describe('BreadcrumbsService', () => {
+// This is a higher-level "integration" test suite for multiple aspects of the breadcrumbs feature.
+// This file is placed in libs/breadcrumbs-testbed to avoid circular dependency linting issues. Although the circular dep is only between lib and .spec files, Nx's enforce boundaries rule has no way to ignore .spec files.
+
+describe('Breadcrumbs', () => {
 	let service: BreadcrumbsService<BreadcrumbTestBedData>;
 
 	describe('with default config', () => {
@@ -24,12 +27,8 @@ describe('BreadcrumbsService', () => {
 
 	function init(config?: BreadcrumbsConfig<BreadcrumbTestBedData>) {
 		TestBed.configureTestingModule({
-			providers: [
-				provideTestingTitleService(),
-				provideNoopConsole(),
-				provideBreadcrumbsConfig(config),
-				RouterTestingModule.withRoutes(breadcrumbsTestBedRoutes),
-			],
+			imports: [RouterTestingModule.withRoutes(breadcrumbsTestBedRoutes)],
+			providers: [provideTestingTitleService(), provideNoopConsole(), provideBreadcrumbsConfig(config)],
 		});
 
 		service = TestBed.inject(BreadcrumbsService);
