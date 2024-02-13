@@ -60,6 +60,7 @@ const sidebars = {
 				'testing-utils/async-data',
 				'testing-utils/async-error',
 				'testing-utils/mock-storage',
+				'testing-utils/provide-testing-service',
 			],
 		},
 	],
