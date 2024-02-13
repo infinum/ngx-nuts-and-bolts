@@ -2,6 +2,7 @@
 export default {
 	displayName: 'breadcrumbs-testbed',
 	preset: '../../jest.preset.js',
+	setupFiles: ['./jest.polyfills.js'],
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 	coverageDirectory: '../../coverage/libs/breadcrumbs-testbed',
 	transform: {

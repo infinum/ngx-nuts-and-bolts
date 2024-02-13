@@ -1,4 +1,4 @@
-import { Customer } from 'breadcrumbs-testbed';
+import { Customer } from '../types';
 
 const _customers: Array<Customer> = [];
 

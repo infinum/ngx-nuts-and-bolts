@@ -1,4 +1,4 @@
-<h2>{{ customer.name }}</h2>
+<h2>{{ customer?.name }}</h2>
 
 <p>Customer-level breadcrumbs:</p>
 <bea-breadcrumbs></bea-breadcrumbs>
@@ -8,7 +8,7 @@
 <nav>
 	<span>Locations:</span>
 	<ul>
-		<li *ngFor="let location of customer.locations">
+		<li *ngFor="let location of customer?.locations">
 			<a [routerLink]="location.id" routerLinkActive="active">{{ location.name }}</a>
 		</li>
 	</ul>

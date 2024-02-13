@@ -1,5 +1,5 @@
 import { HttpResponse, delay, http } from 'msw';
-import { getMockCustomers } from '../data/customers.mock-data';
+import { getMockCustomers } from './customers.mock-data';
 
 function getAllCustomersHandlerFactory(apiUrl: string) {
 	return http.get(`${apiUrl}/customers`, async () => {

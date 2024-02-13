@@ -12,5 +12,5 @@ import { Customer } from '../../types/customer';
 	styleUrls: ['./customer-details.component.scss'],
 })
 export class CustomerDetailsComponent {
-	@Input() public customer!: Customer;
+	@Input() public customer?: Customer;
 }

@@ -1,8 +1,19 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { customerHandlerFactories, initMockCustomers } from 'breadcrumbs-testbed';
+import { setupWorker } from 'msw/browser';
 import { AppComponent } from './app/app.component';
-import { startMsw } from './mocks';
+import { appConfig } from './app/app.config';
 
-startMsw(); // You would usually get API_URL env.var. and pass the value to startMsw, but for the sake of simplicity we're passing an empty string in this example.
+function startMsw(apiUrl = '') {
+	initMockCustomers();
+
+	const handlers = [...customerHandlerFactories].map((factory) => factory(apiUrl));
+
+	const worker = setupWorker(...handlers);
+
+	return worker.start({ onUnhandledRequest: 'bypass' });
+}
+
+startMsw();
 
 bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
