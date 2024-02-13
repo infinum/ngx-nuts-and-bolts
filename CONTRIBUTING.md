@@ -45,3 +45,7 @@ After your pull request is merged, documentation will be built via a GitHub acti
 [github-issues]: https://github.com/infinum/ngx-nuts-and-bolts/issues
 [github-pulls]: https://github.com/infinum/ngx-nuts-and-bolts/pulls
 [github-pages]: https://infinum.github.io/ngx-nuts-and-bolts/
+
+## Publishing
+
+To publish new `ngx-nuts-and-bolts` package to the npm registry after CI process completes you need to checkout main branch on your machine locally, set appropriate versions according to the changes you did and semantic versioning and build the library (`either ngx-nuts-and-bolts or ngx-nuts-and-bolts-ssr`) manually. After that step is complete you need to navigate to the `dist` folder of the respective application you've built and run `npm publish` command. If you'll need to publish alpha or beta versions you need to use `--tag` flag for the npm publish command because versions in the package.json files will be disregarded.

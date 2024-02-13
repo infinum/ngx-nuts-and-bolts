@@ -8,7 +8,19 @@ A collection of commonly used pieces of Angular-related code that we use everyda
 ## Installation
 
 ```bash
+ng add @infinum/ngx-nuts-and-bolts
+```
+
+For usage inside of the NX monorepo setup, you'll have to firstly install the package using package manager e.g. npm:
+
+```bash
 npm install @infinum/ngx-nuts-and-bolts
+```
+
+After that you should be able to call the angular schematic via the NX generator like so:
+
+```bash
+nx g @infinum/ngx-nuts-and-bolts:<name-of-the-schematic>
 ```
 
 ## Available _nuts and bolts_

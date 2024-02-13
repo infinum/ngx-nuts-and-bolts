@@ -53,9 +53,18 @@ const sidebars = {
 			id: 'form-utils',
 		},
 		{
+			type: 'doc',
+			id: 'di-token-type',
+		},
+		{
 			type: 'category',
 			label: 'Testing utilities',
-			items: ['testing-utils/extract-public', 'testing-utils/async-data', 'testing-utils/async-error'],
+			items: [
+				'testing-utils/extract-public',
+				'testing-utils/async-data',
+				'testing-utils/async-error',
+				'testing-utils/mock-storage',
+			],
 		},
 	],
 
