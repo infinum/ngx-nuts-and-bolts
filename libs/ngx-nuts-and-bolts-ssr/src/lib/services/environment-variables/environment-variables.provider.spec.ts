@@ -1,8 +1,9 @@
 import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { StateKey, TransferState } from '@angular/platform-browser';
-import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts';
-import { PROCESS, provideUniversalEnvironmentVariables } from './environment-variables.provider';
+import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts/env';
+import { PROCESS } from '../../di-tokens';
+import { provideUniversalEnvironmentVariables } from './environment-variables.provider';
 
 enum EnvironmentVariable {
 	Foo = 'FOO',
@@ -161,11 +162,11 @@ describe('provideUniversalEnvironmentVariables', () => {
 class TransferStateMock {
 	private readonly record: Record<string, unknown> = {};
 
-	get<T>(key: StateKey<T>, defaultValue: T): T {
+	public get<T>(key: StateKey<T>, defaultValue: T): T {
 		return (this.record[key] as T) ?? defaultValue;
 	}
 
-	set<T>(key: StateKey<T>, value: T): void {
+	public set<T>(key: StateKey<T>, value: T): void {
 		this.record[key] = value;
 	}
 }

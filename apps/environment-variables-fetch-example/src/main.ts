@@ -1,17 +1,9 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { provideEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts';
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
-
-if (environment.production) {
-	enableProdMode();
-}
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import appConfig from './app/app.config';
 
 fetch('./assets/env.json')
 	.then((response) => response.json())
 	.then((env) => {
-		platformBrowserDynamic([provideEnvironmentVariables(env)])
-			.bootstrapModule(AppModule)
-			.catch((err) => console.error(err));
+		bootstrapApplication(AppComponent, appConfig(env)).catch((err) => console.error(err));
 	});

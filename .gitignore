@@ -1,12 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
-/tmp
+dist
+tmp
 /out-tsc
 
 # dependencies
 node_modules
+.nx
 
 # IDEs and editors
 /.idea
@@ -16,6 +17,7 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
+.nx/*
 
 # IDE - VSCode
 .vscode/*
@@ -38,8 +40,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Angular cache
+.angular
+
 # dotenv
 .env
-
-# angular cache
-/.angular

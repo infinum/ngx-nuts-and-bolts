@@ -1,5 +1,2 @@
-export {
-	provideUniversalEnvironmentVariables,
-	IUniversalEnvironmentVariablesProviderConfig,
-	PROCESS,
-} from './lib/services/environment-variables/environment-variables.provider';
+export * from './lib/di-tokens';
+export * from './lib/services';

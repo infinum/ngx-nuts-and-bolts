@@ -2,7 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-	selector: 'ngx-nuts-and-bolts-bar-page',
+	selector: 'inf-nuts-and-bolts-bar-page',
 	template: 'Bar',
 })
 export class BarPageComponent {}
