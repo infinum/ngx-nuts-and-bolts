@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts';
+import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts/env';
 import { EnvironmentVariable } from './enums/environment-variable.enum';
 import { EnvironmentVariableValuePipe } from './pipes/environment-variable-value/environment-variable-value.pipe';
 

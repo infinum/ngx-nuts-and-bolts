@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
-import { EnvironmentVariablesService, provideEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts';
+import { EnvironmentVariablesService, provideEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts/env';
 import { EnvironmentVariable } from '@ngx-nuts-and-bolts/environment-variables-example-app-base';
 
 function appConfig(env: Record<EnvironmentVariable, string>): ApplicationConfig {

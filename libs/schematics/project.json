@@ -1,0 +1,37 @@
+{
+	"name": "ngx-nuts-and-bolts/schematics",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/schematics/src",
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/libs/ngx-nuts-and-bolts/schematics",
+				"main": "",
+				"tsConfig": "libs/schematics/tsconfig.lib.json",
+				"assets": [
+					{
+						"glob": "**/*.json",
+						"input": "libs/schematics/src",
+						"output": "./src"
+					},
+					{
+						"glob": "**/*.__ts__",
+						"input": "libs/schematics/src",
+						"output": "./src"
+					}
+				]
+			}
+		},
+		"lint": {
+			"executor": "@nx/linter:eslint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["libs/schematics/**/*.ts"]
+			}
+		}
+	},
+	"tags": []
+}

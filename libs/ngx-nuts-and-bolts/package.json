@@ -1,6 +1,6 @@
 {
 	"name": "@infinum/ngx-nuts-and-bolts",
-	"version": "3.0.0",
+	"version": "4.0.1",
 	"description": "Reusable components and helpers for angular projects",
 	"license": "MIT",
 	"repository": {
@@ -29,5 +29,9 @@
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"
+	},
+	"schematics": "./schematics/src/collection.json",
+	"ng-add": {
+		"save": "dependencies"
 	}
 }
