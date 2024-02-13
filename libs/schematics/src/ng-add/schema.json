@@ -1,0 +1,6 @@
+{
+	"$schema": "http://json-schema.org/schema",
+	"$id": "SchematicsNgxNutsAndBoltsNgAddSchema",
+	"title": "ngx-nuts-and-bolts ng add Schema",
+	"type": "object"
+}
