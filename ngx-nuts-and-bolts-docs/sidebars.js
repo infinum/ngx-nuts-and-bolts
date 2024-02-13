@@ -30,6 +30,10 @@ const sidebars = {
 		},
 		{
 			type: 'doc',
+			id: 'route-config-loading',
+		},
+		{
+			type: 'doc',
 			id: 'table-state',
 		},
 		{
@@ -51,31 +55,6 @@ const sidebars = {
 		{
 			type: 'doc',
 			id: 'di-token-type',
-		},
-		{
-			type: 'category',
-			label: 'Directives',
-			items: ['directives/in-view'],
-		},
-		{
-			type: 'category',
-			label: 'Pipes',
-			items: ['pipes/enum-property'],
-		},
-		{
-			type: 'category',
-			label: 'Services',
-			items: ['services/environment-variables'],
-		},
-		{
-			type: 'category',
-			label: 'Animations',
-			items: ['animations/animations'],
-		},
-		{
-			type: 'category',
-			label: 'Utilities',
-			items: ['utilities/loading-state', 'utilities/route-config-loading', 'utilities/table-state'],
 		},
 		{
 			type: 'category',
