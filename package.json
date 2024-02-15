@@ -11,6 +11,7 @@
 		"start": "nx run ngx-nuts-and-bolts:storybook",
 		"start:environment-variables-ssr-example": "NGX_NUTS_AND_BOLTS_EXAMPLE_FOO='I am Foo' NGX_NUTS_AND_BOLTS_EXAMPLE_BAR='I am Bar' nx run environment-variables-ssr-example:serve-ssr",
 		"start:environment-variables-fetch-example": "nx run environment-variables-fetch-example:serve",
+		"start:breadcrumbs-example": "nx run breadcrumbs-example:serve",
 		"build": "concurrently \"npm run build:core\" \"npm run build:ssr\"",
 		"build:core": "nx build ngx-nuts-and-bolts --skip-nx-cache && npm run copy-files:core && npm run build:schematics",
 		"build:ssr": "nx build ngx-nuts-and-bolts-ssr --skip-nx-cache && npm run copy-files:ssr",
@@ -19,9 +20,6 @@
 		"copy-files:ssr": "cp ./LICENSE ./dist/libs/ngx-nuts-and-bolts-ssr/LICENSE && cp ./README.md ./dist/libs/ngx-nuts-and-bolts-ssr/README.md",
 		"test": "nx run-many --target=test --all --parallel --skip-nx-cache",
 		"test:watch": "nx run-many --target=test --all --parallel --watchAll --skip-nx-cache",
-		"tscheck": "concurrently \"npm run tsc:lib\" \"npm run tsc:spec\"",
-		"tsc:lib": "tsc --noEmit -p ./libs/ngx-nuts-and-bolts/tsconfig.lib.json",
-		"tsc:spec": "tsc --noEmit -p ./libs/ngx-nuts-and-bolts/tsconfig.spec.json",
 		"dev:ssr-example": "ng run environment-variables-ssr-example:serve-ssr",
 		"serve:ssr-example": "node dist/environment-variables-ssr-example/server/main.js",
 		"build:ssr-example": "ng build && ng run environment-variables-ssr-example:server",
@@ -88,13 +86,19 @@
 		"jest-fail-on-console": "^3.1.1",
 		"jest-preset-angular": "~13.1.0",
 		"lint-staged": "^13.2.3",
+		"msw": "^2.0.11",
 		"ng-packagr": "^16.1.0",
 		"nx": "16.4.1",
 		"nx-cloud": "latest",
 		"postcss-preset-env": "^8.5.1",
 		"prettier": "^2.6.2",
+		"storybook-addon-angular-router": "^1.9.1",
 		"ts-jest": "^29.1.0",
 		"ts-node": "10.9.1",
-		"typescript": "~5.1.3"
+		"typescript": "~5.1.3",
+		"undici": "^5.28.3"
+	},
+	"msw": {
+		"workerDirectory": "libs/msw-public"
 	}
 }

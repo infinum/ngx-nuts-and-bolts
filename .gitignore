@@ -43,5 +43,8 @@ Thumbs.db
 # Angular cache
 .angular
 
+# Nx
+.nx
+
 # dotenv
 .env

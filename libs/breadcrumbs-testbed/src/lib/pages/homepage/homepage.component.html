@@ -1,0 +1,12 @@
+<h1>My logistics company™</h1>
+
+<p>Welcome</p>
+<p>
+	Try looking at some of our <a [routerLink]="['/', CUSTOMERS_ROUTE_PATH]">customers</a> or
+	<a [routerLink]="['/', CUSTOMERS_ROUTE_PATH, 'walmart']" routerLinkActive="active">deep link to Walmart!</a>
+</p>
+
+<p>
+	Or, try breaking stuff by navigating to
+	<a [routerLink]="['/', CUSTOMERS_ROUTE_PATH, 'walmart', 'foo']">a link</a> that will cause the resolver to fail.
+</p>

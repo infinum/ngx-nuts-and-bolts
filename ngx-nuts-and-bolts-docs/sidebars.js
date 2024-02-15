@@ -46,6 +46,10 @@ const sidebars = {
 		},
 		{
 			type: 'doc',
+			id: 'breadcrumbs',
+		},
+		{
+			type: 'doc',
 			id: 'form-utils',
 		},
 		{

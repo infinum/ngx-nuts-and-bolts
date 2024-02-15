@@ -1,6 +1,6 @@
 const config = {
 	stories: ['../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-	addons: ['@storybook/addon-essentials'],
+	addons: ['@storybook/addon-essentials', 'storybook-addon-angular-router'],
 	framework: {
 		name: '@storybook/angular',
 		options: {},
