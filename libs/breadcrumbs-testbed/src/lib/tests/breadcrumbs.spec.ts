@@ -35,8 +35,8 @@ describe('Breadcrumbs', () => {
 	let router: Router;
 
 	describe('with default config', () => {
-		beforeEach(() => {
-			init();
+		beforeEach(async () => {
+			await init();
 		});
 
 		it('should create the host component', () => {
@@ -90,17 +90,19 @@ describe('Breadcrumbs', () => {
 		it('should navigate to a specific customer and re-render the breadcrumbs', async () => {
 			await navigate('/customers');
 
+			const breadcrumbs = fixture.debugElement.query(By.css('bea-breadcrumbs'));
+			const breadcrumbsElement = breadcrumbs.nativeElement as HTMLElement;
+			expect(breadcrumbsElement.textContent).toBe('My logistics company™>Customers');
+
+			console.log(fixture.debugElement.query(By.css('table')));
 			const amazonLink = fixture.debugElement.query(By.css('table a[href="/customers/amazon"]'))
 				.nativeElement as HTMLAnchorElement;
 
 			amazonLink.click();
 
-			await fixture.whenStable();
-			fixture.detectChanges();
+			await whenStable();
 
-			const breadcrumbs = fixture.debugElement.query(By.css('bea-breadcrumbs'));
-			const breadcrumbsElement = breadcrumbs.nativeElement as HTMLElement;
-			expect(breadcrumbsElement.textContent).toBe('My logistics company™>Customers');
+			expect(breadcrumbsElement.textContent).toBe('My logistics company™>Customers>Amazon');
 		});
 
 		it('should render the breadcrumbs on /customers/walmart', async () => {
@@ -137,8 +139,7 @@ describe('Breadcrumbs', () => {
 
 			customersLink.click();
 
-			await fixture.whenStable();
-			fixture.detectChanges();
+			await whenStable();
 
 			breadcrumbsElement = breadcrumbs.nativeElement as HTMLElement;
 			expect(breadcrumbsElement.textContent).toBe('My logistics company™>Customers');
@@ -147,11 +148,18 @@ describe('Breadcrumbs', () => {
 
 	async function navigate(url: string) {
 		await router.navigateByUrl(url);
+		await whenStable();
+	}
 
+	async function whenStable() {
 		fixture.detectChanges();
-
 		await fixture.whenStable();
-		await lastValueFrom(timer(0)); // not 100% sure why this is necessary
+		// Not 100% sure why we need to wait for two event loops, but it seems to be
+		// necessary in order to await for MSW to do it's thing because it also does
+		// some internal delay (even if we do no explicit delay() calls in MSW handlers).
+		// In any case, all this is good reason to write proper e2e tests instead.
+		await lastValueFrom(timer(0));
+		await lastValueFrom(timer(0));
 		fixture.detectChanges();
 	}
 
@@ -169,18 +177,19 @@ describe('Breadcrumbs', () => {
 			],
 		});
 
-		service = TestBed.inject(BreadcrumbsService);
+		service = TestBed.inject(BreadcrumbsService<BreadcrumbTestBedData>);
 		router = TestBed.inject(Router);
 
 		fixture = TestBed.createComponent(HostComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
+
+		await whenStable();
 	}
 
 	function startMsw(apiUrl = '') {
 		initMockCustomers();
 
-		const handlers = [...customerHandlerFactories].map((factory) => factory(apiUrl));
+		const handlers = [...customerHandlerFactories].map((factory) => factory(apiUrl, false));
 
 		const server = setupServer(...handlers);
 

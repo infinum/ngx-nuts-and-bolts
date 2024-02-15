@@ -15,5 +15,5 @@ export const confirmEntryGuard: CanActivateFn = (route) => {
 	}
 
 	const window = inject(WINDOW);
-	return window.confirm(`Are you sure you want to navigate to "${route.url}"?`);
+	return window.confirm(`Are you sure you want to navigate to "${route.url.toString()}"?`);
 };

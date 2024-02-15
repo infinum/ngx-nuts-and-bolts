@@ -10,5 +10,5 @@ export const confirmLeaveGuard: CanDeactivateFn<unknown> = (_, currentRoute) => 
 	}
 
 	const window = inject(WINDOW);
-	return window.confirm(`Are you sure you want to navigate away from "${currentRoute.url}"?`);
+	return window.confirm(`Are you sure you want to navigate away from "${currentRoute.url.toString()}"?`);
 };

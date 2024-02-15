@@ -14,6 +14,13 @@ function startMsw(apiUrl = '') {
 	return worker.start({ onUnhandledRequest: 'bypass' });
 }
 
-startMsw();
+startMsw()
+	.then(() => {
+		bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
+	})
+	.catch((e) => {
+		console.error(e);
+		console.error('Failed to start MSW and/or Angular application.');
 
-bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
+		return;
+	});

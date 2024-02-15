@@ -1,19 +1,23 @@
 import { HttpResponse, delay, http } from 'msw';
 import { getMockCustomers } from './customers.mock-data';
 
-function getAllCustomersHandlerFactory(apiUrl: string) {
+function getAllCustomersHandlerFactory(apiUrl: string, withDelay = true) {
 	return http.get(`${apiUrl}/customers`, async () => {
-		await delay();
+		if (withDelay) {
+			await delay();
+		}
 
 		return HttpResponse.json(getMockCustomers());
 	});
 }
 
-function getCustomerByIdHandlerFactory(apiUrl: string) {
+function getCustomerByIdHandlerFactory(apiUrl: string, withDelay = true) {
 	return http.get(`${apiUrl}/customers/:id`, async (req) => {
-		await delay();
+		if (withDelay) {
+			await delay();
+		}
 
-		const { id } = req.params;
+		const id = req.params['id'] as string;
 
 		const customer = getMockCustomers().find((c) => c.id === id);
 

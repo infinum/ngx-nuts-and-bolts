@@ -28,7 +28,7 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 	}
 
 	const breadcrumbRouteDeactivationGuard: CanDeactivateFn<unknown> = () => {
-		const breadcrumbsService: BreadcrumbsService<TBreadcrumbData> = inject(BreadcrumbsService);
+		const breadcrumbsService = inject(BreadcrumbsService<TBreadcrumbData>);
 
 		breadcrumbsService.pop();
 		return true;
@@ -40,7 +40,7 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot
 	) => {
-		const breadcrumbsService: BreadcrumbsService<TBreadcrumbData> = inject(BreadcrumbsService);
+		const breadcrumbsService = inject(BreadcrumbsService<TBreadcrumbData>);
 		const url = route.pathFromRoot.map((r) => r.url.map((s) => s.toString()).join('/')).join('/');
 
 		// eslint-disable-next-line rxjs/finnish

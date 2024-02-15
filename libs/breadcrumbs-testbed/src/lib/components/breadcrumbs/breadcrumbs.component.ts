@@ -15,7 +15,7 @@ export class BreadcrumbsComponent {
 	@Input() public topLevelLink?: { label: string; url: string };
 
 	private readonly router = inject(Router);
-	private readonly breadcrumbsService: BreadcrumbsService<BreadcrumbTestBedData> = inject(BreadcrumbsService);
+	private readonly breadcrumbsService = inject(BreadcrumbsService<BreadcrumbTestBedData>);
 
 	protected readonly breadcrumbs$ = this.breadcrumbsService.breadcrumbs$;
 
@@ -29,9 +29,9 @@ export class BreadcrumbsComponent {
 		return value instanceof CustomerLocationWithCustomerData;
 	}
 
-	protected onLocationChange(e: Event, customerId: string): void {
+	protected onLocationChange(e: Event, customerId: string) {
 		const newLocationId = (e.target as HTMLSelectElement).value;
 
-		this.router.navigate(['/', 'customers', customerId, newLocationId]);
+		return this.router.navigate(['/', 'customers', customerId, newLocationId]);
 	}
 }

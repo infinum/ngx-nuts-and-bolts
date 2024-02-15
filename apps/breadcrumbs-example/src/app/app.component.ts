@@ -17,7 +17,7 @@ export class AppComponent {
 	private readonly router = inject(Router);
 	protected readonly url$ = this.router.events.pipe(map(() => this.router.url));
 	protected readonly navigationPromptService = inject(NavigationPromptService);
-	private readonly breadcrumbsService: BreadcrumbsService<BreadcrumbTestBedData> = inject(BreadcrumbsService);
+	private readonly breadcrumbsService = inject(BreadcrumbsService<BreadcrumbTestBedData>);
 
 	protected readonly breadcrumbsForCodeSnippet$ = this.breadcrumbsService.breadcrumbs$.pipe(
 		map((breadcrumbs) => {

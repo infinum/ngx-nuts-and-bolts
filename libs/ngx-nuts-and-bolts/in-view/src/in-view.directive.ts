@@ -9,7 +9,7 @@ export class InViewDirective implements AfterViewInit, OnDestroy {
 
 	private readonly observer = this.initObserver();
 
-	constructor(private readonly elementRef: ElementRef) {}
+	constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
 
 	public ngAfterViewInit(): void {
 		this.observer.observe(this.elementRef.nativeElement);
