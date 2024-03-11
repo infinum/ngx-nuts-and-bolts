@@ -23,6 +23,7 @@
 			"@infinum/ngx-nuts-and-bolts/form-utils": ["libs/ngx-nuts-and-bolts/form-utils/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/in-view": ["libs/ngx-nuts-and-bolts/in-view/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/loading-state": ["libs/ngx-nuts-and-bolts/loading-state/src/index.ts"],
+			"@infinum/ngx-nuts-and-bolts/query-params-reader": ["libs/ngx-nuts-and-bolts/query-params-reader/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/table-state": ["libs/ngx-nuts-and-bolts/table-state/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/testing-utils": ["libs/ngx-nuts-and-bolts/testing-utils/src/index.ts"],
 			"@ngx-nuts-and-bolts/environment-variables-example-app-base": [
