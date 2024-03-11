@@ -1,1 +1,1 @@
-export * from './lib/query-params-reader.module';
+export * from './lib/query-params-reader';

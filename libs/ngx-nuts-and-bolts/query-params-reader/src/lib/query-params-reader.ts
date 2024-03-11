@@ -1,46 +1,46 @@
-import { Injectable, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { inject } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { z } from 'zod';
 
-type PaginationInfo = {
-	pageSize: number;
-	pageNumber: number;
-};
-
-@Injectable({
-	providedIn: 'root',
-})
-export class QueryParamReader<T> {
+// TODO: Revisit this type extension
+export class QueryParamReader<T extends Params> {
 	private readonly activatedRoute = inject(ActivatedRoute);
+	private readonly router = inject(Router);
 
-	public read(): Partial<T> {
-		const queryParams = this.activatedRoute.snapshot.queryParams;
-		const result: Partial<T> = {};
+	constructor(private readonly schema: z.ZodTypeAny) {}
 
-		// TODO: all queryParams are strings. Figure out a way how to coerce them to the correct type. Maybe using some zod built-ins
-		// Also, this is a very naive implementation. It doesn't handle nested objects, arrays, etc.
-		// It's just a starting point for the discussion
-		// There is no validation of the query params -> should we use some kind of validation library? e.g. zod ?
-		for (const key in queryParams) {
-			// eslint-disable-next-line no-prototype-builtins
-			if (queryParams.hasOwnProperty(key)) {
-				result[key as keyof T] = queryParams[key];
+	public read(): T {
+		const queryParams = this.activatedRoute.snapshot.queryParamMap;
+		const result: { [key: string]: any } = {};
+
+		for (const key in this.schema) {
+			const queryParam = queryParams.get(key);
+			if (queryParam) {
+				result[key] = queryParam;
 			}
 		}
 
-		return result;
+		console.log(result);
+		return result as T;
 	}
 
-	public write(): void {
-		// TODO: Implement write method for generic query params
+	public write(paramData: T): void {
+		this.router.navigate([], {
+			queryParams: paramData,
+			queryParamsHandling: 'merge',
+			skipLocationChange: true,
+		});
 	}
 }
 
-export function createQueryParamReader<T>(): () => QueryParamReader<T> {
-	return () => new QueryParamReader<T>();
+export function createQueryParamReader<T extends z.ZodTypeAny>(schema: T): () => QueryParamReader<z.infer<T>> {
+	return () => new QueryParamReader<T>(schema);
 }
 
-const injectPaginationReader = createQueryParamReader<PaginationInfo>();
+// const injectPaginationReader = createQueryParamReader<PaginationInfo>();
+const injectPaginationReader = createQueryParamReader(z.object({ pageSize: z.number(), pageNumber: z.number() }));
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class TestingComponent {
 	private readonly paginationReader = injectPaginationReader();
 
