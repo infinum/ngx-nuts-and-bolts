@@ -29,7 +29,7 @@ export enum EnvironmentVariable {
 
 This enum will be used in place of some generic values for things like `EnvironmentVariablesService`, `ENVIRONMENT_VARIABLES_RECORD` and `EnvironmentVariablesRecord`
 
-## 2.2. `EnvironmentVariablesService`
+## 2.2. EnvironmentVariablesService
 
 ### 2.2.1. Methods
 
@@ -47,7 +47,7 @@ This configuration is applied no matter how the environment variables values are
 
 `EnvironmentVariablesService` depends on variables and their values to be provided via `DI`. There are two providers that are available in the library (one for SPA and one for SSR) that should cover most use cases, and a way to create your own provider.
 
-### 2.3.1. For SPA Apps - `provideEnvironmentVariables`
+### 2.3.1. For SPA Apps
 
 `provideEnvironmentVariables` is a simple function that receives an object and returns a provider. The passed object must have all the environment variables that are used in the application.
 
@@ -75,7 +75,7 @@ In `env.json`, you would have something like this:
 
 When you deploy the app to some environment, you build the application artifacts only once and the DevOps team should implement value replacements of properties in `dist/assets/env.json` file. This replacement must happen after the build, but before the application is deployed (basically copied to production server as static files). This way, user's browser will fetch `env.json` when the app starts and use the values that are set in the file. Values can, of course, be set per-environment (that is the whole point of this feature).
 
-### 2.3.2. For SSR / Angular Universal Apps - `provideUniversalEnvironmentVariables`
+### 2.3.2. For SSR / Angular Universal Apps
 
 The setup for Angular Universal is similar, but there is no env.json file that is fetched. This files was necessary for SPA apps because there is no application runtime, only statically built and served files. However, with SSR, there is a runtime and we can access `process.env` to read values from system-level environment variables.
 
@@ -175,7 +175,7 @@ When running the app on production server, simply set environment variables in o
 
 For development, you can easily define values for variables in a local .env file and source it however you like (e.g. using [`dotenv` ohmyzsh plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dotenv) or rely on [`dotenv`](https://www.npmjs.com/package/dotenv) implementation in `server.ts`);
 
-### 2.3.3. Custom setup using `ENVIRONMENT_VARIABLES_RECORD`
+### 2.3.3. Custom setup using ENVIRONMENT_VARIABLES_RECORD
 
 This method gives you flexibility to implement a custom way of initializing environment variables record. You can provide the record containing values for environment variables yourself, by manually setting value for `ENVIRONMENT_VARIABLES_RECORD` DI token. This is what both `provideEnvironmentVariables` and `provideUniversalEnvironmentVariables` do internally.
 
@@ -214,7 +214,7 @@ TestBed.configureTestingModule({
 envService = TestBed.inject(EnvironmentVariablesService);
 ```
 
-## 5. Opinion piece - what about Angular's `environment` files?
+## 5. Opinion piece - what about Angular's environment.ts files?
 
 While Angular provides environment files out-of-the-box (one for development and one for production), but they are not the best solution to this problem for multiple reasons:
 
