@@ -25,14 +25,15 @@
 			"@infinum/ngx-nuts-and-bolts/form-utils": ["libs/ngx-nuts-and-bolts/form-utils/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/in-view": ["libs/ngx-nuts-and-bolts/in-view/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/loading-state": ["libs/ngx-nuts-and-bolts/loading-state/src/index.ts"],
+			"@infinum/ngx-nuts-and-bolts/overflow-check": ["libs/ngx-nuts-and-bolts/overflow-check/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/table-state": ["libs/ngx-nuts-and-bolts/table-state/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/testing-utils": ["libs/ngx-nuts-and-bolts/testing-utils/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/utility-types": ["libs/ngx-nuts-and-bolts/utility-types/src/index.ts"],
 			"@ngx-nuts-and-bolts/environment-variables-example-app-base": [
 				"libs/environment-variables-example-app-base/src/index.ts"
 			],
-			"breadcrumbs-testbed": ["libs/breadcrumbs-testbed/src/index.ts"],
-			"@ngx-nuts-and-bolts/schematics": ["libs/schematics/src/index.ts"]
+			"@ngx-nuts-and-bolts/schematics": ["libs/schematics/src/index.ts"],
+			"breadcrumbs-testbed": ["libs/breadcrumbs-testbed/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

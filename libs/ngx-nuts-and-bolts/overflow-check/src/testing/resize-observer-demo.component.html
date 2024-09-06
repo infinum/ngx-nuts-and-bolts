@@ -1,0 +1,43 @@
+<p>
+	<code>infOverflowCheck</code> directive allows you to check whether the element is overflowing or not. Attach the
+	directive, get the reference to it and check the <code>$isOverflowing()</code> signal value. Use this to add some
+	styling or behavior depending on whether the element is overflowing or not.
+</p>
+
+<p>
+	In this example, overflowing elements will be set a class that makes the color red. Additionally,
+	<code>title</code> attribute will be set, so that on cursor hover you see the whole text. You could use this to
+	conditionally show some nicer tooltip/popover.
+</p>
+
+<p>Try resizing the list below to make elements overflow:</p>
+
+<div class="container" infOverflowCheckContainer>
+	<div
+		*ngFor="let item of items"
+		class="item"
+		infOverflowCheck
+		#overflowCheckRef="infOverflowCheck"
+		[class.is-overflowing]="overflowCheckRef.$isOverflowing()"
+		[attr.title]="overflowCheckRef.$isOverflowing() ? item : null"
+	>
+		{{ item }}
+	</div>
+</div>
+
+<p>
+	Here is another example showcasing that the directive works even if overflowing elements have some margin and padding:
+</p>
+
+<div class="container with-paddings" infOverflowCheckContainer>
+	<div
+		*ngFor="let item of items"
+		class="item"
+		infOverflowCheck
+		#overflowCheckRef="infOverflowCheck"
+		[class.is-overflowing]="overflowCheckRef.$isOverflowing()"
+		[attr.title]="overflowCheckRef.$isOverflowing() ? item : null"
+	>
+		{{ item }}
+	</div>
+</div>

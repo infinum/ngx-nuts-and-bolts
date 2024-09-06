@@ -1,0 +1,27 @@
+.container {
+	width: 100px;
+	min-width: 50px;
+	max-width: 200px;
+	min-height: 50px;
+	overflow-x: hidden;
+	border: 1px solid;
+	resize: both;
+}
+
+.item {
+	overflow: hidden;
+	text-wrap: nowrap;
+	text-overflow: ellipsis;
+}
+
+.is-overflowing {
+	color: red;
+	cursor: help;
+}
+
+.with-paddings {
+	.item {
+		margin: 2px;
+		padding: 8px 16px;
+	}
+}
