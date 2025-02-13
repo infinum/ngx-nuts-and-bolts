@@ -1,7 +1,7 @@
 ---
-id: form-utils
-title: Form utils
-sidebar_label: Form utils
+id: form-value-type
+title: Form value type
+sidebar_label: Form value type
 ---
 
 ## 1. Features
