@@ -14,7 +14,7 @@ export class MockStorage implements Storage {
 	}
 
 	public setItem(key: string, value: unknown) {
-		this.localStore[key] = value + '';
+		this.localStore[key] = String(value);
 	}
 
 	public removeItem(key: string) {

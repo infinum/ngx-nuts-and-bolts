@@ -50,11 +50,16 @@ const sidebars = {
 		},
 		{
 			type: 'doc',
-			id: 'form-utils',
+			id: 'breadcrumbs',
 		},
 		{
 			type: 'doc',
 			id: 'di-token-type',
+		},
+		{
+			type: 'category',
+			label: 'Form utilities',
+			items: ['form-utils/form-value-type', 'form-utils/file-cva'],
 		},
 		{
 			type: 'category',

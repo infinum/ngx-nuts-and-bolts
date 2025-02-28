@@ -6,7 +6,7 @@ import { InViewDirective } from './in-view.directive';
 
 describe('InViewDirective', () => {
 	let directive: InViewDirective;
-	let elementRef: ElementRef;
+	let elementRef: ElementRef<HTMLElement>;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -16,7 +16,7 @@ describe('InViewDirective', () => {
 
 	beforeEach(() => {
 		global.IntersectionObserver ||= jest.fn();
-		elementRef = TestBed.inject(ElementRef);
+		elementRef = TestBed.inject<ElementRef<HTMLElement>>(ElementRef);
 	});
 
 	it('should create an instance', () => {
@@ -35,7 +35,7 @@ describe('InViewDirective', () => {
 			} as unknown as IntersectionObserver;
 			return observer;
 		});
-		const inViewCallbackSpy = jest.fn();
+		const inViewCallbackSpy = jest.fn((_isInView: boolean) => undefined);
 		directive = new InViewDirective(elementRef);
 		directive.ngAfterViewInit();
 		const inViewSub = directive.inView.subscribe(inViewCallbackSpy);

@@ -69,3 +69,24 @@ export class ExampleComponent {
 ```
 
 Here, since `directionsData` doesn't have `differentKey` property for any of the enum values, `undefined` would be returned.
+If the need for retrieving enum property value arises you can use `getEnumPropertyValue()` function directly in your .ts file without the need for instantiating new EnumPropertyPipe instance.
+
+```ts
+import { getEnumPropertyValue } from '@infinum/ngx-nuts-and-bolts';
+
+@Component({
+	selector: 'app-example',
+	template: ``,
+})
+export class ExampleComponent {
+	public enumValue = Directions.NORTH;
+	public directionsData = directionsData;
+
+	private readonly transloco = inject(TranslocoService);
+
+	private translationDemoMethod(): void {
+		const translationKey = getEnumPropertyValue(Directions.NORTH, directionsData);
+		const translation = this.transloco.translate(translationKey);
+	}
+}
+```

@@ -64,7 +64,7 @@ There are two ways to implement handling the loading and error states:
 2. Use `privateLoadingState` and `publicLoadingState` functions to manually create observables
    - this requires a bit more work, but it allows you to have multiple sets of loading and error states within the same component
 
-### 3.1. Extending `LoadingState`
+### 3.1. Extending LoadingState
 
 ```html
 <ng-container *ngIf="templateData$ | async as templateData">...</ng-container>

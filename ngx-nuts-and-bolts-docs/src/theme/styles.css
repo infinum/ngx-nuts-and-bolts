@@ -1,0 +1,11 @@
+@import url('https://use.typekit.net/baz1roy.css');
+
+.hero__title {
+	padding: 16px;
+	color: black;
+}
+
+.hero__subtitle {
+	padding: 16px;
+	color: black;
+}

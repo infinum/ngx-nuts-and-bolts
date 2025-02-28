@@ -28,7 +28,7 @@ describe('EnumPropertyPipe', () => {
 			theAnswer: number;
 			translationKey: string;
 		},
-		number | string
+		'translationKey' | 'theAnswer'
 	>;
 
 	beforeEach(() => {

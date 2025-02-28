@@ -1,0 +1,24 @@
+<div class="breadcrumbs" *ngIf="breadcrumbs$ | async as breadcrumbs">
+	<div *ngIf="topLevelLink" class="breadcrumb">
+		<a [routerLink]="topLevelLink.url">{{ topLevelLink.label }}</a>
+		<span *ngIf="breadcrumbs.length" class="separator">></span>
+	</div>
+
+	<div class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs; let last = last">
+		<a *ngIf="isString(breadcrumb.data)" [routerLink]="breadcrumb.url">{{ breadcrumb.data }}</a>
+
+		<ng-container *ngIf="isCustomerLocationWithCustomerData(breadcrumb.data)">
+			<select (change)="onLocationChange($event, breadcrumb.data.customer.id)">
+				<option
+					*ngFor="let location of breadcrumb.data.customer.locations"
+					[attr.value]="location.id"
+					[attr.selected]="location.id === breadcrumb.data.location.id || null"
+				>
+					{{ location.name }}
+				</option>
+			</select>
+		</ng-container>
+
+		<span *ngIf="!last" class="separator">></span>
+	</div>
+</div>
