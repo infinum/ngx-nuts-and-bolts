@@ -30,6 +30,10 @@ const sidebars = {
 		},
 		{
 			type: 'doc',
+			id: 'route-config-loading',
+		},
+		{
+			type: 'doc',
 			id: 'table-state',
 		},
 		{
