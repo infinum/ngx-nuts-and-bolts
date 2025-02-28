@@ -20,7 +20,7 @@ export class VariableSelectionComponent {
 	public selectedVariable = EnvironmentVariable.Foo;
 	private readonly router = inject(Router);
 	public readonly isRouteConfigLoading$ = createRouteConfigLoadingObservable(this.router);
-	private readonly env: EnvironmentVariablesService<EnvironmentVariable> = inject(EnvironmentVariablesService);
+	private readonly env = inject(EnvironmentVariablesService<EnvironmentVariable>);
 
 	constructor() {
 		for (const variableName of Object.values(EnvironmentVariable)) {
