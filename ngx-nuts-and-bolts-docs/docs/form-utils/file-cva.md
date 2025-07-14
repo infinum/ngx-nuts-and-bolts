@@ -18,6 +18,8 @@ First, define your FormControl and expect the value to be `FileList | null`:
 
 <!-- prettier-ignore-start -->
 ```ts
+import { fileExtensionValidator, FileControlValueAccessorDirective } from '@infinum/ngx-nuts-and-bolts/form-utils';
+
 class MyComponent {
   protected readonly allowedExtensions = [
     '.jpg',

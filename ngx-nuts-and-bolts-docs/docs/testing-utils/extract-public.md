@@ -16,6 +16,8 @@ Good question! Perhaps unexpectedly, that would require you to implement private
 ## 1. Usage
 
 ```ts
+import { ExtractPublic } from '@infinum/ngx-nuts-and-bolts/testing-utils';
+
 export class UserTestingService implements ExtractPublic<UserService>{
 ...
 }

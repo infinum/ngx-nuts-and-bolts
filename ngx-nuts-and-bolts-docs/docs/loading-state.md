@@ -27,6 +27,8 @@ By default, loader enter delay is set to 250ms and loader leave delay is set to 
 Provide the desired values in a provider in your `AppModule`:
 
 ```ts
+import { LoadingState } from '@infinum/ngx-nuts-and-bolts/loading-state';
+
 {
 	provide: LOADING_STATE_CONFIG,
 	useValue: {
@@ -41,6 +43,8 @@ Provide the desired values in a provider in your `AppModule`:
 Pass the desired values via component-specific provider (this will override any values set in the global provider):
 
 ```ts
+import { LoadingState } from '@infinum/ngx-nuts-and-bolts/loading-state';
+
 @Component({
 	...
 	providers: [{
@@ -77,6 +81,7 @@ There are two ways to implement handling the loading and error states:
 ```
 
 ```ts
+import { LoadingState } from '@infinum/ngx-nuts-and-bolts/loading-state';
 
 interface ITemplateData { ... }
 

@@ -24,6 +24,8 @@ export function createExampleForm() {
 Now, pass the function's return type using the TypeScript `ReturnType` utility type to the form type helper as a generic argument and create new form value and raw form value types as needed for this specific form.
 
 ```ts
+import { FormValue, RawFormValue } from '@infinum/ngx-nuts-and-bolts/form-utils';
+
 export type ExampleFormValue = FormValue<ReturnType<typeof createExampleForm>>;
 export type ExampleRawFormValue = RawFormValue<ReturnType<typeof createExampleForm>>;
 ```
