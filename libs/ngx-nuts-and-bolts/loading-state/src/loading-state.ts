@@ -1,4 +1,4 @@
-import { Directive, InjectFlags, InjectionToken, Injector } from '@angular/core';
+import { Directive, InjectionToken, inject } from '@angular/core';
 import { BehaviorSubject, Observable, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, tap } from 'rxjs/operators';
 
@@ -25,6 +25,13 @@ export interface IPublicLoadingState<TError> {
 
 @Directive()
 export abstract class LoadingState<TError = unknown> {
+	private readonly config = inject(LOADING_STATE_CONFIG, {
+		optional: true,
+	}) ?? {
+		enterDelay: DEFAULT_LOADER_ENTER_DELAY,
+		leaveDelay: DEFAULT_LOADER_LEAVE_DELAY,
+	};
+
 	// eslint-disable-next-line rxjs/no-exposed-subjects
 	protected readonly loadingTrigger$ = new BehaviorSubject<void>(undefined);
 
@@ -39,22 +46,13 @@ export abstract class LoadingState<TError = unknown> {
 	public readonly initialLoadDone$: IPublicLoadingState<TError>['initialLoadDone$'];
 	public readonly directLoading$: IPublicLoadingState<TError>['loading$'];
 
-	constructor(private readonly injector: Injector) {
-		const config = this.injector.get(
-			LOADING_STATE_CONFIG,
-			{
-				enterDelay: DEFAULT_LOADER_ENTER_DELAY,
-				leaveDelay: DEFAULT_LOADER_LEAVE_DELAY,
-			},
-			InjectFlags.Optional
-		);
-
+	constructor() {
 		const { _error$, _loading$ } = privateLoadingState<TError>();
 		const directLoading$ = _loading$.pipe(distinctUntilChanged());
 		const { error$, loading$, initialLoadDone$ } = publicLoadingState(
 			{ _error$, _loading$ },
-			config.enterDelay,
-			config.leaveDelay
+			this.config.enterDelay,
+			this.config.leaveDelay
 		);
 
 		this._error$ = _error$;
