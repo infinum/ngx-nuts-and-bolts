@@ -7,6 +7,8 @@ sidebar_label: DI Token Type
 Use `DITokenType` in cases when you want to infer types of injection tokens in environments where typescript doesn't infer this automatically. E.g. when defining providers (most useful for useFactory providers)
 
 ```typescript
+import { DITokenType } from '@infinum/ngx-nuts-and-bolts/utility-types';
+
 type SomeType = {
 	name: string;
 	description: string;

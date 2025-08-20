@@ -9,6 +9,8 @@ When you need to interact with storage but still you are testing only a unit of 
 ## 1. Usage
 
 ```ts
+import { MockStorage } from '@infinum/ngx-nuts-and-bolts/testing-utils';
+
 let storage: Storage;
 
 beforeEach(async () => {

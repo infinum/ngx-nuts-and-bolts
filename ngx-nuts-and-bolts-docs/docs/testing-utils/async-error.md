@@ -39,6 +39,8 @@ When returning the mocked error in test suites or test doubles, simply wrap the 
 ### 1.1. Test double scenario
 
 ```ts
+import { asyncData, asyncError } from '@infinum/ngx-nuts-and-bolts/testing-utils';
+
 export class MockedDataFetchingService {
 	public getSomeData(data: TData): Observable<TData> {
 		return data
@@ -51,6 +53,8 @@ export class MockedDataFetchingService {
 ### 1.2. Test suite scenario
 
 ```ts
+import { asyncError } from '@infinum/ngx-nuts-and-bolts/testing-utils';
+
 describe('asyncError demo', () => {
 	...
 	it('should return not found error if data does not exist', () => {

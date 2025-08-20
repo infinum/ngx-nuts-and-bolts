@@ -21,6 +21,8 @@ This specific implementation uses `observeOn` operator with `asyncScheduler`, cr
 When returning the mock data in test doubles, simply wrap the data using `asyncData` function and the data will be returned asynchronously.
 
 ```ts
+import { asyncData } from '@infinum/ngx-nuts-and-bolts/testing-utils';
+
 public getTestingData(data: TData): Observable<TData>{
 	return asyncData(data);
 }

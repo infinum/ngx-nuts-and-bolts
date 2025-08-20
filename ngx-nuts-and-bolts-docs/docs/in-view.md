@@ -17,6 +17,8 @@ Often times, one may be interested to know whether or not piece a of DOM is visi
 Simply add `infInView` directive to whatever DOM node you care about. You can then handle notifications from `(inView)` EventEmitter.
 
 ```ts
+import { InViewDirective } from '@infinum/ngx-nuts-and-bolts/in-view';
+
 @Component({
 	selector: 'app-example',
 	template: `<div (infInView)="inView$.next($event)>{{ inView$ | async }}</div>`,
@@ -29,6 +31,8 @@ class ExampleComponent {
 You can also select the directive with a `@ViewChild` as you would any other and read `isInView` property which reflects current status.
 
 ```ts
+import { InViewDirective } from '@infinum/ngx-nuts-and-bolts/in-view';
+
 @Component({
 	selector: 'app-example',
 	template: `<div infInView>{{ inViewDirectiveRef.isInView }}</div>`,
@@ -42,6 +46,8 @@ class ExampleComponent {
 Additionally, you can also export the directive instance in a template directly.
 
 ```ts
+import { InViewDirective } from '@infinum/ngx-nuts-and-bolts/in-view';
+
 @Component({
 	selector: 'app-example',
 	template: `<div infInView #infInViewRef="infInView">{{ infInViewRef.isInView }}</div>`,

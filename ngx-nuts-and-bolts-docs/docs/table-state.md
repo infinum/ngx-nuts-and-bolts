@@ -20,6 +20,13 @@ Helper functions can be used individually or, as the example below shows, with o
 ```ts
 
 import {isEqual} from 'loadsh';
+import {
+	createCustomFiltersObservable,
+	createPaginationObservable,
+	createSortObservable,
+	IPageInfo,
+	ISortInfo,
+} from '@infinum/ngx-nuts-and-bolts/table-state';
 
 interface ITemplateData{
 	data: Data;
@@ -77,6 +84,8 @@ export class MyComponent extends LoadingStateComponent {
 Setting of the query parameters is even simpler as shown in code snippets below. With little mapping, interfaces for pagination and sorting should be usable with most of the 3rd party out-of-the-box data table events. While `changeFilters()` function accepts generic object as filter value.
 
 ```ts
+import { changePage } from '@infinum/ngx-nuts-and-bolts/table-state';
+
 ...
 public onPageChange(event: PageEvent): void{
 	const pageInfo: IPageInfo{
@@ -89,6 +98,8 @@ public onPageChange(event: PageEvent): void{
 ```
 
 ```ts
+import { changeSort } from '@infinum/ngx-nuts-and-bolts/table-state';
+
 ...
 public onSortChange(event: SortEvent): void{
 	const sortInfo: ISortInfo{
@@ -101,6 +112,8 @@ public onSortChange(event: SortEvent): void{
 ```
 
 ```ts
+import { changeFilters } from '@infinum/ngx-nuts-and-bolts/table-state';
+
 ...
 public onFiltersChange(event: FilterEvent): void{
 	changeFilters(this.router, event)

@@ -16,6 +16,8 @@ This library includes two commonly used animations — `fadeAnimation()` and `he
 ## 2. Usage
 
 ```ts
+import { fadeAnimation, heightAnimation } from '@infinum/ngx-nuts-and-bolts/animations';
+
 @NgComponent({
 	animations: [heightAnimation(), fadeAnimation()],
 })

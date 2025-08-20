@@ -43,6 +43,8 @@ export const directionsData: Record<Directions, ITranslatableEnum> = {
 You can bring both of these into a component and use them together as such:
 
 ```ts
+import { EnumPropertyPipe } from '@infinum/ngx-nuts-and-bolts/enum-property';
+
 @Component({
 	selector: 'app-example',
 	template: ` {{ enumValue | enumProperty : directionsData }} `,
@@ -72,7 +74,7 @@ Here, since `directionsData` doesn't have `differentKey` property for any of the
 If the need for retrieving enum property value arises you can use `getEnumPropertyValue()` function directly in your .ts file without the need for instantiating new EnumPropertyPipe instance.
 
 ```ts
-import { getEnumPropertyValue } from '@infinum/ngx-nuts-and-bolts';
+import { getEnumPropertyValue } from '@infinum/ngx-nuts-and-bolts/enum-property';
 
 @Component({
 	selector: 'app-example',
