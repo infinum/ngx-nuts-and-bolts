@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { IEnvironmentVariablesConfig } from './environment-variables-config.interface';
 import { ENVIRONMENT_VARIABLES_CONFIG } from './environment-variables-config.token';
+import { EnvironmentVariablesConfig } from './environment-variables-config.type';
 import { ENVIRONMENT_VARIABLES_RECORD } from './environment-variables-record.token';
 import { EnvironmentVariablesRecord } from './environment-variables-record.type';
 
@@ -12,7 +12,7 @@ export class EnvironmentVariablesService<TVariable extends string> {
 
 	constructor(
 		@Inject(ENVIRONMENT_VARIABLES_RECORD) private readonly variables: Partial<EnvironmentVariablesRecord<TVariable>>,
-		@Optional() @Inject(ENVIRONMENT_VARIABLES_CONFIG) private readonly config?: IEnvironmentVariablesConfig
+		@Optional() @Inject(ENVIRONMENT_VARIABLES_CONFIG) private readonly config?: EnvironmentVariablesConfig
 	) {}
 
 	public get(variableName: TVariable): string | undefined {
@@ -25,8 +25,8 @@ export class EnvironmentVariablesService<TVariable extends string> {
 	}
 
 	/**
-	 * @description Transforms the of an environment variable into a boolean. Configurable via IEnvironmentVariablesConfig->truthyBooleanStrings. Before comparison, the actual value is converted to lowercase.
-	 * @returns `true` if the value is one of the strings defined in IEnvironmentVariablesConfig->truthyBooleanStrings. `false` otherwise (including the case when the variable is not present).
+	 * @description Transforms the of an environment variable into a boolean. Configurable via EnvironmentVariablesConfig->truthyBooleanStrings. Before comparison, the actual value is converted to lowercase.
+	 * @returns `true` if the value is one of the strings defined in EnvironmentVariablesConfig->truthyBooleanStrings. `false` otherwise (including the case when the variable is not present).
 	 */
 	public getAsBoolean(variableName: TVariable): boolean {
 		const value = this.get(variableName);

@@ -19,16 +19,16 @@ Helper functions can be used individually or, as the example below shows, with o
 
 import {isEqual} from 'loadsh';
 
-interface ITemplateData{
+type TemplateData = {
 	data: Data;
 	tableState: ITableState;
-}
+};
 
-interface ITableState{
-	pagination: IPageInfo;
-	sort: ISortInfo;
+type TableState = {
+	pagination: PageInfo;
+	sort: SortInfo;
 	filters: TFilterValue;
-}
+};
 
 export class MyComponent extends LoadingStateComponent {
 	public readonly templateData$ = this.createTemplateDataObservable();
@@ -77,7 +77,7 @@ Setting of the query parameters is even simpler as shown in code snippets below.
 ```ts
 ...
 public onPageChange(event: PageEvent): void{
-	const pageInfo: IPageInfo{
+	const pageInfo: PageInfo = {
 		pageIndex: event.pageIndex,
 		pageSize: event.pageSize
 	}

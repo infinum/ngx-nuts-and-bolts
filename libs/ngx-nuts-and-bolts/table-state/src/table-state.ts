@@ -4,16 +4,16 @@ import { map, switchMap } from 'rxjs/operators';
 
 export type Sort = 'asc' | 'desc' | '';
 
-export interface IPageInfo {
+export type PageInfo = {
 	pageIndex: number;
 	pageSize: number;
 	length?: number;
-}
+};
 
-export interface ISortInfo {
+export type SortInfo = {
 	sortKey: string;
 	sortDirection: Sort;
-}
+};
 
 export enum TableQueryParam {
 	PAGE_INDEX = 'pageIndex',
@@ -27,12 +27,12 @@ export enum TableQueryParam {
  *
  * Creates observable that emits when page information in route changes.
  * @param {ActivatedRoute} route - Activated route instance used in component.
- * @param {IPageInfo} [fallbackPaginationInfo] - Fallback values for pagination info.
+ * @param {PageInfo} [fallbackPaginationInfo] - Fallback values for pagination info.
  */
 export function createPaginationObservable(
 	route: ActivatedRoute,
-	fallBackPaginationInfo: IPageInfo = { pageIndex: 0, pageSize: 10 }
-): Observable<IPageInfo> {
+	fallBackPaginationInfo: PageInfo = { pageIndex: 0, pageSize: 10 }
+): Observable<PageInfo> {
 	return route.queryParamMap.pipe(
 		map((paramMap) => {
 			const pageIndex = parseInt(
@@ -57,7 +57,7 @@ export function createPaginationObservable(
  * Creates observable that emits when sort information in route changes.
  * @param {ActivatedRoute} route - Activated route instance used in component.
  */
-export function createSortObservable(route: ActivatedRoute): Observable<ISortInfo> {
+export function createSortObservable(route: ActivatedRoute): Observable<SortInfo> {
 	return route.queryParamMap.pipe(
 		map((paramMap) => {
 			const sortKey = paramMap.get(TableQueryParam.SORT_KEY) ?? '';
@@ -110,9 +110,9 @@ export function createCustomFiltersObservable<TFilterValue extends Record<string
  *
  * Creates query params with passed information about pagination.
  * @param {Router} router - Router instance used in component.
- * @param {IPageInfo} pageInfo - Object containing information about page size and page index
+ * @param {PageInfo} pageInfo - Object containing information about page size and page index
  */
-export function changePage(router: Router, pageInfo: IPageInfo): Promise<boolean> {
+export function changePage(router: Router, pageInfo: PageInfo): Promise<boolean> {
 	return router.navigate([], {
 		replaceUrl: true,
 		queryParamsHandling: 'merge',
@@ -129,7 +129,7 @@ export function changePage(router: Router, pageInfo: IPageInfo): Promise<boolean
  * @param {Router} router - Router instance used in component.
  * @param {ISortInfo} sortInfo - Object containing information about sort key and direction
  */
-export function changeSort(router: Router, sort: ISortInfo): Promise<boolean> {
+export function changeSort(router: Router, sort: SortInfo): Promise<boolean> {
 	const sortDirection = sort.sortDirection || null;
 	const sortKey = sortDirection ? sort.sortKey : null;
 

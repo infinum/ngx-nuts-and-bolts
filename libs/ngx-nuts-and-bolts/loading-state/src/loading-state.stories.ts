@@ -4,9 +4,9 @@ import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, finalize, first, switchMap } from 'rxjs/operators';
 import { LoadingState } from './loading-state';
 
-interface IMockData {
+type MockData = {
 	foo: string;
-}
+};
 
 @Component({
 	template: `
@@ -34,7 +34,7 @@ interface IMockData {
 class LoadingStateHostComponent extends LoadingState {
 	public isPending = true;
 	private counter = 1;
-	private mockDataTrigger$ = new Subject<IMockData>();
+	private mockDataTrigger$ = new Subject<MockData>();
 
 	public readonly mockData$ = this.loadingTrigger$.pipe(
 		switchMap(() => {
@@ -53,7 +53,7 @@ class LoadingStateHostComponent extends LoadingState {
 		})
 	);
 
-	private fetchMockData(): Observable<IMockData> {
+	private fetchMockData(): Observable<MockData> {
 		return this.mockDataTrigger$.pipe(first());
 	}
 

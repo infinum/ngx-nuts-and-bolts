@@ -76,12 +76,12 @@ There are two ways to implement handling the loading and error states:
 
 ```ts
 
-interface ITemplateData { ... }
+type TemplateData = { ... };
 
 class MyComponent extends LoadingState {
 	public readonly templateData$ = this.createTemplateDataObservable();
 
-	private createTemplateDataObservable(): Observable<ITemplateData> {
+	private createTemplateDataObservable(): Observable<TemplateData> {
 		this.loadingTrigger$.pipe( // onRetry() will emit to loadingTrigger$
 			switchMap(() => {
 				this._loading$.next(true);
@@ -100,7 +100,7 @@ class MyComponent extends LoadingState {
 		)
 	}
 
-	private fetchData(): Observable<ITemplateData> {
+	private fetchData(): Observable<TemplateData> {
 		...
 	}
 }
@@ -111,7 +111,7 @@ Please note that data, loading and error containers are not nested inside of eac
 There is a possible variation when `fetchData` returns a long-living observable (e.g. if it depends on route query params):
 
 ```ts
-private createTemplateDataObservable(): Observable<ITemplateData> {
+private createTemplateDataObservable(): Observable<TemplateData> {
 	this.loadingTrigger$.pipe(
 		switchMap(() => {
 			this._loading$.next(true);

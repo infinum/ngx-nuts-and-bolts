@@ -19,13 +19,13 @@ const visibleStyle = style({
 	'margin-bottom': '*',
 });
 
-interface IFadeHeightAnimationOptions {
+type FadeHeightAnimationOptions = {
 	duration: number;
 	triggerName: string;
-}
+};
 
 export function heightAnimation(
-	options: IFadeHeightAnimationOptions = {
+	options: FadeHeightAnimationOptions = {
 		duration: HEIGHT_DEFAULT_DURATION,
 		triggerName: HEIGHT_DEFAULT_TRIGGER_NAME,
 	}

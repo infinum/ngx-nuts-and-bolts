@@ -12,8 +12,8 @@ import {
 	createCustomFiltersObservable,
 	createPaginationObservable,
 	createSortObservable,
-	IPageInfo,
-	ISortInfo,
+	PageInfo,
+	SortInfo,
 	TableQueryParam,
 } from './table-state';
 
@@ -36,7 +36,7 @@ describe('Table sate', () => {
 	it('should set query parameters for pagination', async () => {
 		expect(navigationSpy).toHaveBeenCalledTimes(0);
 
-		const pageInfo: IPageInfo = {
+		const pageInfo: PageInfo = {
 			pageIndex: 1,
 			pageSize: 12,
 		};
@@ -53,7 +53,7 @@ describe('Table sate', () => {
 	it('should set query parameters for sorting', async () => {
 		expect(navigationSpy).toHaveBeenCalledTimes(0);
 
-		const sortInfo: ISortInfo = {
+		const sortInfo: SortInfo = {
 			sortDirection: 'asc',
 			sortKey: 'testing-key',
 		};
@@ -72,7 +72,7 @@ describe('Table sate', () => {
 		expect(navigationSpy).toHaveBeenCalledTimes(0);
 		let paginationValue = await createPaginationObservable(route).pipe(take(1)).toPromise();
 
-		const pageInfo: IPageInfo = {
+		const pageInfo: PageInfo = {
 			pageIndex: 1,
 			pageSize: 12,
 		};
@@ -89,7 +89,7 @@ describe('Table sate', () => {
 		expect(navigationSpy).toHaveBeenCalledTimes(0);
 		let sortValue = await createSortObservable(route).pipe(take(1)).toPromise();
 
-		const sortInfo: ISortInfo = {
+		const sortInfo: SortInfo = {
 			sortDirection: 'asc',
 			sortKey: 'testing-key',
 		};

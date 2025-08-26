@@ -35,7 +35,7 @@ This enum will be used in place of some generic values for things like `Environm
 
 ### 2.2.2. Configuration
 
-`EnvironmentVariablesService` can be configured by setting a value under `ENVIRONMENT_VARIABLES_CONFIG` DI token to an object that satisfies `IEnvironmentVariablesConfig` interface. You can use `provideEnvironmentVariablesServiceConfig` functional provider. The configuration object has the following properties:
+`EnvironmentVariablesService` can be configured by setting a value under `ENVIRONMENT_VARIABLES_CONFIG` DI token to an object that satisfies `EnvironmentVariablesConfig` type. You can use `provideEnvironmentVariablesServiceConfig` functional provider. The configuration object has the following properties:
 
 - `truthyBooleanStrings` - An array of strings that will, when reading environment variable via `getAsBoolean`, be consider `true`. Before comparison, the actual value is converted to lowercase. The default value is `['true', '1']`.
 

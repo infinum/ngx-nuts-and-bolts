@@ -64,7 +64,9 @@
 					"libs/ngx-nuts-and-bolts/utility-types/**/*.ts",
 					"libs/ngx-nuts-and-bolts/utility-types/**/*.html",
 					"libs/ngx-nuts-and-bolts/routing-utils/**/*.ts",
-					"libs/ngx-nuts-and-bolts/routing-utils/**/*.html"
+					"libs/ngx-nuts-and-bolts/routing-utils/**/*.html",
+					"libs/ngx-nuts-and-bolts/http-cache/**/*.ts",
+					"libs/ngx-nuts-and-bolts/http-cache/**/*.html"
 				]
 			}
 		},

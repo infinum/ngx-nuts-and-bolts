@@ -1,4 +1,4 @@
-export interface ISchema {
+export type Schema = {
 	// Name of the project.
 	project: string;
-}
+};

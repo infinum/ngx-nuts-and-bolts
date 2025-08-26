@@ -3,7 +3,7 @@ import { Optional, PLATFORM_ID, StaticProvider, TransferState, makeStateKey } fr
 import { ENVIRONMENT_VARIABLES_RECORD, EnvironmentVariablesRecord } from '@infinum/ngx-nuts-and-bolts/env';
 import { PROCESS } from '../../di-tokens';
 
-export interface IUniversalEnvironmentVariablesProviderConfig<TVariable extends string> {
+export type UniversalEnvironmentVariablesProviderConfig<TVariable extends string> = {
 	/**
 	 * @description List of variables that will be readable only on server-side and will not be transferred to the client.
 	 */
@@ -13,10 +13,10 @@ export interface IUniversalEnvironmentVariablesProviderConfig<TVariable extends 
 	 * @description List of variables that will be readable on both server-side and client-side.
 	 */
 	publicVariables?: Array<TVariable>;
-}
+};
 
 export function provideUniversalEnvironmentVariables<TVariable extends string>(
-	config: IUniversalEnvironmentVariablesProviderConfig<TVariable>
+	config: UniversalEnvironmentVariablesProviderConfig<TVariable>
 ): StaticProvider {
 	const transferKey = makeStateKey<Partial<EnvironmentVariablesRecord<TVariable>>>('ENVIRONMENT_VARIABLES_RECORD');
 

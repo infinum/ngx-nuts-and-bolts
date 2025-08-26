@@ -30,6 +30,10 @@ const sidebars = {
 		},
 		{
 			type: 'doc',
+			id: 'http-cache',
+		},
+		{
+			type: 'doc',
 			id: 'route-config-loading',
 		},
 		{

@@ -5,12 +5,12 @@ enum TestingEnum {
 	Bar = 'bar',
 }
 
-interface ITestingEnumData {
+type TestingEnumData = {
 	translationKey: string;
 	theAnswer: number;
-}
+};
 
-const testingEnumData: Record<TestingEnum, ITestingEnumData> = {
+const testingEnumData: Record<TestingEnum, TestingEnumData> = {
 	[TestingEnum.Foo]: {
 		theAnswer: 42,
 		translationKey: 'testingEnum.foo',

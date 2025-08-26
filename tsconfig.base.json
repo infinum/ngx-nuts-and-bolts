@@ -23,6 +23,7 @@
 			"@infinum/ngx-nuts-and-bolts/enum-property": ["libs/ngx-nuts-and-bolts/enum-property/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/env": ["libs/ngx-nuts-and-bolts/env/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/form-utils": ["libs/ngx-nuts-and-bolts/form-utils/src/index.ts"],
+			"@infinum/ngx-nuts-and-bolts/http-cache": ["libs/ngx-nuts-and-bolts/http-cache/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/in-view": ["libs/ngx-nuts-and-bolts/in-view/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/loading-state": ["libs/ngx-nuts-and-bolts/loading-state/src/index.ts"],
 			"@infinum/ngx-nuts-and-bolts/routing-utils": ["libs/ngx-nuts-and-bolts/routing-utils/src/index.ts"],
@@ -32,8 +33,8 @@
 			"@ngx-nuts-and-bolts/environment-variables-example-app-base": [
 				"libs/environment-variables-example-app-base/src/index.ts"
 			],
-			"breadcrumbs-testbed": ["libs/breadcrumbs-testbed/src/index.ts"],
-			"@ngx-nuts-and-bolts/schematics": ["libs/schematics/src/index.ts"]
+			"@ngx-nuts-and-bolts/schematics": ["libs/schematics/src/index.ts"],
+			"breadcrumbs-testbed": ["libs/breadcrumbs-testbed/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
-import { IEnvironmentVariablesConfig } from './environment-variables-config.interface';
+import { EnvironmentVariablesConfig } from './environment-variables-config.type';
 
-export const ENVIRONMENT_VARIABLES_CONFIG = new InjectionToken<IEnvironmentVariablesConfig>(
+export const ENVIRONMENT_VARIABLES_CONFIG = new InjectionToken<EnvironmentVariablesConfig>(
 	'ENVIRONMENT_VARIABLES_CONFIG'
 );

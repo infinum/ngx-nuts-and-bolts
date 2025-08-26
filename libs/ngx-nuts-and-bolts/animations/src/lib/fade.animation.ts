@@ -11,13 +11,13 @@ const visibleStyle = style({
 	opacity: 1,
 });
 
-interface IFadeAnimationOptions {
+type FadeAnimationOptions = {
 	duration: number;
 	triggerName: string;
-}
+};
 
 export function fadeAnimation(
-	options: IFadeAnimationOptions = {
+	options: FadeAnimationOptions = {
 		duration: FADE_DEFAULT_DURATION,
 		triggerName: FADE_DEFAULT_TRIGGER_NAME,
 	}

@@ -20,11 +20,11 @@ export enum Directions {
 	WEST,
 }
 
-export interface ITranslatableEnum {
+export type TranslatableEnum = {
 	translationKey: string;
-}
+};
 
-export const directionsData: Record<Directions, ITranslatableEnum> = {
+export const directionsData: Record<Directions, TranslatableEnum> = {
 	[Directions.NORTH]: {
 		translationKey: 'directions.north',
 	},

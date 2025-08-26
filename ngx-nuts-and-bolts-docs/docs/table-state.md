@@ -24,20 +24,20 @@ import {
 	createCustomFiltersObservable,
 	createPaginationObservable,
 	createSortObservable,
-	IPageInfo,
-	ISortInfo,
+	PageInfo,
+	SortInfo,
 } from '@infinum/ngx-nuts-and-bolts/table-state';
 
-interface ITemplateData{
+type TemplateData = {
 	data: Data;
-	tableState: ITableState;
-}
+	tableState: TableState;
+};
 
-interface ITableState{
-	pagination: IPageInfo;
-	sort: ISortInfo;
+type TableState = {
+	pagination: PageInfo;
+	sort: SortInfo;
 	filters: TFilterValue;
-}
+};
 
 export class MyComponent extends LoadingStateComponent {
 	public readonly templateData$ = this.createTemplateDataObservable();
@@ -81,17 +81,17 @@ export class MyComponent extends LoadingStateComponent {
 }
 ```
 
-Setting of the query parameters is even simpler as shown in code snippets below. With little mapping, interfaces for pagination and sorting should be usable with most of the 3rd party out-of-the-box data table events. While `changeFilters()` function accepts generic object as filter value.
+Setting of the query parameters is even simpler as shown in code snippets below. With little mapping, types for pagination and sorting should be usable with most of the 3rd party out-of-the-box data table events. While `changeFilters()` function accepts generic object as filter value.
 
 ```ts
 import { changePage } from '@infinum/ngx-nuts-and-bolts/table-state';
 
 ...
 public onPageChange(event: PageEvent): void{
-	const pageInfo: IPageInfo{
+	const pageInfo = {
 		pageIndex: event.pageIndex,
 		pageSize: event.pageSize
-	}
+	} satisfies PageInfo;
 
 	changePage(this.router, pageInfo)
 }

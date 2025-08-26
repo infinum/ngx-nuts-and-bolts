@@ -83,7 +83,7 @@ There are two ways to implement handling the loading and error states:
 ```ts
 import { LoadingState } from '@infinum/ngx-nuts-and-bolts/loading-state';
 
-interface ITemplateData { ... }
+type TemplateData = { ... };
 
 class MyComponent extends LoadingState {
 	public readonly templateData$ = this.createTemplateDataObservable();
