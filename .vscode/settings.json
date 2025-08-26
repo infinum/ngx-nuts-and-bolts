@@ -3,5 +3,6 @@
 	"editor.insertSpaces": false,
 	"editor.detectIndentation": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"cSpell.words": ["infinum"]
+	"cSpell.words": ["infinum"],
+	"nxConsole.generateAiAgentRules": true
 }
