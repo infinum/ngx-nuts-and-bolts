@@ -21,7 +21,7 @@
 	],
 	"sideEffects": false,
 	"peerDependencies": {
-		"@infinum/ngx-nuts-and-bolts": ">=4.0.0",
+		"@infinum/ngx-nuts-and-bolts": ">=5.0.0",
 		"@angular/common": ">=16",
 		"@angular/core": ">=16",
 		"@angular/platform-browser": ">=16"

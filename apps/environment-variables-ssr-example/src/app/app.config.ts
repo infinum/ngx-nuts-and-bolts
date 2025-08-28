@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideUniversalEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts-ssr';
 import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts/env';
@@ -11,13 +11,11 @@ export const appConfig: ApplicationConfig = {
 			privateVariables: [EnvironmentVariable.Bar], // Value for `Bar` will be `undefined` in the browser, but preset on the server.
 		}),
 		provideRouter(envExampleAppRoutes),
-		{
-			provide: APP_INITIALIZER,
-			multi: true,
-			useFactory: (env: EnvironmentVariablesService<EnvironmentVariable>) => {
+		provideAppInitializer(() => {
+			const initializerFn = ((env: EnvironmentVariablesService<EnvironmentVariable>) => {
 				return () => console.log(env.get(EnvironmentVariable.Foo));
-			},
-			deps: [EnvironmentVariablesService],
-		},
+			})(inject(EnvironmentVariablesService));
+			return initializerFn();
+		}),
 	],
 };

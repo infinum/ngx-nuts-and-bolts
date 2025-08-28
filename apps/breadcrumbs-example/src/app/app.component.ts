@@ -7,7 +7,6 @@ import { BreadcrumbTestBedData, BreadcrumbsComponent, NavigationPromptService } 
 import { map } from 'rxjs';
 
 @Component({
-	standalone: true,
 	imports: [CommonModule, RouterModule, BreadcrumbsComponent, FormsModule],
 	selector: 'app-root',
 	templateUrl: './app.component.html',

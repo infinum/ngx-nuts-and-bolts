@@ -53,10 +53,10 @@
 			"executor": "@angular-devkit/build-angular:dev-server",
 			"configurations": {
 				"production": {
-					"browserTarget": "environment-variables-ssr-example:build:production"
+					"buildTarget": "environment-variables-ssr-example:build:production"
 				},
 				"development": {
-					"browserTarget": "environment-variables-ssr-example:build:development"
+					"buildTarget": "environment-variables-ssr-example:build:development"
 				}
 			},
 			"defaultConfiguration": "development"
@@ -64,31 +64,18 @@
 		"extract-i18n": {
 			"executor": "@angular-devkit/build-angular:extract-i18n",
 			"options": {
-				"browserTarget": "environment-variables-ssr-example:build"
+				"buildTarget": "environment-variables-ssr-example:build"
 			}
 		},
 		"lint": {
-			"executor": "@nx/linter:eslint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"apps/environment-variables-ssr-example/**/*.ts",
-					"apps/environment-variables-ssr-example/**/*.html"
-				]
-			}
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
 		},
 		"test": {
 			"executor": "@nx/jest:jest",
 			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
 			"options": {
-				"jestConfig": "apps/environment-variables-ssr-example/jest.config.ts",
-				"passWithNoTests": true
-			},
-			"configurations": {
-				"ci": {
-					"ci": true,
-					"codeCoverage": true
-				}
+				"jestConfig": "apps/environment-variables-ssr-example/jest.config.ts"
 			}
 		},
 		"serve-static": {
@@ -120,7 +107,7 @@
 			"defaultConfiguration": "production"
 		},
 		"serve-ssr": {
-			"executor": "@nguniversal/builders:ssr-dev-server",
+			"executor": "@angular-devkit/build-angular:ssr-dev-server",
 			"configurations": {
 				"development": {
 					"browserTarget": "environment-variables-ssr-example:build:development",
@@ -134,7 +121,7 @@
 			"defaultConfiguration": "development"
 		},
 		"prerender": {
-			"executor": "@nguniversal/builders:prerender",
+			"executor": "@angular-devkit/build-angular:prerender",
 			"options": {
 				"routes": ["/"]
 			},

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 @Component({
 	selector: 'inf-nuts-and-bolts-bar-page',
 	template: 'Bar',
+	standalone: false,
 })
 export class BarPageComponent {}
 

@@ -6,7 +6,6 @@ import { BreadcrumbTestBedData, CustomerLocationWithCustomerData } from '../../t
 
 @Component({
 	selector: 'bea-breadcrumbs',
-	standalone: true,
 	imports: [CommonModule, RouterModule],
 	templateUrl: './breadcrumbs.component.html',
 	styleUrls: ['./breadcrumbs.component.scss'],

@@ -3,3 +3,5 @@
 /coverage
 .angular
 /libs/msw-public
+/.nx/cache
+/.nx/workspace-data
