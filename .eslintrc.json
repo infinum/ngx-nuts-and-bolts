@@ -28,12 +28,19 @@
 				"plugin:@typescript-eslint/recommended-requiring-type-checking",
 				"plugin:@infinum/typescript",
 				"plugin:@infinum/angular"
-			]
+			],
+			"rules": {
+				"@typescript-eslint/no-extra-semi": "error",
+				"no-extra-semi": "off"
+			}
 		},
 		{
 			"files": ["*.js", "*.jsx"],
 			"extends": ["plugin:@nx/javascript", "plugin:@infinum/core"],
-			"rules": {}
+			"rules": {
+				"@typescript-eslint/no-extra-semi": "error",
+				"no-extra-semi": "off"
+			}
 		},
 		{
 			"files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],

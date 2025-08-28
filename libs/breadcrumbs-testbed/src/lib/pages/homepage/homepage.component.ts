@@ -5,7 +5,6 @@ import { CUSTOMERS_ROUTE_PATH } from '../../route-param';
 
 @Component({
 	selector: 'bea-homepage',
-	standalone: true,
 	imports: [CommonModule, RouterModule],
 	templateUrl: './homepage.component.html',
 })

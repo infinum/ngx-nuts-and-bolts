@@ -6,7 +6,6 @@ import { Customer } from '../../types/customer';
 
 @Component({
 	selector: 'bea-customer-details',
-	standalone: true,
 	imports: [CommonModule, RouterModule, BreadcrumbsComponent],
 	templateUrl: './customer-details.component.html',
 	styleUrls: ['./customer-details.component.scss'],

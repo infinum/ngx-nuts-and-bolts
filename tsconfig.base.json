@@ -32,8 +32,8 @@
 			"@ngx-nuts-and-bolts/environment-variables-example-app-base": [
 				"libs/environment-variables-example-app-base/src/index.ts"
 			],
-			"breadcrumbs-testbed": ["libs/breadcrumbs-testbed/src/index.ts"],
-			"@ngx-nuts-and-bolts/schematics": ["libs/schematics/src/index.ts"]
+			"@ngx-nuts-and-bolts/schematics": ["libs/schematics/src/index.ts"],
+			"breadcrumbs-testbed": ["libs/breadcrumbs-testbed/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
