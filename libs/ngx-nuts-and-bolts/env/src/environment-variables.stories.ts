@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Meta, applicationConfig } from '@storybook/angular';
 import { provideEnvironmentVariables } from './environment-variables.provider';
@@ -30,8 +30,7 @@ enum EnvironmentVariable {
 class EnvironmentVariablesHostComponent {
 	public readonly variables = Object.entries(EnvironmentVariable);
 	public selectedVariable = EnvironmentVariable.Foo;
-
-	constructor(public readonly env: EnvironmentVariablesService<EnvironmentVariable>) {}
+	public readonly env = inject(EnvironmentVariablesService<EnvironmentVariable>);
 }
 
 export default {
