@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, OnDestroy, Output, inject } from '@angular/core';
 
 @Directive({ selector: '[infInView]', standalone: true, exportAs: 'infInView' })
 export class InViewDirective implements AfterViewInit, OnDestroy {
@@ -7,9 +7,8 @@ export class InViewDirective implements AfterViewInit, OnDestroy {
 
 	public isInView: boolean | undefined = undefined;
 
+	private readonly elementRef = inject(ElementRef<HTMLElement>);
 	private readonly observer = this.initObserver();
-
-	constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
 
 	public ngAfterViewInit(): void {
 		this.observer.observe(this.elementRef.nativeElement);
