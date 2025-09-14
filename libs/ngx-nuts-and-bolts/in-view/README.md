@@ -16,11 +16,11 @@ Simply add `infInView` directive to whatever DOM node you care about. You can th
 
 ```ts
 @Component({
-	selector: 'app-example',
-	template: `<div (infInView)="inView$.next($event)>{{ inView$ | async }}</div>`,
+  selector: 'app-example',
+  template: `<div (infInView)="inView$.next($event)>{{ inView$ | async }}</div>`,
 })
 class ExampleComponent {
-	public inView$ = new Subject<boolean>();
+  public inView$ = new Subject<boolean>();
 }
 ```
 
@@ -28,12 +28,12 @@ You can also select the directive with a `@ViewChild` as you would any other and
 
 ```ts
 @Component({
-	selector: 'app-example',
-	template: `<div infInView>{{ inViewDirectiveRef.isInView }}</div>`,
+  selector: 'app-example',
+  template: `<div infInView>{{ inViewDirectiveRef.isInView }}</div>`,
 })
 class ExampleComponent {
-	@ViewChild(InViewDirective)
-	public inViewDirectiveRef!: InViewDirective;
+  @ViewChild(InViewDirective)
+  public inViewDirectiveRef!: InViewDirective;
 }
 ```
 
@@ -41,8 +41,8 @@ Additionally, you can also export the directive instance in a template directly.
 
 ```ts
 @Component({
-	selector: 'app-example',
-	template: `<div infInView #infInViewRef="infInView">{{ infInViewRef.isInView }}</div>`,
+  selector: 'app-example',
+  template: `<div infInView #infInViewRef="infInView">{{ infInViewRef.isInView }}</div>`,
 })
 class ExampleComponent {}
 ```

@@ -85,11 +85,9 @@ When returning the mocked error in test suites or test doubles, simply wrap the 
 
 ```ts
 export class MockedDataFetchingService {
-	public getSomeData(data: TData): Observable<TData> {
-		return data
-			? asyncData(data)
-			: asyncError(new HttpErrorResponse({ error: { message: 'The data cannot be found' }, status: 404 }));
-	}
+  public getSomeData(data: TData): Observable<TData> {
+    return data ? asyncData(data) : asyncError(new HttpErrorResponse({ error: { message: 'The data cannot be found' }, status: 404 }));
+  }
 }
 ```
 
@@ -140,18 +138,18 @@ When you need to interact with storage but still you are testing only a unit of 
 let storage: Storage;
 
 beforeEach(async () => {
-	await TestBed.configureTestingModule({
-		providers: [
-			{
-				provide: LOCAL_STORAGE,
-				useClass: MockStorage,
-			},
-			{
-				provide: SESSION_STORAGE,
-				useClass: MockStorage,
-			},
-		],
-	});
-	storage = TestBed.inject(Storage);
+  await TestBed.configureTestingModule({
+    providers: [
+      {
+        provide: LOCAL_STORAGE,
+        useClass: MockStorage,
+      },
+      {
+        provide: SESSION_STORAGE,
+        useClass: MockStorage,
+      },
+    ],
+  });
+  storage = TestBed.inject(Storage);
 });
 ```

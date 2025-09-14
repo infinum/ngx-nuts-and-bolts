@@ -1,113 +1,48 @@
 {
-	"name": "ngx-nuts-and-bolts",
-	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "libs/ngx-nuts-and-bolts/src",
-	"prefix": "inf",
-	"tags": [],
-	"projectType": "library",
-	"targets": {
-		"build": {
-			"executor": "@nx/angular:package",
-			"outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-			"options": {
-				"project": "libs/ngx-nuts-and-bolts/ng-package.json"
-			},
-			"configurations": {
-				"production": {
-					"tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.prod.json"
-				},
-				"development": {
-					"tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.json"
-				}
-			},
-			"defaultConfiguration": "production"
-		},
-		"test": {
-			"executor": "@nx/jest:jest",
-			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-			"options": {
-				"jestConfig": "libs/ngx-nuts-and-bolts/jest.config.ts",
-				"passWithNoTests": true
-			},
-			"configurations": {
-				"ci": {
-					"ci": true,
-					"codeCoverage": true
-				}
-			}
-		},
-		"lint": {
-			"executor": "@nx/linter:eslint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": [
-					"libs/ngx-nuts-and-bolts/**/*.ts",
-					"libs/ngx-nuts-and-bolts/**/*.html",
-					"libs/ngx-nuts-and-bolts/animations/**/*.ts",
-					"libs/ngx-nuts-and-bolts/animations/**/*.html",
-					"libs/ngx-nuts-and-bolts/testing-utils/**/*.ts",
-					"libs/ngx-nuts-and-bolts/testing-utils/**/*.html",
-					"libs/ngx-nuts-and-bolts/in-view/**/*.ts",
-					"libs/ngx-nuts-and-bolts/in-view/**/*.html",
-					"libs/ngx-nuts-and-bolts/enum-property/**/*.ts",
-					"libs/ngx-nuts-and-bolts/enum-property/**/*.html",
-					"libs/ngx-nuts-and-bolts/env/**/*.ts",
-					"libs/ngx-nuts-and-bolts/env/**/*.html",
-					"libs/ngx-nuts-and-bolts/loading-state/**/*.ts",
-					"libs/ngx-nuts-and-bolts/loading-state/**/*.html",
-					"libs/ngx-nuts-and-bolts/table-state/**/*.ts",
-					"libs/ngx-nuts-and-bolts/table-state/**/*.html",
-					"libs/ngx-nuts-and-bolts/breadcrumbs/**/*.ts",
-					"libs/ngx-nuts-and-bolts/breadcrumbs/**/*.html",
-					"libs/ngx-nuts-and-bolts/form-utils/**/*.ts",
-					"libs/ngx-nuts-and-bolts/form-utils/**/*.html",
-					"libs/ngx-nuts-and-bolts/utility-types/**/*.ts",
-					"libs/ngx-nuts-and-bolts/utility-types/**/*.html",
-					"libs/ngx-nuts-and-bolts/routing-utils/**/*.ts",
-					"libs/ngx-nuts-and-bolts/routing-utils/**/*.html"
-				]
-			}
-		},
-		"storybook": {
-			"executor": "@storybook/angular:start-storybook",
-			"options": {
-				"port": 4400,
-				"configDir": "libs/ngx-nuts-and-bolts/.storybook",
-				"browserTarget": "ngx-nuts-and-bolts:build-storybook",
-				"compodoc": false
-			},
-			"configurations": {
-				"ci": {
-					"quiet": true
-				}
-			}
-		},
-		"build-storybook": {
-			"executor": "@storybook/angular:build-storybook",
-			"outputs": ["{options.outputDir}"],
-			"options": {
-				"outputDir": "dist/storybook/ngx-nuts-and-bolts",
-				"configDir": "libs/ngx-nuts-and-bolts/.storybook",
-				"browserTarget": "ngx-nuts-and-bolts:build-storybook",
-				"compodoc": false
-			},
-			"configurations": {
-				"ci": {
-					"quiet": true
-				}
-			}
-		},
-		"static-storybook": {
-			"executor": "@nx/web:file-server",
-			"options": {
-				"buildTarget": "ngx-nuts-and-bolts:build-storybook",
-				"staticFilePath": "dist/storybook/ngx-nuts-and-bolts"
-			},
-			"configurations": {
-				"ci": {
-					"buildTarget": "ngx-nuts-and-bolts:build-storybook:ci"
-				}
-			}
-		}
-	}
+  "name": "ngx-nuts-and-bolts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ngx-nuts-and-bolts/src",
+  "prefix": "inf",
+  "projectType": "library",
+  "release": {
+    "version": {
+      "manifestRootsToUpdate": ["dist/{projectRoot}"],
+      "currentVersionResolver": "git-tag",
+      "fallbackCurrentVersionResolver": "disk"
+    }
+  },
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/ngx-nuts-and-bolts/ng-package.json",
+        "tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.lib.prod.json"
+        },
+        "development": {}
+      },
+      "defaultConfiguration": "production"
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/ngx-nuts-and-bolts/jest.config.ts",
+        "tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
 }

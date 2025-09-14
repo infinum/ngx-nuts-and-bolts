@@ -70,7 +70,7 @@ There are two ways to implement handling the loading and error states:
 <ng-container *ngIf="loading$ | async">Loading...</ng-container>
 
 <ng-container *ngIf="error$ | async">
-	<button (click)="onRetry()">Retry</button>
+  <button (click)="onRetry()">Retry</button>
 </ng-container>
 ```
 
@@ -140,33 +140,33 @@ If you really do need to handle multiple data source observables from the same c
 
 ```ts
 class MyComponent {
-	protected readonly loadingTrigger1$ = new BehaviorSubject<void>(undefined);
-	protected readonly _error1$: IPrivateLoadingState<TError>['_error$'];
-	public readonly error1$: IPublicLoadingState<TError>['error$'];
-	protected readonly _loading1$: IPrivateLoadingState<TError>['_loading$'];
-	public readonly loading1$: IPublicLoadingState<TError>['loading$'];
+  protected readonly loadingTrigger1$ = new BehaviorSubject<void>(undefined);
+  protected readonly _error1$: IPrivateLoadingState<TError>['_error$'];
+  public readonly error1$: IPublicLoadingState<TError>['error$'];
+  protected readonly _loading1$: IPrivateLoadingState<TError>['_loading$'];
+  public readonly loading1$: IPublicLoadingState<TError>['loading$'];
 
-	protected readonly loadingTrigger2$ = new BehaviorSubject<void>(undefined);
-	protected readonly _error2$: IPrivateLoadingState<TError>['_error$'];
-	public readonly error2$: IPublicLoadingState<TError>['error$'];
-	protected readonly _loading2$: IPrivateLoadingState<TError>['_loading$'];
-	public readonly loading2$: IPublicLoadingState<TError>['loading$'];
+  protected readonly loadingTrigger2$ = new BehaviorSubject<void>(undefined);
+  protected readonly _error2$: IPrivateLoadingState<TError>['_error$'];
+  public readonly error2$: IPublicLoadingState<TError>['error$'];
+  protected readonly _loading2$: IPrivateLoadingState<TError>['_loading$'];
+  public readonly loading2$: IPublicLoadingState<TError>['loading$'];
 
-	constructor() {
-		const _state1 = privateLoadingState();
-		const state1 = publicLoadingState(_state1);
-		this._error1$ = _state1._error$;
-		this.error1$ = state1.error$;
-		this._loading1$ = _state1._loading$;
-		this.loading1$ = state1.loading$;
+  constructor() {
+    const _state1 = privateLoadingState();
+    const state1 = publicLoadingState(_state1);
+    this._error1$ = _state1._error$;
+    this.error1$ = state1.error$;
+    this._loading1$ = _state1._loading$;
+    this.loading1$ = state1.loading$;
 
-		const _state2 = privateLoadingState();
-		const state2 = publicLoadingState(_state2);
-		this._error2$ = _state2._error$;
-		this.error2$ = state2.error$;
-		this._loading2$ = _state2._loading$;
-		this.loading2$ = state2.loading$;
-	}
+    const _state2 = privateLoadingState();
+    const state2 = publicLoadingState(_state2);
+    this._error2$ = _state2._error$;
+    this.error2$ = state2.error$;
+    this._loading2$ = _state2._loading$;
+    this.loading2$ = state2.loading$;
+  }
 }
 ```
 

@@ -12,29 +12,29 @@ Common practice of working with enums often runs into a need to define separate 
 
 ```ts
 export enum Directions {
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST,
+  NORTH,
+  EAST,
+  SOUTH,
+  WEST,
 }
 
 export interface ITranslatableEnum {
-	translationKey: string;
+  translationKey: string;
 }
 
 export const directionsData: Record<Directions, ITranslatableEnum> = {
-	[Directions.NORTH]: {
-		translationKey: 'directions.north',
-	},
-	[Directions.EAST]: {
-		translationKey: 'directions.east',
-	},
-	[Directions.SOUTH]: {
-		translationKey: 'directions.south',
-	},
-	[Directions.WEST]: {
-		translationKey: 'directions.west',
-	},
+  [Directions.NORTH]: {
+    translationKey: 'directions.north',
+  },
+  [Directions.EAST]: {
+    translationKey: 'directions.east',
+  },
+  [Directions.SOUTH]: {
+    translationKey: 'directions.south',
+  },
+  [Directions.WEST]: {
+    translationKey: 'directions.west',
+  },
 };
 ```
 
@@ -42,13 +42,13 @@ You can bring both of these into a component and use them together as such:
 
 ```ts
 @Component({
-	selector: 'app-example',
-	template: ` {{ enumValue | enumProperty : directionsData }} `,
+  selector: 'app-example',
+  template: ` {{ enumValue | enumProperty : directionsData }} `,
 })
 export class ExampleComponent {
-	public enumValue = Directions.NORTH;
-	// store reference to metadata so that its accessible from a template
-	public directionsData = directionsData;
+  public enumValue = Directions.NORTH;
+  // store reference to metadata so that its accessible from a template
+  public directionsData = directionsData;
 }
 ```
 
@@ -56,13 +56,13 @@ By default `enumProperty` looks for `translationKey` on the metadata object (in 
 
 ```ts
 @Component({
-	selector: 'app-example',
-	template: ` {{ enumValue | enumProperty : directionsData : 'differentKey' }} `,
+  selector: 'app-example',
+  template: ` {{ enumValue | enumProperty : directionsData : 'differentKey' }} `,
 })
 export class ExampleComponent {
-	public enumValue = Directions.NORTH;
-	// store reference to metadata so that its accessible from a template
-	public directionsData = directionsData;
+  public enumValue = Directions.NORTH;
+  // store reference to metadata so that its accessible from a template
+  public directionsData = directionsData;
 }
 ```
 
@@ -74,18 +74,18 @@ If the need for fetching enum property value in the .ts files arises `getEnumPro
 import { getEnumPropertyValue } from '@infinum/ngx-nuts-and-bolts';
 
 @Component({
-	selector: 'app-example',
-	template: ``,
+  selector: 'app-example',
+  template: ``,
 })
 export class ExampleComponent {
-	public enumValue = Directions.NORTH;
-	public directionsData = directionsData;
+  public enumValue = Directions.NORTH;
+  public directionsData = directionsData;
 
-	private readonly transloco = inject(TranslocoService);
+  private readonly transloco = inject(TranslocoService);
 
-	private translationDemoMethod(): void {
-		const translationKey = getEnumPropertyValue(Directions.NORTH, directionsData);
-		const translation = this.transloco.translate(translationKey);
-	}
+  private translationDemoMethod(): void {
+    const translationKey = getEnumPropertyValue(Directions.NORTH, directionsData);
+    const translation = this.transloco.translate(translationKey);
+  }
 }
 ```

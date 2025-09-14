@@ -20,8 +20,8 @@ Example:
 
 ```ts
 export enum EnvironmentVariable {
-	Foo = 'NGX_NUTS_AND_BOLTS_EXAMPLE_FOO',
-	Bar = 'NGX_NUTS_AND_BOLTS_EXAMPLE_BAR',
+  Foo = 'NGX_NUTS_AND_BOLTS_EXAMPLE_FOO',
+  Bar = 'NGX_NUTS_AND_BOLTS_EXAMPLE_BAR',
 }
 ```
 
@@ -53,19 +53,19 @@ Intended use case for this is to fetch environment variables from a file that is
 
 ```ts title="apps/environment-variables-fetch-example/src/main.ts"
 fetch('./assets/env.json')
-	.then((response) => response.json())
-	.then((env) => {
-		platformBrowserDynamic([provideEnvironmentVariables(env)])
-			.bootstrapModule(AppModule)
-			.catch((err) => console.error(err));
-	});
+  .then((response) => response.json())
+  .then((env) => {
+    platformBrowserDynamic([provideEnvironmentVariables(env)])
+      .bootstrapModule(AppModule)
+      .catch((err) => console.error(err));
+  });
 ```
 
 In `env.json`, you would have something like this:
 
 ```json title="apps/environment-variables-fetch-example/src/assets/env.json"
 {
-	"API_URL": "https://api.example.com"
+  "API_URL": "https://api.example.com"
 }
 ```
 
@@ -94,14 +94,14 @@ import { provideUniversalEnvironmentVariables } from '@infinum/ngx-nuts-and-bolt
 // ...
 
 @NgModule({
-	// ...
-	providers: [
-		// ...
-		provideUniversalEnvironmentVariables({
-			publicVariables: [EnvironmentVariable.Foo],
-			privateVariables: [EnvironmentVariable.Bar],
-		}),
-	],
+  // ...
+  providers: [
+    // ...
+    provideUniversalEnvironmentVariables({
+      publicVariables: [EnvironmentVariable.Foo],
+      privateVariables: [EnvironmentVariable.Bar],
+    }),
+  ],
 })
 export class AppModule {}
 ```
@@ -113,11 +113,11 @@ import { provideProcess } from '@infinum/ngx-nuts-and-bolts-ssr';
 // ...
 
 @NgModule({
-	// ...
-	providers: [
-		// ...
-		provideProcess(),
-	],
+  // ...
+  providers: [
+    // ...
+    provideProcess(),
+  ],
 })
 export class AppServerModule {}
 ```
@@ -132,13 +132,13 @@ import { provideUniversalEnvironmentVariables } from '@infinum/ngx-nuts-and-bolt
 // ...
 
 export const appConfig: ApplicationConfig = {
-	providers: [
-		// ...
-		provideUniversalEnvironmentVariables({
-			publicVariables: [EnvironmentVariable.Foo],
-			privateVariables: [EnvironmentVariable.Bar], // Value for `Bar` will be `undefined` in the browser, but preset on the server.
-		}),
-	],
+  providers: [
+    // ...
+    provideUniversalEnvironmentVariables({
+      publicVariables: [EnvironmentVariable.Foo],
+      privateVariables: [EnvironmentVariable.Bar], // Value for `Bar` will be `undefined` in the browser, but preset on the server.
+    }),
+  ],
 };
 ```
 
@@ -151,7 +151,7 @@ import { provideProcess } from '@infinum/ngx-nuts-and-bolts-ssr';
 import { appConfig } from './app.config';
 
 const serverConfig: ApplicationConfig = {
-	providers: [provideServerRendering(), provideProcess()],
+  providers: [provideServerRendering(), provideProcess()],
 };
 
 export const config = mergeApplicationConfig(appConfig, serverConfig);
@@ -201,12 +201,12 @@ For unit testing, simply call `provideEnvironmentVariables` with desired values 
 
 ```ts
 TestBed.configureTestingModule({
-	providers: [
-		provideEnvironmentVariables({
-			[EnvironmentVariable.Foo]: 'I am Foo (testing)',
-			[EnvironmentVariable.Bar]: 'I am Bar (testing)',
-		}),
-	],
+  providers: [
+    provideEnvironmentVariables({
+      [EnvironmentVariable.Foo]: 'I am Foo (testing)',
+      [EnvironmentVariable.Bar]: 'I am Bar (testing)',
+    }),
+  ],
 });
 
 envService = TestBed.inject(EnvironmentVariablesService);

@@ -1,32 +1,9 @@
 {
-	"name": "@infinum/ngx-nuts-and-bolts-ssr",
-	"version": "4.1.0",
-	"description": "Reusable components and helpers for angular projects",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/infinum/ngx-nuts-and-bolts.git"
-	},
-	"bugs": {
-		"url": "https://github.com/infinum/ngx-nuts-and-bolts/issues"
-	},
-	"homepage": "https://github.com/infinum/ngx-nuts-and-bolts",
-	"author": "Infinum JavaScript Team <hello@infinum.com>",
-	"keywords": [
-		"angular",
-		"components",
-		"helpers",
-		"ssr",
-		"universal"
-	],
-	"sideEffects": false,
-	"peerDependencies": {
-		"@infinum/ngx-nuts-and-bolts": ">=4.0.0",
-		"@angular/common": ">=16",
-		"@angular/core": ">=16",
-		"@angular/platform-browser": ">=16"
-	},
-	"dependencies": {
-		"tslib": "^2.3.0"
-	}
+  "name": "@infinum/ngx-nuts-and-bolts-ssr",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^20.2.0",
+    "@angular/core": "^20.2.0"
+  },
+  "sideEffects": false
 }

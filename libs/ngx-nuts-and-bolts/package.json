@@ -1,37 +1,30 @@
 {
-	"name": "@infinum/ngx-nuts-and-bolts",
-	"version": "5.0.0",
-	"description": "Reusable components and helpers for angular projects",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/infinum/ngx-nuts-and-bolts.git"
-	},
-	"bugs": {
-		"url": "https://github.com/infinum/ngx-nuts-and-bolts/issues"
-	},
-	"homepage": "https://github.com/infinum/ngx-nuts-and-bolts",
-	"author": "Infinum JavaScript Team <hello@infinum.com>",
-	"keywords": [
-		"angular",
-		"components",
-		"helpers"
-	],
-	"sideEffects": false,
-	"peerDependencies": {
-		"@angular/animations": ">=16",
-		"@angular/common": ">=16",
-		"@angular/core": ">=16",
-		"@angular/forms": ">=16",
-		"@angular/platform-browser": ">=16",
-		"@angular/router": ">=16",
-		"rxjs": ">=7"
-	},
-	"dependencies": {
-		"tslib": "^2.3.0"
-	},
-	"schematics": "./schematics/src/collection.json",
-	"ng-add": {
-		"save": "dependencies"
-	}
+  "name": "@infinum/ngx-nuts-and-bolts",
+  "version": "6.0.0",
+  "description": "Reusable components and helpers for angular projects",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/infinum/ngx-nuts-and-bolts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/infinum/ngx-nuts-and-bolts/issues"
+  },
+  "homepage": "https://github.com/infinum/ngx-nuts-and-bolts",
+  "author": "Infinum JavaScript Team <hello@infinum.com>",
+  "keywords": [
+    "angular",
+    "components",
+    "helpers"
+  ],
+  "sideEffects": false,
+  "peerDependencies": {
+    "@angular/animations": ">=20",
+    "@angular/common": ">=20",
+    "@angular/core": ">=20",
+    "@angular/forms": ">=20",
+    "@angular/platform-browser": ">=20",
+    "@angular/router": ">=20",
+    "rxjs": ">=7"
+  }
 }

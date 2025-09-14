@@ -15,7 +15,7 @@ This library includes two commonly used animations — `fadeAnimation()` and `he
 
 ```ts
 @NgComponent({
-	animations: [heightAnimation(), fadeAnimation()],
+  animations: [heightAnimation(), fadeAnimation()],
 })
 export class MyComponent {}
 ```

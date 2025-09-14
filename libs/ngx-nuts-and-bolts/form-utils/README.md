@@ -12,10 +12,10 @@ To leverage these type helpers, you must first create a helper function that ret
 
 ```ts
 export function createExampleForm() {
-	return new FormGroup({
-		exampleControlOne: new FormControl('', { nonNullable: true }),
-		exampleControlTwo: new FormControl(''),
-	});
+  return new FormGroup({
+    exampleControlOne: new FormControl('', { nonNullable: true }),
+    exampleControlTwo: new FormControl(''),
+  });
 }
 ```
 
