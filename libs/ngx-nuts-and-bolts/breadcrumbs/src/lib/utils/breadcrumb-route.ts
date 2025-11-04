@@ -43,7 +43,6 @@ export function breadcrumbRoute<TBreadcrumbData, TRouteData = TBreadcrumbData>(
 		const breadcrumbsService = inject(BreadcrumbsService<TBreadcrumbData>);
 		const url = route.pathFromRoot.map((r) => r.url.map((s) => s.toString()).join('/')).join('/');
 
-		// eslint-disable-next-line rxjs/finnish
 		const resolver = breadcrumbResolver(route, state);
 
 		if (resolver instanceof Observable) {

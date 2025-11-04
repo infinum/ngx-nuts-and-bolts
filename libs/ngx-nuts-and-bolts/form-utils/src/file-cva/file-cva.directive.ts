@@ -37,8 +37,14 @@ export class FileControlValueAccessorDirective implements ControlValueAccessor {
 	private changeHandler?: ChangeFn;
 	private touchHandler?: TouchFn;
 
-	@HostListener('change', ['$event.target.files'])
-	public onFileChange(files: FileList | null): void {
+	@HostListener('change', ['$event'])
+	public onFileChange(event: Event): void {
+		const files = (event.target as HTMLInputElement).files;
+		if (!files) {
+			this.changeHandler?.(null);
+			return;
+		}
+
 		if (!this.touched) {
 			this.touched = true;
 			this.touchHandler?.();

@@ -4,7 +4,6 @@ import { NavigationCancel, NavigationEnd, NavigationError, Router } from '@angul
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { BREADCRUMBS_CONFIG, DEFAULT_BREADCRUMBS_CONFIG } from '../providers';
 import { Breadcrumb } from '../types';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { CONSOLE } from '@infinum/ngx-nuts-and-bolts';
 
 type BreadcrumbOperation<T> =

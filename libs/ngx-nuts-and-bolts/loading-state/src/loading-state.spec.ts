@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -5,6 +6,7 @@ import { LoadingState } from './loading-state';
 
 @Component({
 	selector: 'inf-component-with-loading-state-host',
+	imports: [CommonModule],
 	template: `
 		<div *ngIf="loading$ | async" class="loader">Loading</div>
 		<div *ngIf="error$ | async as error" class="error">{{ error }}</div>
@@ -28,7 +30,7 @@ describe('LoadingState', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [LoadingStateHostComponent],
+			imports: [LoadingStateHostComponent],
 		}).compileComponents();
 	});
 
