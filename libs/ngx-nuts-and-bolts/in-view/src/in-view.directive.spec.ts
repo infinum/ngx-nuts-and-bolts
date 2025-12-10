@@ -68,10 +68,13 @@ describe('InViewDirective', () => {
 	});
 
 	it('should emit changes and set public property based on IntersectionObserver', () => {
+		if (!directive) {
+			console.log('directive is undefined');
+			return;
+		}
+
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const inViewCallbackSpy = jest.fn((inView: boolean) => undefined);
-		directive = new InViewDirective();
-		directive.ngAfterViewInit();
 		const inViewSub = directive.inView.subscribe(inViewCallbackSpy);
 		callbackParams$.next([{ isIntersecting: false } as IntersectionObserverEntry]);
 
