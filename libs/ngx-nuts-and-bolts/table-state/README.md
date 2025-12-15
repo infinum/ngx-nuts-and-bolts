@@ -31,13 +31,11 @@ interface ITableState{
 }
 
 export class MyComponent extends LoadingStateComponent {
-	public readonly templateData$ = this.createTemplateDataObservable();
+	private readonly dataService = inject(DataService);
+	private readonly route = inject(ActivatedRoute);
+	private readonly router = inject(Router);
 
-	constructor(
-		private readonly dataService: DataService,
-		private readonly route: ActivatedRoute,
-		private readonly router: Router
-	) {}
+	public readonly templateData$ = this.createTemplateDataObservable();
 
 	private createTemplateDataObservable(): Observable<ITemplateData> {
 		const pagination$ = createPaginationObservable();

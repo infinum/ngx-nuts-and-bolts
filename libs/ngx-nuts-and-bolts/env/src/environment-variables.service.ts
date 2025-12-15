@@ -1,5 +1,4 @@
-import { Inject, Injectable, Optional } from '@angular/core';
-import { IEnvironmentVariablesConfig } from './environment-variables-config.interface';
+import { inject, Injectable } from '@angular/core';
 import { ENVIRONMENT_VARIABLES_CONFIG } from './environment-variables-config.token';
 import { ENVIRONMENT_VARIABLES_RECORD } from './environment-variables-record.token';
 import { EnvironmentVariablesRecord } from './environment-variables-record.type';
@@ -8,12 +7,9 @@ const DEFAULT_TRUTHY_BOOLEAN_STRINGS = ['true', '1'];
 
 @Injectable({ providedIn: 'root' })
 export class EnvironmentVariablesService<TVariable extends string> {
-	private readonly truthyBooleanStrings = this.config?.truthyBooleanStrings ?? DEFAULT_TRUTHY_BOOLEAN_STRINGS;
-
-	constructor(
-		@Inject(ENVIRONMENT_VARIABLES_RECORD) private readonly variables: Partial<EnvironmentVariablesRecord<TVariable>>,
-		@Optional() @Inject(ENVIRONMENT_VARIABLES_CONFIG) private readonly config?: IEnvironmentVariablesConfig
-	) {}
+	private readonly variables: Partial<EnvironmentVariablesRecord<TVariable>> = inject(ENVIRONMENT_VARIABLES_RECORD);
+	private readonly truthyBooleanStrings =
+		inject(ENVIRONMENT_VARIABLES_CONFIG, { optional: true })?.truthyBooleanStrings ?? DEFAULT_TRUTHY_BOOLEAN_STRINGS;
 
 	public get(variableName: TVariable): string | undefined {
 		return this.variables[variableName];

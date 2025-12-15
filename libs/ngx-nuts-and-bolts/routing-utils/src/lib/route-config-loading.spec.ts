@@ -12,7 +12,6 @@ import { Observable, Subject } from 'rxjs';
 import { createRouteConfigLoadingObservable } from './route-config-loading';
 
 class RouterMock {
-	// eslint-disable-next-line rxjs/no-exposed-subjects, rxjs/finnish
 	public readonly events = new Subject<RouterEvent>();
 }
 

@@ -14,48 +14,79 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' }}
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout [main]
+      - name: Checkout [main]
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-      - uses: actions/setup-node@v1
+        uses: nrwl/nx-set-shas@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
-      - run: npm ci
-      - run: npx nx-cloud start-ci-run
-      - run: npx nx affected -t lint build test
-      - run: npx nx-cloud stop-all-agents
+          node-version: '22.20.0'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.9.0
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - run: pnpm nx-cloud start-ci-run
+      - run: pnpm nx affected -t lint build test
+      - run: pnpm nx-cloud stop-all-agents
+
   pr:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
+
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-      - uses: actions/setup-node@v1
+        uses: nrwl/nx-set-shas@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: '16'
-      - run: npm ci
-      - run: npx nx-cloud start-ci-run
-      - run: npx nx affected -t lint build test
+          node-version: '22.20.0'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.9.0
+          run_install: false
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm nx-cloud start-ci-run
+      - run: pnpm nx affected -t lint build test
       - run: npx nx-cloud stop-all-agents
+
   agents:
     runs-on: ubuntu-latest
-    name: Agent 1
+    name: ${{ matrix.agent }}
     timeout-minutes: 60
     strategy:
       matrix:
         agent: [1, 2]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '16'
-      - run: npm ci
+          node-version: '22.20.0'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.9.0
+          run_install: false
+
+      - run: pnpm install --frozen-lockfile
+
       - name: Start Nx Agent ${{ matrix.agent }}
-        run: npx nx-cloud start-agent
+        run: pnpm nx-cloud start-agent

@@ -1,6 +1,5 @@
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type Breadcrumb<T> = {
 	url: string;
 	route: ActivatedRouteSnapshot;

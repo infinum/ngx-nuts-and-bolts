@@ -1,43 +1,80 @@
-import { ElementRef } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Subject, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { InViewDirective } from './in-view.directive';
 
+@Component({
+	selector: 'inf-host-element',
+	imports: [InViewDirective],
+	template: `<div infInView #inViewDirective="infInView">{{ inViewDirective.isInView }}</div>`,
+})
+class HostElementComponent {
+	public readonly inViewDirective = viewChild<InViewDirective>('inViewDirective');
+}
+
 describe('InViewDirective', () => {
-	let directive: InViewDirective;
-	let elementRef: ElementRef<HTMLElement>;
+	let directive: InViewDirective | undefined = undefined;
+	let callbackParams$: Subject<Array<IntersectionObserverEntry>>;
 
 	beforeEach(() => {
+		callbackParams$ = new Subject<Array<IntersectionObserverEntry>>();
+
+		// Mock IntersectionObserver
+		class MockIntersectionObserver implements IntersectionObserver {
+			public readonly root: Element | null = null;
+			public readonly rootMargin: string = '0px';
+			public readonly thresholds: ReadonlyArray<number> = [0];
+
+			private callbacksCallsSub?: Subscription;
+
+			constructor(private callback: IntersectionObserverCallback) {}
+
+			public observe(): void {
+				this.callbacksCallsSub = callbackParams$.pipe(tap((params) => this.callback(params, this))).subscribe();
+			}
+
+			public disconnect(): void {
+				this.callbacksCallsSub?.unsubscribe();
+			}
+
+			public takeRecords(): IntersectionObserverEntry[] {
+				return [];
+			}
+
+			public unobserve(): void {
+				// noop
+			}
+		}
+
+		// Assign IntersectionObserver to global before spying
+		(global as any).IntersectionObserver = jest
+			.fn()
+			.mockImplementation((callback: IntersectionObserverCallback) => new MockIntersectionObserver(callback));
+
 		TestBed.configureTestingModule({
-			providers: [{ provide: ElementRef, useValue: {} }],
+			imports: [HostElementComponent],
 		});
 	});
 
 	beforeEach(() => {
-		global.IntersectionObserver ||= jest.fn();
-		elementRef = TestBed.inject<ElementRef<HTMLElement>>(ElementRef);
+		const fixture = TestBed.createComponent(HostElementComponent);
+		fixture.detectChanges();
+		directive = fixture.componentInstance.inViewDirective();
 	});
 
 	it('should create an instance', () => {
-		directive = new InViewDirective(elementRef);
 		expect(directive).toBeTruthy();
 	});
 
 	it('should emit changes and set public property based on IntersectionObserver', () => {
-		const callbackParams$ = new Subject<Array<IntersectionObserverEntry>>();
-		jest.spyOn(global, 'IntersectionObserver').mockImplementation((callback) => {
-			let callbacksCallsSub: Subscription;
-			const observer = {
-				observe: () =>
-					(callbacksCallsSub = callbackParams$.pipe(tap((params) => callback(params, observer))).subscribe()),
-				disconnect: () => callbacksCallsSub?.unsubscribe(),
-			} as unknown as IntersectionObserver;
-			return observer;
-		});
-		const inViewCallbackSpy = jest.fn((_isInView: boolean) => undefined);
-		directive = new InViewDirective(elementRef);
-		directive.ngAfterViewInit();
+		if (!directive) {
+			console.log('directive is undefined');
+			return;
+		}
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const inViewCallbackSpy = jest.fn((inView: boolean) => undefined);
 		const inViewSub = directive.inView.subscribe(inViewCallbackSpy);
 		callbackParams$.next([{ isIntersecting: false } as IntersectionObserverEntry]);
 

@@ -25,7 +25,7 @@ export function provideUniversalEnvironmentVariables<TVariable extends string>(
 		useFactory: (
 			platformId: Parameters<typeof isPlatformBrowser>[0],
 			transferState: TransferState,
-			process?: NodeJS.Process
+			process?: { env: Record<string, string | undefined> }
 		) => {
 			if (isPlatformBrowser(platformId)) {
 				return transferState.get(transferKey, {});

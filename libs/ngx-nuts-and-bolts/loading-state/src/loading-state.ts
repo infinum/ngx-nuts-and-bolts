@@ -32,14 +32,11 @@ export abstract class LoadingState<TError = unknown> {
 		leaveDelay: DEFAULT_LOADER_LEAVE_DELAY,
 	};
 
-	// eslint-disable-next-line rxjs/no-exposed-subjects
 	protected readonly loadingTrigger$ = new BehaviorSubject<void>(undefined);
 
-	// eslint-disable-next-line rxjs/no-exposed-subjects
 	protected readonly _error$: IPrivateLoadingState<TError>['_error$'];
 	public readonly error$: IPublicLoadingState<TError>['error$'];
 
-	// eslint-disable-next-line rxjs/no-exposed-subjects
 	protected readonly _loading$: IPrivateLoadingState<TError>['_loading$'];
 	public readonly loading$: IPublicLoadingState<TError>['loading$'];
 

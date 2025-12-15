@@ -1,6 +1,5 @@
-import { PLATFORM_ID } from '@angular/core';
+import { PLATFORM_ID, StateKey, TransferState } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { StateKey, TransferState } from '@angular/platform-browser';
 import { EnvironmentVariablesService } from '@infinum/ngx-nuts-and-bolts/env';
 import { PROCESS } from '../../di-tokens';
 import { provideUniversalEnvironmentVariables } from './environment-variables.provider';
@@ -128,7 +127,7 @@ describe('provideUniversalEnvironmentVariables', () => {
 					],
 				});
 
-				expect(() => TestBed.inject(EnvironmentVariablesService)).toThrowError(
+				expect(() => TestBed.inject(EnvironmentVariablesService)).toThrow(
 					'No process found. Please provide a process object via the PROCESS injection token.'
 				);
 			});
@@ -153,7 +152,7 @@ describe('provideUniversalEnvironmentVariables', () => {
 					],
 				});
 
-				expect(() => TestBed.inject(EnvironmentVariablesService)).not.toThrowError();
+				expect(() => TestBed.inject(EnvironmentVariablesService)).not.toThrow();
 			});
 		});
 	});
