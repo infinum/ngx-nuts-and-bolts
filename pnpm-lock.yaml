@@ -5,42 +5,39 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  handlebars: 4.7.9
-  tar: 7.5.11
-  axios: 1.15.2
-  node-forge: 1.4.0
-  minimatch@<3.1.4: 3.1.4
-  minimatch@5: 5.1.8
-  minimatch@7: 7.4.8
-  minimatch@9: 9.0.7
-  minimatch@10: 10.2.3
-  picomatch@<2.3.2: 2.3.2
-  picomatch@4: 4.0.4
-  fast-uri: 3.1.2
-  flatted: 3.4.2
-  immutable: 5.1.5
-  koa: 3.1.2
-  path-to-regexp: 0.1.13
-  rollup: 4.59.0
-  svgo: 3.3.3
   '@babel/plugin-transform-modules-systemjs': 7.29.4
   '@modelcontextprotocol/sdk': 1.26.0
-  serialize-javascript: 7.0.5
-  vite: 7.3.2
-  webpack: 5.104.1
-  lodash: 4.17.21
   ajv@8: 8.18.0
+  axios: 1.15.2
   brace-expansion@1: 1.1.13
   brace-expansion@2: 2.0.3
   diff: 4.0.4
+  fast-uri: 3.1.2
+  flatted: 3.4.2
   follow-redirects: 1.16.0
+  handlebars: 4.7.9
+  immutable: 5.1.5
   ip-address: 10.1.1
+  koa: 3.1.2
+  lodash: 4.18.0
+  minimatch@10: 10.2.3
+  minimatch@5: 5.1.8
+  minimatch@7: 7.4.8
+  minimatch@9: 9.0.7
+  minimatch@<3.1.4: 3.1.4
+  node-forge: 1.4.0
+  path-to-regexp: 0.1.13
+  picomatch@4: 4.0.4
+  picomatch@<2.3.2: 2.3.2
   qs: 6.14.2
+  rollup: 4.59.0
+  serialize-javascript: 7.0.5
+  svgo: 3.3.3
+  tar: 7.5.11
+  vite: 7.3.2
+  webpack: 5.104.1
   yaml@1: 1.10.3
   yaml@2: 2.8.3
-  lodash@>=4.0.0 <=4.17.22: '>=4.17.23'
-  lodash@>=4.0.0 <=4.17.23: '>=4.18.0'
-  lodash@<=4.17.23: '>=4.18.0'
 
 importers:
 
@@ -6039,8 +6036,9 @@ packages:
   lodash.uniq@4.5.0:
     resolution: {integrity: sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==}
 
-  lodash@4.18.1:
-    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
+  lodash@4.18.0:
+    resolution: {integrity: sha512-l1mfj2atMqndAHI3ls7XqPxEjV2J9ZkcNyHpoZA3r2T1LLwDB69jgkMWh71YKwhBbK0G2f4WSn05ahmQXVxupA==}
+    deprecated: Bad release. Please use lodash@4.17.21 instead.
 
   log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -12969,7 +12967,7 @@ snapshots:
       '@verdaccio/loaders': 8.0.0-next-8.18
       '@verdaccio/signature': 8.0.0-next-8.20
       debug: 4.4.3
-      lodash: 4.18.1
+      lodash: 4.18.0
       verdaccio-htpasswd: 13.0.0-next-8.28
     transitivePeerDependencies:
       - supports-color
@@ -12979,7 +12977,7 @@ snapshots:
       '@verdaccio/core': 8.0.0-next-8.28
       debug: 4.4.3
       js-yaml: 4.1.1
-      lodash: 4.18.1
+      lodash: 4.18.0
     transitivePeerDependencies:
       - supports-color
 
@@ -13023,7 +13021,7 @@ snapshots:
     dependencies:
       '@verdaccio/core': 8.0.0-next-8.28
       debug: 4.4.3
-      lodash: 4.18.1
+      lodash: 4.18.0
     transitivePeerDependencies:
       - supports-color
 
@@ -13034,7 +13032,7 @@ snapshots:
       '@verdaccio/streams': 10.2.1
       async: 3.2.6
       debug: 4.4.1
-      lodash: 4.18.1
+      lodash: 4.18.0
       lowdb: 1.0.0
       mkdirp: 1.0.4
     transitivePeerDependencies:
@@ -13053,7 +13051,7 @@ snapshots:
     dependencies:
       colorette: 2.0.20
       dayjs: 1.11.13
-      lodash: 4.18.1
+      lodash: 4.18.0
       on-exit-leak-free: 2.1.2
       pino-abstract-transport: 1.2.0
       sonic-boom: 3.8.1
@@ -13073,7 +13071,7 @@ snapshots:
       debug: 4.4.3
       express: 4.21.2
       express-rate-limit: 5.5.1
-      lodash: 4.18.1
+      lodash: 4.18.0
       lru-cache: 7.18.3
     transitivePeerDependencies:
       - supports-color
@@ -13116,7 +13114,7 @@ snapshots:
   '@verdaccio/utils@8.1.0-next-8.28':
     dependencies:
       '@verdaccio/core': 8.0.0-next-8.28
-      lodash: 4.18.1
+      lodash: 4.18.0
       minimatch: 7.4.8
 
   '@vitejs/plugin-basic-ssl@2.1.0(vite@7.3.2(@types/node@20.19.9)(jiti@2.6.1)(less@4.4.0)(sass-embedded@1.95.1)(sass@1.90.0)(terser@5.44.1)(yaml@2.8.3))':
@@ -16207,7 +16205,7 @@ snapshots:
 
   lodash.uniq@4.5.0: {}
 
-  lodash@4.18.1: {}
+  lodash@4.18.0: {}
 
   log-symbols@4.1.0:
     dependencies:
@@ -16243,7 +16241,7 @@ snapshots:
     dependencies:
       graceful-fs: 4.2.11
       is-promise: 2.2.2
-      lodash: 4.18.1
+      lodash: 4.18.0
       pify: 3.0.0
       steno: 0.4.4
 
@@ -18527,7 +18525,7 @@ snapshots:
       debug: 4.4.3
       envinfo: 7.15.0
       express: 4.21.2
-      lodash: 4.18.1
+      lodash: 4.18.0
       lru-cache: 7.18.3
       mime: 3.0.0
       semver: 7.7.3
