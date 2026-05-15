@@ -1,8 +1,13 @@
+# Supply-chain hardening: refuse to install any package published in the
+# last 28800 minutes (~20 days). Note: Dependabot may file PRs against
+# releases that pnpm will not install until this window elapses.
 minimumReleaseAge: 28800
 
+# The overrides below pin transitive dependencies to patched versions in
+# response to specific advisories. Revisit this list periodically so
+# legitimate upstream bumps aren't masked.
 overrides:
   '@babel/plugin-transform-modules-systemjs': 7.29.4
-  '@modelcontextprotocol/sdk': 1.26.0
   ajv@8: 8.18.0
   axios: 1.15.2
   brace-expansion@1: 1.1.13
@@ -34,3 +39,4 @@ overrides:
   webpack: 5.104.1
   yaml@1: 1.10.3
   yaml@2: 2.8.3
+  postcss@<8.5.10: '>=8.5.10'
