@@ -3,3 +3,4 @@
 /coverage
 .angular
 /libs/msw-public
+.nx/self-healing
