@@ -8,8 +8,13 @@ import { LoadingState } from './loading-state';
 	selector: 'inf-component-with-loading-state-host',
 	imports: [CommonModule],
 	template: `
-		<div *ngIf="loading$ | async" class="loader">Loading</div>
-		<div *ngIf="error$ | async as error" class="error">{{ error }}</div>
+	<div>
+		@if(loading$ | async){
+			<div class="loader">Loading</div>
+		}
+		@if(error$ | async){
+			<div class="error">{{ error$ | async }}</div>
+		}
 	`,
 })
 class LoadingStateHostComponent extends LoadingState {
