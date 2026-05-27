@@ -52,6 +52,10 @@
 			"cache": true,
 			"dependsOn": ["^build"],
 			"inputs": ["production", "^production"]
+		},
+		"build-storybook": {
+			"cache": true,
+			"inputs": ["production", "^production"]
 		}
 	},
 	"generators": {
