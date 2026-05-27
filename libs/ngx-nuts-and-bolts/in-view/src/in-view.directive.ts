@@ -1,8 +1,18 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, inject, OnDestroy, Output } from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectorRef,
+	Directive,
+	ElementRef,
+	EventEmitter,
+	inject,
+	OnDestroy,
+	Output,
+} from '@angular/core';
 
 @Directive({ selector: '[infInView]', standalone: true, exportAs: 'infInView' })
 export class InViewDirective implements AfterViewInit, OnDestroy {
 	private readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+	private readonly cdr = inject(ChangeDetectorRef);
 
 	@Output('infInView')
 	public inView: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -23,6 +33,7 @@ export class InViewDirective implements AfterViewInit, OnDestroy {
 		return new IntersectionObserver(([entry]) => {
 			this.isInView = entry.isIntersecting;
 			this.inView.emit(entry.isIntersecting);
+			this.cdr.markForCheck();
 		});
 	}
 }
