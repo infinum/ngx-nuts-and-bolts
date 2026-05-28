@@ -1,3 +1,6 @@
+packages:
+  - apps/docs
+
 # Supply-chain hardening: refuse to install any package published in the
 # last 28800 minutes (~20 days). Note: Dependabot may file PRs against
 # releases that pnpm will not install until this window elapses.
