@@ -1,0 +1,34 @@
+@if (breadcrumbs$ | async; as breadcrumbs) {
+	<div class="breadcrumbs">
+		@if (topLevelLink) {
+			<div class="breadcrumb">
+				<a [routerLink]="topLevelLink.url">{{ topLevelLink.label }}</a>
+				@if (breadcrumbs.length) {
+					<span class="separator">></span>
+				}
+			</div>
+		}
+
+		@for (breadcrumb of breadcrumbs; track breadcrumb.url; let last = $last) {
+			<div class="breadcrumb">
+				@if (isString(breadcrumb.data)) {
+					<a [routerLink]="breadcrumb.url">{{ breadcrumb.data }}</a>
+				}
+
+				@if (isCustomerLocationWithCustomerData(breadcrumb.data)) {
+					<select (change)="onLocationChange($event, breadcrumb.data.customer.id)">
+						@for (location of breadcrumb.data.customer.locations; track location.id) {
+							<option [attr.value]="location.id" [attr.selected]="location.id === breadcrumb.data.location.id || null">
+								{{ location.name }}
+							</option>
+						}
+					</select>
+				}
+
+				@if (!last) {
+					<span class="separator">></span>
+				}
+			</div>
+		}
+	</div>
+}
