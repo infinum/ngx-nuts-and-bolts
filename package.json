@@ -4,7 +4,10 @@
 	"license": "MIT",
 	"scripts": {
 		"test": "nx run-many --target=test --all=true",
-		"build": "nx run-many --target=build --all=true"
+		"build": "nx run-many --target=build --all=true",
+		"start:breadcrumbs-example": "nx serve breadcrumbs-example",
+		"start:environment-variables-fetch-example": "nx serve environment-variables-fetch-example",
+		"start:environment-variables-ssr-example": "nx serve environment-variables-ssr-example"
 	},
 	"private": true,
 	"packageManager": "pnpm@10.9.0",
