@@ -1,0 +1,26 @@
+:host {
+	display: flex;
+	gap: 32px;
+	justify-content: space-between;
+}
+
+pre {
+	background-color: #eee;
+	padding: 16px;
+	border-radius: 16px;
+	max-width: 400px;
+	white-space: pre-wrap;
+}
+
+.active {
+	font-weight: bold;
+}
+
+.current-url {
+	display: inline-block;
+}
+
+.prompt-checkbox {
+	user-select: none;
+	cursor: pointer;
+}
