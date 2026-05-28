@@ -1,24 +1,46 @@
 name: Build and Deploy documentation
+
 on:
   push:
     branches:
       - main
+
+env:
+  NX_NO_CLOUD: true
+
 jobs:
   build-and-deploy:
-    concurrency: ci-${{ github.ref }}
+    concurrency: docs-${{ github.ref }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2
-
-      - name: Install and Build
-        working-directory: ./ngx-nuts-and-bolts-docs
-        run: |
-          npm ci
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: ./ngx-nuts-and-bolts-docs/build # The folder the action should deploy.
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.20.0'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.9.0
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build docs
+        run: pnpm nx build docs
+
+      - name: Deploy docs
+        run: pnpm nx deploy docs
+        env:
+          GIT_USER: ${{ github.actor }}
+          GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+          GIT_USER_NAME: ${{ secrets.DOCS_USER_NAME }}
+          GIT_USER_EMAIL: ${{ secrets.DOCS_USER_EMAIL }}
