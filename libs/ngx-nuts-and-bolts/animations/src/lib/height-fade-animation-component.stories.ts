@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { applicationConfig } from '@storybook/angular';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { fadeAnimation } from './fade.animation';
 import { heightAnimation } from './height.animation';
@@ -15,9 +16,9 @@ import { heightAnimation } from './height.animation';
 		@if (isOpened) {
 			<div @height @fade class="panel">
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-					dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-					ea commodo consequat.
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+					magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.
 				</p>
 			</div>
 		}
@@ -58,6 +59,11 @@ const meta = {
 	title: 'HeightFadeAnimations',
 	component: HeightFadeAnimationsHostComponent,
 	tags: ['autodocs'],
+	decorators: [
+		applicationConfig({
+			providers: [provideAnimations()],
+		}),
+	],
 } satisfies Meta<HeightFadeAnimationsHostComponent>;
 
 export default meta;
