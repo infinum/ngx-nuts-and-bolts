@@ -23,6 +23,18 @@ After that you should be able to call the angular schematic via the NX generator
 nx g @infinum/ngx-nuts-and-bolts:<name-of-the-schematic>
 ```
 
+## Local development
+
+This workspace is connected to [Nx Cloud](https://nx.app) for remote caching and distributed CI. Nx requires an access token whenever a cloud workspace is configured, but that token is only available in CI via the `NX_CLOUD_ACCESS_TOKEN` secret—not on developer machines.
+
+To avoid authentication errors when running Nx commands locally, disable Nx Cloud for your shell session:
+
+```bash
+export NX_NO_CLOUD=true
+```
+
+Add the same line to your shell profile (e.g. `~/.zshrc`) so it applies to every terminal. CI is unaffected; it continues to use Nx Cloud as configured in `.github/workflows/ci.yml`.
+
 ## Available _nuts and bolts_
 
 For a list of all available _nuts and bolts_ and guidance on how to use them, please check out the [documentation pages](https://infinum.github.io/ngx-nuts-and-bolts/docs).

@@ -51,3 +51,5 @@ Thumbs.db
 
 # nx 
 .nx
+
+.claude/worktrees
