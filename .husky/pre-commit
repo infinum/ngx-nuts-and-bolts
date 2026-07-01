@@ -5,4 +5,4 @@
 npx lint-staged
 
 # Check linters, builds and tests
-npx nx affected -t lint build test
+NX_NO_CLOUD=true npx nx affected -t lint build test
