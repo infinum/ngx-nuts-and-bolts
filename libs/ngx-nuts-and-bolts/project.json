@@ -41,6 +41,37 @@
 				"tsConfig": "libs/ngx-nuts-and-bolts/tsconfig.spec.json"
 			}
 		},
+		"storybook": {
+			"executor": "@storybook/angular:start-storybook",
+			"options": {
+				"port": 4400,
+				"configDir": "libs/ngx-nuts-and-bolts/.storybook",
+				"browserTarget": "ngx-nuts-and-bolts:build-storybook",
+				"tsConfig": "libs/ngx-nuts-and-bolts/.storybook/tsconfig.json",
+				"compodoc": false
+			},
+			"configurations": {
+				"ci": {
+					"quiet": true
+				}
+			}
+		},
+		"build-storybook": {
+			"executor": "@storybook/angular:build-storybook",
+			"outputs": ["{options.outputDir}"],
+			"options": {
+				"outputDir": "dist/storybook/ngx-nuts-and-bolts",
+				"configDir": "libs/ngx-nuts-and-bolts/.storybook",
+				"browserTarget": "ngx-nuts-and-bolts:build-storybook",
+				"tsConfig": "libs/ngx-nuts-and-bolts/.storybook/tsconfig.json",
+				"compodoc": false
+			},
+			"configurations": {
+				"ci": {
+					"quiet": true
+				}
+			}
+		},
 		"lint": {
 			"executor": "@nx/eslint:lint"
 		}
