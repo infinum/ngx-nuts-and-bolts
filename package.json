@@ -4,7 +4,8 @@
 	"license": "MIT",
 	"scripts": {
 		"test": "nx run-many --target=test --all=true",
-		"build": "nx run-many --target=build --all=true"
+		"build": "nx run-many --target=build --all=true",
+		"storybook": "nx storybook ngx-nuts-and-bolts"
 	},
 	"private": true,
 	"packageManager": "pnpm@10.9.0",
