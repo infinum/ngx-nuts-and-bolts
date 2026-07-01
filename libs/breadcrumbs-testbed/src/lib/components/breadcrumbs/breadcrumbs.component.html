@@ -16,7 +16,13 @@
 				}
 
 				@if (isCustomerLocationWithCustomerData(breadcrumb.data)) {
-					<select (change)="onLocationChange($event, breadcrumb.data.customer.id)">
+					<label [attr.for]="'customer-location-' + breadcrumb.data.customer.id">
+						Location for {{ breadcrumb.data.customer.name }}
+					</label>
+					<select
+						[id]="'customer-location-' + breadcrumb.data.customer.id"
+						(change)="onLocationChange($event, breadcrumb.data.customer.id)"
+					>
 						@for (location of breadcrumb.data.customer.locations; track location.id) {
 							<option [attr.value]="location.id" [attr.selected]="location.id === breadcrumb.data.location.id || null">
 								{{ location.name }}
