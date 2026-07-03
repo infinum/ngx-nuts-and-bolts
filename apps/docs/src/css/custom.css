@@ -1,0 +1,19 @@
+@import url('https://use.typekit.net/baz1roy.css');
+
+:root {
+	--ifm-color-primary: #127475;
+	--ifm-color-primary-dark: #106869;
+	--ifm-color-primary-darker: #0f6263;
+	--ifm-color-primary-darkest: #0c5152;
+	--ifm-color-primary-light: #147f81;
+	--ifm-color-primary-lighter: #158688;
+	--ifm-color-primary-lightest: #18989a;
+	--ifm-code-font-size: 95%;
+	--docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+.hero__title,
+.hero__subtitle {
+	padding: 16px;
+	color: black;
+}
