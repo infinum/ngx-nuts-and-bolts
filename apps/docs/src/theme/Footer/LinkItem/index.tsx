@@ -7,7 +7,10 @@ export default function FooterLinkItem({ item }: Props): ReactNode {
 	const { to, href, label, prependBaseUrlToHref, className, ...props } = item;
 	const toUrl = useBaseUrl(to);
 	const normalizedHref = useBaseUrl(href, { forcePrependBaseUrl: true });
-	const linkHref = href ? (prependBaseUrlToHref ? normalizedHref : href) : toUrl;
+	let linkHref = toUrl;
+	if (href) {
+		linkHref = prependBaseUrlToHref ? normalizedHref : href;
+	}
 
 	return (
 		<a className={clsx('footer__link-item', className)} href={linkHref} {...props}>

@@ -21,13 +21,13 @@ function ColumnLinkItem({ item }: { item: ColumnItemType }) {
 	);
 }
 
-function Column({ column }: { column: ColumnType }) {
+function Column({ column }: Readonly<{ column: ColumnType }>) {
 	return (
 		<div className={clsx(ThemeClassNames.layout.footer.column, 'col footer__col', column.className)}>
 			<div className="footer__title">{column.title}</div>
 			<ul className="footer__items clean-list">
-				{column.items.map((item, i) => (
-					<ColumnLinkItem key={i} item={item} />
+				{column.items.map((item) => (
+					<ColumnLinkItem key={item.href ?? item.to ?? item.label} item={item} />
 				))}
 			</ul>
 		</div>
@@ -37,8 +37,8 @@ function Column({ column }: { column: ColumnType }) {
 export default function FooterLinksMultiColumn({ columns }: Props): ReactNode {
 	return (
 		<div className="row footer__links">
-			{columns.map((column, i) => (
-				<Column key={i} column={column} />
+			{columns.map((column) => (
+				<Column key={column.title} column={column} />
 			))}
 		</div>
 	);

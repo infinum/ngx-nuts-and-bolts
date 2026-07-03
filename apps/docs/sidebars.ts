@@ -1,47 +1,23 @@
 import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
+function doc(id: string) {
+	return { type: 'doc' as const, id };
+}
+
 const sidebars: SidebarsConfig = {
 	mainSidebar: [
-		{
-			type: 'doc',
-			id: 'introduction',
-		},
-		{
-			type: 'doc',
-			id: 'environment-variables',
-		},
-		{
-			type: 'doc',
-			id: 'loading-state',
-		},
-		{
-			type: 'doc',
-			id: 'route-config-loading',
-		},
-		{
-			type: 'doc',
-			id: 'table-state',
-		},
-		{
-			type: 'doc',
-			id: 'in-view',
-		},
-		{
-			type: 'doc',
-			id: 'enum-property',
-		},
-		{
-			type: 'doc',
-			id: 'animations',
-		},
-		{
-			type: 'doc',
-			id: 'breadcrumbs',
-		},
-		{
-			type: 'doc',
-			id: 'di-token-type',
-		},
+		...[
+			'introduction',
+			'environment-variables',
+			'loading-state',
+			'route-config-loading',
+			'table-state',
+			'in-view',
+			'enum-property',
+			'animations',
+			'breadcrumbs',
+			'di-token-type',
+		].map(doc),
 		{
 			type: 'category',
 			label: 'Form utilities',

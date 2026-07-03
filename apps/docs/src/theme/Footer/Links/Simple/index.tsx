@@ -24,7 +24,7 @@ export default function FooterLinksSimple({ links }: Props): ReactNode {
 		<div className="footer__links text--center">
 			<div className="footer__links">
 				{links.map((item, i) => (
-					<React.Fragment key={i}>
+					<React.Fragment key={item.href ?? item.to ?? item.label}>
 						<SimpleLinkItem item={item} />
 						{links.length !== i + 1 && <Separator />}
 					</React.Fragment>
