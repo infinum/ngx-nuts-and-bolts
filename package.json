@@ -5,6 +5,9 @@
 	"scripts": {
 		"test": "nx run-many --target=test --all=true",
 		"build": "nx run-many --target=build --all=true",
+		"start:breadcrumbs-example": "nx serve breadcrumbs-example",
+		"start:environment-variables-fetch-example": "nx serve environment-variables-fetch-example",
+		"start:environment-variables-ssr-example": "nx serve environment-variables-ssr-example",
 		"storybook": "nx storybook ngx-nuts-and-bolts"
 	},
 	"private": true,
@@ -63,9 +66,11 @@
 		"eslint-config-prettier": "^10.0.0",
 		"jest": "^30.0.2",
 		"jest-environment-jsdom": "^30.0.2",
+		"jest-environment-node": "~30.3.0",
 		"jest-preset-angular": "16.0.0",
 		"jest-util": "^30.0.2",
 		"jsonc-eslint-parser": "^2.1.0",
+		"msw": "^2.14.6",
 		"ng-packagr": "21.2.5",
 		"nx": "22.7.5",
 		"postcss": "^8.5.10",
