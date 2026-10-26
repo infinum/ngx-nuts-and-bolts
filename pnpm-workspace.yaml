@@ -1,23 +1,25 @@
 minimumReleaseAge: 28800
 
 overrides:
-  '@modelcontextprotocol/sdk@<1.31.0': '>=1.31.0'
+  '@modelcontextprotocol/sdk@<1.32.0': '>=1.32.0'
   adm-zip@<0.6.1: '>=0.6.1'
   ajv@>=8.0.0 <8.18.0: '>=8.18.0'
   axios@<1.20.0: '>=1.20.0'
   brace-expansion@<5.0.12: '>=5.0.12'
   compression@<1.8.2: '>=1.8.2'
-  esbuild@<0.28.1: '>=0.28.1'
+  follow-redirects@<1.16.1: '>=1.16.1'
+  handlebars@<4.7.10: '>=4.7.10'
+  http-cache-semantics@<4.2.1: '>=4.2.1'
   js-yaml@<4.3.2: '>=4.3.2'
   koa@<3.1.2: '>=3.1.2'
   minimatch@<7.4.8: '>=7.4.8'
-  piscina@<5.3.2: '>=5.3.2'
+  node-forge@<1.4.1: '>=1.4.1'
   qs@<6.16.0: '>=6.16.0'
   smol-toml@<1.9.0: 1.9.0
-  undici@<7.29.1: '>=7.29.1'
+  undici@<7.30.1: 7.30.1
   uuid@<11.1.1: '>=11.1.1'
+  vite@<7.3.7: '>=7.3.7'
   webpack-dev-middleware@<7.4.6: '>=7.4.6'
   webpack-dev-server@<5.2.6: '>=5.2.6'
   ws@<8.21.0: '>=8.21.0'
-  handlebars@>=4.0.0 <=4.7.9: '>=4.7.10'
-  handlebars@>=3.0.0 <=4.7.9: '>=4.7.10'
+  zod@<4.6.6: '>=4.6.6'
