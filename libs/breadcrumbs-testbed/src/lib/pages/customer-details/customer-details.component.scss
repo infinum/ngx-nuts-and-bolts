@@ -1,0 +1,23 @@
+nav {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+
+	ul {
+		display: inline-flex;
+		align-items: center;
+		gap: 16px;
+		margin: 0;
+		padding: 0;
+
+		li {
+			display: inline;
+			margin: 0;
+			padding: 0;
+		}
+	}
+}
+
+.active {
+	font-weight: bold;
+}

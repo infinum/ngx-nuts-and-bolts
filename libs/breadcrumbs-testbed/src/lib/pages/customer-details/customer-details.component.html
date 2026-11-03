@@ -1,0 +1,19 @@
+<h2>{{ customer?.name }}</h2>
+
+<p>Customer-level breadcrumbs:</p>
+<bea-breadcrumbs></bea-breadcrumbs>
+
+<hr />
+
+<nav>
+	<span>Locations:</span>
+	<ul>
+		@for (location of customer?.locations; track location.id) {
+			<li>
+				<a [routerLink]="location.id" routerLinkActive="active">{{ location.name }}</a>
+			</li>
+		}
+	</ul>
+</nav>
+
+<router-outlet></router-outlet>

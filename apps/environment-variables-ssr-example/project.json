@@ -1,0 +1,94 @@
+{
+	"name": "environment-variables-ssr-example",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"projectType": "application",
+	"prefix": "app",
+	"sourceRoot": "apps/environment-variables-ssr-example/src",
+	"tags": [],
+	"targets": {
+		"build": {
+			"executor": "@angular/build:application",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/apps/environment-variables-ssr-example",
+				"browser": "apps/environment-variables-ssr-example/src/main.ts",
+				"tsConfig": "apps/environment-variables-ssr-example/tsconfig.app.json",
+				"inlineStyleLanguage": "scss",
+				"assets": [
+					{
+						"glob": "**/*",
+						"input": "apps/environment-variables-ssr-example/public"
+					},
+					"apps/environment-variables-ssr-example/src/favicon.ico",
+					{
+						"glob": "**/*",
+						"input": "apps/environment-variables-ssr-example/src/assets",
+						"output": "assets"
+					}
+				],
+				"styles": ["apps/environment-variables-ssr-example/src/styles.scss"],
+				"server": "apps/environment-variables-ssr-example/src/main.server.ts",
+				"ssr": {
+					"entry": "apps/environment-variables-ssr-example/src/server.ts"
+				},
+				"outputMode": "server"
+			},
+			"configurations": {
+				"production": {
+					"budgets": [
+						{
+							"type": "initial",
+							"maximumWarning": "500kb",
+							"maximumError": "1mb"
+						},
+						{
+							"type": "anyComponentStyle",
+							"maximumWarning": "4kb",
+							"maximumError": "8kb"
+						}
+					],
+					"outputHashing": "all"
+				},
+				"development": {
+					"optimization": false,
+					"extractLicenses": false,
+					"sourceMap": true
+				}
+			},
+			"defaultConfiguration": "production"
+		},
+		"serve": {
+			"continuous": true,
+			"executor": "@angular/build:dev-server",
+			"configurations": {
+				"production": {
+					"buildTarget": "environment-variables-ssr-example:build:production"
+				},
+				"development": {
+					"buildTarget": "environment-variables-ssr-example:build:development"
+				}
+			},
+			"defaultConfiguration": "development"
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "apps/environment-variables-ssr-example/jest.config.cts",
+				"tsConfig": "apps/environment-variables-ssr-example/tsconfig.spec.json"
+			}
+		},
+		"serve-static": {
+			"continuous": true,
+			"executor": "@nx/web:file-server",
+			"options": {
+				"buildTarget": "environment-variables-ssr-example:build",
+				"staticFilePath": "dist/apps/environment-variables-ssr-example/browser",
+				"spa": true
+			}
+		}
+	}
+}
