@@ -4,7 +4,6 @@ import { EnvironmentVariable } from '../../enums/environment-variable.enum';
 
 @Pipe({
 	name: 'environmentVariableValue',
-	standalone: true,
 })
 export class EnvironmentVariableValuePipe implements PipeTransform {
 	private readonly env = inject<EnvironmentVariablesService<EnvironmentVariable>>(EnvironmentVariablesService);

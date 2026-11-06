@@ -19,7 +19,6 @@
 						"glob": "**/*",
 						"input": "apps/environment-variables-fetch-example/public"
 					},
-					"apps/environment-variables-fetch-example/src/favicon.ico",
 					{
 						"glob": "**/*",
 						"input": "apps/environment-variables-fetch-example/src/assets",

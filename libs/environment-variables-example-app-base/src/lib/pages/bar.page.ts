@@ -1,20 +1,7 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'inf-nuts-and-bolts-bar-page',
 	template: 'Bar',
 })
 export class BarPageComponent {}
-
-@NgModule({
-	imports: [
-		RouterModule.forChild([
-			{
-				path: '',
-				component: BarPageComponent,
-			},
-		]),
-	],
-})
-export class BarPageModule {}

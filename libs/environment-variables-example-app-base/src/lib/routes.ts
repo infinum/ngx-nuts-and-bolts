@@ -8,10 +8,10 @@ export const envExampleAppRoutes: Array<Route> = [
 	},
 	{
 		path: 'foo',
-		loadChildren: () => import('./pages/foo.page').then((m) => m.FooPageModule),
+		loadComponent: () => import('./pages/foo.page').then((m) => m.FooPageComponent),
 	},
 	{
 		path: 'bar',
-		loadChildren: () => import('./pages/bar.page').then((m) => m.BarPageModule),
+		loadComponent: () => import('./pages/bar.page').then((m) => m.BarPageComponent),
 	},
 ];

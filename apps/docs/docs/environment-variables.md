@@ -189,11 +189,11 @@ Please check out the source code repository for two example applications. Exampl
 
 ### 3.1 Single-page App with fetching
 
-[`apps/environment-variables-fetch-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-fetch-example) demonstrates an example that uses `provideEnvironmentVariables` provider. In `main.ts` (before the application is loaded), `./assets/env.json` is fetched using `fetch` and the application is bootstrapped with the `provideEnvironmentVariables` provider. You can start this example with `npm run start:environment-variables-fetch-example`.
+[`apps/environment-variables-fetch-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-fetch-example) demonstrates an example that uses `provideEnvironmentVariables` provider. In `main.ts` (before the application is loaded), `./assets/env.json` is fetched using `fetch` and the application is bootstrapped with the `provideEnvironmentVariables` provider. You can start this example with `pnpm start:environment-variables-fetch-example`.
 
 ### 3.2 Angular Universal App with SSR
 
-[`apps/environment-variables-ssr-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-ssr-example) uses `provideUniversalEnvironmentVariables` provider. The application has to be started with environment variables exposed to the node process that is running the SSR app. You can start this example with `npm run start:environment-variables-ssr-example`.
+[`apps/environment-variables-ssr-example`](https://github.com/infinum/ngx-nuts-and-bolts/tree/main/apps/environment-variables-ssr-example) uses `provideUniversalEnvironmentVariables` provider. The application has to be started with environment variables exposed to the node process that is running the SSR app. You can start this example with `pnpm start:environment-variables-ssr-example`.
 
 For this example, `Foo` variable is set as public, and `Bar` is set as private. That is why you don't see value for `Bar` in the browser, but you will see it in the console of the node process.
 

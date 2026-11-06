@@ -1,18 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { BreadcrumbsService } from '@infinum/ngx-nuts-and-bolts/breadcrumbs';
 import { BreadcrumbTestBedData, CustomerLocationWithCustomerData } from '../../types/breadcrumb-data';
 
 @Component({
 	selector: 'bea-breadcrumbs',
-	standalone: true,
 	imports: [CommonModule, RouterModule],
 	templateUrl: './breadcrumbs.component.html',
 	styleUrls: ['./breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent {
-	@Input() public topLevelLink?: { label: string; url: string };
+	public readonly topLevelLink = input<{ label: string; url: string }>();
 
 	private readonly router = inject(Router);
 	private readonly breadcrumbsService = inject(BreadcrumbsService<BreadcrumbTestBedData>);

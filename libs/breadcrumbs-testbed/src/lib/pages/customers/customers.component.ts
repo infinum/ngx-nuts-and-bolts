@@ -5,7 +5,6 @@ import { CustomersService } from '../../services/customers.service';
 
 @Component({
 	selector: 'bea-customers',
-	standalone: true,
 	imports: [CommonModule, RouterModule],
 	templateUrl: './customers.component.html',
 	styleUrls: ['./customers.component.scss'],

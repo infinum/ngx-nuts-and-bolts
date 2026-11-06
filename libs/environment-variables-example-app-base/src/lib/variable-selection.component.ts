@@ -12,7 +12,6 @@ import { EnvironmentVariableValuePipe } from './pipes/environment-variable-value
 	selector: 'inf-variable-selection',
 	templateUrl: './variable-selection.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [CommonModule, EnvironmentVariableValuePipe, FormsModule, RouterModule],
 })
 export class VariableSelectionComponent {

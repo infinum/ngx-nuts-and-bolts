@@ -1,6 +1,6 @@
 @if (breadcrumbs$ | async; as breadcrumbs) {
 	<div class="breadcrumbs">
-		@if (topLevelLink) {
+		@if (topLevelLink(); as topLevelLink) {
 			<div class="breadcrumb">
 				<a [routerLink]="topLevelLink.url">{{ topLevelLink.label }}</a>
 				@if (breadcrumbs.length) {

@@ -7,7 +7,7 @@ import { BreadcrumbTestBedData, NavigationPromptService } from '@ngx-nuts-and-bo
 import { AppComponent } from './app.component';
 
 class NavigationPromptServiceStub {
-	public shouldPrompt = false;
+	public promptDuringNavigation = false;
 }
 
 describe('AppComponent', () => {

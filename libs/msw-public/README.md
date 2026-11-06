@@ -1,7 +1,9 @@
 # msw-public
 
-This library was generated with [Nx](https://nx.dev).
+Hosts the [Mock Service Worker](https://mswjs.io) script (`mockServiceWorker.js`) shared by the example apps. Apps copy it to their output root via a build `assets` entry and list `msw-public` in `implicitDependencies`, so `nx affected` picks up changes to the worker.
 
-## Running unit tests
+After upgrading `msw`, regenerate the worker with:
 
-Run `nx test msw-public` to execute the unit tests via [Jest](https://jestjs.io).
+```bash
+pnpm exec msw init libs/msw-public --no-save
+```

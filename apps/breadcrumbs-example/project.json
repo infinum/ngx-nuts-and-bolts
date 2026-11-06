@@ -5,6 +5,7 @@
 	"prefix": "app",
 	"sourceRoot": "apps/breadcrumbs-example/src",
 	"tags": [],
+	"implicitDependencies": ["msw-public"],
 	"targets": {
 		"build": {
 			"executor": "@angular/build:application",
@@ -18,12 +19,6 @@
 					{
 						"glob": "**/*",
 						"input": "apps/breadcrumbs-example/public"
-					},
-					"apps/breadcrumbs-example/src/favicon.ico",
-					{
-						"glob": "**/*",
-						"input": "apps/breadcrumbs-example/src/assets",
-						"output": "assets"
 					},
 					{
 						"glob": "mockServiceWorker.js",

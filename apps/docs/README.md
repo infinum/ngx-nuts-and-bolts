@@ -1,41 +1,31 @@
-# Website
+# docs
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+Documentation site for `@infinum/ngx-nuts-and-bolts`, built with [Docusaurus](https://docusaurus.io/) and published to GitHub Pages at https://infinum.github.io/ngx-nuts-and-bolts/.
 
-## Installation
+Run all commands from the repository root.
 
-```bash
-yarn
-```
-
-## Local Development
+## Local development
 
 ```bash
-yarn start
+pnpm nx serve docs
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+Starts a dev server at http://localhost:3000/ngx-nuts-and-bolts/ with live reload.
 
 ## Build
 
 ```bash
-yarn build
+pnpm nx build docs
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+Generates the static site into `apps/docs/build`.
 
 ## Deployment
 
-Using SSH:
+Deployment runs automatically on pushes to `main` via `.github/workflows/docs.yml`. To deploy manually:
 
 ```bash
-USE_SSH=true yarn deploy
+GIT_USER=<your GitHub username> pnpm nx deploy docs
 ```
 
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+`deploy` builds the site first and then pushes it to the `gh-pages` branch.

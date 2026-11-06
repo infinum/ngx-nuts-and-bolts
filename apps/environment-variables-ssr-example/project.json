@@ -18,12 +18,6 @@
 					{
 						"glob": "**/*",
 						"input": "apps/environment-variables-ssr-example/public"
-					},
-					"apps/environment-variables-ssr-example/src/favicon.ico",
-					{
-						"glob": "**/*",
-						"input": "apps/environment-variables-ssr-example/src/assets",
-						"output": "assets"
 					}
 				],
 				"styles": ["apps/environment-variables-ssr-example/src/styles.scss"],

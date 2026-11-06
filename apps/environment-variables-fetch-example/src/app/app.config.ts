@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { EnvironmentVariablesService, provideEnvironmentVariables } from '@infinum/ngx-nuts-and-bolts/env';
 import { EnvironmentVariable, envExampleAppRoutes } from '@ngx-nuts-and-bolts/environment-variables-example-app-base';
@@ -8,14 +8,10 @@ function appConfig(env: Record<EnvironmentVariable, string>): ApplicationConfig 
 		providers: [
 			provideEnvironmentVariables(env),
 			provideRouter(envExampleAppRoutes),
-			{
-				provide: APP_INITIALIZER,
-				multi: true,
-				useFactory: (env: EnvironmentVariablesService<EnvironmentVariable>) => {
-					return () => console.log(env.get(EnvironmentVariable.Foo));
-				},
-				deps: [EnvironmentVariablesService],
-			},
+			provideAppInitializer(() => {
+				const env = inject(EnvironmentVariablesService<EnvironmentVariable>);
+				console.log(env.get(EnvironmentVariable.Foo));
+			}),
 		],
 	};
 }

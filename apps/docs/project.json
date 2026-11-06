@@ -27,9 +27,10 @@
 		},
 		"deploy": {
 			"executor": "nx:run-commands",
+			"dependsOn": ["build"],
 			"options": {
 				"cwd": "apps/docs",
-				"command": "pnpm run deploy"
+				"command": "pnpm exec docusaurus deploy --skip-build"
 			}
 		}
 	}
