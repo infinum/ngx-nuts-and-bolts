@@ -37,7 +37,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - run: pnpm nx-cloud start-ci-run
-      - run: pnpm nx affected -t lint build test
+      - run: pnpm nx affected -t lint build test build-storybook
       - run: pnpm nx-cloud stop-all-agents
 
   pr:
@@ -64,7 +64,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm nx-cloud start-ci-run
-      - run: pnpm nx affected -t lint build test
+      - run: pnpm nx affected -t lint build test build-storybook
       - run: npx nx-cloud stop-all-agents
 
   agents:

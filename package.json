@@ -52,6 +52,7 @@
 		"@nx/web": "22.7.10",
 		"@nx/workspace": "22.7.10",
 		"@schematics/angular": "21.2.25",
+		"@storybook/addon-docs": "10.6.2",
 		"@storybook/angular": "10.6.2",
 		"@swc-node/register": "1.11.1",
 		"@swc/core": "1.15.8",

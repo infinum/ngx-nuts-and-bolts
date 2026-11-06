@@ -22,6 +22,9 @@
 				"command": "pnpm run build"
 			}
 		},
+		"lint": {
+			"executor": "@nx/eslint:lint"
+		},
 		"deploy": {
 			"executor": "nx:run-commands",
 			"options": {

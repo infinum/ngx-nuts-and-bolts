@@ -31,7 +31,10 @@
 				"ssr": {
 					"entry": "apps/environment-variables-ssr-example/src/server.ts"
 				},
-				"outputMode": "server"
+				"outputMode": "server",
+				"security": {
+					"allowedHosts": ["localhost"]
+				}
 			},
 			"configurations": {
 				"production": {
